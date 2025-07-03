@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "efa2b0a61b4ca4ad",
+        "id": "658feaf794c46436",
         "type": "tabs",
         "children": [
           {
-            "id": "6ce6ad3e01421ea1",
+            "id": "762e7b44cad9bc10",
             "type": "leaf",
             "state": {
               "type": "empty",
@@ -90,6 +90,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "content/index.md.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -99,7 +100,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Rückverweis"
+              "title": "Rückverweise für index.md"
             }
           },
           {
@@ -108,11 +109,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
+                "file": "content/index.md.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Ausgehende Links"
+              "title": "Ausgehende Links von index.md öffnen"
             }
           },
           {
@@ -136,12 +138,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "content/index.md.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Gliederung"
+              "title": "Gliederung von index.md"
             }
           }
         ]
@@ -161,6 +164,14 @@
       "command-palette:Befehlspalette öffnen": false
     }
   },
-  "active": "6ce6ad3e01421ea1",
-  "lastOpenFiles": []
+  "active": "f2cdc68bdab8a7d9",
+  "lastOpenFiles": [
+    "docs/authoring content.md",
+    "content/index.md.md",
+    "quartz/static/og-image.png",
+    "quartz/static/icon.png",
+    "docs/build.md",
+    "CODE_OF_CONDUCT.md",
+    "README.md"
+  ]
 }
