@@ -1,8 +1,11 @@
 ---
-title: Home
-date: 2025-07-10T15:00:00
-draft:
+title: "Jonas Hartmann"
+date: "2025-07-18"
+description: "Persönliche Website von Jonas Hartmann"
 ---
-Herzliche Willkommen.
 
-weiter zu [[post-1]] 
+Herzlich Willkommen auf meiner Website! 
+
+Hier finde ich meine Gedanken zu Recht, Technologie und allem was mich beschäftigt.
+
+Schauen Sie gerne in meinem [Blog](/blog/) vorbei oder erfahren Sie mehr über meine Arbeit.

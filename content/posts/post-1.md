@@ -1,10 +1,40 @@
-+++
-title = 'Post 1'
-date = 2023-01-15T09:00:00-07:00
-draft = false
-tags = ['red']
-+++
+---
+title: "Willkommen zu meinem neuen Blog"
+date: "2025-07-18"
+tags: ["willkommen", "blog", "technologie"]
+---
 
-Tempor proident minim aliquip reprehenderit dolor et ad anim Lorem duis sint eiusmod. Labore ut ea duis dolor. Incididunt consectetur proident qui occaecat incididunt do nisi Lorem. Tempor do laborum elit laboris excepteur eiusmod do. Eiusmod nisi excepteur ut amet pariatur adipisicing Lorem.
+# Ein neuer Anfang
 
-Occaecat nulla excepteur dolore excepteur duis eiusmod ullamco officia anim in voluptate ea occaecat officia. Cillum sint esse velit ea officia minim fugiat. Elit ea esse id aliquip pariatur cupidatat id duis minim incididunt ea ea. Anim ut duis sunt nisi. Culpa cillum sit voluptate voluptate eiusmod dolor. Enim nisi Lorem ipsum irure est excepteur voluptate eu in enim nisi. Nostrud ipsum Lorem anim sint labore consequat do.
+Willkommen auf meiner persönlichen Website! Nach längerer Überlegung habe ich mich entschieden, wieder regelmäßiger zu schreiben und meine Gedanken zu verschiedenen Themen zu teilen.
+
+## Was Sie hier finden werden
+
+Auf diesem Blog werde ich über verschiedene Themen schreiben:
+
+- **Rechtliche Entwicklungen** - Aktuelle Trends und Änderungen im Rechtswesen
+- **Technologie** - Neue Tools und Entwicklungen, die mich faszinieren  
+- **Persönliche Reflexionen** - Gedanken zu Beruf, Leben und allem dazwischen
+
+## Die Technik dahinter
+
+Diese Website wurde mit einem eigenen, schlanken Markdown-to-HTML Generator entwickelt. Kein WordPress, kein kompliziertes CMS - nur einfache Markdown-Dateien, die in schönes HTML umgewandelt werden.
+
+```javascript
+// Ein kleiner Eindruck vom Code
+console.log('Einfach und effektiv!');
+```
+
+## Was kommt als nächstes?
+
+In den kommenden Wochen plane ich Beiträge zu:
+
+1. Aktuellen Entwicklungen im Digitalisierungsrecht
+2. Tools, die mir den Arbeitsalltag erleichtern
+3. Gedanken zur Work-Life-Balance im Rechtsbereich
+
+Ich freue mich auf den Austausch und Ihre Kommentare!
+
+---
+
+*Haben Sie Fragen oder Anregungen? Kontaktieren Sie mich gerne.*
