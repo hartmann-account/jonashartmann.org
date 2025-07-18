@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Official Store – Mirai International Operations OÜ</title>
+  <style>
+    body {
+      font-family: 'Times New Roman', serif;
+      background-color: #fff;
+      color: #000080;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+    a {
+      color: #0000EE;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10pt;
+      padding: 0 10px;
+    }
+  </style>
+  <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+</head>
+<body link="#800080" bgcolor="#ffffff" text="#000080" vlink="#ff0000">
+
+<!-- Header -->
+<b>
+  <font size="6">
+    <p align="center">M</font><font size="4">IRAI </font>
+    <font size="6">I</font><font size="4">NTERNATIONAL </font>
+    <font size="6">O</font><font size="4">PERATIONS <font size="1">OÜ</font></font>
+  </p>
+</b>
+
+<hr>
+
+<!-- Content -->
+<p align="center"><b>Official Store</b></p>
+
+<!-- Stripe Pricing Table -->
+<stripe-pricing-table pricing-table-id="prctbl_1RQpEvDkbLvUe7HOICRjnxD3"
+publishable-key="pk_live_51RL2oNDkbLvUe7HOjjlHw1Vbhj7RBZ2u6UZ6zEKQ3zO6cCLm3x7Qs22g9y84ZV5rNHpWskFwBWTaiSwut50vooWv00R7bPNTfE">
+</stripe-pricing-table>
+
+<hr>
+
+<p align="center">
+  <a href="index.html">Back to home page</a>
+</p>
+
+<hr>
+
+<!-- Footer -->
+<div class="footer">
+  <div>
+    <font size="2">
+      Copyright &copy; 2016 - <span id="year"></span> <b>Mirai International Operations OÜ</b>
+    </font>
+  </div>
+  <div>
+    <font size="2"><a href="legal.html">Impressum</a></font>
+  </div>
+</div>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
