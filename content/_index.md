@@ -1,11 +1,9 @@
 ---
 title: "Jonas Hartmann"
 date: "2025-07-18"
-description: "Persönliche Website von Jonas Hartmann"
+description: "Rechtsanwalt und Technologie-Enthusiast"
 ---
 
-Herzlich Willkommen auf meiner Website! 
+Willkommen auf meiner persönlichen Website. Ich bin Rechtsanwalt mit einer Leidenschaft für Technologie und digitale Innovation im Rechtswesen.
 
-Hier finde ich meine Gedanken zu Recht, Technologie und allem was mich beschäftigt.
-
-Schauen Sie gerne in meinem [Blog](/blog/) vorbei oder erfahren Sie mehr über meine Arbeit.
+Hier teile ich meine Gedanken zu aktuellen rechtlichen Entwicklungen, nützlichen Tools für Anwälte und den Wandel der Rechtsbranche in der digitalen Ära.

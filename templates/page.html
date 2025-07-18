@@ -18,33 +18,40 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="nav-brand">{{siteTitle}}</a>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="/" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/blog/" class="nav-link">Blog</a>
-                </li>
-            </ul>
+        <div class="container">
+            <div class="nav-container">
+                <a href="/" class="nav-brand">{{siteTitle}}</a>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/blog/" class="nav-link">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/ueber-mich/" class="nav-link">Über mich</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
-    <main class="main-content">
-        <div class="single-page">
-            <header class="page-header">
-                <h1>{{title}}</h1>
-            </header>
-            
-            <div class="page-content">
-                {{htmlContent}}
+    <main>
+        <section class="section">
+            <div class="container-sm">
+                <header class="page-header">
+                    <h1>{{title}}</h1>
+                </header>
+                
+                <div class="post-content">
+                    {{htmlContent}}
+                </div>
             </div>
-        </div>
+        </section>
     </main>
 
     <footer class="footer">
-        <div class="footer-container">
+        <div class="container">
             <p>&copy; {{current_year}} {{author}}. Alle Rechte vorbehalten.</p>
         </div>
     </footer>

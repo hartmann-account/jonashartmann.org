@@ -18,54 +18,58 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="nav-brand">{{siteTitle}}</a>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="/" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/blog/" class="nav-link active">Blog</a>
-                </li>
-            </ul>
+        <div class="container">
+            <div class="nav-container">
+                <a href="/" class="nav-brand">{{siteTitle}}</a>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/blog/" class="nav-link active">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/ueber-mich/" class="nav-link">Über mich</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
-    <main class="main-content">
-        <div class="blog-page">
-            <header class="page-header">
-                <h1>Blog</h1>
-                <p>Alle Beiträge und Gedanken</p>
-            </header>
-            
-            <div class="posts-list">
-                {{#each posts}}
-                <article class="post-item">
-                    <h2><a href="{{urlPath}}">{{title}}</a></h2>
-                    
-                    <div class="post-meta">
+    <main>
+        <section class="section">
+            <div class="container-sm">
+                <header class="page-header">
+                    <h1>Blog</h1>
+                    <p>Alle Beiträge und Gedanken zu Recht, Technologie und mehr</p>
+                </header>
+                
+                <div class="posts-list">
+                    {{#each posts}}
+                    <article class="post-item">
                         <time datetime="{{date}}">{{formatted_date}}</time>
+                        <h2><a href="{{urlPath}}">{{title}}</a></h2>
                         
                         {{#if tags}}
-                        <div class="tags">
+                        <div class="tags mb-1">
                             {{#each tags}}
                             <span class="tag">{{.}}</span>
                             {{/each}}
                         </div>
                         {{/if}}
-                    </div>
-                    
-                    <div class="post-excerpt">{{excerpt}}</div>
-                    
-                    <a href="{{urlPath}}" class="read-more">Weiterlesen →</a>
-                </article>
-                {{/each}}
+                        
+                        <div class="post-excerpt">{{excerpt}}</div>
+                        
+                        <a href="{{urlPath}}" class="read-more">Weiterlesen</a>
+                    </article>
+                    {{/each}}
+                </div>
             </div>
-        </div>
+        </section>
     </main>
 
     <footer class="footer">
-        <div class="footer-container">
+        <div class="container">
             <p>&copy; {{current_year}} {{author}}. Alle Rechte vorbehalten.</p>
         </div>
     </footer>

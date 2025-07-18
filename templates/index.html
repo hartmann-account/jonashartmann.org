@@ -18,56 +18,73 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="nav-container">
-            <a href="/" class="nav-brand">{{siteTitle}}</a>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="/" class="nav-link active">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/blog/" class="nav-link">Blog</a>
-                </li>
-            </ul>
+        <div class="container">
+            <div class="nav-container">
+                <a href="/" class="nav-brand">{{siteTitle}}</a>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link active">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/blog/" class="nav-link">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/ueber-mich/" class="nav-link">Über mich</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
-    <main class="main-content">
-        <div class="hero">
-            <div class="hero-content">
-                <h1>{{title}}</h1>
-                <div class="hero-description">
-                    {{htmlContent}}
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>{{title}}</h1>
+                    <div class="hero-description">
+                        {{htmlContent}}
+                    </div>
+                    <div class="hero-cta">
+                        <a href="/blog/" class="btn btn-primary">Blog lesen</a>
+                        <a href="mailto:kontakt@jonashartmann.org" class="btn btn-outline">Kontakt</a>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <section class="recent-posts">
-            <h2>Neueste Beiträge</h2>
-            <div class="posts-grid">
-                {{#recent_posts 6}}
-                <article class="post-card">
-                    <h3><a href="{{urlPath}}">{{title}}</a></h3>
-                    <time datetime="{{date}}">{{formatted_date}}</time>
-                    <div class="post-excerpt">{{excerpt}}</div>
-                    {{#if tags}}
-                    <div class="tags">
-                        {{#each tags}}
-                        <span class="tag">{{.}}</span>
-                        {{/each}}
-                    </div>
-                    {{/if}}
-                </article>
-                {{/recent_posts}}
-            </div>
-            
-            <div class="view-all">
-                <a href="/blog/" class="btn">Alle Beiträge ansehen</a>
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Neueste Beiträge</h2>
+                    <p class="section-description">Aktuelle Gedanken zu Recht, Technologie und mehr</p>
+                </div>
+                
+                <div class="posts-grid">
+                    {{#recent_posts 6}}
+                    <article class="post-card">
+                        <time datetime="{{date}}">{{formatted_date}}</time>
+                        <h3><a href="{{urlPath}}">{{title}}</a></h3>
+                        <div class="post-excerpt">{{excerpt}}</div>
+                        {{#if tags}}
+                        <div class="tags">
+                            {{#each tags}}
+                            <span class="tag">{{.}}</span>
+                            {{/each}}
+                        </div>
+                        {{/if}}
+                    </article>
+                    {{/recent_posts}}
+                </div>
+                
+                <div class="text-center mt-4">
+                    <a href="/blog/" class="btn btn-ghost">Alle Beiträge ansehen</a>
+                </div>
             </div>
         </section>
     </main>
 
     <footer class="footer">
-        <div class="footer-container">
+        <div class="container">
             <p>&copy; {{current_year}} {{author}}. Alle Rechte vorbehalten.</p>
         </div>
     </footer>
