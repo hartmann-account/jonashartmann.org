@@ -1,0 +1,22 @@
+{
+  "name": "jonashartmann-org",
+  "version": "1.0.0",
+  "description": "Custom Markdown to Website Generator",
+  "main": "build.js",
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node dev-server.js",
+    "start": "npm run dev"
+  },
+  "keywords": ["markdown", "website", "generator", "javascript"],
+  "author": "Jonas Hartmann",
+  "license": "MIT",
+  "dependencies": {
+    "marked": "^12.0.2",
+    "highlight.js": "^11.9.0",
+    "chokidar": "^3.6.0"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

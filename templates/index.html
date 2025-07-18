@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{description}}">
+    <title>{{title}}</title>
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    
+    <meta property="og:title" content="{{title}}">
+    <meta property="og:description" content="{{description}}">
+    <meta property="og:url" content="{{siteUrl}}">
+    <meta property="og:type" content="website">
+    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">{{siteTitle}}</a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="/" class="nav-link active">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/blog/" class="nav-link">Blog</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="hero">
+            <div class="hero-content">
+                <h1>{{title}}</h1>
+                <div class="hero-description">
+                    {{htmlContent}}
+                </div>
+            </div>
+        </div>
+
+        <section class="recent-posts">
+            <h2>Neueste Beiträge</h2>
+            <div class="posts-grid">
+                {{#recent_posts 6}}
+                <article class="post-card">
+                    <h3><a href="{{urlPath}}">{{title}}</a></h3>
+                    <time datetime="{{date}}">{{formatted_date}}</time>
+                    <div class="post-excerpt">{{excerpt}}</div>
+                    {{#if tags}}
+                    <div class="tags">
+                        {{#each tags}}
+                        <span class="tag">{{.}}</span>
+                        {{/each}}
+                    </div>
+                    {{/if}}
+                </article>
+                {{/recent_posts}}
+            </div>
+            
+            <div class="view-all">
+                <a href="/blog/" class="btn">Alle Beiträge ansehen</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <p>&copy; {{current_year}} {{author}}. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>
