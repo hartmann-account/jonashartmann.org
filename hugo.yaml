@@ -1,0 +1,33 @@
+baseURL: 'https://jonashartmann.org'
+languageCode: 'de-de'
+title: 'Jonas Hartmann'
+theme: 'custom'
+
+params:
+  author: 'Jonas Hartmann'
+  description: 'Persönliche Website von Jonas Hartmann'
+  
+menu:
+  main:
+    - identifier: 'home'
+      name: 'Home'
+      url: '/'
+      weight: 10
+    - identifier: 'posts'
+      name: 'Blog'
+      url: '/posts/'
+      weight: 20
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  highlight:
+    style: github
+    lineNos: true
+
+paginate: 10
+
+taxonomies:
+  tag: tags
+  category: categories
