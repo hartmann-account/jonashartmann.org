@@ -1,0 +1,257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+  <title>Beiträge – Jonas Hartmann</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <style>
+    body {
+      font-family: 'Times New Roman', serif;
+      background-color: #ffffff;
+      color: #000080;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+    }
+    a {
+      color: #800080;
+      text-decoration: none;
+    }
+    a:visited {
+      color: #ff0000;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10pt;
+      padding: 0 10px;
+    }
+    .content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .beitrag {
+      margin-bottom: 30px;
+      padding: 20px;
+      border: 1px solid #e0e0e0;
+      background-color: #f9f9f9;
+    }
+    .beitrag h1, .beitrag h2, .beitrag h3 {
+      color: #000080;
+    }
+    .beitrag-datum {
+      font-style: italic;
+      color: #666;
+      font-size: 0.9em;
+    }
+    .beitrag-liste {
+      list-style-type: none;
+      padding: 0;
+    }
+    .beitrag-liste li {
+      margin-bottom: 15px;
+      padding: 10px;
+      background-color: #f0f0f0;
+    }
+    .beitrag-liste a {
+      font-weight: bold;
+      font-size: 1.1em;
+    }
+    .loading {
+      text-align: center;
+      color: #666;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body link="#800080" bgcolor="#ffffff" text="#000080" vlink="#ff0000">
+
+<!-- Header -->
+<b>
+  <font size="6">
+    <p align="center">J</font><font size="4">ONAS </font>
+    <font size="6">H</font><font size="4">ARTMANN</font>
+  </p>
+</b>
+
+<hr>
+
+<!-- Inhalt -->
+<div class="content">
+  <p align="center"><b><font size="4">Beiträge</font></b></p>
+  
+  <div id="beitraege-container">
+    <p class="loading">Beiträge werden geladen...</p>
+  </div>
+  
+  <noscript>
+    <p align="center">
+      <font color="red">Diese Seite benötigt JavaScript, um die Beiträge anzuzeigen.</font>
+    </p>
+  </noscript>
+</div>
+
+<hr>
+
+<p align="center">
+  <a href="index.html">Zurück zur Startseite</a>
+</p>
+
+<hr>
+
+<!-- Footer -->
+<div class="footer">
+  <div>
+    <font size="2">Copyright &copy; <span id="year"></span> <b>Jonas Hartmann</b></font>
+  </div>
+  <div>
+    <font size="2"><a href="impressum.html">Impressum</a></font>
+  </div>
+</div>
+
+<script>
+  // Aktuelles Jahr automatisch einfügen
+  document.getElementById("year").textContent = new Date().getFullYear();
+  
+  // Liste der Beiträge (muss manuell aktualisiert werden)
+  const beitraege = [
+    {
+      datei: 'beispiel-beitrag.md',
+      titel: 'Willkommen zu meinem Blog',
+      datum: '21. Juli 2025',
+      beschreibung: 'Ein Beispielbeitrag über Markdown und das Bloggen.'
+    }
+    // Weitere Beiträge hier hinzufügen:
+    // {
+    //   datei: 'mein-zweiter-beitrag.md',
+    //   titel: 'Mein zweiter Beitrag',
+    //   datum: '22. Juli 2025',
+    //   beschreibung: 'Beschreibung des zweiten Beitrags.'
+    // }
+  ];
+  
+  // Einfache Markdown-zu-HTML-Konvertierung
+  function simpleMarkdownToHtml(markdown) {
+    let html = markdown;
+    
+    // Überschriften
+    html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+    html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+    html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+    
+    // Fett und Kursiv
+    html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<b><i>$1</i></b>');
+    html = html.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+    html = html.replace(/\*(.+?)\*/g, '<i>$1</i>');
+    
+    // Listen
+    html = html.replace(/^\* (.+)$/gim, '<li>$1</li>');
+    html = html.replace(/^\- (.+)$/gim, '<li>$1</li>');
+    html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+    
+    // Absätze
+    html = html.replace(/\n\n/g, '</p><p>');
+    html = '<p>' + html + '</p>';
+    
+    // Mehrfache Absatz-Tags bereinigen
+    html = html.replace(/<p><\/p>/g, '');
+    html = html.replace(/<p>(<h[1-6]>)/g, '$1');
+    html = html.replace(/(<\/h[1-6]>)<\/p>/g, '$1');
+    
+    return html;
+  }
+  
+  // Beiträge anzeigen
+  function zeigeBeitraege() {
+    const container = document.getElementById('beitraege-container');
+    
+    if (beitraege.length === 0) {
+      container.innerHTML = '<p align="center">Noch keine Beiträge vorhanden.</p>';
+      return;
+    }
+    
+    // Liste der verfügbaren Beiträge anzeigen
+    let html = '<ul class="beitrag-liste">';
+    
+    beitraege.forEach(beitrag => {
+      html += `
+        <li>
+          <a href="#" onclick="ladeBeitrag('${beitrag.datei}'); return false;">${beitrag.titel}</a>
+          <div class="beitrag-datum">${beitrag.datum}</div>
+          <div>${beitrag.beschreibung}</div>
+        </li>
+      `;
+    });
+    
+    html += '</ul>';
+    container.innerHTML = html;
+  }
+  
+  // Einzelnen Beitrag laden und anzeigen
+  function ladeBeitrag(dateiname) {
+    const container = document.getElementById('beitraege-container');
+    container.innerHTML = '<p class="loading">Beitrag wird geladen...</p>';
+    
+    // Simuliere das Laden der Markdown-Datei
+    // In einer echten Implementierung würde hier ein fetch() verwendet
+    fetch('beitraege/' + dateiname)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Beitrag konnte nicht geladen werden');
+        }
+        return response.text();
+      })
+      .then(markdown => {
+        const html = simpleMarkdownToHtml(markdown);
+        container.innerHTML = `
+          <div class="beitrag">
+            ${html}
+          </div>
+          <p align="center">
+            <a href="#" onclick="zeigeBeitraege(); return false;">← Zurück zur Übersicht</a>
+          </p>
+        `;
+      })
+      .catch(error => {
+        // Fallback für lokale Entwicklung ohne Server
+        if (dateiname === 'beispiel-beitrag.md') {
+          const beispielInhalt = `# Willkommen zu meinem Blog
+
+*Datum: 21. Juli 2025*
+
+Dies ist ein Beispielbeitrag. Hier können Sie Ihre Gedanken, Artikel und Beiträge in Markdown-Format verfassen.
+
+## Warum Markdown?
+
+Markdown ist eine einfache Auszeichnungssprache, die es ermöglicht:
+- Formatierte Texte zu schreiben
+- Listen zu erstellen
+- Links und Bilder einzufügen
+- Code-Beispiele zu zeigen
+
+Weitere Beiträge folgen in Kürze!`;
+          
+          const html = simpleMarkdownToHtml(beispielInhalt);
+          container.innerHTML = `
+            <div class="beitrag">
+              ${html}
+            </div>
+            <p align="center">
+              <a href="#" onclick="zeigeBeitraege(); return false;">← Zurück zur Übersicht</a>
+            </p>
+          `;
+        } else {
+          container.innerHTML = '<p align="center" style="color: red;">Fehler beim Laden des Beitrags.</p>';
+        }
+      });
+  }
+  
+  // Beim Laden der Seite Beiträge anzeigen
+  zeigeBeitraege();
+</script>
+
+</body>
+</html>
