@@ -1,14 +1,8 @@
 [
   {
-    "datei": "beispiel-beitrag.md",
-    "titel": "Willkommen zu meinem Blog",
+    "datei": "Zuzug in die Schweiz.md",
+    "titel": "Zuzug in die Schweiz - Ein praktischer Leitfaden",
     "datum": "2025-07-21",
-    "beschreibung": "Dies ist ein Beispielbeitrag. Hier können Sie Ihre Gedanken, Artikel und Beiträge in Markdown-Format verfassen."
-  },
-  {
-    "datei": "zukunft-rechtswissenschaft.md",
-    "titel": "Die Zukunft der Rechtswissenschaft",
-    "datum": "2025-07-20",
-    "beschreibung": "Die Digitalisierung verändert die Rechtswissenschaft fundamental. Von KI-gestützter Rechtsrecherche bis zu Smart Contracts - die..."
+    "beschreibung": "Als Neuzuzüger in die Schweiz steht man vor vielen administrativen und alltäglichen Herausforderungen. Dieser umfassende Leitfaden..."
   }
 ]
