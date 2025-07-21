@@ -33,6 +33,16 @@
       margin: 0 auto;
       text-align: left;
     }
+    .content-with-toc {
+      display: flex;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .beitrag-content {
+      flex: 1;
+      text-align: left;
+    }
     .beitrag {
       margin-bottom: 30px;
       padding: 20px;
@@ -41,6 +51,7 @@
     }
     .beitrag h1, .beitrag h2, .beitrag h3 {
       color: #000080;
+      scroll-margin-top: 20px;
     }
     .beitrag-datum {
       font-style: italic;
@@ -70,6 +81,57 @@
       text-align: center;
       padding: 20px;
     }
+    .toc {
+      position: sticky;
+      top: 20px;
+      width: 250px;
+      padding: 15px;
+      background-color: #f0f0f0;
+      border: 1px solid #e0e0e0;
+      max-height: calc(100vh - 100px);
+      overflow-y: auto;
+    }
+    .toc h4 {
+      margin-top: 0;
+      color: #000080;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+    .toc ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .toc li {
+      margin-bottom: 5px;
+    }
+    .toc li.toc-h2 {
+      margin-left: 15px;
+    }
+    .toc li.toc-h3 {
+      margin-left: 30px;
+      font-size: 0.9em;
+    }
+    .toc a {
+      color: #800080;
+      display: block;
+      padding: 3px 0;
+    }
+    .toc a:hover {
+      background-color: #e0e0e0;
+    }
+    .toc a.active {
+      font-weight: bold;
+      background-color: #d0d0d0;
+    }
+    @media (max-width: 1000px) {
+      .toc {
+        display: none;
+      }
+      .content-with-toc {
+        display: block;
+      }
+    }
   </style>
 </head>
 <body link="#800080" bgcolor="#ffffff" text="#000080" vlink="#ff0000">
@@ -85,18 +147,20 @@
 <hr>
 
 <!-- Inhalt -->
-<div class="content">
-  <p align="center"><b><font size="4">Beiträge</font></b></p>
-  
-  <div id="beitraege-container">
-    <p class="loading">Beiträge werden geladen...</p>
+<div id="main-container">
+  <div class="content">
+    <p align="center"><b><font size="4">Beiträge</font></b></p>
+    
+    <div id="beitraege-container">
+      <p class="loading">Beiträge werden geladen...</p>
+    </div>
+    
+    <noscript>
+      <p align="center">
+        <font color="red">Diese Seite benötigt JavaScript, um die Beiträge anzuzeigen.</font>
+      </p>
+    </noscript>
   </div>
-  
-  <noscript>
-    <p align="center">
-      <font color="red">Diese Seite benötigt JavaScript, um die Beiträge anzuzeigen.</font>
-    </p>
-  </noscript>
 </div>
 
 <hr>
@@ -122,15 +186,73 @@
   document.getElementById("year").textContent = new Date().getFullYear();
   
   let beitraege = [];
+  let aktuellerBeitrag = null;
   
-  // Einfache Markdown-zu-HTML-Konvertierung
-  function simpleMarkdownToHtml(markdown) {
-    let html = markdown;
+  // URL-Handling
+  function getURLParameter(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+  }
+  
+  function setURLParameter(name, value) {
+    const url = new URL(window.location);
+    if (value) {
+      url.searchParams.set(name, value);
+    } else {
+      url.searchParams.delete(name);
+    }
+    window.history.pushState({}, '', url);
+  }
+  
+  // Überschriften aus Markdown extrahieren
+  function extrahiereUeberschriften(markdown) {
+    const ueberschriften = [];
+    const zeilen = markdown.split('\n');
     
-    // Überschriften
-    html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
-    html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
-    html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+    zeilen.forEach((zeile, index) => {
+      const h1Match = zeile.match(/^# (.+)$/);
+      const h2Match = zeile.match(/^## (.+)$/);
+      const h3Match = zeile.match(/^### (.+)$/);
+      
+      if (h1Match) {
+        ueberschriften.push({
+          text: h1Match[1].trim(),
+          level: 1,
+          id: 'heading-' + index
+        });
+      } else if (h2Match) {
+        ueberschriften.push({
+          text: h2Match[1].trim(),
+          level: 2,
+          id: 'heading-' + index
+        });
+      } else if (h3Match) {
+        ueberschriften.push({
+          text: h3Match[1].trim(),
+          level: 3,
+          id: 'heading-' + index
+        });
+      }
+    });
+    
+    return ueberschriften;
+  }
+  
+  // Erweiterte Markdown-zu-HTML-Konvertierung mit IDs für Überschriften
+  function markdownToHtmlMitIDs(markdown) {
+    let html = markdown;
+    let headingIndex = 0;
+    
+    // Überschriften mit IDs
+    html = html.replace(/^### (.*$)/gim, function(match, p1) {
+      return '<h3 id="heading-' + (headingIndex++) + '">' + p1 + '</h3>';
+    });
+    html = html.replace(/^## (.*$)/gim, function(match, p1) {
+      return '<h2 id="heading-' + (headingIndex++) + '">' + p1 + '</h2>';
+    });
+    html = html.replace(/^# (.*$)/gim, function(match, p1) {
+      return '<h1 id="heading-' + (headingIndex++) + '">' + p1 + '</h1>';
+    });
     
     // Fett und Kursiv
     html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<b><i>$1</i></b>');
@@ -151,12 +273,45 @@
     
     // Mehrfache Absatz-Tags bereinigen
     html = html.replace(/<p><\/p>/g, '');
-    html = html.replace(/<p>(<h[1-6]>)/g, '$1');
+    html = html.replace(/<p>(<h[1-6])/g, '$1');
     html = html.replace(/(<\/h[1-6]>)<\/p>/g, '$1');
     html = html.replace(/<p>(<ul>)/g, '$1');
     html = html.replace(/(<\/ul>)<\/p>/g, '$1');
     
     return html;
+  }
+  
+  // Inhaltsverzeichnis erstellen
+  function erstelleInhaltsverzeichnis(ueberschriften) {
+    if (ueberschriften.length === 0) return '';
+    
+    let tocHTML = '<div class="toc"><h4>Inhalt</h4><ul>';
+    
+    ueberschriften.forEach(ueberschrift => {
+      const levelClass = 'toc-h' + ueberschrift.level;
+      tocHTML += `<li class="${levelClass}">
+        <a href="#${ueberschrift.id}" onclick="scrollZuUeberschrift('${ueberschrift.id}'); return false;">
+          ${ueberschrift.text}
+        </a>
+      </li>`;
+    });
+    
+    tocHTML += '</ul></div>';
+    return tocHTML;
+  }
+  
+  // Scroll zu Überschrift
+  function scrollZuUeberschrift(id) {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      
+      // Aktive Überschrift markieren
+      document.querySelectorAll('.toc a').forEach(a => {
+        a.classList.remove('active');
+      });
+      document.querySelector(`.toc a[href="#${id}"]`).classList.add('active');
+    }
   }
   
   // Datum formatieren
@@ -209,18 +364,28 @@
       })
       .then(data => {
         beitraege = data.sort((a, b) => new Date(b.datum) - new Date(a.datum));
+        
+        // Prüfen ob ein spezifischer Beitrag in der URL ist
+        const beitragParam = getURLParameter('beitrag');
+        if (beitragParam) {
+          const beitrag = beitraege.find(b => b.datei === beitragParam);
+          if (beitrag) {
+            ladeBeitrag(beitrag.datei);
+            return;
+          }
+        }
+        
         zeigeBeitraege();
       })
       .catch(error => {
         console.error('Fehler beim Laden der Beitragsliste:', error);
-        // Fallback: Versuche Beiträge direkt zu laden
         ladeBeitraegeDirekt();
       });
   }
   
   // Fallback: Lade bekannte Beiträge direkt
   function ladeBeitraegeDirekt() {
-    const bekannteBeitraege = ['beispiel-beitrag.md'];
+    const bekannteBeitraege = ['beispiel-beitrag.md', 'zukunft-rechtswissenschaft.md', 'Zuzug in die Schweiz.md'];
     const geladeneBeitraege = [];
     
     Promise.all(bekannteBeitraege.map(datei => 
@@ -238,12 +403,33 @@
         .catch(() => null)
     )).then(results => {
       beitraege = results.filter(b => b !== null);
+      
+      const beitragParam = getURLParameter('beitrag');
+      if (beitragParam) {
+        const beitrag = beitraege.find(b => b.datei === beitragParam);
+        if (beitrag) {
+          ladeBeitrag(beitrag.datei);
+          return;
+        }
+      }
+      
       zeigeBeitraege();
     });
   }
   
   // Beiträge anzeigen
   function zeigeBeitraege() {
+    aktuellerBeitrag = null;
+    setURLParameter('beitrag', null);
+    
+    const mainContainer = document.getElementById('main-container');
+    mainContainer.innerHTML = `
+      <div class="content">
+        <p align="center"><b><font size="4">Beiträge</font></b></p>
+        <div id="beitraege-container"></div>
+      </div>
+    `;
+    
     const container = document.getElementById('beitraege-container');
     
     if (beitraege.length === 0) {
@@ -261,7 +447,7 @@
       
       html += `
         <li>
-          <a href="#" onclick="ladeBeitrag('${beitrag.datei}'); return false;">${beitrag.titel}</a>
+          <a href="?beitrag=${encodeURIComponent(beitrag.datei)}" onclick="ladeBeitrag('${beitrag.datei}'); return false;">${beitrag.titel}</a>
           <div class="beitrag-datum">${datumAnzeige}</div>
           <div>${beitrag.beschreibung}</div>
         </li>
@@ -274,8 +460,11 @@
   
   // Einzelnen Beitrag laden und anzeigen
   function ladeBeitrag(dateiname) {
-    const container = document.getElementById('beitraege-container');
-    container.innerHTML = '<p class="loading">Beitrag wird geladen...</p>';
+    aktuellerBeitrag = dateiname;
+    setURLParameter('beitrag', dateiname);
+    
+    const mainContainer = document.getElementById('main-container');
+    mainContainer.innerHTML = '<p class="loading">Beitrag wird geladen...</p>';
     
     fetch('beitraege/' + dateiname)
       .then(response => {
@@ -285,25 +474,51 @@
         return response.text();
       })
       .then(markdown => {
-        const html = simpleMarkdownToHtml(markdown);
-        container.innerHTML = `
-          <div class="beitrag">
-            ${html}
+        const ueberschriften = extrahiereUeberschriften(markdown);
+        const html = markdownToHtmlMitIDs(markdown);
+        const tocHTML = erstelleInhaltsverzeichnis(ueberschriften);
+        
+        mainContainer.innerHTML = `
+          <div class="content-with-toc">
+            <div class="beitrag-content">
+              <div class="beitrag">
+                ${html}
+              </div>
+              <p align="center">
+                <a href="#" onclick="zeigeBeitraege(); return false;">← Zurück zur Übersicht</a>
+              </p>
+            </div>
+            ${tocHTML}
           </div>
-          <p align="center">
-            <a href="#" onclick="zeigeBeitraege(); return false;">← Zurück zur Übersicht</a>
-          </p>
         `;
+        
+        // Wenn ein Hash in der URL ist, dorthin scrollen
+        if (window.location.hash) {
+          const id = window.location.hash.substring(1);
+          setTimeout(() => scrollZuUeberschrift(id), 100);
+        }
       })
       .catch(error => {
-        container.innerHTML = `
-          <p class="error">Fehler beim Laden des Beitrags.</p>
-          <p align="center">
-            <a href="#" onclick="zeigeBeitraege(); return false;">← Zurück zur Übersicht</a>
-          </p>
+        mainContainer.innerHTML = `
+          <div class="content">
+            <p class="error">Fehler beim Laden des Beitrags.</p>
+            <p align="center">
+              <a href="#" onclick="zeigeBeitraege(); return false;">← Zurück zur Übersicht</a>
+            </p>
+          </div>
         `;
       });
   }
+  
+  // Browser-Navigation behandeln
+  window.addEventListener('popstate', function(event) {
+    const beitragParam = getURLParameter('beitrag');
+    if (beitragParam && beitragParam !== aktuellerBeitrag) {
+      ladeBeitrag(beitragParam);
+    } else if (!beitragParam && aktuellerBeitrag) {
+      zeigeBeitraege();
+    }
+  });
   
   // Beim Laden der Seite Beiträge laden
   ladeBeitraegeListe();
