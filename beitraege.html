@@ -53,6 +53,21 @@
       color: #000080;
       scroll-margin-top: 20px;
     }
+    .beitrag h1 {
+      font-size: 2em;
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+    .beitrag h2 {
+      font-size: 1.5em;
+      margin-top: 25px;
+      margin-bottom: 10px;
+    }
+    .beitrag h3 {
+      font-size: 1.2em;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
     .beitrag-datum {
       font-style: italic;
       color: #666;
@@ -84,18 +99,20 @@
     .toc {
       position: sticky;
       top: 20px;
-      width: 250px;
-      padding: 15px;
-      background-color: #f0f0f0;
+      width: 280px;
+      padding: 20px;
+      background-color: #f8f8f8;
       border: 1px solid #e0e0e0;
+      border-radius: 5px;
       max-height: calc(100vh - 100px);
       overflow-y: auto;
     }
     .toc h4 {
       margin-top: 0;
+      margin-bottom: 15px;
       color: #000080;
-      font-size: 14px;
-      text-transform: uppercase;
+      font-size: 16px;
+      font-weight: bold;
     }
     .toc ul {
       list-style: none;
@@ -103,26 +120,54 @@
       margin: 0;
     }
     .toc li {
-      margin-bottom: 5px;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+    .toc li.toc-h1 {
+      margin-left: 0;
+      font-weight: bold;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #e0e0e0;
     }
     .toc li.toc-h2 {
-      margin-left: 15px;
+      margin-left: 20px;
+      font-size: 0.95em;
     }
     .toc li.toc-h3 {
-      margin-left: 30px;
+      margin-left: 40px;
       font-size: 0.9em;
+      color: #666;
     }
     .toc a {
       color: #800080;
       display: block;
-      padding: 3px 0;
+      padding: 3px 5px;
+      border-radius: 3px;
+      transition: background-color 0.2s;
     }
     .toc a:hover {
-      background-color: #e0e0e0;
+      background-color: #e8e8e8;
     }
     .toc a.active {
       font-weight: bold;
-      background-color: #d0d0d0;
+      background-color: #d8d8d8;
+    }
+    .toc .toc-toggle {
+      display: inline-block;
+      cursor: pointer;
+      user-select: none;
+      margin-right: 5px;
+      font-family: monospace;
+      width: 15px;
+      text-align: center;
+    }
+    .toc .toc-toggle.collapsed {
+      transform: rotate(-90deg);
+      display: inline-block;
+    }
+    .toc ul.collapsed {
+      display: none;
     }
     @media (max-width: 1000px) {
       .toc {
@@ -204,10 +249,26 @@
     window.history.pushState({}, '', url);
   }
   
+  // Markdown-Formatierung aus Text entfernen
+  function entferneMarkdownFormatierung(text) {
+    // Entferne Bold/Italic Markdown
+    text = text.replace(/\*\*\*(.+?)\*\*\*/g, '$1');
+    text = text.replace(/\*\*(.+?)\*\*/g, '$1');
+    text = text.replace(/\*(.+?)\*/g, '$1');
+    text = text.replace(/__(.+?)__/g, '$1');
+    text = text.replace(/_(.+?)_/g, '$1');
+    // Entferne Code-Formatierung
+    text = text.replace(/`(.+?)`/g, '$1');
+    // Entferne Links
+    text = text.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+    return text.trim();
+  }
+  
   // Überschriften aus Markdown extrahieren
   function extrahiereUeberschriften(markdown) {
     const ueberschriften = [];
     const zeilen = markdown.split('\n');
+    let headingCounter = 0;
     
     zeilen.forEach((zeile, index) => {
       const h1Match = zeile.match(/^# (.+)$/);
@@ -216,26 +277,57 @@
       
       if (h1Match) {
         ueberschriften.push({
-          text: h1Match[1].trim(),
+          text: entferneMarkdownFormatierung(h1Match[1]),
           level: 1,
-          id: 'heading-' + index
+          id: 'heading-' + headingCounter++,
+          children: []
         });
       } else if (h2Match) {
         ueberschriften.push({
-          text: h2Match[1].trim(),
+          text: entferneMarkdownFormatierung(h2Match[1]),
           level: 2,
-          id: 'heading-' + index
+          id: 'heading-' + headingCounter++,
+          children: []
         });
       } else if (h3Match) {
         ueberschriften.push({
-          text: h3Match[1].trim(),
+          text: entferneMarkdownFormatierung(h3Match[1]),
           level: 3,
-          id: 'heading-' + index
+          id: 'heading-' + headingCounter++,
+          children: []
         });
       }
     });
     
-    return ueberschriften;
+    // Hierarchie aufbauen
+    const hierarchie = [];
+    let aktuelleH1 = null;
+    let aktuelleH2 = null;
+    
+    ueberschriften.forEach(ueberschrift => {
+      if (ueberschrift.level === 1) {
+        hierarchie.push(ueberschrift);
+        aktuelleH1 = ueberschrift;
+        aktuelleH2 = null;
+      } else if (ueberschrift.level === 2) {
+        if (aktuelleH1) {
+          aktuelleH1.children.push(ueberschrift);
+        } else {
+          hierarchie.push(ueberschrift);
+        }
+        aktuelleH2 = ueberschrift;
+      } else if (ueberschrift.level === 3) {
+        if (aktuelleH2 && aktuelleH1) {
+          aktuelleH2.children.push(ueberschrift);
+        } else if (aktuelleH1) {
+          aktuelleH1.children.push(ueberschrift);
+        } else {
+          hierarchie.push(ueberschrift);
+        }
+      }
+    });
+    
+    return hierarchie;
   }
   
   // Erweiterte Markdown-zu-HTML-Konvertierung mit IDs für Überschriften
@@ -245,24 +337,58 @@
     
     // Überschriften mit IDs
     html = html.replace(/^### (.*$)/gim, function(match, p1) {
-      return '<h3 id="heading-' + (headingIndex++) + '">' + p1 + '</h3>';
+      const cleanText = entferneMarkdownFormatierung(p1);
+      return '<h3 id="heading-' + (headingIndex++) + '">' + cleanText + '</h3>';
     });
     html = html.replace(/^## (.*$)/gim, function(match, p1) {
-      return '<h2 id="heading-' + (headingIndex++) + '">' + p1 + '</h2>';
+      const cleanText = entferneMarkdownFormatierung(p1);
+      return '<h2 id="heading-' + (headingIndex++) + '">' + cleanText + '</h2>';
     });
     html = html.replace(/^# (.*$)/gim, function(match, p1) {
-      return '<h1 id="heading-' + (headingIndex++) + '">' + p1 + '</h1>';
+      const cleanText = entferneMarkdownFormatierung(p1);
+      return '<h1 id="heading-' + (headingIndex++) + '">' + cleanText + '</h1>';
     });
     
     // Fett und Kursiv
     html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<b><i>$1</i></b>');
     html = html.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
     html = html.replace(/\*(.+?)\*/g, '<i>$1</i>');
+    html = html.replace(/__(.+?)__/g, '<b>$1</b>');
+    html = html.replace(/_(.+?)_/g, '<i>$1</i>');
+    
+    // Code
+    html = html.replace(/`(.+?)`/g, '<code>$1</code>');
     
     // Listen
-    html = html.replace(/^\* (.+)$/gim, '<li>$1</li>');
-    html = html.replace(/^\- (.+)$/gim, '<li>$1</li>');
-    html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+    const listLines = [];
+    const lines = html.split('\n');
+    let inList = false;
+    
+    lines.forEach(line => {
+      if (line.match(/^[\*\-] /)) {
+        if (!inList) {
+          listLines.push('<ul>');
+          inList = true;
+        }
+        listLines.push('<li>' + line.substring(2) + '</li>');
+      } else {
+        if (inList && line.trim() === '') {
+          // Leere Zeile innerhalb der Liste ignorieren
+        } else {
+          if (inList) {
+            listLines.push('</ul>');
+            inList = false;
+          }
+          listLines.push(line);
+        }
+      }
+    });
+    
+    if (inList) {
+      listLines.push('</ul>');
+    }
+    
+    html = listLines.join('\n');
     
     // Links
     html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
@@ -282,22 +408,51 @@
   }
   
   // Inhaltsverzeichnis erstellen
-  function erstelleInhaltsverzeichnis(ueberschriften) {
-    if (ueberschriften.length === 0) return '';
+  function erstelleInhaltsverzeichnis(hierarchie) {
+    if (hierarchie.length === 0) return '';
     
-    let tocHTML = '<div class="toc"><h4>Inhalt</h4><ul>';
+    let tocHTML = '<div class="toc"><h4>Inhalt</h4>';
     
-    ueberschriften.forEach(ueberschrift => {
-      const levelClass = 'toc-h' + ueberschrift.level;
-      tocHTML += `<li class="${levelClass}">
-        <a href="#${ueberschrift.id}" onclick="scrollZuUeberschrift('${ueberschrift.id}'); return false;">
-          ${ueberschrift.text}
-        </a>
-      </li>`;
-    });
+    function erstelleEbene(items, level) {
+      if (items.length === 0) return '';
+      
+      let html = '<ul>';
+      items.forEach(item => {
+        const levelClass = 'toc-h' + item.level;
+        html += `<li class="${levelClass}">`;
+        
+        if (item.children && item.children.length > 0) {
+          html += `<span class="toc-toggle" onclick="toggleTocSection(this)">▼</span>`;
+        }
+        
+        html += `<a href="#${item.id}" onclick="scrollZuUeberschrift('${item.id}'); return false;">
+          ${item.text}
+        </a>`;
+        
+        if (item.children && item.children.length > 0) {
+          html += erstelleEbene(item.children, item.level + 1);
+        }
+        
+        html += '</li>';
+      });
+      html += '</ul>';
+      
+      return html;
+    }
     
-    tocHTML += '</ul></div>';
+    tocHTML += erstelleEbene(hierarchie, 1);
+    tocHTML += '</div>';
+    
     return tocHTML;
+  }
+  
+  // Toggle TOC Section
+  function toggleTocSection(element) {
+    element.classList.toggle('collapsed');
+    const ul = element.parentElement.querySelector('ul');
+    if (ul) {
+      ul.classList.toggle('collapsed');
+    }
   }
   
   // Scroll zu Überschrift
@@ -310,8 +465,47 @@
       document.querySelectorAll('.toc a').forEach(a => {
         a.classList.remove('active');
       });
-      document.querySelector(`.toc a[href="#${id}"]`).classList.add('active');
+      const activeLink = document.querySelector(`.toc a[href="#${id}"]`);
+      if (activeLink) {
+        activeLink.classList.add('active');
+      }
     }
+  }
+  
+  // Scroll-Event für aktive Überschrift
+  function setupScrollSpy() {
+    let ticking = false;
+    
+    function updateActiveHeading() {
+      const headings = document.querySelectorAll('h1[id], h2[id], h3[id]');
+      const scrollPosition = window.scrollY + 100;
+      
+      let activeId = null;
+      headings.forEach(heading => {
+        if (heading.offsetTop <= scrollPosition) {
+          activeId = heading.id;
+        }
+      });
+      
+      if (activeId) {
+        document.querySelectorAll('.toc a').forEach(a => {
+          a.classList.remove('active');
+        });
+        const activeLink = document.querySelector(`.toc a[href="#${activeId}"]`);
+        if (activeLink) {
+          activeLink.classList.add('active');
+        }
+      }
+      
+      ticking = false;
+    }
+    
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        window.requestAnimationFrame(updateActiveHeading);
+        ticking = true;
+      }
+    });
   }
   
   // Datum formatieren
@@ -332,7 +526,7 @@
     // Titel extrahieren (erste H1 Überschrift)
     for (const zeile of zeilen) {
       if (zeile.startsWith('# ')) {
-        titel = zeile.substring(2).trim();
+        titel = entferneMarkdownFormatierung(zeile.substring(2));
         break;
       }
     }
@@ -347,7 +541,7 @@
     const inhaltOhneTitel = markdown.replace(/^#\s+.+$/m, '').replace(/\*Datum:.+?\*/, '').trim();
     const erstesAbsatzMatch = inhaltOhneTitel.match(/^(.+?)(\n\n|$)/);
     if (erstesAbsatzMatch) {
-      beschreibung = erstesAbsatzMatch[1].trim().substring(0, 150) + '...';
+      beschreibung = entferneMarkdownFormatierung(erstesAbsatzMatch[1]).substring(0, 150) + '...';
     }
     
     return { titel, datum, beschreibung };
@@ -491,6 +685,9 @@
             ${tocHTML}
           </div>
         `;
+        
+        // ScrollSpy aktivieren
+        setupScrollSpy();
         
         // Wenn ein Hash in der URL ist, dorthin scrollen
         if (window.location.hash) {
