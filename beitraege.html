@@ -65,6 +65,11 @@
       color: #666;
       padding: 20px;
     }
+    .error {
+      color: red;
+      text-align: center;
+      padding: 20px;
+    }
   </style>
 </head>
 <body link="#800080" bgcolor="#ffffff" text="#000080" vlink="#ff0000">
@@ -116,22 +121,7 @@
   // Aktuelles Jahr automatisch einfügen
   document.getElementById("year").textContent = new Date().getFullYear();
   
-  // Liste der Beiträge (muss manuell aktualisiert werden)
-  const beitraege = [
-    {
-      datei: 'beispiel-beitrag.md',
-      titel: 'Willkommen zu meinem Blog',
-      datum: '21. Juli 2025',
-      beschreibung: 'Ein Beispielbeitrag über Markdown und das Bloggen.'
-    }
-    // Weitere Beiträge hier hinzufügen:
-    // {
-    //   datei: 'mein-zweiter-beitrag.md',
-    //   titel: 'Mein zweiter Beitrag',
-    //   datum: '22. Juli 2025',
-    //   beschreibung: 'Beschreibung des zweiten Beitrags.'
-    // }
-  ];
+  let beitraege = [];
   
   // Einfache Markdown-zu-HTML-Konvertierung
   function simpleMarkdownToHtml(markdown) {
@@ -152,6 +142,9 @@
     html = html.replace(/^\- (.+)$/gim, '<li>$1</li>');
     html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
     
+    // Links
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+    
     // Absätze
     html = html.replace(/\n\n/g, '</p><p>');
     html = '<p>' + html + '</p>';
@@ -160,8 +153,93 @@
     html = html.replace(/<p><\/p>/g, '');
     html = html.replace(/<p>(<h[1-6]>)/g, '$1');
     html = html.replace(/(<\/h[1-6]>)<\/p>/g, '$1');
+    html = html.replace(/<p>(<ul>)/g, '$1');
+    html = html.replace(/(<\/ul>)<\/p>/g, '$1');
     
     return html;
+  }
+  
+  // Datum formatieren
+  function formatiereDatum(datumString) {
+    const monate = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 
+                    'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
+    const datum = new Date(datumString);
+    return datum.getDate() + '. ' + monate[datum.getMonth()] + ' ' + datum.getFullYear();
+  }
+  
+  // Metadaten aus Markdown extrahieren
+  function extrahiereMetadaten(markdown) {
+    const zeilen = markdown.split('\n');
+    let titel = 'Unbenannter Beitrag';
+    let datum = null;
+    let beschreibung = '';
+    
+    // Titel extrahieren (erste H1 Überschrift)
+    for (const zeile of zeilen) {
+      if (zeile.startsWith('# ')) {
+        titel = zeile.substring(2).trim();
+        break;
+      }
+    }
+    
+    // Datum extrahieren (suche nach *Datum: ...)
+    const datumMatch = markdown.match(/\*Datum:\s*(.+?)\*/);
+    if (datumMatch) {
+      datum = datumMatch[1].trim();
+    }
+    
+    // Beschreibung extrahieren (erster Absatz nach Titel und Datum)
+    const inhaltOhneTitel = markdown.replace(/^#\s+.+$/m, '').replace(/\*Datum:.+?\*/, '').trim();
+    const erstesAbsatzMatch = inhaltOhneTitel.match(/^(.+?)(\n\n|$)/);
+    if (erstesAbsatzMatch) {
+      beschreibung = erstesAbsatzMatch[1].trim().substring(0, 150) + '...';
+    }
+    
+    return { titel, datum, beschreibung };
+  }
+  
+  // Beiträge aus index.json laden
+  function ladeBeitraegeListe() {
+    fetch('beitraege/index.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('index.json konnte nicht geladen werden');
+        }
+        return response.json();
+      })
+      .then(data => {
+        beitraege = data.sort((a, b) => new Date(b.datum) - new Date(a.datum));
+        zeigeBeitraege();
+      })
+      .catch(error => {
+        console.error('Fehler beim Laden der Beitragsliste:', error);
+        // Fallback: Versuche Beiträge direkt zu laden
+        ladeBeitraegeDirekt();
+      });
+  }
+  
+  // Fallback: Lade bekannte Beiträge direkt
+  function ladeBeitraegeDirekt() {
+    const bekannteBeitraege = ['beispiel-beitrag.md'];
+    const geladeneBeitraege = [];
+    
+    Promise.all(bekannteBeitraege.map(datei => 
+      fetch('beitraege/' + datei)
+        .then(response => response.text())
+        .then(markdown => {
+          const metadaten = extrahiereMetadaten(markdown);
+          return {
+            datei: datei,
+            titel: metadaten.titel,
+            datum: metadaten.datum,
+            beschreibung: metadaten.beschreibung
+          };
+        })
+        .catch(() => null)
+    )).then(results => {
+      beitraege = results.filter(b => b !== null);
+      zeigeBeitraege();
+    });
   }
   
   // Beiträge anzeigen
@@ -177,10 +255,14 @@
     let html = '<ul class="beitrag-liste">';
     
     beitraege.forEach(beitrag => {
+      const datumAnzeige = beitrag.datum ? 
+        (beitrag.datum.includes('-') ? formatiereDatum(beitrag.datum) : beitrag.datum) : 
+        'Kein Datum';
+      
       html += `
         <li>
           <a href="#" onclick="ladeBeitrag('${beitrag.datei}'); return false;">${beitrag.titel}</a>
-          <div class="beitrag-datum">${beitrag.datum}</div>
+          <div class="beitrag-datum">${datumAnzeige}</div>
           <div>${beitrag.beschreibung}</div>
         </li>
       `;
@@ -195,8 +277,6 @@
     const container = document.getElementById('beitraege-container');
     container.innerHTML = '<p class="loading">Beitrag wird geladen...</p>';
     
-    // Simuliere das Laden der Markdown-Datei
-    // In einer echten Implementierung würde hier ein fetch() verwendet
     fetch('beitraege/' + dateiname)
       .then(response => {
         if (!response.ok) {
@@ -216,41 +296,17 @@
         `;
       })
       .catch(error => {
-        // Fallback für lokale Entwicklung ohne Server
-        if (dateiname === 'beispiel-beitrag.md') {
-          const beispielInhalt = `# Willkommen zu meinem Blog
-
-*Datum: 21. Juli 2025*
-
-Dies ist ein Beispielbeitrag. Hier können Sie Ihre Gedanken, Artikel und Beiträge in Markdown-Format verfassen.
-
-## Warum Markdown?
-
-Markdown ist eine einfache Auszeichnungssprache, die es ermöglicht:
-- Formatierte Texte zu schreiben
-- Listen zu erstellen
-- Links und Bilder einzufügen
-- Code-Beispiele zu zeigen
-
-Weitere Beiträge folgen in Kürze!`;
-          
-          const html = simpleMarkdownToHtml(beispielInhalt);
-          container.innerHTML = `
-            <div class="beitrag">
-              ${html}
-            </div>
-            <p align="center">
-              <a href="#" onclick="zeigeBeitraege(); return false;">← Zurück zur Übersicht</a>
-            </p>
-          `;
-        } else {
-          container.innerHTML = '<p align="center" style="color: red;">Fehler beim Laden des Beitrags.</p>';
-        }
+        container.innerHTML = `
+          <p class="error">Fehler beim Laden des Beitrags.</p>
+          <p align="center">
+            <a href="#" onclick="zeigeBeitraege(); return false;">← Zurück zur Übersicht</a>
+          </p>
+        `;
       });
   }
   
-  // Beim Laden der Seite Beiträge anzeigen
-  zeigeBeitraege();
+  // Beim Laden der Seite Beiträge laden
+  ladeBeitraegeListe();
 </script>
 
 </body>
