@@ -33,18 +33,6 @@
       margin: 0 auto;
       text-align: left;
     }
-    .content-with-toc {
-      display: flex;
-      gap: 40px;
-      max-width: 1300px;
-      margin: 0 auto;
-      align-items: flex-start;
-    }
-    .beitrag-content {
-      flex: 1;
-      text-align: left;
-      max-width: 800px;
-    }
     .beitrag {
       margin-bottom: 30px;
       padding: 30px;
@@ -54,7 +42,6 @@
     }
     .beitrag h1, .beitrag h2, .beitrag h3 {
       color: #000080;
-      scroll-margin-top: 30px;
     }
     .beitrag h1 {
       font-size: 2.2em;
@@ -123,221 +110,6 @@
       text-align: center;
       padding: 40px;
     }
-    
-    /* Schönes hierarchisches Inhaltsverzeichnis */
-    .toc {
-      position: sticky;
-      top: 30px;
-      width: 320px;
-      background: linear-gradient(to bottom, #f8f9fa, #ffffff);
-      border: 1px solid #e0e0e0;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-      max-height: calc(100vh - 80px);
-      overflow-y: auto;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
-    
-    .toc-header {
-      padding: 20px 25px 15px 25px;
-      border-bottom: 2px solid #e0e0e0;
-      background-color: #000080;
-      color: white;
-      border-radius: 10px 10px 0 0;
-    }
-    
-    .toc h4 {
-      margin: 0;
-      font-size: 18px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-    
-    .toc-content {
-      padding: 15px;
-    }
-    
-    .toc ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    
-    .toc li {
-      position: relative;
-      margin: 0;
-    }
-    
-    /* Hierarchische Linien */
-    .toc li.toc-h2::before,
-    .toc li.toc-h3::before {
-      content: "";
-      position: absolute;
-      left: -10px;
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      background-color: #e0e0e0;
-    }
-    
-    .toc li.toc-h2::after,
-    .toc li.toc-h3::after {
-      content: "";
-      position: absolute;
-      left: -10px;
-      top: 18px;
-      width: 8px;
-      height: 1px;
-      background-color: #e0e0e0;
-    }
-    
-    /* Einrückungen und Abstände */
-    .toc li.toc-h1 {
-      margin: 12px 0;
-    }
-    
-    .toc li.toc-h2 {
-      margin: 8px 0 8px 25px;
-    }
-    
-    .toc li.toc-h3 {
-      margin: 6px 0 6px 50px;
-    }
-    
-    /* Link-Styling */
-    .toc a {
-      display: block;
-      padding: 8px 12px;
-      border-radius: 6px;
-      color: #333;
-      font-size: 15px;
-      transition: all 0.2s ease;
-      position: relative;
-    }
-    
-    .toc li.toc-h1 > a {
-      font-weight: 600;
-      color: #000080;
-      font-size: 16px;
-      background-color: #f0f0f0;
-      margin-bottom: 4px;
-    }
-    
-    .toc li.toc-h2 > a {
-      font-weight: 500;
-      font-size: 14px;
-      color: #555;
-    }
-    
-    .toc li.toc-h3 > a {
-      font-weight: 400;
-      font-size: 13px;
-      color: #777;
-    }
-    
-    /* Hover-Effekte */
-    .toc a:hover {
-      background-color: rgba(128, 0, 128, 0.1);
-      color: #800080;
-      text-decoration: none;
-      transform: translateX(3px);
-    }
-    
-    /* Aktiver Link */
-    .toc a.active {
-      background-color: #800080;
-      color: white;
-      font-weight: 600;
-      box-shadow: 0 2px 8px rgba(128, 0, 128, 0.3);
-    }
-    
-    .toc li.toc-h1 > a.active {
-      background-color: #000080;
-      box-shadow: 0 2px 8px rgba(0, 0, 128, 0.3);
-    }
-    
-    /* Nummern-Badges */
-    .toc-number {
-      display: inline-block;
-      width: 24px;
-      height: 24px;
-      line-height: 24px;
-      text-align: center;
-      background-color: #e0e0e0;
-      color: #666;
-      border-radius: 50%;
-      font-size: 12px;
-      font-weight: 600;
-      margin-right: 8px;
-    }
-    
-    .toc li.toc-h1 .toc-number {
-      background-color: #000080;
-      color: white;
-    }
-    
-    .toc a.active .toc-number {
-      background-color: white;
-      color: #800080;
-    }
-    
-    /* Scrollbar-Styling */
-    .toc::-webkit-scrollbar {
-      width: 8px;
-    }
-    
-    .toc::-webkit-scrollbar-track {
-      background: #f1f1f1;
-      border-radius: 10px;
-    }
-    
-    .toc::-webkit-scrollbar-thumb {
-      background: #888;
-      border-radius: 10px;
-    }
-    
-    .toc::-webkit-scrollbar-thumb:hover {
-      background: #555;
-    }
-    
-    /* Mobile Toggle */
-    .toc-toggle {
-      display: none;
-      position: fixed;
-      right: 20px;
-      top: 20px;
-      background-color: #000080;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      cursor: pointer;
-      border-radius: 8px;
-      z-index: 1000;
-      font-size: 16px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-    
-    @media (max-width: 1100px) {
-      .toc {
-        display: none;
-      }
-      .content-with-toc {
-        display: block;
-      }
-      .toc-toggle {
-        display: block;
-      }
-      .toc.mobile-visible {
-        display: block;
-        position: fixed;
-        right: 20px;
-        top: 80px;
-        z-index: 999;
-        max-width: 85%;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-      }
-    }
   </style>
 </head>
 <body link="#800080" bgcolor="#ffffff" text="#000080" vlink="#ff0000">
@@ -387,15 +159,12 @@
   </div>
 </div>
 
-<button class="toc-toggle" onclick="toggleMobileTOC()">☰ Inhalt</button>
-
 <script>
   // Aktuelles Jahr automatisch einfügen
   document.getElementById("year").textContent = new Date().getFullYear();
   
   let beitraege = [];
   let aktuellerBeitrag = null;
-  let headingCounter = 0;
   
   // URL-Handling
   function getURLParameter(name) {
@@ -434,72 +203,14 @@
     return text.trim();
   }
   
-  // Überschriften aus Markdown extrahieren mit Nummerierung
-  function extrahiereUeberschriften(markdown) {
-    const ueberschriften = [];
-    const zeilen = markdown.split('\n');
-    headingCounter = 0;
-    let h1Counter = 0;
-    let h2Counter = 0;
-    let h3Counter = 0;
-    let lastH1 = 0;
-    let lastH2 = 0;
-    
-    zeilen.forEach((zeile) => {
-      const h1Match = zeile.match(/^# (.+)$/);
-      const h2Match = zeile.match(/^## (.+)$/);
-      const h3Match = zeile.match(/^### (.+)$/);
-      
-      if (h1Match) {
-        h1Counter++;
-        h2Counter = 0;
-        h3Counter = 0;
-        lastH1 = h1Counter;
-        ueberschriften.push({
-          text: entferneMarkdownFormatierung(h1Match[1]),
-          level: 1,
-          id: 'heading-' + (headingCounter++),
-          number: h1Counter
-        });
-      } else if (h2Match) {
-        h2Counter++;
-        h3Counter = 0;
-        lastH2 = h2Counter;
-        ueberschriften.push({
-          text: entferneMarkdownFormatierung(h2Match[1]),
-          level: 2,
-          id: 'heading-' + (headingCounter++),
-          number: lastH1 + '.' + h2Counter
-        });
-      } else if (h3Match) {
-        h3Counter++;
-        ueberschriften.push({
-          text: entferneMarkdownFormatierung(h3Match[1]),
-          level: 3,
-          id: 'heading-' + (headingCounter++),
-          number: lastH1 + '.' + lastH2 + '.' + h3Counter
-        });
-      }
-    });
-    
-    return ueberschriften;
-  }
-  
-  // Erweiterte Markdown-zu-HTML-Konvertierung mit IDs für Überschriften
-  function markdownToHtmlMitIDs(markdown) {
+  // Einfache Markdown-zu-HTML-Konvertierung
+  function markdownToHtml(markdown) {
     let html = markdown;
-    let currentHeadingIndex = 0;
     
-    // Überschriften mit IDs
-    html = html.replace(/^### (.*$)/gim, function(match, p1) {
-      return '<h3 id="heading-' + (currentHeadingIndex++) + '">' + p1 + '</h3>';
-    });
-    html = html.replace(/^## (.*$)/gim, function(match, p1) {
-      return '<h2 id="heading-' + (currentHeadingIndex++) + '">' + p1 + '</h2>';
-    });
-    html = html.replace(/^# (.*$)/gim, function(match, p1) {
-      return '<h1 id="heading-' + (currentHeadingIndex++) + '">' + p1 + '</h1>';
-    });
+    // Überschriften
+    html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+    html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+    html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
     
     // Fett und Kursiv
     html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<b><i>$1</i></b>');
@@ -548,94 +259,6 @@
     html = html.replace(/(<\/ul>)<\/p>/g, '$1');
     
     return html;
-  }
-  
-  // Schönes hierarchisches Inhaltsverzeichnis erstellen
-  function erstelleInhaltsverzeichnis(ueberschriften) {
-    if (ueberschriften.length === 0) return '';
-    
-    let tocHTML = `
-      <div class="toc" id="toc">
-        <div class="toc-header">
-          <h4>Inhaltsverzeichnis</h4>
-        </div>
-        <div class="toc-content">
-          <ul>`;
-    
-    ueberschriften.forEach((ueberschrift, index) => {
-      const levelClass = 'toc-h' + ueberschrift.level;
-      const numberBadge = ueberschrift.level === 1 ? 
-        `<span class="toc-number">${ueberschrift.number}</span>` : '';
-      
-      tocHTML += `
-        <li class="${levelClass}">
-          <a href="#${ueberschrift.id}" onclick="scrollZuUeberschrift('${ueberschrift.id}'); return false;">
-            ${numberBadge}${ueberschrift.text}
-          </a>
-        </li>`;
-    });
-    
-    tocHTML += `
-          </ul>
-        </div>
-      </div>`;
-    
-    return tocHTML;
-  }
-  
-  // Scroll zu Überschrift
-  function scrollZuUeberschrift(id) {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      
-      // Aktive Überschrift markieren
-      document.querySelectorAll('.toc a').forEach(a => {
-        a.classList.remove('active');
-      });
-      const activeLink = document.querySelector(`.toc a[href="#${id}"]`);
-      if (activeLink) {
-        activeLink.classList.add('active');
-      }
-      
-      // Mobile TOC ausblenden
-      const toc = document.getElementById('toc');
-      if (toc && window.innerWidth <= 1100) {
-        toc.classList.remove('mobile-visible');
-      }
-    }
-  }
-  
-  // Toggle Mobile TOC
-  function toggleMobileTOC() {
-    const toc = document.getElementById('toc');
-    if (toc) {
-      toc.classList.toggle('mobile-visible');
-    }
-  }
-  
-  // Scroll-Spy für aktive Überschrift
-  function aktiviereScrollSpy() {
-    const headings = document.querySelectorAll('.beitrag h1, .beitrag h2, .beitrag h3');
-    const tocLinks = document.querySelectorAll('.toc a');
-    
-    window.addEventListener('scroll', () => {
-      let current = '';
-      
-      headings.forEach(heading => {
-        const rect = heading.getBoundingClientRect();
-        if (rect.top <= 100) {
-          current = heading.getAttribute('id');
-        }
-      });
-      
-      tocLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + current) {
-          link.classList.add('active');
-        }
-      });
-    });
   }
   
   // Datum formatieren
@@ -802,32 +425,18 @@
         return response.text();
       })
       .then(markdown => {
-        const ueberschriften = extrahiereUeberschriften(markdown);
-        const html = markdownToHtmlMitIDs(markdown);
-        const tocHTML = erstelleInhaltsverzeichnis(ueberschriften);
+        const html = markdownToHtml(markdown);
         
         mainContainer.innerHTML = `
-          <div class="content-with-toc">
-            <div class="beitrag-content">
-              <div class="beitrag">
-                ${html}
-              </div>
-              <p align="center">
-                <a href="#" onclick="zeigeBeitraege(); return false;">← Zurück zur Übersicht</a>
-              </p>
+          <div class="content">
+            <div class="beitrag">
+              ${html}
             </div>
-            ${tocHTML}
+            <p align="center">
+              <a href="#" onclick="zeigeBeitraege(); return false;">← Zurück zur Übersicht</a>
+            </p>
           </div>
         `;
-        
-        // Scroll-Spy aktivieren
-        setTimeout(aktiviereScrollSpy, 100);
-        
-        // Wenn ein Hash in der URL ist, dorthin scrollen
-        if (window.location.hash) {
-          const id = window.location.hash.substring(1);
-          setTimeout(() => scrollZuUeberschrift(id), 100);
-        }
       })
       .catch(error => {
         mainContainer.innerHTML = `
