@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Beiträge von Jonas Hartmann - Gedanken und Analysen zu aktuellen Themen aus Wirtschaft, Recht und Gesellschaft.">
+    <title>Beiträge - Jonas Hartmann</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #1a1a2e;
+            --secondary-color: #16213e;
+            --accent-color: #0f3460;
+            --text-light: #e94560;
+            --text-primary: #f5f5f5;
+            --text-secondary: #b0b0b0;
+            --gradient-start: #667eea;
+            --gradient-end: #764ba2;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --code-bg: rgba(0, 0, 0, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(118, 75, 162, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(233, 69, 96, 0.05) 0%, transparent 50%);
+            z-index: -1;
+        }
+        
+        /* Navigation Bar */
+        .nav-bar {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .back-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        
+        .back-link:hover {
+            color: var(--text-light);
+        }
+        
+        /* Header */
+        header {
+            padding: 3rem 0 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        /* Main Content Container */
+        .content-wrapper {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 4rem 2rem;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 1rem;
+            border: 3px solid var(--border-color);
+            border-top-color: var(--text-light);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Blog Post List */
+        .blog-list {
+            display: grid;
+            gap: 1.5rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .blog-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blog-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(233, 69, 96, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .blog-card:hover::before {
+            left: 100%;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--text-light);
+        }
+        
+        .blog-card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+        
+        .blog-card:hover h2 {
+            color: var(--text-light);
+        }
+        
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .blog-date {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .blog-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        
+        /* Single Blog Post View */
+        .blog-post {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .blog-post h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: left;
+            line-height: 1.2;
+        }
+        
+        .blog-post h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem;
+            color: var(--text-light);
+            position: relative;
+            padding-left: 1rem;
+        }
+        
+        .blog-post h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--gradient-start), var(--gradient-end));
+            border-radius: 2px;
+        }
+        
+        .blog-post h3 {
+            font-size: 1.4rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--text-primary);
+        }
+        
+        .blog-post p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        
+        .blog-post ul,
+        .blog-post ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+            color: var(--text-secondary);
+        }
+        
+        .blog-post li {
+            margin-bottom: 0.5rem;
+            line-height: 1.8;
+        }
+        
+        .blog-post a {
+            color: var(--text-light);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+        
+        .blog-post a:hover {
+            border-bottom-color: var(--text-light);
+        }
+        
+        .blog-post code {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--code-bg);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        
+        .blog-post pre {
+            background: var(--code-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        
+        .blog-post pre code {
+            background: none;
+            padding: 0;
+        }
+        
+        .blog-post blockquote {
+            border-left: 4px solid var(--text-light);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+        
+        /* Back to list button */
+        .back-to-list {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+        
+        .back-to-list:hover {
+            background: rgba(233, 69, 96, 0.1);
+            color: var(--text-light);
+            border-color: var(--text-light);
+            transform: translateX(-5px);
+        }
+        
+        /* Error State */
+        .error {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--text-light);
+        }
+        
+        .error-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Footer */
+        footer {
+            margin-top: 6rem;
+            padding: 3rem 2rem 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: var(--text-light);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .blog-post {
+                padding: 2rem;
+            }
+            
+            .blog-post h1 {
+                font-size: 2rem;
+            }
+            
+            .blog-post h2 {
+                font-size: 1.5rem;
+            }
+        }
+        
+        /* No JavaScript Notice */
+        noscript {
+            display: block;
+            background: rgba(233, 69, 96, 0.1);
+            border: 1px solid var(--text-light);
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            margin: 2rem auto;
+            max-width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <a href="index.html" class="back-link">
+                <span>←</span> Zurück zur Startseite
+            </a>
+        </div>
+    </nav>
+    
+    <header>
+        <h1>Beiträge</h1>
+    </header>
+    
+    <main class="content-wrapper">
+        <div id="content-container">
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>Beiträge werden geladen...</p>
+            </div>
+        </div>
+        
+        <noscript>
+            <p>⚠️ Diese Seite benötigt JavaScript, um die Beiträge dynamisch zu laden und anzuzeigen.</p>
+        </noscript>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <p class="copyright">© <span id="year"></span> Jonas Hartmann</p>
+            <a href="impressum.html" class="footer-link">Impressum</a>
+        </div>
+    </footer>
+    
+    <script>
+        // Set current year
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Blog management system
+        let beitraege = [];
+        let aktuellerBeitrag = null;
+        
+        // URL parameter handling
+        function getURLParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+        
+        function setURLParameter(name, value) {
+            const url = new URL(window.location);
+            if (value) {
+                url.searchParams.set(name, value);
+            } else {
+                url.searchParams.delete(name);
+            }
+            window.history.pushState({}, '', url);
+        }
+        
+        // Remove markdown formatting
+        function entferneMarkdownFormatierung(text) {
+            text = text.replace(/\*\*\*(.+?)\*\*\*/g, '$1');
+            text = text.replace(/\*\*(.+?)\*\*/g, '$1');
+            text = text.replace(/\*(.+?)\*/g, '$1');
+            text = text.replace(/___(.+?)___/g, '$1');
+            text = text.replace(/__(.+?)__/g, '$1');
+            text = text.replace(/_(.+?)_/g, '$1');
+            text = text.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
+            text = text.replace(/`(.+?)`/g, '$1');
+            return text.trim();
+        }
+        
+        // Enhanced Markdown to HTML converter
+        function markdownToHtml(markdown) {
+            let html = markdown;
+            
+            // Headers
+            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+            html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+            
+            // Bold and italic
+            html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+            html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+            html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+            
+            // Code blocks
+            html = html.replace(/```(\w+)?\n([\s\S]*?)```/g, '<pre><code class="language-$1">$2</code></pre>');
+            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+            
+            // Lists
+            let inList = false;
+            const lines = html.split('\n');
+            const processedLines = [];
+            
+            lines.forEach((line, index) => {
+                if (line.match(/^[\*\-] /)) {
+                    if (!inList) {
+                        processedLines.push('<ul>');
+                        inList = true;
+                    }
+                    processedLines.push(line.replace(/^[\*\-] (.+)$/, '<li>$1</li>'));
+                } else {
+                    if (inList && !line.match(/^[\*\-] /)) {
+                        processedLines.push('</ul>');
+                        inList = false;
+                    }
+                    processedLines.push(line);
+                }
+            });
+            
+            if (inList) {
+                processedLines.push('</ul>');
+            }
+            
+            html = processedLines.join('\n');
+            
+            // Links
+            html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+            
+            // Blockquotes
+            html = html.replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>');
+            
+            // Paragraphs
+            html = html.replace(/\n\n/g, '</p><p>');
+            html = '<p>' + html + '</p>';
+            
+            // Clean up
+            html = html.replace(/<p><\/p>/g, '');
+            html = html.replace(/<p>(<h[1-6])/g, '$1');
+            html = html.replace(/(<\/h[1-6]>)<\/p>/g, '$1');
+            html = html.replace(/<p>(<ul>)/g, '$1');
+            html = html.replace(/(<\/ul>)<\/p>/g, '$1');
+            html = html.replace(/<p>(<blockquote>)/g, '$1');
+            html = html.replace(/(<\/blockquote>)<\/p>/g, '$1');
+            html = html.replace(/<p>(<pre>)/g, '$1');
+            html = html.replace(/(<\/pre>)<\/p>/g, '$1');
+            
+            return html;
+        }
+        
+        // Format date
+        function formatiereDatum(datumString) {
+            const monate = ['Januar', 'Februar', 'März', 'April', 'Mai', 'Juni', 
+                            'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember'];
+            const datum = new Date(datumString);
+            return datum.getDate() + '. ' + monate[datum.getMonth()] + ' ' + datum.getFullYear();
+        }
+        
+        // Extract metadata from Markdown
+        function extrahiereMetadaten(markdown) {
+            const zeilen = markdown.split('\n');
+            let titel = 'Unbenannter Beitrag';
+            let datum = null;
+            let beschreibung = '';
+            
+            for (const zeile of zeilen) {
+                if (zeile.startsWith('# ')) {
+                    titel = entferneMarkdownFormatierung(zeile.substring(2));
+                    break;
+                }
+            }
+            
+            const datumMatch = markdown.match(/\*Datum:\s*(.+?)\*/);
+            if (datumMatch) {
+                datum = datumMatch[1].trim();
+            }
+            
+            const inhaltOhneTitel = markdown.replace(/^#\s+.+$/m, '').replace(/\*Datum:.+?\*/, '').trim();
+            const erstesAbsatzMatch = inhaltOhneTitel.match(/^(.+?)(\n\n|$)/);
+            if (erstesAbsatzMatch) {
+                let beschreibungText = entferneMarkdownFormatierung(erstesAbsatzMatch[1]);
+                if (beschreibungText.length > 150) {
+                    beschreibungText = beschreibungText.substring(0, 147) + '...';
+                }
+                beschreibung = beschreibungText;
+            }
+            
+            return { titel, datum, beschreibung };
+        }
+        
+        // Load blog posts from index.json
+        function ladeBeitraegeListe() {
+            fetch('beitraege/index.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('index.json konnte nicht geladen werden');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    beitraege = data.sort((a, b) => new Date(b.datum) - new Date(a.datum));
+                    
+                    const beitragParam = getURLParameter('beitrag');
+                    if (beitragParam) {
+                        const beitrag = beitraege.find(b => b.datei === beitragParam);
+                        if (beitrag) {
+                            ladeBeitrag(beitrag.datei);
+                            return;
+                        }
+                    }
+                    
+                    zeigeBeitraege();
+                })
+                .catch(error => {
+                    console.error('Fehler beim Laden der Beitragsliste:', error);
+                    ladeBeitraegeDirekt();
+                });
+        }
+        
+        // Fallback: Load known posts directly
+        function ladeBeitraegeDirekt() {
+            const bekannteBeitraege = ['Zuzug in die Schweiz.md'];
+            
+            Promise.all(bekannteBeitraege.map(datei => 
+                fetch('beitraege/' + datei)
+                    .then(response => response.text())
+                    .then(markdown => {
+                        const metadaten = extrahiereMetadaten(markdown);
+                        return {
+                            datei: datei,
+                            titel: metadaten.titel,
+                            datum: metadaten.datum,
+                            beschreibung: metadaten.beschreibung
+                        };
+                    })
+                    .catch(() => null)
+            )).then(results => {
+                beitraege = results.filter(b => b !== null);
+                
+                const beitragParam = getURLParameter('beitrag');
+                if (beitragParam) {
+                    const beitrag = beitraege.find(b => b.datei === beitragParam);
+                    if (beitrag) {
+                        ladeBeitrag(beitrag.datei);
+                        return;
+                    }
+                }
+                
+                zeigeBeitraege();
+            });
+        }
+        
+        // Display blog posts list
+        function zeigeBeitraege() {
+            aktuellerBeitrag = null;
+            setURLParameter('beitrag', null);
+            
+            const container = document.getElementById('content-container');
+            
+            if (beitraege.length === 0) {
+                container.innerHTML = `
+                    <div class="error">
+                        <div class="error-icon">📝</div>
+                        <p>Noch keine Beiträge vorhanden.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '<div class="blog-list">';
+            
+            beitraege.forEach(beitrag => {
+                const datumAnzeige = beitrag.datum ? 
+                    (beitrag.datum.includes('-') ? formatiereDatum(beitrag.datum) : beitrag.datum) : 
+                    'Kein Datum';
+                
+                html += `
+                    <article class="blog-card" onclick="ladeBeitrag('${beitrag.datei}')">
+                        <h2>${beitrag.titel}</h2>
+                        <div class="blog-meta">
+                            <div class="blog-date">
+                                <span>📅</span>
+                                <span>${datumAnzeige}</span>
+                            </div>
+                        </div>
+                        <p class="blog-description">${beitrag.beschreibung}</p>
+                    </article>
+                `;
+            });
+            
+            html += '</div>';
+            container.innerHTML = html;
+        }
+        
+        // Load and display single blog post
+        function ladeBeitrag(dateiname) {
+            aktuellerBeitrag = dateiname;
+            setURLParameter('beitrag', dateiname);
+            
+            const container = document.getElementById('content-container');
+            container.innerHTML = `
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Beitrag wird geladen...</p>
+                </div>
+            `;
+            
+            fetch('beitraege/' + dateiname)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Beitrag konnte nicht geladen werden');
+                    }
+                    return response.text();
+                })
+                .then(markdown => {
+                    const html = markdownToHtml(markdown);
+                    
+                    container.innerHTML = `
+                        <a href="#" class="back-to-list" onclick="zeigeBeitraege(); return false;">
+                            <span>←</span> Zurück zur Übersicht
+                        </a>
+                        <article class="blog-post">
+                            ${html}
+                        </article>
+                    `;
+                })
+                .catch(error => {
+                    container.innerHTML = `
+                        <div class="error">
+                            <div class="error-icon">⚠️</div>
+                            <p>Fehler beim Laden des Beitrags.</p>
+                            <a href="#" class="back-to-list" onclick="zeigeBeitraege(); return false;">
+                                <span>←</span> Zurück zur Übersicht
+                            </a>
+                        </div>
+                    `;
+                });
+        }
+        
+        // Handle browser navigation
+        window.addEventListener('popstate', function(event) {
+            const beitragParam = getURLParameter('beitrag');
+            if (beitragParam && beitragParam !== aktuellerBeitrag) {
+                ladeBeitrag(beitragParam);
+            } else if (!beitragParam && aktuellerBeitrag) {
+                zeigeBeitraege();
+            }
+        });
+        
+        // Initial load
+        ladeBeitraegeListe();
+    </script>
+</body>
+</html>
