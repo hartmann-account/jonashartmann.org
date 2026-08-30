@@ -1,0 +1,22 @@
+name = "jonashartmann-org"
+account_id = "edc3932f1c8628cc44b7a0941c973a71"
+main = "src/index.tsx"
+compatibility_date = "2025-02-23"
+
+workers_dev = true
+
+assets = { directory = "public" }
+
+# Das Stylesheet ist ein Build-Artefakt und liegt nicht im Repository. Cloudflare
+# Workers Builds und `wrangler deploy` erzeugen es hierueber vor dem Hochladen.
+[build]
+command = "npm run build:css"
+
+[vars]
+# Wird an jede statische URL gehaengt (?v=...). BEI JEDER AENDERUNG an
+# public/static/app.js oder src/styles.css erhoehen, sonst halten Browser-
+# Caches an der alten Datei fest.
+ASSET_VERSION = "1"
+
+[observability.logs]
+enabled = true

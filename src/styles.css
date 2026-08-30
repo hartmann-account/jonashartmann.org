@@ -1,0 +1,129 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Expliziter Grund hinter allen Ebenen. */
+html { background: var(--th-bg); }
+
+/* Theme variables - light is default */
+:root {
+  --th-bg: #ffffff;
+  --th-bg-secondary: #f9fafb;
+  --th-bg-tertiary: #f3f4f6;
+  --th-sidebar: #fafafa;
+  --th-border: #e5e7eb;
+  --th-border-strong: #d1d5db;
+  --th-text: #111827;
+  --th-text-secondary: #6b7280;
+  --th-text-tertiary: #9ca3af;
+  --th-text-muted: #374151;
+  --th-btn: #111827;
+  --th-btn-text: #ffffff;
+  --th-btn-hover: #374151;
+  --th-active: rgba(0, 0, 0, 0.06);
+  --th-hover: rgba(0, 0, 0, 0.04);
+  --th-overlay: rgba(0, 0, 0, 0.3);
+  --th-header: rgba(255, 255, 255, 0.95);
+  --th-invert: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --th-bg: #000000;
+    --th-bg-secondary: #111111;
+    --th-bg-tertiary: #1a1a1a;
+    --th-sidebar: #0a0a0a;
+    --th-border: #222222;
+    --th-border-strong: #333333;
+    --th-text: #ffffff;
+    --th-text-secondary: #a3a3a3;
+    --th-text-tertiary: #737373;
+    --th-text-muted: #d4d4d4;
+    --th-btn: #ffffff;
+    --th-btn-text: #000000;
+    --th-btn-hover: #e5e5e5;
+    --th-active: rgba(255, 255, 255, 0.1);
+    --th-hover: rgba(255, 255, 255, 0.05);
+    --th-overlay: rgba(0, 0, 0, 0.6);
+    --th-header: rgba(0, 0, 0, 0.95);
+    --th-invert: 1;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--th-bg);
+  color: var(--th-text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Logo invert - only in dark mode */
+.logo-invert {
+  filter: invert(var(--th-invert));
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--th-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--th-border-strong);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--th-text-tertiary);
+}
+
+/*
+ * Mobile: Doppeltipp-Zoom unterbinden. touch-action: manipulation laesst
+ * Scrollen und Pinch-Zoom (Barrierefreiheit!) zu, entfernt aber die
+ * 300ms-Doppeltipp-Geste.
+ */
+html, body {
+  touch-action: manipulation;
+}
+a, button, input, select, textarea, label, summary {
+  touch-action: manipulation;
+}
+
+/*
+ * Lade-Indikator: 2px-Balken unter der Topleiste, laeuft nach einem Klick
+ * dezent von links nach rechts (app.js schaltet .active).
+ */
+.nav-progress {
+  position: fixed;
+  top: 3.5rem;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 60;
+  pointer-events: none;
+}
+.nav-progress::before {
+  content: "";
+  display: block;
+  height: 100%;
+  background: var(--th-btn);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.nav-progress.active::before {
+  animation: navload 2.5s cubic-bezier(0.2, 0.6, 0.3, 1) forwards;
+}
+@keyframes navload {
+  0% { transform: scaleX(0); }
+  70% { transform: scaleX(0.8); }
+  100% { transform: scaleX(0.92); }
+}
