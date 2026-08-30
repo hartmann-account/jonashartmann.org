@@ -1,6 +1,5 @@
 import { Hono } from "hono";
 import { secureHeaders } from "hono/secure-headers";
-import { cache } from "hono/cache";
 import { setAssetVersion } from "./lib/version";
 import homeRoutes from "./routes/home";
 import researchRoutes from "./routes/research";
@@ -23,10 +22,10 @@ app.use("*", secureHeaders({
 }));
 
 // Content-Security-Policy: eigene Origin, keine fremden Skripte oder Styles.
+// Statische Dateien beantwortet der Assets-Layer VOR dem Worker - diese
+// Middleware sieht /static/* nie. Deren Cache-Header stehen in public/_headers.
 app.use("*", async (c, next) => {
   await next();
-
-  if (c.req.path.startsWith("/static/")) return;
 
   const csp = [
     "default-src 'self'",
@@ -43,9 +42,6 @@ app.use("*", async (c, next) => {
     c.res.headers.set("Content-Security-Policy", csp);
   }
 });
-
-// Statische Dateien cachen
-app.use("/static/*", cache({ cacheName: "static-assets", cacheControl: "public, max-age=86400" }));
 
 app.route("/", homeRoutes);
 app.route("/", researchRoutes);

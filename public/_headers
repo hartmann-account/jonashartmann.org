@@ -1,0 +1,6 @@
+# Header fuer den Workers-Assets-Layer. Er beantwortet /static/* direkt,
+# bevor der Worker laeuft - Cache-Steuerung gehoert deshalb hierher, nicht
+# in eine Hono-Middleware. Lange Laufzeit ist sicher: jede Referenz traegt
+# ?v=ASSET_VERSION als Cache-Buster.
+/static/*
+  Cache-Control: public, max-age=86400
