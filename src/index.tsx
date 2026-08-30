@@ -3,6 +3,7 @@ import { secureHeaders } from "hono/secure-headers";
 import { cache } from "hono/cache";
 import { setAssetVersion } from "./lib/version";
 import homeRoutes from "./routes/home";
+import researchRoutes from "./routes/research";
 
 type Bindings = { ASSET_VERSION?: string };
 
@@ -47,6 +48,7 @@ app.use("*", async (c, next) => {
 app.use("/static/*", cache({ cacheName: "static-assets", cacheControl: "public, max-age=86400" }));
 
 app.route("/", homeRoutes);
+app.route("/", researchRoutes);
 
 app.notFound((c) => c.redirect("/"));
 
