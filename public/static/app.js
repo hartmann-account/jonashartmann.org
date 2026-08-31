@@ -6,17 +6,17 @@
 
   if (toggle && overlay && sidebar) {
     function open() {
-      sidebar.classList.remove('-translate-x-full');
+      sidebar.classList.remove('translate-x-full');
       sidebar.classList.add('translate-x-0');
       overlay.classList.remove('hidden');
     }
     function close() {
-      sidebar.classList.add('-translate-x-full');
+      sidebar.classList.add('translate-x-full');
       sidebar.classList.remove('translate-x-0');
       overlay.classList.add('hidden');
     }
     toggle.addEventListener('click', function () {
-      if (sidebar.classList.contains('-translate-x-full')) open(); else close();
+      if (sidebar.classList.contains('translate-x-full')) open(); else close();
     });
     overlay.addEventListener('click', close);
   }

@@ -44,10 +44,11 @@ export const SiteShell: FC<SiteShellProps> = ({ currentPath, children }) => {
       {/* Overlay hinter dem ausgeklappten Menue */}
       <div id="menu-overlay" class="lg:hidden fixed inset-0 z-40 bg-th-overlay backdrop-blur-sm hidden" />
 
-      {/* Seitenleiste */}
+      {/* Seitenleiste: auf dem Desktop fest links; als mobiles Menue klappt
+          sie von rechts auf (translate-x-full liegt rechts ausserhalb). */}
       <aside
         id="sidebar"
-        class="fixed top-0 left-0 z-50 h-full w-64 bg-th-sidebar border-r border-th-border transform transition-transform duration-200 ease-in-out lg:translate-x-0 -translate-x-full"
+        class="fixed top-0 max-lg:right-0 lg:left-0 z-50 h-full w-64 bg-th-sidebar max-lg:border-l lg:border-r border-th-border transform transition-transform duration-200 ease-in-out lg:translate-x-0 translate-x-full"
       >
         <div class="flex flex-col h-full">
           {/* Wortmarke */}

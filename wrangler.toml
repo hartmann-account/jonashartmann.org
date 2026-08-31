@@ -16,7 +16,7 @@ command = "npm run build:css"
 # Wird an jede statische URL gehaengt (?v=...). BEI JEDER AENDERUNG an
 # public/static/app.js oder src/styles.css erhoehen, sonst halten Browser-
 # Caches an der alten Datei fest.
-ASSET_VERSION = "3"
+ASSET_VERSION = "4"
 
 [observability.logs]
 enabled = true
