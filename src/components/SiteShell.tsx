@@ -83,10 +83,41 @@ export const SiteShell: FC<SiteShellProps> = ({ currentPath, children }) => {
         </div>
       </aside>
 
-      {/* Inhalt */}
-      <main class="pt-14 lg:pt-0 lg:pl-64">
+      {/* Inhalt. Unten Platz fuer die mobile Bottom-Navigation. */}
+      <main class="pt-14 lg:pt-0 lg:pl-64 max-lg:pb-24">
         <div class="p-4 md:p-6 lg:p-8">{children}</div>
       </main>
+
+      {/*
+        Mobile Bottom-Navigation: schwebende Leiste mittig unten, wie in der
+        hartmann.id-App - hier in jeder mobilen Ansicht sichtbar, nicht nur
+        im Standalone-Modus.
+
+        Der untere Abstand kombiniert einen Mindestwert mit der Safe-Area des
+        iPhones (Home-Bar). Ohne viewport-fit=cover im Layout liefert env()
+        dort 0.
+      */}
+      <nav
+        aria-label="Schnellzugriff"
+        class="lg:hidden fixed left-1/2 -translate-x-1/2 bottom-[max(0.75rem,env(safe-area-inset-bottom))] z-40 flex items-center gap-1 px-2 py-1.5 rounded-[2rem] border border-th-border bg-th-header backdrop-blur-xl shadow-xl max-w-[calc(100vw-1.5rem)] overflow-x-auto"
+      >
+        {navItems.map((item) => {
+          const isActive = currentPath === item.href;
+          return (
+            <a
+              href={item.href}
+              aria-current={isActive ? "page" : undefined}
+              aria-label={item.label}
+              class={`flex flex-col items-center justify-center rounded-3xl transition-colors w-[4.5rem] py-1.5 gap-0.5 [&_svg]:w-6 [&_svg]:h-6 text-[11px] ${
+                isActive ? "bg-th-active text-th-text" : "text-th-text-secondary"
+              }`}
+            >
+              {raw(icons[item.icon])}
+              {item.label}
+            </a>
+          );
+        })}
+      </nav>
     </div>
   );
 };
