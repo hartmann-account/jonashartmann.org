@@ -22,9 +22,21 @@ home.get("/", (c) => {
       description="Jonas Hartmann – Advisor, Investor, Researcher"
     >
       <SiteShell currentPath="/">
-        <div class="mb-6">
-          <h1 class="text-xl font-semibold">Über mich</h1>
-          <p class="text-th-text-tertiary text-sm mt-1">Ich bin Jonas Hartmann</p>
+        <div class="mb-6 flex items-center gap-4">
+          {/* Kleine Variante (512px) statt des 2048px-Originals in
+              /static/images/portrait.jpg - fuer die Anzeigegroesse reicht sie
+              und laedt einen Bruchteil. */}
+          <img
+            src="/static/images/portrait-512.jpg"
+            alt="Portrait von Jonas Hartmann"
+            width="64"
+            height="64"
+            class="w-16 h-16 rounded-full object-cover border border-th-border flex-none"
+          />
+          <div>
+            <h1 class="text-xl font-semibold">Über mich</h1>
+            <p class="text-th-text-tertiary text-sm mt-1">Ich bin Jonas Hartmann</p>
+          </div>
         </div>
 
         <div class="max-w-2xl space-y-5">
