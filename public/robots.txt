@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mein-hartmann.de/sitemap.xml

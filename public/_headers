@@ -1,6 +1,8 @@
-# Header fuer den Workers-Assets-Layer. Er beantwortet /static/* direkt,
-# bevor der Worker laeuft - Cache-Steuerung gehoert deshalb hierher, nicht
-# in eine Hono-Middleware. Lange Laufzeit ist sicher: jede Referenz traegt
-# ?v=ASSET_VERSION als Cache-Buster.
-/static/*
-  Cache-Control: public, max-age=86400
+# Header fuer den Workers-Assets-Layer. Schriften und Bilder aendern sich
+# nur mit neuem Dateinamen - ein Jahr Cache ist sicher. HTML kurz halten.
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+/images/*
+  Cache-Control: public, max-age=604800
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable

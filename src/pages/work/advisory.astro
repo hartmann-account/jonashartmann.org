@@ -1,0 +1,30 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHead from "../../components/PageHead.astro";
+import V from "../../components/V.astro";
+import work from "../../content/work.json";
+const a = work.advisory;
+---
+<Base title={a.title} description={a.intro} path="/work/advisory">
+  <PageHead title={a.title} kicker={a.kicker} lede={a.intro} />
+
+  <section class="container">
+    <h2 class="visually-hidden">Positions</h2>
+    {/* Stationen absteigend; AlixPartners groesste Nennung, alle uebrigen eine Stufe kleiner. */}
+    <ol class="rows">
+      {a.stations.map((s) => (
+        <li class:list={["row", { "is-major": s.weight === "major", "is-minor": s.weight === "minor" }]}>
+          <span class="row-org">{s.org}</span>
+          <span class="row-role"><V f={s.role} /></span>
+          <span class="row-meta"><V f={s.period} /></span>
+        </li>
+      ))}
+    </ol>
+    <p class="small muted" style="margin-top: var(--s2)"><V f={a.stationsNote} /></p>
+  </section>
+
+  <section class="container" style="margin-top: var(--s8)">
+    <h2>Areas</h2>
+    <p class="measure">{a.areas}</p>
+  </section>
+</Base>

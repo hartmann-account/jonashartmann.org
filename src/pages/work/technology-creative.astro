@@ -1,0 +1,35 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHead from "../../components/PageHead.astro";
+import V from "../../components/V.astro";
+import work from "../../content/work.json";
+const t = work.technology;
+---
+<Base title={t.title} description={t.intro} path="/work/technology-creative">
+  <PageHead title={t.title} lede={t.intro} />
+
+  <section class="container">
+    <h2>Areas</h2>
+    <ul class="areas">
+      {t.areas.map((a) => <li>{a}</li>)}
+    </ul>
+    <p style="margin-top: var(--s4)">
+      <a href={t.music.href} rel="noopener">{t.music.label}</a>
+    </p>
+    <p class="small muted" style="margin-top: var(--s6)"><V f={t.screenshots} /></p>
+  </section>
+</Base>
+
+<style>
+  .areas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0 var(--gutter);
+    border-top: 1px solid var(--line);
+    max-width: 760px;
+  }
+  .areas li {
+    padding: var(--s2) 0;
+    border-bottom: 1px solid var(--line);
+  }
+</style>

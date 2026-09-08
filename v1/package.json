@@ -1,0 +1,21 @@
+{
+  "name": "jonashartmann-org",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev",
+    "dev:css": "tailwindcss -i src/styles.css -o public/static/styles.css --watch",
+    "build:css": "tailwindcss -i src/styles.css -o public/static/styles.css --minify",
+    "deploy": "npm run build:css && wrangler deploy",
+    "cf-typegen": "wrangler types"
+  },
+  "dependencies": {
+    "hono": "^4.7.0"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250214.0 || ^5.20260828.1",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2",
+    "wrangler": "^4.65.0"
+  }
+}

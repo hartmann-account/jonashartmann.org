@@ -1,0 +1,56 @@
+{
+  "title": "About",
+  "portrait": { "src": "/images/portrait-512.jpg", "alt": "Portrait of Jonas Hartmann", "verified": false, "note": "Portraet bestaetigen" },
+  "story": [
+    "I started building things early.",
+    "My first work was creative: music, design, film. From 2016, that turned into companies, then technology infrastructure, then financial services and corporate consulting, and eventually into family governance and academic research.",
+    "The pattern has been the same each time. I create something. Then I work on how it is perceived. Then on its legal and corporate structure. Then on its systems and automation. Then on its finances and governance. The research is the last step of that sequence: asking how such structures become institutions.",
+    "Ten years later, at 26, these experiences have developed into one central interest: understanding how organizations, ownership and capital can be structured to endure.",
+    "I live in Zug, Switzerland."
+  ],
+  "timeline": {
+    "title": "2016–2026",
+    "stages": [
+      {
+        "no": "01",
+        "title": "Create",
+        "period": { "value": "2016–2019", "verified": false },
+        "details": [
+          { "value": "Graphic design and video production", "verified": true },
+          { "value": "Music production, DJing and the Season Records label", "verified": true },
+          { "value": "Brands, media and digital experiences", "verified": true }
+        ]
+      },
+      {
+        "no": "02",
+        "title": "Structure",
+        "period": { "value": "2017–2023", "verified": false },
+        "details": [
+          { "value": "Ventures and company formations", "verified": true },
+          { "value": "Managed IT services and web infrastructure", "verified": true },
+          { "value": "Digital products", "verified": true }
+        ]
+      },
+      {
+        "no": "03",
+        "title": "Professionalize",
+        "period": { "value": "2020–today", "verified": false },
+        "details": [
+          { "value": "Banks, professional-services firms and a global corporation", "verified": true },
+          { "value": "Transformation, investigations, due diligence and transactions", "verified": true },
+          { "value": "Risk advisory with a focus on investigations and data analytics", "verified": true }
+        ]
+      },
+      {
+        "no": "04",
+        "title": "Automate",
+        "period": { "value": "2022–today", "verified": false },
+        "details": [
+          { "value": "Digital governance and the Family Manager platform", "verified": true },
+          { "value": "Data analytics and AI", "verified": true },
+          { "value": "Family governance and doctoral research", "verified": true }
+        ]
+      }
+    ]
+  }
+}

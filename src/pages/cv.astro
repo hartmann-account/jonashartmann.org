@@ -1,0 +1,17 @@
+---
+import Base from "../layouts/Base.astro";
+import PageHead from "../components/PageHead.astro";
+import cv from "../content/cv.json";
+---
+<Base title={cv.title} description={cv.intro} path="/cv">
+  <PageHead title={cv.title} lede={cv.intro}>
+    <p>
+      {cv.pdf.verified
+        ? <a href={cv.pdf.href} download>{cv.pdf.label}</a>
+        : <span class="unverified" title={`To verify: ${cv.pdf.note}`}>{cv.pdf.label}</span>}
+    </p>
+  </PageHead>
+  <section class="container">
+    <p class="small muted measure">{cv.note}</p>
+  </section>
+</Base>

@@ -1,0 +1,386 @@
+---
+import Base from "../layouts/Base.astro";
+import V from "../components/V.astro";
+import site from "../content/site.json";
+import home from "../content/home.json";
+
+const description = `${site.tagline} ${home.hero.intro}`;
+---
+<Base title="Home" description={description} path="/">
+  {/* Hero: nur die Identitaetszeile ist zentriert, alles andere linksbuendig. */}
+  <section class="hero">
+    <div class="container">
+      <p class="identity">
+        <span class="identity-name">{site.name}</span>
+        <span class="identity-roles">{site.roles.join(" · ")}</span>
+      </p>
+      <h1 class="tagline">{site.tagline}</h1>
+      <p class="intro measure">{home.hero.intro}</p>
+      <a class="cta" href={home.hero.cta.href}>{home.hero.cta.label} <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  {/* Die vier Rollen: gleich gross, flaechig, durch Linien getrennt. */}
+  <section class="section roles" aria-labelledby="roles-title">
+    <div class="container">
+      <h2 id="roles-title" class="visually-hidden">The four roles</h2>
+      <ul class="role-grid">
+        {home.roles.map((r) => (
+          <li>
+            <a href={r.href}>
+              <span class="role-title">{r.title}</span>
+              <span class="role-text">{r.text}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  {/* Die Klammer: einzige narrative, vertikal laufende Strecke der Seite. */}
+  <section class="section decade" aria-labelledby="decade-title">
+    <div class="container">
+      <h2 id="decade-title">{home.decade.title}</h2>
+      <p class="claim">{home.decade.claim}</p>
+    </div>
+    <p class="band" aria-label={home.decade.band.join(", ")}>
+      {home.decade.band.map((word, i) => (
+        <>
+          <span class="band-word">{word}</span>
+          {i < home.decade.band.length - 1 && <span class="band-arrow" aria-hidden="true">→</span>}
+        </>
+      ))}
+    </p>
+    <div class="container">
+      <ol class="stages" data-stages>
+        <span class="marker" data-marker aria-hidden="true"></span>
+        {home.decade.stages.map((s) => (
+          <li class="stage" data-stage>
+            <div class="stage-head">
+              <span class="stage-no">{s.no} — {s.title}</span>
+              <span class="stage-period"><V f={s.period} /></span>
+            </div>
+            <p class="measure">{s.text}</p>
+            <ul class="proof">
+              {s.proof.map((p) => (
+                <li class:list={{ "is-major": (p as { major?: boolean }).major }}><V f={p} /></li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ol>
+      <p class="backlink">{home.decade.backlink}</p>
+    </div>
+  </section>
+
+  {/* Beweis: Bento-Grid, Zahlen groesser als Worte, "10 years" doppelt breit. */}
+  <section class="section experience" aria-labelledby="exp-title">
+    <div class="container">
+      <h2 id="exp-title">{home.experience.title}</h2>
+      <ul class="bento">
+        {home.experience.tiles.map((t) => (
+          <li class:list={["tile", `is-${t.kind}`, { "is-wide": (t as { wide?: boolean }).wide }]}>
+            <span class="tile-value"><V f={t} /></span>
+            <span class="tile-label">{t.label}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<script>
+  /*
+   * Die eine Bewegung der Seite: beim Scrollen durch die Klammer-Sektion
+   * wandert ein Marker in --accent von Stufe zu Stufe. Ohne JavaScript oder
+   * bei prefers-reduced-motion bleibt es bei den statischen Punkten.
+   */
+  const root = document.querySelector<HTMLElement>("[data-stages]");
+  const marker = document.querySelector<HTMLElement>("[data-marker]");
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  if (root && marker && !reduced && "IntersectionObserver" in window) {
+    const stages = Array.from(root.querySelectorAll<HTMLElement>("[data-stage]"));
+    const place = (el: HTMLElement) => {
+      marker.style.transform = `translateY(${el.offsetTop}px)`;
+    };
+    root.classList.add("has-marker");
+    place(stages[0]);
+    const io = new IntersectionObserver(
+      (entries) => {
+        // Die oberste sichtbare Stufe im mittleren Band des Viewports gewinnt.
+        const visible = entries.filter((e) => e.isIntersecting).map((e) => e.target as HTMLElement);
+        if (visible.length) place(visible.sort((a, b) => a.offsetTop - b.offsetTop)[0]);
+      },
+      { rootMargin: "-35% 0px -45% 0px", threshold: 0 }
+    );
+    stages.forEach((s) => io.observe(s));
+    window.addEventListener("resize", () => {
+      const active = stages.find((s) => Math.abs(s.offsetTop - parseFloat(marker.style.transform.replace(/[^\d.]/g, "") || "0")) < 2);
+      if (active) place(active);
+    });
+  }
+</script>
+
+<style>
+  /* Hero */
+  .hero {
+    padding: var(--s12) 0 0;
+  }
+  .identity {
+    text-align: center;
+    margin: 0 0 var(--s8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--s1);
+    max-width: none;
+  }
+  .identity-name {
+    font-family: var(--font-display);
+    font-size: var(--t2);
+  }
+  .identity-roles {
+    color: var(--stone);
+    font-size: var(--t-1);
+  }
+  .tagline {
+    font-size: var(--t5);
+    max-width: 18ch;
+    margin-bottom: var(--s4);
+  }
+  .intro {
+    font-size: var(--t1);
+    color: var(--stone);
+    margin-bottom: var(--s4);
+  }
+  .cta {
+    font-size: var(--t0);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+  }
+  @media (max-width: 767px) {
+    .hero {
+      padding-top: var(--s8);
+    }
+    .tagline {
+      font-size: var(--t4);
+    }
+  }
+
+  /* Rollen */
+  .role-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
+  }
+  .role-grid li {
+    border-right: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .role-grid a {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s2);
+    padding: var(--s5) var(--s4);
+    min-height: 200px;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .role-grid a:hover .role-title {
+    color: var(--accent);
+  }
+  .role-title {
+    font-family: var(--font-display);
+    font-size: var(--t3);
+  }
+  .role-text {
+    color: var(--stone);
+    max-width: 30ch;
+  }
+  @media (max-width: 599px) {
+    .role-grid {
+      grid-template-columns: 1fr;
+    }
+    .role-grid a {
+      min-height: 0;
+      padding: var(--s4) var(--s3);
+    }
+  }
+
+  /* Klammer */
+  .claim {
+    font-family: var(--font-display);
+    font-size: var(--t2);
+    max-width: none;
+  }
+  .band {
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: var(--t-band);
+    line-height: 1.05;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin: var(--s8) auto;
+    max-width: none;
+    padding: 0 var(--gutter);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    column-gap: 0.35em;
+  }
+  .band-arrow {
+    color: var(--accent);
+    font-weight: 300;
+  }
+  @media (max-width: 767px) {
+    /* Band bricht auf vier Zeilen um; die Pfeile treten zurueck */
+    .band {
+      flex-direction: column;
+      row-gap: var(--s1);
+    }
+    .band-arrow {
+      display: block;
+      transform: rotate(90deg);
+      font-size: 0.6em;
+    }
+  }
+
+  .stages {
+    position: relative;
+    margin-top: var(--s6);
+    padding-left: var(--s5);
+    border-left: 1px solid var(--line);
+  }
+  .stage {
+    position: relative;
+    padding-bottom: var(--stage-gap);
+  }
+  .stage:last-child {
+    padding-bottom: 0;
+  }
+  /* Statische Punkte: Standard ohne JS oder bei reduzierter Bewegung */
+  .stage::before {
+    content: "";
+    position: absolute;
+    left: calc(-1 * var(--s5) - 6px);
+    top: 0.5em;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .stages.has-marker .stage::before {
+    background: var(--line);
+  }
+  .marker {
+    position: absolute;
+    left: -6px;
+    top: 0;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--accent);
+    transform: translateY(0);
+    transition: transform 400ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    display: none;
+    margin-top: 0.5em;
+  }
+  .stages.has-marker .marker {
+    display: block;
+  }
+  .stage-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--s3);
+    margin-bottom: var(--s2);
+    flex-wrap: wrap;
+  }
+  .stage-no {
+    font-family: var(--font-display);
+    font-size: var(--t2);
+  }
+  .stage-period {
+    color: var(--stone);
+    font-size: var(--t-1);
+  }
+  .proof {
+    margin-top: var(--s2);
+    color: var(--stone);
+    font-size: var(--t-1);
+  }
+  .proof .is-major {
+    color: var(--ink);
+    font-size: var(--t0);
+    font-weight: 500;
+  }
+  .backlink {
+    margin-top: var(--s6);
+    color: var(--stone);
+    font-family: var(--font-display);
+    font-size: var(--t1);
+  }
+
+  /* Bento */
+  /* Drei Spalten: acht Kacheln plus die doppelt breite ergeben genau neun Zellen. */
+  .bento {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--s2);
+    margin-top: var(--s4);
+  }
+  .tile {
+    border: 1px solid var(--line);
+    padding: var(--s4);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: var(--s1);
+  }
+  .tile.is-number {
+    min-height: 220px;
+    grid-row: span 1;
+  }
+  .tile.is-word {
+    min-height: 150px;
+  }
+  .tile.is-wide {
+    grid-column: span 2;
+  }
+  .tile-value {
+    font-family: var(--font-display);
+    line-height: 1;
+  }
+  .is-number .tile-value {
+    font-size: var(--t5);
+  }
+  .is-word .tile-value {
+    font-size: var(--t2);
+  }
+  .tile-label {
+    color: var(--stone);
+    font-size: var(--t-1);
+  }
+  @media (max-width: 899px) {
+    .bento {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 599px) {
+    .bento {
+      grid-template-columns: 1fr;
+    }
+    .tile.is-wide {
+      grid-column: auto;
+    }
+    .tile.is-number {
+      min-height: 160px;
+    }
+    .tile.is-word {
+      min-height: 0;
+    }
+  }
+</style>

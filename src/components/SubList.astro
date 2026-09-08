@@ -1,0 +1,16 @@
+---
+interface Props {
+  items: { title: string; href: string; desc?: string }[];
+}
+const { items } = Astro.props;
+---
+<ul class="sub-list">
+  {items.map((p) => (
+    <li>
+      <a href={p.href}>
+        <span class="sub-title">{p.title}</span>
+        {p.desc && <span class="sub-desc">{p.desc}</span>}
+      </a>
+    </li>
+  ))}
+</ul>

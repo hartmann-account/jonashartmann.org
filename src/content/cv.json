@@ -1,0 +1,6 @@
+{
+  "title": "Curriculum vitae",
+  "intro": "Complete record of positions, ventures, education and memberships.",
+  "pdf": { "label": "Download as PDF", "href": "/cv/jonas-hartmann-cv-2026-09.pdf", "verified": false, "note": "PDF unter public/cv/ ablegen; Dateiname jonas-hartmann-cv-YYYY-MM.pdf" },
+  "note": "The full record lives in the PDF. Per the site brief, nothing from the CV appears on the website that is not part of the brief itself."
+}

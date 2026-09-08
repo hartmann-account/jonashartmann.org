@@ -1,0 +1,30 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHead from "../../components/PageHead.astro";
+import SubList from "../../components/SubList.astro";
+import V from "../../components/V.astro";
+import research from "../../content/research.json";
+const r = research.index;
+---
+<Base title={r.title} description={r.intro} path="/research">
+  <PageHead title={r.title} lede={r.intro} />
+
+  <section class="container">
+    <h2 class="visually-hidden">Education</h2>
+    <ol class="rows">
+      {r.education.map((e) => (
+        <li class:list={["row", { "is-major": e.weight === "major" }]}>
+          <span class="row-org"><V f={e.degree} /></span>
+          <span><V f={e.detail} /></span>
+          <span></span>
+        </li>
+      ))}
+    </ol>
+    <p class="small muted" style="margin-top: var(--s2)"><V f={r.educationNote} /></p>
+  </section>
+
+  <section class="container" style="margin-top: var(--s8)">
+    <h2 class="visually-hidden">Research areas</h2>
+    <SubList items={r.pages} />
+  </section>
+</Base>

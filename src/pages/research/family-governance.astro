@@ -1,0 +1,9 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHead from "../../components/PageHead.astro";
+import research from "../../content/research.json";
+const g = research.familyGovernance;
+---
+<Base title={g.title} description={g.text} path="/research/family-governance">
+  <PageHead title={g.title} lede={g.text} />
+</Base>

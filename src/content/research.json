@@ -1,0 +1,32 @@
+{
+  "index": {
+    "title": "Research",
+    "intro": "My academic work sits at the intersection of finance, law and family enterprise.",
+    "education": [
+      { "degree": "Doctoral research", "detail": { "value": "Family office governance (Witten/Herdecke)", "verified": false }, "weight": "major" },
+      { "degree": "M.Sc. Finance", "detail": { "value": "Allensbach Hochschule, 2026", "verified": false } },
+      { "degree": { "value": "M.Sc. [Family Office Management]", "verified": false }, "detail": { "value": "[Institution, year]", "verified": false } },
+      { "degree": { "value": "[Law studies]", "verified": false }, "detail": { "value": "[Institution, year]", "verified": false } },
+      { "degree": { "value": "B.Sc. / B.A. [Banking / Business]", "verified": false }, "detail": { "value": "[Institution, year]", "verified": false } }
+    ],
+    "educationNote": { "value": "Order, institutions and years to be confirmed. Second doctorate (Liechtenstein) is not shown on the website by decision of 2026-09-08.", "verified": false },
+    "pages": [
+      { "title": "Family governance", "href": "/research/family-governance", "desc": "How ownership, capital and decision rights in families can be organized to endure." },
+      { "title": "Family offices", "href": "/research/family-offices", "desc": "Doctoral research on the governance of single family offices." },
+      { "title": "Publications", "href": "/research/publications", "desc": "Published and submitted work, live from ORCID." }
+    ]
+  },
+  "familyGovernance": {
+    "title": "Family governance",
+    "text": "I did not come to family governance from the literature. I built governance and administration structures for a family association and a family office first, then began to study why such structures hold or fail. The research asks how ownership, capital and decision rights in families can be organized to endure across generations."
+  },
+  "familyOffices": {
+    "title": "Family offices",
+    "text": { "value": "Doctoral research on the governance of single family offices: board composition, decision rights, and the wealth thresholds at which a dedicated structure becomes rational.", "verified": false, "note": "Gegen Exposé abgleichen" }
+  },
+  "publications": {
+    "title": "Publications",
+    "intro": "Title, outlet, year, status and link. Published and submitted work only — loaded live from my ORCID record.",
+    "orcid": "0009-0004-2447-8989"
+  }
+}

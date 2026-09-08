@@ -1,0 +1,16 @@
+---
+/*
+ * Gibt ein Content-Feld aus. Felder aus Abschnitt 4 des Briefings, die dort
+ * mit [VERIFY] markiert sind, liegen als { value, verified } in den
+ * JSON-Dateien. Solange verified false ist, erscheint der Wert im Entwurf
+ * gepunktet unterstrichen; der Production-Build blockiert ohnehin (siehe
+ * scripts/verify-gate.mjs). Einfache Strings werden unveraendert ausgegeben.
+ */
+interface Field { value: string; verified: boolean; note?: string }
+interface Props { f: Field | string }
+const { f } = Astro.props;
+const value = typeof f === "string" ? f : f.value;
+const verified = typeof f === "string" ? true : f.verified;
+const note = typeof f === "string" ? undefined : f.note;
+---
+{verified ? value : <span class="unverified" title={note ? `To verify: ${note}` : "To verify"}>{value}</span>}

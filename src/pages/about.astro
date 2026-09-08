@@ -1,0 +1,46 @@
+---
+import Base from "../layouts/Base.astro";
+import V from "../components/V.astro";
+import about from "../content/about.json";
+const description = about.story.slice(0, 2).join(" ");
+---
+<Base title={about.title} description={description} path="/about">
+  <section class="container page-head">
+    {/* Portraet oberhalb der Story. */}
+    <img class="portrait" src={about.portrait.src} alt={about.portrait.alt} width="160" height="160" />
+    <h1 class="story-lead">{about.story[0]}</h1>
+    <div class="story">
+      {about.story.slice(1).map((par) => <p class="measure">{par}</p>)}
+    </div>
+  </section>
+
+  <section class="container" style="margin-top: var(--s12)">
+    <h2>{about.timeline.title}</h2>
+    {/* Die Klammer als vertikale Timeline; Nummerierung nur hier und auf Home. */}
+    <ol class="timeline">
+      {about.timeline.stages.map((s) => (
+        <li>
+          <span class="stage-no">{s.no} — <V f={s.period} /></span>
+          <h3>{s.title}</h3>
+          <ul class="details">
+            {s.details.map((d) => <li><V f={d} /></li>)}
+          </ul>
+        </li>
+      ))}
+    </ol>
+  </section>
+</Base>
+
+<style>
+  .story-lead {
+    font-size: var(--t4);
+    max-width: 20ch;
+  }
+  .story p {
+    font-size: var(--t1);
+    margin-bottom: var(--s3);
+  }
+  .story p:last-child {
+    color: var(--stone);
+  }
+</style>

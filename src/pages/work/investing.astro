@@ -1,0 +1,75 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHead from "../../components/PageHead.astro";
+import V from "../../components/V.astro";
+import work from "../../content/work.json";
+import investments from "../../content/investments.json";
+
+const inv = work.investing;
+const p = inv.personal;
+
+/* Sektoren aus Notion (deutsch) in der Sprache der Seite. */
+const sectorLabel: Record<string, string> = {
+  "Mobilität": "Mobility",
+  "Industrie & Robotik": "Industrial & robotics",
+  "Fintech": "Fintech",
+  "HealthTech": "HealthTech",
+  "Energie": "Energy",
+  "Consumer Hardware": "Consumer hardware",
+  "Security & Identity": "Security & identity",
+  "Food & Beverage": "Food & beverage",
+  "Verpackung": "Packaging",
+  "Agrar & Forst": "Agriculture & forestry",
+  "Retail & Fashion": "Retail & fashion",
+};
+
+const portfolio = p.showPortfolio
+  ? investments.items.filter((i) => !p.hideStatuses.includes(i.status))
+  : [];
+
+/* Satz mit den beiden [VERIFY]-Feldern zusammensetzen. */
+const [before, afterCount] = p.text.split("{count}");
+const [between, after] = afterCount.split("{year}");
+---
+<Base title={inv.title} description={inv.intro} path="/work/investing">
+  <PageHead title={inv.title} lede={inv.intro} />
+
+  {/* Drei Kapitalsphaeren, jede unter eigener Ueberschrift - nie nebeneinander. */}
+  <section class="container sphere">
+    <h2>{p.title}</h2>
+    <p class="measure">{before}<V f={p.count} />{between}<V f={p.year} />{after}</p>
+
+    {portfolio.length > 0 && (
+      <>
+        <h3 class="visually-hidden">Early-stage companies</h3>
+        {/* Nur Name, Logo und Sektor. Keine Betraege, keine Volumina. */}
+        <ul class="logo-grid" aria-label="Early-stage investments">
+          {portfolio.map((c) => (
+            <li>
+              {c.website ? (
+                <a href={c.website} rel="noopener" title={`${c.name} — ${sectorLabel[c.sector] ?? c.sector}`}>
+                  {c.logo ? <img src={c.logo} alt={c.name} loading="lazy" /> : <span>{c.name}</span>}
+                </a>
+              ) : (
+                <span title={sectorLabel[c.sector] ?? c.sector}>
+                  {c.logo ? <img src={c.logo} alt={c.name} loading="lazy" /> : c.name}
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+        <p class="small muted" style="margin-top: var(--s2)">Company marks belong to their owners. Listing is not an endorsement and carries no financial detail.</p>
+      </>
+    )}
+  </section>
+
+  <section class="container sphere is-minor">
+    <h2>{inv.family.title}</h2>
+    <p class="measure">{inv.family.text}</p>
+  </section>
+
+  <section class="container sphere is-minor">
+    <h2>{inv.infrastructure.title}</h2>
+    <p class="measure">{inv.infrastructure.text}</p>
+  </section>
+</Base>

@@ -1,0 +1,16 @@
+{
+  "name": "Jonas Hartmann",
+  "roles": ["Advisor", "Entrepreneur", "Investor", "Researcher"],
+  "tagline": "Building structures for businesses, families and capital.",
+  "location": "Zug, Switzerland",
+  "email": { "value": "", "verified": false, "note": "Kontakt-Adresse fuer den Footer eintragen" },
+  "linkedin": "https://www.linkedin.com/in/hartmann-jonas/",
+  "orcid": "0009-0004-2447-8989",
+  "domain": { "value": "https://mein-hartmann.de", "verified": true },
+  "nav": [
+    { "label": "Work", "href": "/work" },
+    { "label": "Research", "href": "/research" },
+    { "label": "About", "href": "/about" },
+    { "label": "CV", "href": "/cv" }
+  ]
+}

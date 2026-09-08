@@ -1,0 +1,13 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHead from "../../components/PageHead.astro";
+import SubList from "../../components/SubList.astro";
+import work from "../../content/work.json";
+const w = work.index;
+---
+<Base title={w.title} description={w.intro} path="/work">
+  <PageHead title={w.title} lede={w.intro} />
+  <div class="container">
+    <SubList items={w.pages} />
+  </div>
+</Base>

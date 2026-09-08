@@ -1,0 +1,79 @@
+{
+  "index": {
+    "title": "Work",
+    "intro": "The four roles developed in parallel rather than in sequence, and they inform each other: advising is sharper for having built, investing is more disciplined for having advised, and research is grounded in all three.",
+    "pages": [
+      { "title": "Advisory", "href": "/work/advisory", "desc": "Risk advisory, investigations, transformation, transactions and corporate structuring." },
+      { "title": "Entrepreneurship", "href": "/work/entrepreneurship", "desc": "A continuous part of my work since 2016." },
+      { "title": "Investing", "href": "/work/investing", "desc": "Private and public markets, and the governance of family capital." },
+      { "title": "Technology and creative", "href": "/work/technology-creative", "desc": "Design, film, music, infrastructure — the reason I build things myself." }
+    ]
+  },
+  "advisory": {
+    "title": "Advisory",
+    "kicker": "Risk advisory · Investigations · Data analytics · Transformation · Transactions · Legal and corporate structuring",
+    "intro": "I have worked in professional advisory environments across consulting firms, banks and family offices, on transformation programs, investigations, due diligence, transactions and corporate structuring. This is the conventional part of my profile, and it anchors the rest.",
+    "stations": [
+      { "org": "AlixPartners", "role": { "value": "Risk Advisory Practice — Forensic Investigations & Data Analytics", "verified": true }, "period": { "value": "[Period]", "verified": false }, "weight": "major" },
+      { "org": "TIE Capital Partners", "role": { "value": "Senior Associate", "verified": true }, "period": { "value": "[Period]", "verified": false } },
+      { "org": "Scipio Family Office", "role": { "value": "[Function]", "verified": false }, "period": { "value": "[Period]", "verified": false } },
+      { "org": "Roche / ASPIRE", "role": { "value": "Change and training management (mandate)", "verified": true }, "period": { "value": "2020–2025", "verified": true } },
+      { "org": "M.M. Warburg", "role": { "value": "[Function]", "verified": false }, "period": { "value": "[Period]", "verified": false } },
+      { "org": "KPMG", "role": { "value": "[Function]", "verified": false }, "period": { "value": "[Period]", "verified": false } },
+      { "org": "PwC", "role": { "value": "[Function]", "verified": false }, "period": { "value": "[Period]", "verified": false } },
+      { "org": "LIQID", "role": { "value": "[Function]", "verified": false }, "period": { "value": "[Period]", "verified": false } }
+    ],
+    "stationsNote": { "value": "Internships are to be marked as such and set one step smaller (weight: minor).", "verified": false },
+    "areas": "SAP-led transformation · Investigations · Due diligence · Company formations · Asset transfers and mergers · Corporate governance"
+  },
+  "entrepreneurship": {
+    "title": "Entrepreneurship",
+    "intro": "Entrepreneurship has been a continuous part of my work since 2016. The ventures differ; the pattern behind them does not: create, structure, professionalize, automate.",
+    "ventures": [
+      { "name": "Managed IT services", "desc": { "value": "~350 business customers", "verified": false }, "status": { "value": "[Status]", "verified": false } },
+      { "name": "Feelbelt", "desc": { "value": "[Field, role, period]", "verified": false }, "status": { "value": "[Status]", "verified": false } },
+      { "name": "finivia", "desc": { "value": "[Field, role, period]", "verified": false }, "status": { "value": "[Status]", "verified": false } },
+      { "name": "Virtual App Container", "desc": { "value": "[Field, role, period]", "verified": false }, "status": { "value": "[Status]", "verified": false } },
+      { "name": "Web hosting / reselling", "desc": { "value": "Hosting and domain infrastructure", "verified": true }, "status": { "value": "[Status]", "verified": false } },
+      { "name": "Brand and marketing", "desc": { "value": "Advisory for early-stage companies", "verified": true }, "status": { "value": "[Status]", "verified": false } },
+      { "name": "Season Records", "desc": { "value": "Recording label", "verified": true }, "status": { "value": "[Status]", "verified": false } },
+      { "name": "Earlier formations", "desc": { "value": "Company formations 2016–2020", "verified": true }, "status": { "value": "", "verified": true } }
+    ]
+  },
+  "investing": {
+    "title": "Investing",
+    "intro": "I invest across private and public markets, including early-stage companies and listed securities.",
+    "personal": {
+      "title": "Personal investing",
+      "text": "Early-stage investments in {count} companies since {year}, alongside a public-markets strategy run via Wikifolio with a multi-asset allocation.",
+      "count": { "value": "15+", "verified": false, "note": "Notion-Datenbank Beteiligungen fuehrt 21 Positionen (Stand 2026-08-07)" },
+      "year": { "value": "[year]", "verified": false, "note": "Frueheste Position laut Notion: Companisto, gezeichnet 2012" },
+      "wikifolio": { "value": "Wikifolio", "verified": true },
+      "showPortfolio": true,
+      "hideStatuses": ["Insolvenz"]
+    },
+    "family": {
+      "title": "Family capital",
+      "text": "Alongside my personal investment activities, I serve on the board of the Hartmann Family Office and chair the Investment Committee of the Vereinigung der Familie Hartmann, contributing to the governance and strategic allocation of a long-term multi-asset portfolio."
+    },
+    "infrastructure": {
+      "title": "Family enterprise infrastructure",
+      "text": "Founding and development of the family office, a digital family governance platform, e-voting, and the administration and reporting systems behind the family association."
+    }
+  },
+  "technology": {
+    "title": "Technology and creative",
+    "intro": "I was trained in graphic design and video production, and produced music and worked as a DJ, before I worked in finance. That background, combined with years of running IT and hosting infrastructure, is why I build things myself rather than specify them for others.",
+    "areas": [
+      "Branding",
+      "Web development",
+      "Automated customer platforms",
+      "IT infrastructure",
+      "Hosting",
+      "App and container projects",
+      "AI and automation"
+    ],
+    "music": { "label": "Music and DJ references", "href": "https://soma-suru.de", "verified": true },
+    "screenshots": { "value": "Three to five project screenshots to be supplied.", "verified": false }
+  }
+}

@@ -1,0 +1,123 @@
+---
+import Base from "../../layouts/Base.astro";
+import PageHead from "../../components/PageHead.astro";
+import research from "../../content/research.json";
+const p = research.publications;
+const orcidUrl = `https://orcid.org/${p.orcid}`;
+---
+<Base title={p.title} description={p.intro} path="/research/publications">
+  <PageHead title={p.title} lede={p.intro}>
+    <a class="orcid" href={orcidUrl} rel="me noopener">
+      <svg viewBox="0 0 256 256" aria-hidden="true"><path fill="#A6CE39" d="M256 128c0 70.7-57.3 128-128 128S0 198.7 0 128 57.3 0 128 0s128 57.3 128 128z"/><path fill="#fff" d="M86.3 186.2H70.9V79.1h15.4v107.1zM108.9 79.1h41.6c39.6 0 57 28.3 57 53.6 0 27.5-21.5 53.6-56.8 53.6h-41.8V79.1zm15.4 93.3h24.5c34.9 0 42.9-26.5 42.9-39.7 0-21.5-13.7-39.7-43.7-39.7h-23.7v79.4zM88.7 56.8c0 5.5-4.5 10.1-10.1 10.1s-10.1-4.6-10.1-10.1c0-5.6 4.5-10.1 10.1-10.1s10.1 4.6 10.1 10.1z"/></svg>
+      <span>ORCID {p.orcid}</span>
+    </a>
+  </PageHead>
+
+  <section class="container">
+    <h2 class="visually-hidden">Works</h2>
+    {/*
+      Die Liste kommt live von der ORCID Public API (CORS ist freigegeben).
+      Die Seite ist statisch, deshalb laeuft der Abruf im Browser; ohne
+      JavaScript oder bei Ausfall bleibt der Link auf das Profil.
+    */}
+    <ol class="pub-list" id="pubs" data-orcid={p.orcid} aria-live="polite">
+      <li class="muted" id="pubs-status">Loading from ORCID …</li>
+    </ol>
+    <noscript>
+      <p class="muted">The publication list is loaded from ORCID and needs JavaScript. See the full record at <a href={orcidUrl}>orcid.org/{p.orcid}</a>.</p>
+    </noscript>
+  </section>
+</Base>
+
+<script>
+  const list = document.getElementById("pubs") as HTMLOListElement | null;
+  const status = document.getElementById("pubs-status");
+  const id = list?.dataset.orcid;
+
+  const typeLabel: Record<string, string> = {
+    "journal-article": "Journal article",
+    "working-paper": "Working paper",
+    "dissertation-thesis": "Thesis",
+    "book": "Book",
+    "book-chapter": "Book chapter",
+    "conference-paper": "Conference paper",
+    "report": "Report",
+    "preprint": "Preprint",
+    "other": "Other",
+  };
+
+  /* Nur http(s)-Links duerfen in ein href; ORCID-URL-Felder sind Freitext. */
+  const safeUrl = (u?: string) => {
+    if (!u) return undefined;
+    try {
+      const p = new URL(u);
+      return p.protocol === "https:" || p.protocol === "http:" ? u : undefined;
+    } catch {
+      return undefined;
+    }
+  };
+
+  async function load() {
+    if (!list || !id) return;
+    const fallback = () => {
+      if (status) status.innerHTML = `The list could not be loaded right now. See the full record at <a href="https://orcid.org/${id}">orcid.org/${id}</a>.`;
+    };
+    try {
+      const res = await fetch(`https://pub.orcid.org/v3.0/${id}/works`, {
+        headers: { Accept: "application/json" },
+        signal: AbortSignal.timeout(8000),
+      });
+      if (!res.ok) return fallback();
+      const data = await res.json();
+      const works = (data.group ?? [])
+        .map((g: any) => g["work-summary"]?.[0])
+        .filter(Boolean)
+        .map((s: any) => {
+          const ids = s["external-ids"]?.["external-id"] ?? [];
+          const doiId = ids.find((i: any) => i["external-id-type"] === "doi");
+          const doi: string | undefined = doiId?.["external-id-value"];
+          const doiHref = doi ? `https://doi.org/${doi.split("/").map(encodeURIComponent).join("/")}` : undefined;
+          return {
+            title: s.title?.title?.value as string | undefined,
+            type: typeLabel[s.type] ?? s.type ?? "",
+            year: s["publication-date"]?.year?.value as string | undefined,
+            journal: s["journal-title"]?.value as string | undefined,
+            href: safeUrl(s.url?.value) ?? safeUrl(doiId?.["external-id-url"]?.value) ?? doiHref,
+            doi,
+          };
+        })
+        .filter((w: any) => w.title)
+        .sort((a: any, b: any) => Number(b.year ?? 0) - Number(a.year ?? 0));
+
+      list.innerHTML = "";
+      if (works.length === 0) {
+        list.innerHTML = `<li class="muted">No public works listed on ORCID yet.</li>`;
+        return;
+      }
+      for (const w of works) {
+        const li = document.createElement("li");
+        const meta = [w.type, w.journal, w.year].filter(Boolean).join(" · ");
+        const t = document.createElement("p");
+        t.className = "pub-title";
+        if (w.href) {
+          const a = document.createElement("a");
+          a.href = w.href;
+          a.rel = "noopener";
+          a.textContent = w.title;
+          t.appendChild(a);
+        } else {
+          t.textContent = w.title;
+        }
+        li.appendChild(t);
+        const m = document.createElement("p");
+        m.className = "pub-meta";
+        m.textContent = meta + (w.doi ? ` · DOI ${w.doi}` : "");
+        li.appendChild(m);
+        list.appendChild(li);
+      }
+    } catch {
+      fallback();
+    }
+  }
+  load();
+</script>
