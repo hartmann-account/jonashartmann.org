@@ -136,15 +136,18 @@ const description = `${site.tagline} ${home.hero.intro}`;
     max-width: none;
   }
   .identity-name {
-    font-family: var(--font-display);
-    font-size: var(--t2);
+    font-weight: 600;
+    font-size: var(--t3);
+    letter-spacing: 0.01em;
   }
   .identity-roles {
     color: var(--stone);
-    font-size: var(--t-1);
+    font-size: var(--t1);
+    font-style: italic;
   }
   .tagline {
     font-size: var(--t5);
+    font-weight: 600;
     max-width: 18ch;
     margin-bottom: var(--s4);
   }
@@ -192,7 +195,7 @@ const description = `${site.tagline} ${home.hero.intro}`;
     color: var(--accent);
   }
   .role-title {
-    font-family: var(--font-display);
+    font-weight: 600;
     font-size: var(--t3);
   }
   .role-text {
@@ -211,17 +214,17 @@ const description = `${site.tagline} ${home.hero.intro}`;
 
   /* Klammer */
   .claim {
-    font-family: var(--font-display);
+    font-style: italic;
     font-size: var(--t2);
     max-width: none;
   }
   .band {
     text-align: center;
-    font-family: var(--font-display);
+    font-weight: 600;
     font-size: var(--t-band);
     line-height: 1.05;
     text-transform: uppercase;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.04em;
     margin: var(--s8) auto;
     max-width: none;
     padding: 0 var(--gutter);
@@ -300,27 +303,28 @@ const description = `${site.tagline} ${home.hero.intro}`;
     flex-wrap: wrap;
   }
   .stage-no {
-    font-family: var(--font-display);
+    font-weight: 600;
     font-size: var(--t2);
   }
   .stage-period {
     color: var(--stone);
-    font-size: var(--t-1);
+    font-size: var(--t0);
+    font-style: italic;
   }
   .proof {
     margin-top: var(--s2);
     color: var(--stone);
-    font-size: var(--t-1);
+    font-size: var(--t0);
   }
   .proof .is-major {
     color: var(--ink);
-    font-size: var(--t0);
-    font-weight: 500;
+    font-size: var(--t1);
+    font-weight: 600;
   }
   .backlink {
     margin-top: var(--s6);
     color: var(--stone);
-    font-family: var(--font-display);
+    font-style: italic;
     font-size: var(--t1);
   }
 
@@ -340,9 +344,11 @@ const description = `${site.tagline} ${home.hero.intro}`;
     justify-content: flex-end;
     gap: var(--s1);
   }
+  /* Ton-in-Ton (Brand Book 1.2): Zahlen auf Flaeche, Worte auf Grund */
   .tile.is-number {
     min-height: 220px;
-    grid-row: span 1;
+    background: var(--surface);
+    border-color: var(--surface);
   }
   .tile.is-word {
     min-height: 150px;
@@ -351,7 +357,7 @@ const description = `${site.tagline} ${home.hero.intro}`;
     grid-column: span 2;
   }
   .tile-value {
-    font-family: var(--font-display);
+    font-weight: 600;
     line-height: 1;
   }
   .is-number .tile-value {
@@ -362,7 +368,8 @@ const description = `${site.tagline} ${home.hero.intro}`;
   }
   .tile-label {
     color: var(--stone);
-    font-size: var(--t-1);
+    font-size: var(--t0);
+    font-style: italic;
   }
   @media (max-width: 899px) {
     .bento {

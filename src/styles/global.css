@@ -1,28 +1,44 @@
-/* Design tokens - Briefing v3, Abschnitt 5 */
+/*
+ * Design tokens.
+ *
+ * Farben und Schrift folgen dem Hartmann Brand Book 2026: Cormorant als
+ * einzige Schrift (Semibold fuer Ueberschriften, Regular fuer Fliesstext,
+ * Italic als Qualifizierer), Schwarz und Weiss nie pur, monochrom als
+ * Standard und Blau als Signalwelt. Layout, Raster und Abstaende bleiben
+ * beim Briefing v3, Abschnitt 5.
+ */
 :root {
-  --ink: #1a1c1e;
-  --paper: #fbfaf7;
-  --stone: #6b6f76;
-  --line: #d9d6cf;
-  --accent: #1f4e5f;
-  --accent-2: #c8a96a;
+  /* Monochrom (Brand Book 3.0) */
+  --ink-deep: #060707;
+  --ink: #171a1c;
+  --stone: #5a5e60;
+  --mist: #cdd2d7;
+  /* Blaue Signalwelt */
+  --accent-deep: #082742;
+  --accent: #395b75;
+  --accent-mist: #d2d8db;
+  /* Abgeleitet: heller Grund (Weiss nie pur), Haarlinien, Flaechen */
+  --paper: #eff1f2;
+  --line: #c3c9ce;
+  --surface: #dfe3e6;
 
-  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
-  --font-text: "Inter", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font: "Cormorant", "Cormorant Garamond", Garamond, "Times New Roman", serif;
+  --font-display: var(--font);
+  --font-text: var(--font);
 
-  /* Skala (rem) */
-  --t-1: 0.875rem;
-  --t0: 1rem;
-  --t1: 1.25rem;
-  --t2: 1.563rem;
-  --t3: 1.953rem;
-  --t4: 2.441rem;
-  --t5: 3.052rem;
-  --t-band: 4.5rem;
+  /* Skala (rem); Cormorant laeuft klein, daher Grundgroesse 1.125 */
+  --t-1: 1rem;
+  --t0: 1.125rem;
+  --t1: 1.375rem;
+  --t2: 1.75rem;
+  --t3: 2.125rem;
+  --t4: 2.75rem;
+  --t5: 3.5rem;
+  --t-band: 4.25rem;
 
   --container: 1120px;
   --gutter: 24px;
-  --measure: 68ch;
+  --measure: 66ch;
 
   /* 8er-System */
   --s1: 8px;
@@ -44,22 +60,22 @@
   :root {
     --section-gap: var(--s11);
     --stage-gap: var(--s8);
-    --t-band: 2.441rem;
+    --t-band: 2.75rem;
   }
 }
 
 @font-face {
-  font-family: "Fraunces";
-  src: url("/fonts/fraunces-latin.woff2") format("woff2");
+  font-family: "Cormorant";
+  src: url("/fonts/cormorant-latin.woff2") format("woff2");
   font-weight: 300 700;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: "Inter";
-  src: url("/fonts/inter-latin.woff2") format("woff2");
+  font-family: "Cormorant";
+  src: url("/fonts/cormorant-italic-latin.woff2") format("woff2");
   font-weight: 300 700;
-  font-style: normal;
+  font-style: italic;
   font-display: swap;
 }
 
@@ -72,9 +88,9 @@
 html {
   background: var(--paper);
   color: var(--ink);
-  font-family: var(--font-text);
+  font-family: var(--font);
   font-size: 100%;
-  line-height: 1.55;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scroll-behavior: smooth;
@@ -90,17 +106,18 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  font-size: var(--t0);
 }
 
 h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-display);
-  font-weight: 500;
-  line-height: 1.15;
+  font-family: var(--font);
+  font-weight: 600;
+  line-height: 1.12;
   margin: 0 0 var(--s2);
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 h1 {
   font-size: var(--t4);
@@ -118,15 +135,20 @@ p {
 p:last-child {
   margin-bottom: 0;
 }
+em,
+.qualifier {
+  font-style: italic;
+  font-weight: 400;
+}
 
 a {
   color: var(--accent);
   text-decoration: underline;
   text-decoration-thickness: 1px;
-  text-underline-offset: 0.15em;
+  text-underline-offset: 0.16em;
 }
 a:hover {
-  color: var(--accent-2);
+  color: var(--accent-deep);
 }
 a:focus-visible,
 button:focus-visible {
@@ -158,11 +180,9 @@ svg {
 .muted {
   color: var(--stone);
 }
-
 .small {
   font-size: var(--t-1);
 }
-
 .measure {
   max-width: var(--measure);
 }
@@ -175,7 +195,6 @@ svg {
   padding-bottom: var(--section-gap);
 }
 
-/* Zwoelf-Spalten-Raster */
 .grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
@@ -183,7 +202,14 @@ svg {
   row-gap: var(--s4);
 }
 
-/* Header */
+/* Haarlinie als Titel-Unterstreichung (Brand Book: "1.0 Das Logo") */
+.rule-title {
+  display: inline-block;
+  padding-bottom: 0.15em;
+  border-bottom: 1px solid var(--ink);
+}
+
+/* Header: Ecken-Anordnung, Haarlinie darunter */
 .site-header {
   padding: var(--s3) 0;
   border-bottom: 1px solid var(--line);
@@ -196,13 +222,20 @@ svg {
   flex-wrap: wrap;
 }
 .brand {
-  font-family: var(--font-display);
+  font-family: var(--font);
+  font-weight: 600;
   font-size: var(--t1);
   color: var(--ink);
   text-decoration: none;
+  letter-spacing: 0.01em;
 }
 .brand:hover {
   color: var(--ink);
+}
+.brand .initial {
+  font-size: 1.28em;
+  line-height: 0;
+  vertical-align: -0.05em;
 }
 .nav {
   display: flex;
@@ -211,64 +244,92 @@ svg {
 .nav a {
   color: var(--stone);
   text-decoration: none;
-  font-size: var(--t-1);
+  font-size: var(--t0);
 }
 .nav a:hover,
 .nav a[aria-current="page"],
 .nav a[aria-current="true"] {
-  color: var(--accent);
+  color: var(--ink);
 }
 .nav a[aria-current] {
-  text-decoration: underline;
-  text-underline-offset: 0.35em;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 0.1em;
 }
 
 main {
   flex: 1;
 }
 
-/* Footer */
+/* Footer: dunkle Flaeche ton-in-ton, Bildmarke als stiller Abschluss */
 .site-footer {
   margin-top: var(--section-gap);
-  padding: var(--s5) 0 var(--s6);
-  border-top: 1px solid var(--line);
-  color: var(--stone);
-  font-size: var(--t-1);
+  padding: var(--s8) 0 var(--s6);
+  background: var(--ink);
+  color: var(--mist);
+  font-size: var(--t0);
 }
 .site-footer .container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: var(--s2) var(--s4);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--s4) var(--s4);
+  align-items: end;
 }
 .site-footer a {
-  color: var(--stone);
+  color: var(--mist);
 }
 .site-footer a:hover {
-  color: var(--accent);
+  color: #ffffff;
+}
+.site-footer .footer-mark {
+  grid-column: 1 / -1;
+  font-family: var(--font);
+  font-weight: 600;
+  font-size: var(--t5);
+  line-height: 1;
+  color: var(--stone);
+  margin-top: var(--s4);
 }
 .footer-links {
   display: flex;
   gap: var(--s2);
+  flex-wrap: wrap;
 }
 .footer-links li + li::before {
   content: "·";
   margin-right: var(--s2);
+  color: var(--stone);
+}
+.site-footer .unverified {
+  color: var(--mist);
+  border-color: var(--stone);
+}
+@media (max-width: 599px) {
+  .site-footer .container {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
 }
 
 /* Seitenkopf fuer Unterseiten */
 .page-head {
   padding-top: var(--s11);
 }
+.page-head h1 {
+  display: inline-block;
+  padding-bottom: 0.12em;
+  border-bottom: 1px solid var(--ink);
+  margin-bottom: var(--s3);
+}
 .page-head .lede {
   font-size: var(--t1);
   color: var(--stone);
 }
 
-/* Kicker: Stichwortzeile unter einer Ueberschrift (keine Versalien) */
+/* Kicker: Stichwortzeile unter einer Ueberschrift, kursiv (Qualifizierer) */
 .kicker {
   color: var(--stone);
-  font-size: var(--t-1);
+  font-size: var(--t0);
+  font-style: italic;
 }
 
 /* Unterseiten-Liste (Work/Research) */
@@ -292,7 +353,7 @@ main {
   color: var(--accent);
 }
 .sub-title {
-  font-family: var(--font-display);
+  font-weight: 600;
   font-size: var(--t2);
 }
 .sub-desc {
@@ -318,16 +379,16 @@ main {
   font-size: var(--t-1);
 }
 .row.is-major .row-org {
-  font-family: var(--font-display);
   font-size: var(--t1);
 }
 .row-org {
-  font-weight: 500;
+  font-weight: 600;
 }
 .row-meta {
   color: var(--stone);
   text-align: right;
   white-space: nowrap;
+  font-style: italic;
 }
 @media (max-width: 599px) {
   .row {
@@ -358,7 +419,7 @@ main {
   color: var(--stone);
 }
 
-/* Beteiligungs-Logos */
+/* Beteiligungs-Logos: Haarlinien-Raster, Marken ton-in-ton */
 .logo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -383,7 +444,7 @@ main {
   height: 100%;
   text-decoration: none;
   color: var(--stone);
-  font-size: var(--t-1);
+  font-size: var(--t0);
   text-align: center;
 }
 .logo-grid img {
@@ -392,7 +453,7 @@ main {
   max-width: 100%;
   object-fit: contain;
   filter: grayscale(1);
-  opacity: 0.8;
+  opacity: 0.75;
 }
 .logo-grid a:hover img {
   filter: none;
@@ -424,7 +485,8 @@ main {
 }
 .timeline .stage-no {
   color: var(--stone);
-  font-size: var(--t-1);
+  font-size: var(--t0);
+  font-style: italic;
 }
 .timeline h3 {
   font-size: var(--t2);
@@ -441,14 +503,13 @@ main {
   content: none;
 }
 
-/* Portraet */
+/* Portraet: Schwarz-Weiss, harte Kante statt Kreis (Bildsprache 4.0) */
 .portrait {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
+  width: 180px;
+  height: 180px;
   object-fit: cover;
   margin-bottom: var(--s5);
-  border: 1px solid var(--line);
+  filter: grayscale(1) contrast(1.05);
 }
 
 /* Publikationen */
@@ -461,7 +522,7 @@ main {
   padding: var(--s3) 0;
 }
 .pub-title {
-  font-family: var(--font-display);
+  font-weight: 600;
   font-size: var(--t1);
   margin-bottom: var(--s1);
 }
@@ -474,7 +535,8 @@ main {
 }
 .pub-meta {
   color: var(--stone);
-  font-size: var(--t-1);
+  font-size: var(--t0);
+  font-style: italic;
 }
 .orcid {
   display: inline-flex;
@@ -482,7 +544,7 @@ main {
   gap: var(--s1);
   text-decoration: none;
   color: var(--stone);
-  font-size: var(--t-1);
+  font-size: var(--t0);
 }
 .orcid svg {
   width: 16px;
@@ -495,7 +557,7 @@ main {
   left: -999px;
   top: var(--s2);
   background: var(--ink);
-  color: var(--paper);
+  color: var(--mist);
   padding: var(--s1) var(--s2);
   z-index: 10;
 }

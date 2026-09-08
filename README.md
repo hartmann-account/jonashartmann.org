@@ -8,7 +8,12 @@ Professionalize → Automate.
 
 - **Astro 5**, statisch gebaut, `lang="en"`
 - **Vanilla CSS** mit Custom Properties (`src/styles/global.css`), kein Tailwind
-- **Self-hosted Fonts**: Fraunces (Display) und Inter (Text), woff2, `font-display: swap`
+- **Branding nach Hartmann Brand Book 2026**: Cormorant als einzige Schrift
+  (Semibold Ueberschriften, Regular Fliesstext, Italic als Qualifizierer),
+  Schwarz/Weiss nie pur (`--ink #171a1c`, `--mist #cdd2d7`), Blau als Signalwelt
+  (`--accent #395b75`, `--accent-deep #082742`), Haarlinien, dunkler Footer mit
+  der Bildmarke als stillem Abschluss. Layout und Abstaende nach Briefing v3.
+- **Self-hosted Font**: Cormorant (variabel, normal + italic), woff2, `font-display: swap`
 - **Client-JS nur an zwei Stellen**: Stufenmarker auf Home (IntersectionObserver,
   aus bei `prefers-reduced-motion`) und der ORCID-Abruf auf `/research/publications`
 - **Hosting**: Cloudflare Worker `jonashartmann-org` (Assets-only aus `dist/`), siehe `wrangler.toml`
