@@ -1,0 +1,28 @@
+---
+/*
+ * Sektions-Anatomie: Nummer links, Titel in der Hauptspalte, Haarlinie
+ * darunter. Jede Sektion der Website benutzt diese Komponente - daraus
+ * entsteht das Nummern-Motiv, das sich durch alle Seiten zieht.
+ */
+interface Props {
+  index: string;
+  title: string;
+  /** Optionale Randnotiz rechts, z. B. eine Quellenangabe. */
+  note?: string;
+  id?: string;
+  /** Ueberschriftenebene; Standard h2. */
+  as?: "h2" | "h3";
+}
+const { index, title, note, id, as = "h2" } = Astro.props;
+const Heading = as;
+---
+<section class="section" id={id}>
+  <div class="wrap">
+    <div class="grid section-head">
+      <span class="section-index zone-meta">{index}</span>
+      <Heading class="section-title zone-main">{title}</Heading>
+      {note && <p class="section-note zone-side">{note}</p>}
+    </div>
+    <slot />
+  </div>
+</section>

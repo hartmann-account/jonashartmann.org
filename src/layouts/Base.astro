@@ -5,7 +5,7 @@ import site from "../content/site.json";
 interface Props {
   title: string;
   description: string;
-  /** Pfad der Seite fuer canonical und aria-current, z. B. "/work/advisory". */
+  /** Pfad der Seite, z. B. "/work/advisory". Steuert canonical und aria-current. */
   path: string;
 }
 const { title, description, path } = Astro.props;
@@ -16,7 +16,7 @@ const fullTitle = path === "/" ? `${site.name} — ${site.roles.join(" · ")}` :
 
 /* Oberster Pfadabschnitt bestimmt den aktiven Navigationspunkt. */
 const section = "/" + path.split("/")[1];
-const cvHref = site.nav.find((n) => n.href === "/cv")?.href ?? "/cv";
+const year = 2026;
 ---
 <!doctype html>
 <html lang="en">
@@ -28,6 +28,7 @@ const cvHref = site.nav.find((n) => n.href === "/cv")?.href ?? "/cv";
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap.xml" />
+    <meta name="theme-color" content="#f4f3f0" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />
     <meta property="og:title" content={fullTitle} />
@@ -38,17 +39,22 @@ const cvHref = site.nav.find((n) => n.href === "/cv")?.href ?? "/cv";
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preload" href="/fonts/cormorant-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/cormorant-italic-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
+
     <header class="site-header">
-      <div class="container">
-        {/* Wortmarke: das Initial leicht groesser, wie im Brand Book. */}
-        <a class="brand" href="/" aria-current={path === "/" ? "page" : undefined}><span class="initial">J</span>onas <span class="initial">H</span>artmann</a>
-        <nav class="nav" aria-label="Main">
+      <div class="wrap">
+        {/* Wortmarke: das Initial eine Spur groesser, wie im Brand Book. */}
+        <a class="wordmark" href="/" aria-current={path === "/" ? "page" : undefined}>
+          <span class="initial">J</span>onas <span class="initial">H</span>artmann
+        </a>
+        <nav class="site-nav" aria-label="Main">
           {site.nav.map((item) => (
-            <a href={item.href} aria-current={section === item.href ? (path === item.href ? "page" : "true") : undefined}>{item.label}</a>
+            <a href={item.href} aria-current={section === item.href ? (path === item.href ? "page" : "true") : undefined}>
+              {item.label}
+            </a>
           ))}
         </nav>
       </div>
@@ -59,19 +65,32 @@ const cvHref = site.nav.find((n) => n.href === "/cv")?.href ?? "/cv";
     </main>
 
     <footer class="site-footer">
-      <div class="container">
-        <p>{site.name} · {site.location}</p>
-        <ul class="footer-links">
-          <li>
+      <div class="wrap grid">
+        <div class="zone-meta">
+          <span class="eyebrow">Contact</span>
+          <div class="footer-contact">
             {site.email.verified && site.email.value
               ? <a href={`mailto:${site.email.value}`}>{site.email.value}</a>
               : <span class="unverified" title="To verify: email address">[email]</span>}
-          </li>
-          <li><a href={site.linkedin} rel="me noopener">LinkedIn</a></li>
-          <li><a href={cvHref}>Full CV</a></li>
-        </ul>
+            <a href={site.linkedin} rel="me noopener">LinkedIn</a>
+          </div>
+        </div>
+
+        <div class="zone-main">
+          <span class="eyebrow">Elsewhere</span>
+          <div class="footer-contact">
+            <a href="/cv">Full curriculum vitae</a>
+            <a href={`https://orcid.org/${site.orcid}`} rel="me noopener">ORCID {site.orcid}</a>
+          </div>
+        </div>
+
         {/* Bildmarke als stiller Abschluss (Brand Book 5.0) */}
-        <span class="footer-mark" aria-hidden="true">H</span>
+        <span class="footer-mark zone-side" aria-hidden="true">H</span>
+
+        <div class="footer-baseline">
+          <span>{site.name} · {site.location}</span>
+          <span>© {year}</span>
+        </div>
       </div>
     </footer>
   </body>

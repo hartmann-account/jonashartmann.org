@@ -1,23 +1,25 @@
 ---
 import Base from "../../layouts/Base.astro";
-import PageHead from "../../components/PageHead.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Section from "../../components/Section.astro";
 import V from "../../components/V.astro";
 import work from "../../content/work.json";
 const e = work.entrepreneurship;
 ---
 <Base title={e.title} description={e.intro} path="/work/entrepreneurship">
-  <PageHead title={e.title} lede={e.intro} />
+  <PageHeader eyebrow="Work" title={e.title} lead={e.intro} />
 
-  <section class="container">
-    <h2 class="visually-hidden">Ventures</h2>
-    <ol class="rows">
-      {e.ventures.map((v) => (
-        <li class="row">
-          <span class="row-org">{v.name}</span>
-          <span><V f={v.desc} /></span>
-          <span class="row-meta"><V f={v.status} /></span>
-        </li>
-      ))}
-    </ol>
-  </section>
+  <Section index="01" title="Ventures" note="Descending by relevance.">
+    <div class="wrap">
+      <ol class="data-table">
+        {e.ventures.map((v) => (
+          <li class="data-row">
+            <span class="data-org">{v.name}</span>
+            <span class="data-detail"><V f={v.desc} /></span>
+            <span class="data-meta"><V f={v.status} /></span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </Section>
 </Base>

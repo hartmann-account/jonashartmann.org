@@ -1,35 +1,33 @@
 ---
 import Base from "../../layouts/Base.astro";
-import PageHead from "../../components/PageHead.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Section from "../../components/Section.astro";
 import V from "../../components/V.astro";
 import work from "../../content/work.json";
 const t = work.technology;
 ---
 <Base title={t.title} description={t.intro} path="/work/technology-creative">
-  <PageHead title={t.title} lede={t.intro} />
+  <PageHeader eyebrow="Work" title={t.title} lead={t.intro} />
 
-  <section class="container">
-    <h2>Areas</h2>
-    <ul class="areas">
-      {t.areas.map((a) => <li>{a}</li>)}
-    </ul>
-    <p style="margin-top: var(--s4)">
-      <a href={t.music.href} rel="noopener">{t.music.label}</a>
-    </p>
-    <p class="small muted" style="margin-top: var(--s6)"><V f={t.screenshots} /></p>
-  </section>
+  <Section index="01" title="Areas">
+    <div class="wrap">
+      <ul class="tag-list">
+        {t.areas.map((a) => <li>{a}</li>)}
+      </ul>
+    </div>
+  </Section>
+
+  <Section index="02" title="Music">
+    <div class="wrap grid">
+      <div class="zone-main stack stack-4">
+        <p class="text-secondary">
+          Music production and DJing are part of where this started, not a footnote to it.
+        </p>
+        <a class="cta" href={t.music.href} rel="noopener">
+          {t.music.label} <span aria-hidden="true">→</span>
+        </a>
+      </div>
+      <p class="section-note zone-side"><V f={t.screenshots} /></p>
+    </div>
+  </Section>
 </Base>
-
-<style>
-  .areas {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 0 var(--gutter);
-    border-top: 1px solid var(--line);
-    max-width: 760px;
-  }
-  .areas li {
-    padding: var(--s2) 0;
-    border-bottom: 1px solid var(--line);
-  }
-</style>

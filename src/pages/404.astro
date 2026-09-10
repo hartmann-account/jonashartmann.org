@@ -1,9 +1,11 @@
 ---
 import Base from "../layouts/Base.astro";
-import PageHead from "../components/PageHead.astro";
+import PageHeader from "../components/PageHeader.astro";
 ---
 <Base title="Page not found" description="This page does not exist." path="/404">
-  <PageHead title="Page not found" lede="This page does not exist.">
-    <p><a href="/">Back to the start</a></p>
-  </PageHead>
+  <PageHeader eyebrow="404" title="Page not found" lead="This page does not exist.">
+    <a class="cta" href="/" style="margin-block-start: var(--space-5)">
+      Back to the start <span aria-hidden="true">→</span>
+    </a>
+  </PageHeader>
 </Base>

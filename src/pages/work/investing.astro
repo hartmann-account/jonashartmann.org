@@ -1,12 +1,17 @@
 ---
 import Base from "../../layouts/Base.astro";
-import PageHead from "../../components/PageHead.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Section from "../../components/Section.astro";
 import V from "../../components/V.astro";
 import work from "../../content/work.json";
 import investments from "../../content/investments.json";
 
 const inv = work.investing;
 const p = inv.personal;
+
+const portfolio = p.showPortfolio
+  ? investments.items.filter((i) => !p.hideStatuses.includes(i.status))
+  : [];
 
 /* Sektoren aus Notion (deutsch) in der Sprache der Seite. */
 const sectorLabel: Record<string, string> = {
@@ -23,26 +28,25 @@ const sectorLabel: Record<string, string> = {
   "Retail & Fashion": "Retail & fashion",
 };
 
-const portfolio = p.showPortfolio
-  ? investments.items.filter((i) => !p.hideStatuses.includes(i.status))
-  : [];
-
 /* Satz mit den beiden [VERIFY]-Feldern zusammensetzen. */
 const [before, afterCount] = p.text.split("{count}");
 const [between, after] = afterCount.split("{year}");
 ---
 <Base title={inv.title} description={inv.intro} path="/work/investing">
-  <PageHead title={inv.title} lede={inv.intro} />
+  <PageHeader eyebrow="Work" title={inv.title} lead={inv.intro} />
 
-  {/* Drei Kapitalsphaeren, jede unter eigener Ueberschrift - nie nebeneinander. */}
-  <section class="container sphere">
-    <h2>{p.title}</h2>
-    <p class="measure">{before}<V f={p.count} />{between}<V f={p.year} />{after}</p>
+  {/*
+    Drei Kapitalsphaeren, jede unter eigener Nummer und Ueberschrift.
+    Nie zwei Sphaeren nebeneinander - die Trennung ist das Ordnungsprinzip
+    dieser Seite.
+  */}
+  <Section index="01" title={p.title}>
+    <div class="wrap grid">
+      <p class="zone-main">{before}<V f={p.count} />{between}<V f={p.year} />{after}</p>
+    </div>
 
     {portfolio.length > 0 && (
-      <>
-        <h3 class="visually-hidden">Early-stage companies</h3>
-        {/* Nur Name, Logo und Sektor. Keine Betraege, keine Volumina. */}
+      <div class="wrap">
         <ul class="logo-grid" aria-label="Early-stage investments">
           {portfolio.map((c) => (
             <li>
@@ -58,18 +62,22 @@ const [between, after] = afterCount.split("{year}");
             </li>
           ))}
         </ul>
-        <p class="small muted" style="margin-top: var(--s2)">Company marks belong to their owners. Listing is not an endorsement and carries no financial detail.</p>
-      </>
+        <p class="text-sm text-tertiary" style="margin-block-start: var(--space-4)">
+          Company marks belong to their owners. Listing is not an endorsement and carries no financial detail.
+        </p>
+      </div>
     )}
-  </section>
+  </Section>
 
-  <section class="container sphere is-minor">
-    <h2>{inv.family.title}</h2>
-    <p class="measure">{inv.family.text}</p>
-  </section>
+  <Section index="02" title={inv.family.title}>
+    <div class="wrap grid">
+      <p class="zone-main text-secondary">{inv.family.text}</p>
+    </div>
+  </Section>
 
-  <section class="container sphere is-minor">
-    <h2>{inv.infrastructure.title}</h2>
-    <p class="measure">{inv.infrastructure.text}</p>
-  </section>
+  <Section index="03" title={inv.infrastructure.title}>
+    <div class="wrap grid">
+      <p class="zone-main text-secondary">{inv.infrastructure.text}</p>
+    </div>
+  </Section>
 </Base>

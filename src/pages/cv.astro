@@ -1,17 +1,20 @@
 ---
 import Base from "../layouts/Base.astro";
-import PageHead from "../components/PageHead.astro";
+import PageHeader from "../components/PageHeader.astro";
+import Section from "../components/Section.astro";
 import cv from "../content/cv.json";
 ---
 <Base title={cv.title} description={cv.intro} path="/cv">
-  <PageHead title={cv.title} lede={cv.intro}>
-    <p>
-      {cv.pdf.verified
-        ? <a href={cv.pdf.href} download>{cv.pdf.label}</a>
-        : <span class="unverified" title={`To verify: ${cv.pdf.note}`}>{cv.pdf.label}</span>}
-    </p>
-  </PageHead>
-  <section class="container">
-    <p class="small muted measure">{cv.note}</p>
-  </section>
+  <PageHeader eyebrow="Record" title={cv.title} lead={cv.intro} />
+
+  <Section index="01" title="Download">
+    <div class="wrap grid">
+      <div class="zone-main stack stack-5">
+        {cv.pdf.verified
+          ? <a class="cta" href={cv.pdf.href} download>{cv.pdf.label} <span aria-hidden="true">↓</span></a>
+          : <span class="unverified" title={`To verify: ${cv.pdf.note}`}>{cv.pdf.label}</span>}
+        <p class="text-sm text-tertiary">{cv.note}</p>
+      </div>
+    </div>
+  </Section>
 </Base>

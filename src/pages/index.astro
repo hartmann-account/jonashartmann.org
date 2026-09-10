@@ -1,33 +1,58 @@
 ---
 import Base from "../layouts/Base.astro";
+import Section from "../components/Section.astro";
 import V from "../components/V.astro";
 import site from "../content/site.json";
 import home from "../content/home.json";
+import about from "../content/about.json";
 
 const description = `${site.tagline} ${home.hero.intro}`;
+const metrics = home.experience.tiles.filter((t) => t.kind === "number");
+const capabilities = home.experience.tiles.filter((t) => t.kind === "word");
 ---
 <Base title="Home" description={description} path="/">
-  {/* Hero: nur die Identitaetszeile ist zentriert, alles andere linksbuendig. */}
+  {/*
+    Hero: Text in der Hauptspalte, Portraet in der Marginalie. Damit steht
+    die rechte Rasterzone nicht leer, und die Bildsprache des Brand Books
+    (Schwarz-Weiss, harte Kante) ist von der ersten Zeile an praesent.
+  */}
   <section class="hero">
-    <div class="container">
-      <p class="identity">
-        <span class="identity-name">{site.name}</span>
-        <span class="identity-roles">{site.roles.join(" · ")}</span>
-      </p>
-      <h1 class="tagline">{site.tagline}</h1>
-      <p class="intro measure">{home.hero.intro}</p>
-      <a class="cta" href={home.hero.cta.href}>{home.hero.cta.label} <span aria-hidden="true">→</span></a>
+    <div class="wrap grid">
+      <div class="zone-meta">
+        <span class="eyebrow">Zug, Switzerland</span>
+      </div>
+
+      <div class="zone-main">
+        <p class="hero-name">{site.name}</p>
+        <p class="hero-roles">{site.roles.join(" · ")}</p>
+        <h1 class="hero-claim">{site.tagline}</h1>
+        <p class="hero-intro">{home.hero.intro}</p>
+        <a class="cta" href={home.hero.cta.href}>
+          {home.hero.cta.label} <span aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <figure class="hero-figure">
+        <img
+          class="hero-portrait"
+          src={about.portrait.src}
+          alt={about.portrait.alt}
+          width="512"
+          height="640"
+          fetchpriority="high"
+        />
+      </figure>
     </div>
   </section>
 
-  {/* Die vier Rollen: gleich gross, flaechig, durch Linien getrennt. */}
-  <section class="section roles" aria-labelledby="roles-title">
-    <div class="container">
-      <h2 id="roles-title" class="visually-hidden">The four roles</h2>
-      <ul class="role-grid">
-        {home.roles.map((r) => (
+  {/* 01 — Definition: was Jonas ist. */}
+  <Section index="01" title="Four roles" note="Each links to its own page.">
+    <div class="wrap">
+      <ul class="roles">
+        {home.roles.map((r, i) => (
           <li>
             <a href={r.href}>
+              <span class="role-index">{String(i + 1).padStart(2, "0")}</span>
               <span class="role-title">{r.title}</span>
               <span class="role-text">{r.text}</span>
             </a>
@@ -35,359 +60,126 @@ const description = `${site.tagline} ${home.hero.intro}`;
         ))}
       </ul>
     </div>
-  </section>
+  </Section>
 
-  {/* Die Klammer: einzige narrative, vertikal laufende Strecke der Seite. */}
-  <section class="section decade" aria-labelledby="decade-title">
-    <div class="container">
-      <h2 id="decade-title">{home.decade.title}</h2>
-      <p class="claim">{home.decade.claim}</p>
+  {/* 02 — Herkunft: wie es dazu kam. Die einzige narrative Strecke. */}
+  <Section index="02" title={home.decade.title} note={home.decade.claim}>
+    <div class="wrap">
+      <p class="band" aria-label={home.decade.band.join(", ")}>
+        {home.decade.band.map((word, i) => (
+          <>
+            <span>{word}</span>
+            {i < home.decade.band.length - 1 && <span class="band-arrow" aria-hidden="true">→</span>}
+          </>
+        ))}
+      </p>
     </div>
-    <p class="band" aria-label={home.decade.band.join(", ")}>
-      {home.decade.band.map((word, i) => (
-        <>
-          <span class="band-word">{word}</span>
-          {i < home.decade.band.length - 1 && <span class="band-arrow" aria-hidden="true">→</span>}
-        </>
-      ))}
-    </p>
-    <div class="container">
+
+    <div class="wrap">
       <ol class="stages" data-stages>
-        <span class="marker" data-marker aria-hidden="true"></span>
         {home.decade.stages.map((s) => (
-          <li class="stage" data-stage>
-            <div class="stage-head">
-              <span class="stage-no">{s.no} — {s.title}</span>
+          <li class="stage grid" data-stage>
+            <div class="stage-meta zone-meta">
+              <span class="stage-num">{s.no}</span>
               <span class="stage-period"><V f={s.period} /></span>
             </div>
-            <p class="measure">{s.text}</p>
-            <ul class="proof">
-              {s.proof.map((p) => (
-                <li class:list={{ "is-major": (p as { major?: boolean }).major }}><V f={p} /></li>
-              ))}
-            </ul>
+            <div class="zone-main">
+              <h3 class="stage-title">{s.title}</h3>
+              <p class="stage-text">{s.text}</p>
+              <ul class="stage-proof">
+                {s.proof.map((p) => (
+                  <li class:list={{ "is-major": (p as { major?: boolean }).major }}><V f={p} /></li>
+                ))}
+              </ul>
+            </div>
           </li>
         ))}
       </ol>
-      <p class="backlink">{home.decade.backlink}</p>
-    </div>
-  </section>
 
-  {/* Beweis: Bento-Grid, Zahlen groesser als Worte, "10 years" doppelt breit. */}
-  <section class="section experience" aria-labelledby="exp-title">
-    <div class="container">
-      <h2 id="exp-title">{home.experience.title}</h2>
-      <ul class="bento">
-        {home.experience.tiles.map((t) => (
-          <li class:list={["tile", `is-${t.kind}`, { "is-wide": (t as { wide?: boolean }).wide }]}>
-            <span class="tile-value"><V f={t} /></span>
-            <span class="tile-label">{t.label}</span>
+      <div class="grid stages-outro">
+        <p class="stages-backlink zone-main">{home.decade.backlink}</p>
+      </div>
+    </div>
+  </Section>
+
+  {/* 03 — Beweis: Kennzahlen zuerst, Begriffe geordnet darunter. */}
+  <Section index="03" title={home.experience.title}>
+    <div class="wrap">
+      <ul class="metrics">
+        {metrics.map((t) => (
+          <li class="metric">
+            <span class="metric-value"><V f={t} /></span>
+            <span class="metric-label">{t.label}</span>
           </li>
         ))}
       </ul>
+
+      <dl class="capabilities">
+        {capabilities.map((t) => (
+          <div class="capability">
+            <dt><V f={t} /></dt>
+            <dd>{t.label}</dd>
+          </div>
+        ))}
+      </dl>
     </div>
-  </section>
+  </Section>
 </Base>
+
+<style>
+  /*
+   * Der Hero teilt das Raster anders auf als die uebrigen Sektionen: die
+   * Textspalte ist breiter, damit der Claim in drei Zeilen laeuft, und das
+   * Portraet bekommt vier statt drei Spalten.
+   */
+  .hero .zone-main {
+    grid-column: 3 / span 6;
+  }
+  .hero-figure {
+    grid-column: 9 / span 4;
+  }
+  @media (max-width: 1023px) {
+    .hero .zone-main {
+      grid-column: 4 / span 9;
+    }
+    .hero-figure {
+      grid-column: 4 / span 9;
+    }
+  }
+  @media (max-width: 639px) {
+    .hero .zone-main,
+    .hero-figure {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* Der Rueckverweis schliesst die Strecke ab und braucht Luft davor. */
+  .stages-outro {
+    margin-block-start: var(--space-8);
+    padding-block-start: var(--space-5);
+    border-block-start: 1px solid var(--border);
+  }
+</style>
 
 <script>
   /*
-   * Die eine Bewegung der Seite: beim Scrollen durch die Klammer-Sektion
-   * wandert ein Marker in --accent von Stufe zu Stufe. Ohne JavaScript oder
-   * bei prefers-reduced-motion bleibt es bei den statischen Punkten.
+   * Die einzige Bewegung der Seite: beim Scrollen durch die Klammer faerbt
+   * sich die Nummer der Stufe, die gerade im Lesefeld steht. Ohne
+   * JavaScript oder bei prefers-reduced-motion bleiben alle Nummern neutral
+   * - die Seite funktioniert unveraendert.
    */
-  const root = document.querySelector<HTMLElement>("[data-stages]");
-  const marker = document.querySelector<HTMLElement>("[data-marker]");
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const stages = Array.from(document.querySelectorAll<HTMLElement>("[data-stage]"));
 
-  if (root && marker && !reduced && "IntersectionObserver" in window) {
-    const stages = Array.from(root.querySelectorAll<HTMLElement>("[data-stage]"));
-    const place = (el: HTMLElement) => {
-      marker.style.transform = `translateY(${el.offsetTop}px)`;
-    };
-    root.classList.add("has-marker");
-    place(stages[0]);
+  if (stages.length && !reduced && "IntersectionObserver" in window) {
     const io = new IntersectionObserver(
       (entries) => {
-        // Die oberste sichtbare Stufe im mittleren Band des Viewports gewinnt.
-        const visible = entries.filter((e) => e.isIntersecting).map((e) => e.target as HTMLElement);
-        if (visible.length) place(visible.sort((a, b) => a.offsetTop - b.offsetTop)[0]);
+        for (const entry of entries) {
+          entry.target.classList.toggle("is-active", entry.isIntersecting);
+        }
       },
-      { rootMargin: "-35% 0px -45% 0px", threshold: 0 }
+      { rootMargin: "-30% 0px -50% 0px", threshold: 0 }
     );
     stages.forEach((s) => io.observe(s));
-    window.addEventListener("resize", () => {
-      const active = stages.find((s) => Math.abs(s.offsetTop - parseFloat(marker.style.transform.replace(/[^\d.]/g, "") || "0")) < 2);
-      if (active) place(active);
-    });
   }
 </script>
-
-<style>
-  /* Hero */
-  .hero {
-    padding: var(--s12) 0 0;
-  }
-  .identity {
-    text-align: center;
-    margin: 0 0 var(--s8);
-    display: flex;
-    flex-direction: column;
-    gap: var(--s1);
-    max-width: none;
-  }
-  .identity-name {
-    font-weight: 600;
-    font-size: var(--t3);
-    letter-spacing: 0.01em;
-  }
-  .identity-roles {
-    color: var(--stone);
-    font-size: var(--t1);
-    font-style: italic;
-  }
-  .tagline {
-    font-size: var(--t5);
-    font-weight: 600;
-    max-width: 18ch;
-    margin-bottom: var(--s4);
-  }
-  .intro {
-    font-size: var(--t1);
-    color: var(--stone);
-    margin-bottom: var(--s4);
-  }
-  .cta {
-    font-size: var(--t0);
-    text-decoration: none;
-    border-bottom: 1px solid currentColor;
-    padding-bottom: 2px;
-  }
-  @media (max-width: 767px) {
-    .hero {
-      padding-top: var(--s8);
-    }
-    .tagline {
-      font-size: var(--t4);
-    }
-  }
-
-  /* Rollen */
-  .role-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    border-top: 1px solid var(--line);
-    border-left: 1px solid var(--line);
-  }
-  .role-grid li {
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-  .role-grid a {
-    display: flex;
-    flex-direction: column;
-    gap: var(--s2);
-    padding: var(--s5) var(--s4);
-    min-height: 200px;
-    text-decoration: none;
-    color: var(--ink);
-  }
-  .role-grid a:hover .role-title {
-    color: var(--accent);
-  }
-  .role-title {
-    font-weight: 600;
-    font-size: var(--t3);
-  }
-  .role-text {
-    color: var(--stone);
-    max-width: 30ch;
-  }
-  @media (max-width: 599px) {
-    .role-grid {
-      grid-template-columns: 1fr;
-    }
-    .role-grid a {
-      min-height: 0;
-      padding: var(--s4) var(--s3);
-    }
-  }
-
-  /* Klammer */
-  .claim {
-    font-style: italic;
-    font-size: var(--t2);
-    max-width: none;
-  }
-  .band {
-    text-align: center;
-    font-weight: 600;
-    font-size: var(--t-band);
-    line-height: 1.05;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-    margin: var(--s8) auto;
-    max-width: none;
-    padding: 0 var(--gutter);
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    column-gap: 0.35em;
-  }
-  .band-arrow {
-    color: var(--accent);
-    font-weight: 300;
-  }
-  @media (max-width: 767px) {
-    /* Band bricht auf vier Zeilen um; die Pfeile treten zurueck */
-    .band {
-      flex-direction: column;
-      row-gap: var(--s1);
-    }
-    .band-arrow {
-      display: block;
-      transform: rotate(90deg);
-      font-size: 0.6em;
-    }
-  }
-
-  .stages {
-    position: relative;
-    margin-top: var(--s6);
-    padding-left: var(--s5);
-    border-left: 1px solid var(--line);
-  }
-  .stage {
-    position: relative;
-    padding-bottom: var(--stage-gap);
-  }
-  .stage:last-child {
-    padding-bottom: 0;
-  }
-  /* Statische Punkte: Standard ohne JS oder bei reduzierter Bewegung */
-  .stage::before {
-    content: "";
-    position: absolute;
-    left: calc(-1 * var(--s5) - 6px);
-    top: 0.5em;
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    background: var(--accent);
-  }
-  .stages.has-marker .stage::before {
-    background: var(--line);
-  }
-  .marker {
-    position: absolute;
-    left: -6px;
-    top: 0;
-    width: 11px;
-    height: 11px;
-    border-radius: 50%;
-    background: var(--accent);
-    transform: translateY(0);
-    transition: transform 400ms cubic-bezier(0.2, 0.7, 0.2, 1);
-    display: none;
-    margin-top: 0.5em;
-  }
-  .stages.has-marker .marker {
-    display: block;
-  }
-  .stage-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: var(--s3);
-    margin-bottom: var(--s2);
-    flex-wrap: wrap;
-  }
-  .stage-no {
-    font-weight: 600;
-    font-size: var(--t2);
-  }
-  .stage-period {
-    color: var(--stone);
-    font-size: var(--t0);
-    font-style: italic;
-  }
-  .proof {
-    margin-top: var(--s2);
-    color: var(--stone);
-    font-size: var(--t0);
-  }
-  .proof .is-major {
-    color: var(--ink);
-    font-size: var(--t1);
-    font-weight: 600;
-  }
-  .backlink {
-    margin-top: var(--s6);
-    color: var(--stone);
-    font-style: italic;
-    font-size: var(--t1);
-  }
-
-  /* Bento */
-  /* Drei Spalten: acht Kacheln plus die doppelt breite ergeben genau neun Zellen. */
-  .bento {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--s2);
-    margin-top: var(--s4);
-  }
-  .tile {
-    border: 1px solid var(--line);
-    padding: var(--s4);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: var(--s1);
-  }
-  /* Ton-in-Ton (Brand Book 1.2): Zahlen auf Flaeche, Worte auf Grund */
-  .tile.is-number {
-    min-height: 220px;
-    background: var(--surface);
-    border-color: var(--surface);
-  }
-  .tile.is-word {
-    min-height: 150px;
-  }
-  .tile.is-wide {
-    grid-column: span 2;
-  }
-  .tile-value {
-    font-weight: 600;
-    line-height: 1;
-  }
-  .is-number .tile-value {
-    font-size: var(--t5);
-  }
-  .is-word .tile-value {
-    font-size: var(--t2);
-  }
-  .tile-label {
-    color: var(--stone);
-    font-size: var(--t0);
-    font-style: italic;
-  }
-  @media (max-width: 899px) {
-    .bento {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-  @media (max-width: 599px) {
-    .bento {
-      grid-template-columns: 1fr;
-    }
-    .tile.is-wide {
-      grid-column: auto;
-    }
-    .tile.is-number {
-      min-height: 160px;
-    }
-    .tile.is-word {
-      min-height: 0;
-    }
-  }
-</style>

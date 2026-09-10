@@ -1,0 +1,146 @@
+/* ==========================================================================
+   Design tokens
+   Die einzige Stelle, an der Werte definiert werden. Alles andere im
+   Stylesheet referenziert ausschliesslich diese Variablen.
+   ========================================================================== */
+
+:root {
+  /* --- Farbe: Rohwerte ---------------------------------------------------
+     Monochrom und Blau stammen aus dem Hartmann Brand Book (3.0 Farben).
+     Zwischenstufen sind daraus interpoliert, damit eine vollstaendige
+     Leiter zur Verfuegung steht. Schwarz und Weiss nie pur.
+
+     ink-400 ist bewusst dunkler als die reine Interpolation: als
+     --fg-tertiary traegt es Meta-Text ab 11px und muss auf --bg die
+     4.5:1 des WCAG-AA erreichen (jetzt 4.52:1). Der interpolierte Wert
+     #868b8e lag bei 3.10:1 und waere durchgefallen.                      */
+  --ink-900: #060707;
+  --ink-800: #171a1c;
+  --ink-600: #3d4245;
+  --ink-500: #5a5e60;
+  --ink-400: #6b7073;
+  --ink-300: #a8aeb2;
+  --ink-200: #cdd2d7;
+
+  --paper-000: #faf9f7;
+  --paper-100: #f4f3f0;
+  --paper-200: #e9e8e4;
+  --paper-300: #dbdad5;
+  --paper-400: #c6c5bf;
+
+  --blue-900: #082742;
+  --blue-600: #395b75;
+  --blue-200: #d2d8db;
+
+  /* --- Farbe: semantische Rollen -----------------------------------------
+     Komponenten benutzen nur diese Namen, nie die Rohwerte darueber.      */
+  --bg: var(--paper-100);
+  --bg-raised: var(--paper-200);
+  --bg-inverse: var(--ink-800);
+
+  --fg: var(--ink-800);
+  --fg-secondary: var(--ink-500);
+  --fg-tertiary: var(--ink-400);
+  --fg-inverse: var(--paper-100);
+  --fg-inverse-secondary: var(--ink-200);
+  --fg-inverse-tertiary: #7d8489;
+
+  --border: var(--paper-300);
+  --border-strong: var(--paper-400);
+  --border-inverse: #343a3e;
+
+  --accent: var(--blue-600);
+
+  /* --- Typografie: Familien ----------------------------------------------
+     Zwei Schriften mit strikt getrennten Aufgaben.
+     Cormorant ist eine Display-Serif: grosse Grade, hohe Kontraste, aber
+     bei Lesegroesse zu duenn. Sie traegt deshalb nur Marke, Ueberschriften
+     ab 28px und Zahlen. Alles darunter laeuft in Inter.                   */
+  --font-display: "Cormorant", "Cormorant Garamond", Garamond, "Times New Roman", serif;
+  --font-text: "Inter", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  /* --- Typografie: Skala -------------------------------------------------
+     Zwei abgestimmte Leitern statt einer durchgehenden. Text in feinen
+     Stufen (Lesbarkeit), Display in weiten Spruengen (Wirkung).           */
+  --text-2xs: 0.6875rem;  /* 11px - Eyebrow, Nummern */
+  --text-xs: 0.75rem;     /* 12px - Meta, Bildunterschrift */
+  --text-sm: 0.8125rem;   /* 13px - Tabellen, Labels */
+  --text-md: 0.9375rem;   /* 15px - Sekundaertext */
+  --text-base: 1.0625rem; /* 17px - Fliesstext */
+  --text-lead: 1.25rem;   /* 20px - Lead-Absatz */
+
+  --display-xs: 1.5rem;   /* 24px */
+  --display-sm: 1.75rem;  /* 28px - H3 */
+  --display-md: 2.25rem;  /* 36px - H2 */
+  --display-lg: 3rem;     /* 48px - H1 Unterseite */
+  --display-xl: 4rem;     /* 64px - H1 Startseite */
+  --display-2xl: 5.5rem;  /* 88px - Band */
+
+  /* --- Typografie: Zeilenhoehen und Laufweiten --------------------------- */
+  --leading-tight: 1.08;
+  --leading-snug: 1.25;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.7;
+
+  --tracking-wide: 0.14em;   /* Eyebrows in Versalien */
+  --tracking-normal: 0;
+  --tracking-tight: -0.011em; /* Inter bei Lesegroesse */
+  --tracking-display: -0.005em;
+
+  --measure: 64ch;
+  --measure-narrow: 48ch;
+
+  /* --- Abstaende ---------------------------------------------------------
+     4px-Basis, geometrisch wachsend.                                       */
+  --space-1: 0.25rem;   /* 4 */
+  --space-2: 0.5rem;    /* 8 */
+  --space-3: 0.75rem;   /* 12 */
+  --space-4: 1rem;      /* 16 */
+  --space-5: 1.5rem;    /* 24 */
+  --space-6: 2rem;      /* 32 */
+  --space-7: 3rem;      /* 48 */
+  --space-8: 4rem;      /* 64 */
+  --space-9: 6rem;      /* 96 */
+  --space-10: 8rem;     /* 128 */
+
+  /* --- Raster ------------------------------------------------------------ */
+  --grid-max: 1240px;
+  --grid-gutter: 1.5rem;
+  --grid-margin: 2rem;
+
+  /* Vertikaler Rhythmus zwischen Sektionen */
+  --section-space: var(--space-10);
+  --block-space: var(--space-7);
+
+  /* --- Bewegung ---------------------------------------------------------- */
+  --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --duration: 400ms;
+  --duration-fast: 150ms;
+}
+
+@media (max-width: 1023px) {
+  :root {
+    --display-2xl: 3.5rem;
+    --display-xl: 3rem;
+    --display-lg: 2.25rem;
+    --grid-margin: 1.5rem;
+    --section-space: var(--space-9);
+  }
+}
+
+@media (max-width: 639px) {
+  :root {
+    /* Das Band ist die einzige fluide Groesse der Seite. "PROFESSIONALIZE"
+       ist ein einzelnes Wort und kann nicht umbrechen; auf sehr schmalen
+       Schirmen muss es deshalb mitskalieren, sonst laeuft die Seite
+       horizontal ueber. */
+    --display-2xl: clamp(1.625rem, 8vw, 2.5rem);
+    --display-xl: 2.25rem;
+    --display-lg: 1.875rem;
+    --display-md: 1.625rem;
+    --display-sm: 1.375rem;
+    --grid-margin: 1.25rem;
+    --section-space: var(--space-8);
+    --block-space: var(--space-6);
+  }
+}

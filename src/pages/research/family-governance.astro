@@ -1,9 +1,23 @@
 ---
 import Base from "../../layouts/Base.astro";
-import PageHead from "../../components/PageHead.astro";
+import PageHeader from "../../components/PageHeader.astro";
+import Section from "../../components/Section.astro";
 import research from "../../content/research.json";
 const g = research.familyGovernance;
+
+/* Der erste Satz traegt die These und steht als Lead; der Rest folgt. */
+const [lead, ...rest] = g.text.split(/(?<=\.)\s+/);
 ---
 <Base title={g.title} description={g.text} path="/research/family-governance">
-  <PageHead title={g.title} lede={g.text} />
+  <PageHeader eyebrow="Research" title={g.title} />
+
+  <Section index="01" title="Position">
+    <div class="wrap grid">
+      <div class="zone-main prose">
+        <p class="is-lead">{lead}</p>
+        <p>{rest.join(" ")}</p>
+      </div>
+      <p class="section-note zone-side">Practice preceded the literature.</p>
+    </div>
+  </Section>
 </Base>

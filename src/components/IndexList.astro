@@ -1,0 +1,27 @@
+---
+/*
+ * Inhaltsverzeichnis der Unterseiten: Nummer, Titel, Beschreibung.
+ * Traegt das Nummern-Motiv in die Bereichsseiten (/work, /research).
+ */
+interface Item {
+  title: string;
+  href: string;
+  desc?: string;
+}
+interface Props {
+  items: Item[];
+}
+const { items } = Astro.props;
+---
+<ul class="index-list">
+  {items.map((item, i) => (
+    <li>
+      <a href={item.href}>
+        <span class="index-num">{String(i + 1).padStart(2, "0")}</span>
+        <span class="index-title">{item.title}</span>
+        <span class="index-desc">{item.desc}</span>
+        <span class="index-arrow" aria-hidden="true">→</span>
+      </a>
+    </li>
+  ))}
+</ul>

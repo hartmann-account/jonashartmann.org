@@ -1,0 +1,681 @@
+/* ==========================================================================
+   Komponenten
+
+   Jede Komponente folgt denselben Regeln: Haarlinien statt Rahmenkaesten,
+   Cormorant nur fuer Display-Grade, Inter fuer alles Lesbare, Flaechen nur
+   ton-in-ton. Keine Schatten, keine Radien ausser bei Bildmarken.
+   ========================================================================== */
+
+/* --- Kopfzeile ------------------------------------------------------------ */
+.site-header {
+  border-block-end: 1px solid var(--border);
+  background: var(--bg);
+}
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  min-height: 4.5rem;
+}
+
+.wordmark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--display-xs);
+  line-height: 1;
+  letter-spacing: var(--tracking-display);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.wordmark:hover {
+  color: inherit;
+}
+/* Das Initial traegt die Kerbe der Marke - hier typografisch angedeutet. */
+.wordmark .initial {
+  font-size: 1.22em;
+  line-height: 0;
+  vertical-align: -0.04em;
+}
+
+.site-nav {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-5);
+}
+.site-nav a {
+  font-size: var(--text-sm);
+  font-weight: 450;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  color: var(--fg-secondary);
+  padding-block: var(--space-1);
+  border-block-end: 1px solid transparent;
+}
+.site-nav a:hover {
+  color: var(--fg);
+}
+.site-nav a[aria-current] {
+  color: var(--fg);
+  border-block-end-color: var(--fg);
+}
+@media (max-width: 479px) {
+  .site-header .wrap {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding-block: var(--space-4);
+  }
+  .site-nav {
+    gap: var(--space-4);
+  }
+}
+
+/* --- Fusszeile ------------------------------------------------------------
+   Dunkle Flaeche, Ecken-Anordnung, Bildmarke als stiller Abschluss.       */
+.site-footer {
+  margin-block-start: var(--section-space);
+  background: var(--bg-inverse);
+  color: var(--fg-inverse-secondary);
+  padding-block: var(--space-8) var(--space-6);
+  font-size: var(--text-md);
+}
+.site-footer a {
+  color: var(--fg-inverse);
+  text-decoration-color: var(--fg-inverse-tertiary);
+}
+.site-footer a:hover {
+  color: #fff;
+  text-decoration-color: currentColor;
+}
+.site-footer .eyebrow {
+  color: var(--fg-inverse-tertiary);
+  margin-block-end: var(--space-3);
+}
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+.footer-mark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 4rem;
+  line-height: 0.8;
+  color: var(--fg-inverse-tertiary);
+  align-self: end;
+  justify-self: end;
+}
+.footer-baseline {
+  grid-column: 1 / -1;
+  margin-block-start: var(--space-7);
+  padding-block-start: var(--space-4);
+  border-block-start: 1px solid var(--border-inverse);
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  font-size: var(--text-xs);
+  color: var(--fg-inverse-tertiary);
+}
+.site-footer .unverified {
+  color: var(--fg-inverse-secondary);
+  border-block-end-color: var(--fg-inverse-tertiary);
+}
+
+/* --- Hero ----------------------------------------------------------------- */
+.hero {
+  padding-block: var(--space-9) 0;
+}
+.hero-name {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--display-sm);
+  line-height: 1;
+  margin-block-end: var(--space-2);
+}
+.hero-roles {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--text-lead);
+  color: var(--fg-secondary);
+  letter-spacing: var(--tracking-normal);
+}
+.hero-claim {
+  font-size: var(--display-xl);
+  margin-block: var(--space-7) var(--space-5);
+  max-width: 20ch;
+}
+.hero-intro {
+  font-size: var(--text-lead);
+  line-height: var(--leading-snug);
+  color: var(--fg-secondary);
+  max-width: var(--measure-narrow);
+  letter-spacing: var(--tracking-normal);
+}
+.hero-portrait {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 22%;
+  filter: grayscale(1) contrast(1.06);
+}
+@media (max-width: 1023px) {
+  .hero-portrait {
+    max-width: 260px;
+    aspect-ratio: 1 / 1;
+  }
+}
+
+/* Textlink mit Pfeil - der einzige Pfeil-Link der Seite. */
+.cta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin-block-start: var(--space-6);
+  font-size: var(--text-md);
+  font-weight: 500;
+  text-decoration: none;
+  border-block-end: 1px solid var(--fg);
+  padding-block-end: var(--space-1);
+  width: fit-content;
+}
+.cta:hover {
+  color: var(--accent);
+  border-block-end-color: var(--accent);
+}
+.cta span {
+  transition: transform var(--duration-fast) var(--ease);
+}
+.cta:hover span {
+  transform: translateX(3px);
+}
+
+/* --- Rollen ---------------------------------------------------------------
+   Vier gleichwertige Felder als Inhaltsverzeichnis mit Nummern-Motiv.     */
+.roles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--grid-gutter);
+}
+.roles li {
+  border-block-start: 1px solid var(--fg);
+  padding-block-start: var(--space-4);
+}
+.roles a {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  text-decoration: none;
+  height: 100%;
+}
+.role-index {
+  font-size: var(--text-2xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  color: var(--fg-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+.role-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--display-md);
+  line-height: 1;
+}
+.role-text {
+  font-size: var(--text-md);
+  line-height: var(--leading-normal);
+  color: var(--fg-secondary);
+}
+.roles a:hover .role-title {
+  color: var(--accent);
+}
+@media (max-width: 899px) {
+  .roles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    row-gap: var(--space-6);
+  }
+}
+@media (max-width: 479px) {
+  .roles {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Band ----------------------------------------------------------------
+   Das einzige auffaellige Element der Seite.                              */
+.band {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  column-gap: 0.4em;
+  row-gap: var(--space-2);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--display-2xl);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-block: var(--space-8);
+}
+.band-arrow {
+  color: var(--accent);
+  font-weight: 300;
+  font-size: 0.55em;
+  transform: translateY(-0.12em);
+}
+@media (max-width: 899px) {
+  .band {
+    flex-direction: column;
+    row-gap: var(--space-1);
+  }
+  .band-arrow {
+    transform: rotate(90deg);
+    font-size: 0.4em;
+  }
+}
+
+/* --- Stufen der Klammer ---------------------------------------------------
+   Meta-Spalte traegt Nummer und Zeitraum, Hauptspalte den Text.          */
+.stages {
+  position: relative;
+}
+.stage {
+  padding-block-end: var(--space-9);
+}
+.stage:last-child {
+  padding-block-end: 0;
+}
+.stage-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  position: relative;
+}
+.stage-num {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--display-sm);
+  line-height: 1;
+  color: var(--border-strong);
+  font-variant-numeric: tabular-nums;
+  transition: color var(--duration) var(--ease);
+}
+.stage.is-active .stage-num {
+  color: var(--accent);
+}
+.stage-period {
+  font-size: var(--text-xs);
+  color: var(--fg-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+.stage-title {
+  font-size: var(--display-md);
+  margin-block-end: var(--space-4);
+}
+.stage-text {
+  line-height: var(--leading-relaxed);
+  color: var(--fg-secondary);
+}
+.stage-proof {
+  margin-block-start: var(--space-5);
+  padding-block-start: var(--space-4);
+  border-block-start: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--fg-tertiary);
+}
+.stage-proof .is-major {
+  font-size: var(--text-md);
+  font-weight: 500;
+  color: var(--fg);
+}
+.stages-backlink {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--display-xs);
+  color: var(--fg-secondary);
+}
+
+/* --- Kennzahlen -----------------------------------------------------------
+   Strenge Reihe statt unruhigem Kachelfeld: Zahlen tragen den Blick,
+   Begriffe stehen als geordnete Liste darunter.                          */
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--grid-gutter);
+  row-gap: var(--space-6);
+}
+.metric {
+  border-block-start: 1px solid var(--fg);
+  padding-block-start: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.metric-value {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--display-lg);
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+.metric-label {
+  font-size: var(--text-sm);
+  color: var(--fg-secondary);
+  text-wrap: pretty;
+}
+@media (max-width: 899px) {
+  .metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.capabilities {
+  margin-block-start: var(--space-8);
+  border-block-start: 1px solid var(--border);
+}
+.capability {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+  gap: var(--space-2) var(--grid-gutter);
+  padding-block: var(--space-4);
+  border-block-end: 1px solid var(--border);
+  align-items: baseline;
+}
+.capability dt {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--display-xs);
+  line-height: 1.1;
+}
+.capability dd {
+  margin: 0;
+  font-size: var(--text-md);
+  color: var(--fg-secondary);
+}
+@media (max-width: 639px) {
+  .capability {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Index-Liste (Unterseiten) --------------------------------------------
+   Wie ein Inhaltsverzeichnis: Nummer, Titel, Beschreibung, Pfeil.        */
+.index-list {
+  border-block-start: 1px solid var(--fg);
+}
+.index-list li {
+  border-block-end: 1px solid var(--border);
+}
+.index-list a {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 5fr) minmax(0, 6fr) 1.5rem;
+  gap: var(--space-2) var(--grid-gutter);
+  align-items: baseline;
+  padding-block: var(--space-5);
+  text-decoration: none;
+}
+.index-num {
+  font-size: var(--text-2xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-wide);
+  color: var(--fg-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+.index-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--display-sm);
+  line-height: 1.1;
+}
+.index-desc {
+  font-size: var(--text-md);
+  color: var(--fg-secondary);
+}
+.index-arrow {
+  color: var(--fg-tertiary);
+  justify-self: end;
+  transition: transform var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease);
+}
+.index-list a:hover .index-title {
+  color: var(--accent);
+}
+.index-list a:hover .index-arrow {
+  transform: translateX(4px);
+  color: var(--accent);
+}
+@media (max-width: 899px) {
+  .index-list a {
+    grid-template-columns: 2.5rem minmax(0, 1fr) 1.5rem;
+  }
+  .index-desc {
+    grid-column: 2;
+  }
+  .index-arrow {
+    grid-row: 1;
+    grid-column: 3;
+  }
+}
+
+/* --- Datentabelle (Stationen, Ventures, Ausbildung) -----------------------
+   Echte Tabellen-Anmutung mit Haarlinien; die Hierarchie steuert eine
+   Modifier-Klasse, nicht die Reihenfolge.                                 */
+.data-table {
+  border-block-start: 1px solid var(--fg);
+  width: 100%;
+}
+.data-row {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 6fr) minmax(0, 2fr);
+  gap: var(--space-1) var(--grid-gutter);
+  padding-block: var(--space-4);
+  border-block-end: 1px solid var(--border);
+  align-items: baseline;
+}
+.data-org {
+  font-weight: 500;
+  font-size: var(--text-base);
+}
+.data-detail {
+  font-size: var(--text-md);
+  color: var(--fg-secondary);
+}
+.data-meta {
+  font-size: var(--text-sm);
+  color: var(--fg-tertiary);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+/* Groesste Nennung: eine Stufe groesser, in der Display-Schrift. */
+.data-row.is-major .data-org {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--display-xs);
+  line-height: 1.15;
+}
+/* Praktika und Nebenposten: eine Stufe kleiner, zurueckgenommen. */
+.data-row.is-minor {
+  padding-block: var(--space-3);
+}
+.data-row.is-minor .data-org {
+  font-weight: 450;
+  font-size: var(--text-md);
+  color: var(--fg-secondary);
+}
+.data-row.is-minor .data-detail {
+  font-size: var(--text-sm);
+  color: var(--fg-tertiary);
+}
+@media (max-width: 639px) {
+  .data-row {
+    grid-template-columns: 1fr;
+  }
+  .data-meta {
+    text-align: left;
+  }
+}
+
+/* --- Stichwortliste ------------------------------------------------------- */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-3);
+}
+.tag-list li {
+  font-size: var(--text-sm);
+  color: var(--fg-secondary);
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--border);
+}
+
+/* --- Beteiligungen --------------------------------------------------------
+   Haarlinien-Raster, Marken ton-in-ton und erst im Hover farbig.          */
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  border-block-start: 1px solid var(--border);
+  border-inline-start: 1px solid var(--border);
+}
+.logo-grid li {
+  border-inline-end: 1px solid var(--border);
+  border-block-end: 1px solid var(--border);
+  aspect-ratio: 3 / 2;
+  display: grid;
+  place-items: center;
+  padding: var(--space-5);
+  background: var(--bg);
+  transition: background var(--duration-fast) var(--ease);
+}
+.logo-grid li:hover {
+  background: var(--bg-raised);
+}
+.logo-grid a,
+.logo-grid > li > span {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  font-size: var(--text-sm);
+  color: var(--fg-tertiary);
+  text-align: center;
+}
+.logo-grid img {
+  max-height: 38px;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: 0.7;
+  transition: opacity var(--duration-fast) var(--ease), filter var(--duration-fast) var(--ease);
+}
+.logo-grid a:hover img {
+  filter: none;
+  opacity: 1;
+}
+
+/* --- Zeitleiste (About) --------------------------------------------------- */
+.timeline {
+  border-block-start: 1px solid var(--fg);
+}
+.timeline > li {
+  padding-block: var(--space-6);
+  border-block-end: 1px solid var(--border);
+}
+.timeline-title {
+  font-size: var(--display-sm);
+  margin-block-end: var(--space-1);
+}
+.timeline-period {
+  font-size: var(--text-xs);
+  color: var(--fg-tertiary);
+  font-variant-numeric: tabular-nums;
+}
+.timeline-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--text-md);
+  color: var(--fg-secondary);
+}
+.timeline-details li {
+  padding-inline-start: var(--space-4);
+  position: relative;
+}
+.timeline-details li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0.65em;
+  width: 5px;
+  height: 1px;
+  background: var(--border-strong);
+}
+
+/* --- Publikationen -------------------------------------------------------- */
+.pub-list {
+  border-block-start: 1px solid var(--fg);
+}
+.pub-list li {
+  border-block-end: 1px solid var(--border);
+  padding-block: var(--space-5);
+}
+.pub-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--display-xs);
+  line-height: 1.2;
+  margin-block-end: var(--space-2);
+  max-width: var(--measure);
+}
+.pub-title a {
+  text-decoration: none;
+}
+.pub-meta {
+  font-size: var(--text-sm);
+  color: var(--fg-tertiary);
+}
+.orcid-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--fg-secondary);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  padding: var(--space-2) var(--space-3);
+  width: fit-content;
+}
+.orcid-badge:hover {
+  border-color: var(--border-strong);
+  color: var(--fg);
+}
+.orcid-badge svg {
+  width: 15px;
+  height: 15px;
+  flex: none;
+}
+
+/* --- Bild ---------------------------------------------------------------- */
+.figure img {
+  width: 100%;
+  filter: grayscale(1) contrast(1.04);
+}
+.figure figcaption {
+  margin-block-start: var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--fg-tertiary);
+}
+
+/* --- Unverifizierte Inhalte ----------------------------------------------
+   Sichtbar nur im Entwurf; der Production-Build bricht vorher ab.         */
+.unverified {
+  color: var(--fg-tertiary);
+  border-block-end: 1px dotted var(--fg-tertiary);
+  cursor: help;
+}
