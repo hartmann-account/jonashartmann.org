@@ -1,0 +1,98 @@
+/* Farben — Hartmann Brand Book 3.0. Schwarz und »Weiß« nie pur. Monochrom ist Standard; Blau und Rot sind Signalwelten, hier nur als minimaler Akzent. */
+:root {
+  /* Monochrome Welt (Brand Book) */
+  --ink-900: #060707; /* Tiefschwarz  C86 M75 Y62 K93 */
+  --ink-800: #171a1c; /* Anthrazit    C81 M69 Y60 K81 */
+  --ink-500: #5a5e60; /* Graphit      C61 M48 Y46 K36 */
+  --ink-200: #cdd2d7; /* Nebel        C23 M14 Y13 K0  */
+  /* Abgeleitete Zwischentöne (nicht im Brand Book; gleiche Hue wie Nebel) */
+  --ink-700: #3a3e41; /* Bildplatzhalter-Grau aus dem Brand Book */
+  --ink-100: #e1e4e7;
+  --paper-100: #eceef0;
+  --paper-50: #f5f6f7; /* »Weiß«, nie #fff */
+
+  /* Blaue Welt */
+  --blue-900: #082742; /* C92 M65 Y28 K65 */
+  --blue-600: #395b75; /* C74 M45 Y25 K37 */
+  --blue-100: #d2d8db; /* C20 M11 Y12 K1  */
+  /* Rote Welt */
+  --red-900: #330809; /* C54 M91 Y69 K81 */
+  --red-600: #5b1414; /* C37 M98 Y81 K60 */
+  --red-100: #d8d8d8; /* C18 M13 Y14 K0  */
+
+  /* Semantik — Papier */
+  --bg-page: var(--paper-50);
+  --bg-surface: var(--paper-100);      /* Karten, Felder: ton-in-ton, eine Stufe dunkler */
+  --bg-surface-strong: var(--ink-200); /* Visitenkarten-Grau */
+  --bg-inverse: var(--ink-800);        /* dunkle Panels, Präsentation */
+  --bg-inverse-deep: var(--ink-900);
+  --bg-image-placeholder: var(--ink-700);
+  --bg-scrim: rgba(245, 246, 247, 0.82);
+
+  /* Semantik — Text */
+  --text-primary: var(--ink-900);
+  --text-body: var(--ink-800);
+  --text-secondary: var(--ink-500);
+  --text-on-inverse: var(--ink-200);
+  --text-on-inverse-strong: var(--paper-50);
+  --text-link: var(--ink-900);
+  --text-link-hover: var(--ink-500);
+
+  /* Semantik — Linien */
+  --rule: var(--ink-200);          /* Haarlinie */
+  --rule-strong: var(--ink-900);   /* Haarlinie unter Titeln */
+  --rule-on-inverse: var(--ink-500);
+  --border-field: var(--ink-500);
+  --border-field-focus: var(--ink-900);
+
+  /* Semantik — Akzent. Standard: monochrom (Akzent = Tinte). */
+  --accent: var(--ink-900);
+  --accent-soft: var(--ink-200);
+  --accent-ink: var(--paper-50);
+
+  /* Interaktion */
+  --focus-ring: var(--ink-900);
+  --state-hover-opacity: 0.6; /* @kind other */
+  --state-disabled-opacity: 0.38; /* @kind other */
+  --selection-bg: var(--ink-200);
+}
+
+/* Signalwelten — minimaler Akzent (Links, ein Marker, ein Wort). Nicht flächig. */
+[data-world="blue"] {
+  --accent: var(--blue-600);
+  --accent-soft: var(--blue-100);
+  --accent-ink: var(--paper-50);
+  --text-link-hover: var(--blue-600);
+  --focus-ring: var(--blue-900);
+}
+[data-world="red"] {
+  --accent: var(--red-600);
+  --accent-soft: var(--red-100);
+  --accent-ink: var(--paper-50);
+  --text-link-hover: var(--red-600);
+  --focus-ring: var(--red-900);
+}
+
+/* Dunkle Fläche — ton-in-ton wie die Präsentation im Brand Book */
+[data-theme="dark"] {
+  --bg-page: var(--ink-800);
+  --bg-surface: var(--ink-900);
+  --bg-surface-strong: var(--ink-700);
+  --bg-inverse: var(--paper-50);
+  --bg-scrim: rgba(23, 26, 28, 0.82);
+  --text-primary: var(--paper-50);
+  --text-body: var(--ink-200);
+  --text-secondary: #9aa0a5;
+  --text-on-inverse: var(--ink-800);
+  --text-link: var(--paper-50);
+  --text-link-hover: var(--ink-200);
+  --rule: var(--ink-500);
+  --rule-strong: var(--ink-200);
+  --border-field: var(--ink-500);
+  --border-field-focus: var(--ink-200);
+  --accent: var(--ink-200);
+  --accent-soft: var(--ink-700);
+  --accent-ink: var(--ink-900);
+  --focus-ring: var(--ink-200);
+  --selection-bg: var(--ink-500);
+}

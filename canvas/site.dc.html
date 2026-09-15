@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/jonas-hartmann-design-system-a175b002-6b10-4bea-9667-6179321e4d79/fonts/fonts.css">
+  <link rel="stylesheet" href="_ds/jonas-hartmann-design-system-a175b002-6b10-4bea-9667-6179321e4d79/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/jonas-hartmann-design-system-a175b002-6b10-4bea-9667-6179321e4d79/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/jonas-hartmann-design-system-a175b002-6b10-4bea-9667-6179321e4d79/tokens/spacing.css">
+  <link rel="stylesheet" href="_ds/jonas-hartmann-design-system-a175b002-6b10-4bea-9667-6179321e4d79/tokens/shape.css">
+  <link rel="stylesheet" href="_ds/jonas-hartmann-design-system-a175b002-6b10-4bea-9667-6179321e4d79/tokens/motion.css">
+  <link rel="stylesheet" href="_ds/jonas-hartmann-design-system-a175b002-6b10-4bea-9667-6179321e4d79/tokens/base.css">
+  <link rel="stylesheet" href="_ds/jonas-hartmann-design-system-a175b002-6b10-4bea-9667-6179321e4d79/styles.css">
+  <script src="_ds/jonas-hartmann-design-system-a175b002-6b10-4bea-9667-6179321e4d79/_ds_bundle.js"></script>
+  <style>
+    body { margin: 0; background: var(--bg-page); }
+    a { color: var(--text-link); }
+    a:hover { color: var(--text-link-hover); }
+  </style>
+</helmet>
+<div data-world="{{ world }}" style="min-height: 100vh; display: flex; flex-direction: column; box-sizing: border-box; padding: var(--page-margin); max-width: var(--page-max); margin: 0 auto; background: var(--bg-page); color: var(--text-body); font-family: var(--font-body);">
+  <header style="display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-5); flex-wrap: wrap;">
+    <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.NameMark" size="sm" href="#/" qualifier="zug, switzerland" hint-size="180px,40px"></x-import>
+    <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Tabs" size="sm" items="{{ navItems }}" value="{{ navValue }}" on-change="{{ goRoute }}" hint-size="520px,36px"></x-import>
+  </header>
+  <main style="flex: 1; padding-top: clamp(48px, 8vw, 112px); padding-bottom: clamp(48px, 8vw, 112px);">
+
+    <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+      <div data-screen-label="Home">
+
+        <sc-if value="{{ heroSequence }}" hint-placeholder-val="{{ true }}">
+          <section data-screen-label="Hero · sequence" style="display: grid; gap: var(--space-7);">
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.NameMark" size="md" qualifier="entrepreneur · advisor · investor · researcher" hint-size="360px,56px"></x-import>
+            <h1 style="margin: 0; font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-hero); line-height: var(--leading-hero); letter-spacing: var(--tracking-display); color: var(--text-primary); display: flex; flex-wrap: wrap; column-gap: 0.32em; row-gap: 0.08em; align-items: baseline;">
+              <span>Create</span><span style="color: var(--ink-200); font-weight: var(--weight-light);">→</span><span>Structure</span><span style="color: var(--ink-200); font-weight: var(--weight-light);">→</span><span>Professionalize</span><span style="color: var(--ink-200); font-weight: var(--weight-light);">→</span><span>Automate</span>
+            </h1>
+            <p style="font-size: var(--text-lead); line-height: 1.4; font-weight: var(--weight-light); letter-spacing: var(--tracking-qualifier); color: var(--text-body); max-width: 56ch;">Make it exist. Make it sound. Make it professional. Make it run on its own.</p>
+            <div style="border-top: var(--hairline); padding-top: var(--space-6); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: var(--space-6); align-items: start;">
+              <h2 style="margin: 0; font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h1); line-height: var(--leading-heading); letter-spacing: var(--tracking-display); color: var(--text-primary); max-width: 18ch; text-wrap: balance;">Building structures for businesses, families and capital.</h2>
+              <p style="color: var(--text-body); max-width: var(--measure-narrow); line-height: var(--leading-body);">For the past decade, I have worked across entrepreneurship, corporate advisory, technology and family governance — building companies, digital systems and organizational structures while developing an academic focus on finance, law and family enterprise.</p>
+            </div>
+            <div style="display: flex; gap: var(--space-3); flex-wrap: wrap;">
+              <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Button" variant="secondary" on-click="{{ jumpRoles }}" hint-size="190px,44px">Explore my work ↓</x-import>
+              <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Button" variant="ghost" href="#/cv" hint-size="120px,44px">Full CV →</x-import>
+            </div>
+          </section>
+        </sc-if>
+
+        <sc-if value="{{ heroType }}" hint-placeholder-val="{{ false }}">
+          <section data-screen-label="Hero · type" style="display: grid; gap: var(--space-7); justify-items: start;">
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.NameMark" size="hero" qualifier="entrepreneur · advisor · investor · researcher" hint-size="100%,140px"></x-import>
+            <h1 style="margin: 0; font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-display); line-height: var(--leading-display); letter-spacing: var(--tracking-display); color: var(--text-primary); max-width: 20ch; text-wrap: balance;">Building structures for businesses, families and capital.</h1>
+            <p style="font-size: var(--text-lead); line-height: 1.4; color: var(--text-body); max-width: var(--measure-narrow);">For the past decade, I have worked across entrepreneurship, corporate advisory, technology and family governance — building companies, digital systems and organizational structures while developing an academic focus on finance, law and family enterprise.</p>
+            <div style="display: flex; gap: var(--space-3); flex-wrap: wrap;">
+              <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Button" variant="secondary" on-click="{{ jumpRoles }}" hint-size="190px,44px">Explore my work ↓</x-import>
+              <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Button" variant="ghost" href="#/cv" hint-size="120px,44px">Full CV →</x-import>
+            </div>
+          </section>
+        </sc-if>
+
+        <sc-if value="{{ heroPortrait }}" hint-placeholder-val="{{ false }}">
+          <section data-screen-label="Hero · portrait" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: var(--space-8); align-items: end;">
+            <div style="display: grid; gap: var(--space-7); justify-items: start;">
+              <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.NameMark" size="lg" qualifier="entrepreneur · advisor · investor · researcher" hint-size="100%,80px"></x-import>
+              <h1 style="margin: 0; font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-display); line-height: var(--leading-display); letter-spacing: var(--tracking-display); color: var(--text-primary); max-width: 18ch; text-wrap: balance;">Building structures for businesses, families and capital.</h1>
+              <p style="font-size: var(--text-lead); line-height: 1.4; color: var(--text-body); max-width: var(--measure-narrow);">For the past decade, I have worked across entrepreneurship, corporate advisory, technology and family governance — building companies, digital systems and organizational structures while developing an academic focus on finance, law and family enterprise.</p>
+              <div style="display: flex; gap: var(--space-3); flex-wrap: wrap;">
+                <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Button" variant="secondary" on-click="{{ jumpRoles }}" hint-size="190px,44px">Explore my work ↓</x-import>
+                <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Button" variant="ghost" href="#/cv" hint-size="120px,44px">Full CV →</x-import>
+              </div>
+            </div>
+            <figure style="margin: 0; justify-self: end; width: 100%; max-width: 360px; display: grid; gap: 10px;">
+              <img src="assets/portrait-bw.jpg" alt="Jonas Hartmann" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block; background: var(--bg-image-placeholder);">
+              <figcaption style="display: flex; justify-content: space-between; font-size: var(--text-caption); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);"><span>jonas hartmann</span><span>zug, 2026</span></figcaption>
+            </figure>
+          </section>
+        </sc-if>
+
+        <section id="sec-roles" style="margin-top: clamp(64px, 10vw, 128px);">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-5); flex-wrap: wrap;">
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.SectionTitle" number="0.1" level="2" hint-size="220px,40px">Four roles</x-import>
+            <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">in parallel, not in sequence</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: var(--space-6); margin-top: var(--space-7);">
+            <a href="#/work" style="text-decoration: none; color: var(--text-body); display: grid; gap: var(--space-3); align-content: start; border-top: var(--hairline-strong); padding-top: var(--space-4);" style-hover="color: var(--text-secondary);">
+              <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">01</span>
+              <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h2); line-height: var(--leading-heading); letter-spacing: var(--tracking-display); color: var(--text-primary);">Advise</span>
+              <span style="line-height: var(--leading-body);">Organizations on transformation, transactions, risk and strategic challenges.</span>
+              <span style="margin-top: var(--space-2); font-size: var(--text-small); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier);">→ 1.1 advisory</span>
+            </a>
+            <a href="#/work" style="text-decoration: none; color: var(--text-body); display: grid; gap: var(--space-3); align-content: start; border-top: var(--hairline-strong); padding-top: var(--space-4);" style-hover="color: var(--text-secondary);">
+              <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">02</span>
+              <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h2); line-height: var(--leading-heading); letter-spacing: var(--tracking-display); color: var(--text-primary);">Build</span>
+              <span style="line-height: var(--leading-body);">Companies, products, brands and digital infrastructure.</span>
+              <span style="margin-top: var(--space-2); font-size: var(--text-small); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier);">→ 1.2 entrepreneurship</span>
+            </a>
+            <a href="#/work" style="text-decoration: none; color: var(--text-body); display: grid; gap: var(--space-3); align-content: start; border-top: var(--hairline-strong); padding-top: var(--space-4);" style-hover="color: var(--text-secondary);">
+              <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">03</span>
+              <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h2); line-height: var(--leading-heading); letter-spacing: var(--tracking-display); color: var(--text-primary);">Invest</span>
+              <span style="line-height: var(--leading-body);">Across private and public markets, and in the governance of family capital.</span>
+              <span style="margin-top: var(--space-2); font-size: var(--text-small); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier);">→ 1.3 investing</span>
+            </a>
+            <a href="#/research" style="text-decoration: none; color: var(--text-body); display: grid; gap: var(--space-3); align-content: start; border-top: var(--hairline-strong); padding-top: var(--space-4);" style-hover="color: var(--text-secondary);">
+              <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">04</span>
+              <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h2); line-height: var(--leading-heading); letter-spacing: var(--tracking-display); color: var(--text-primary);">Research</span>
+              <span style="line-height: var(--leading-body);">Family enterprise, governance, finance and institutional structures.</span>
+              <span style="margin-top: var(--space-2); font-size: var(--text-small); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier);">→ 2.0 research</span>
+            </a>
+          </div>
+        </section>
+
+        <section id="sec-decade" style="margin-top: clamp(64px, 10vw, 128px);">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-5); flex-wrap: wrap;">
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.SectionTitle" number="0.2" level="2" hint-size="320px,40px">A decade of building</x-import>
+            <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">2016 → 2026</span>
+          </div>
+          <p style="margin-top: var(--space-6); font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-display); line-height: var(--leading-display); letter-spacing: var(--tracking-display); color: var(--text-primary); max-width: 22ch; text-wrap: balance;">From creating things to building institutions.</p>
+
+          <sc-if value="{{ schemeColumns }}" hint-placeholder-val="{{ true }}">
+            <div data-screen-label="Scheme · columns" style="margin-top: var(--space-7);">
+              <p style="font-size: var(--text-lead); line-height: 1.4; font-weight: var(--weight-light); letter-spacing: var(--tracking-qualifier); color: var(--text-body); max-width: 60ch;">The pattern has been the same each time. Make it exist. Make it sound. Make it professional. Make it run on its own.</p>
+              <div style="margin-top: var(--space-6); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: var(--space-6);">
+                <div style="display: grid; gap: var(--space-3); align-content: start; border-top: var(--hairline-strong); padding-top: var(--space-4);">
+                  <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">01 · 2016–2019</span>
+                  <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: 32px; line-height: 1.05; letter-spacing: var(--tracking-display); color: var(--text-primary);">Create</span>
+                  <span style="font-size: var(--text-lead); line-height: 1.3; font-weight: var(--weight-light); letter-spacing: var(--tracking-qualifier); color: var(--text-primary);">Make it exist.</span>
+                  <span style="margin-top: var(--space-2); border-top: var(--hairline); padding-top: var(--space-4); font-size: var(--text-small); line-height: 1.6; color: var(--text-body);">My professional path started on the creative side: graphic design, video production, music production and DJing. Creating brands, media and digital experiences gradually evolved into building products and businesses of my own.</span>
+                  <span style="font-size: var(--text-caption); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);">design · film · music · brands</span>
+                </div>
+                <div style="display: grid; gap: var(--space-3); align-content: start; border-top: var(--hairline-strong); padding-top: var(--space-4);">
+                  <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">02 · 2017–2023</span>
+                  <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: 32px; line-height: 1.05; letter-spacing: var(--tracking-display); color: var(--text-primary);">Structure</span>
+                  <span style="font-size: var(--text-lead); line-height: 1.3; font-weight: var(--weight-light); letter-spacing: var(--tracking-qualifier); color: var(--text-primary);">Make it sound.</span>
+                  <span style="margin-top: var(--space-2); border-top: var(--hairline); padding-top: var(--space-4); font-size: var(--text-small); line-height: 1.6; color: var(--text-body);">Creating became building. I began building companies, digital products and technology infrastructure — moving from creating individual outputs to creating systems around them.</span>
+                  <span style="font-size: var(--text-caption); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);">10 years of entrepreneurial activity · 350+ managed it customers</span>
+                </div>
+                <div style="display: grid; gap: var(--space-3); align-content: start; border-top: var(--hairline-strong); padding-top: var(--space-4);">
+                  <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">03 · 2020–today</span>
+                  <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: 32px; line-height: 1.05; letter-spacing: var(--tracking-display); color: var(--text-primary);">Professionalize</span>
+                  <span style="font-size: var(--text-lead); line-height: 1.3; font-weight: var(--weight-light); letter-spacing: var(--tracking-qualifier); color: var(--text-primary);">Make it professional.</span>
+                  <span style="margin-top: var(--space-2); border-top: var(--hairline); padding-top: var(--space-4); font-size: var(--text-small); line-height: 1.6; color: var(--text-body);">Building became professionalizing. Working within banks, professional-services firms and global corporations added another perspective: how established institutions manage complexity, risk, transformation and scale.</span>
+                  <span style="font-size: var(--text-caption); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);">alixpartners · roche · kpmg · pwc · m.m. warburg</span>
+                </div>
+                <div style="display: grid; gap: var(--space-3); align-content: start; border-top: var(--hairline-strong); padding-top: var(--space-4);">
+                  <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">04 · 2022–today</span>
+                  <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: 32px; line-height: 1.05; letter-spacing: var(--tracking-display); color: var(--text-primary);">Automate</span>
+                  <span style="font-size: var(--text-lead); line-height: 1.3; font-weight: var(--weight-light); letter-spacing: var(--tracking-qualifier); color: var(--text-primary);">Make it run on its own.</span>
+                  <span style="margin-top: var(--space-2); border-top: var(--hairline); padding-top: var(--space-4); font-size: var(--text-small); line-height: 1.6; color: var(--text-body);">From projects to systems. My interest shifted from individual projects toward how technology, governance and data can make organizations less dependent on individual people and more capable of enduring.</span>
+                  <span style="font-size: var(--text-caption); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);">digital governance · family manager · data analytics and ai</span>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ schemeBand }}" hint-placeholder-val="{{ false }}">
+            <div data-screen-label="Scheme · band" style="margin-top: var(--space-7);">
+              <div style="border-top: var(--hairline-strong); border-bottom: var(--hairline); padding: var(--space-6) 0; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 0.4em; row-gap: 8px; font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: clamp(28px, 3.6vw, 48px); line-height: 1.05; letter-spacing: var(--tracking-display); color: var(--text-primary);">
+                <span>Create</span><span style="color: var(--ink-200); font-weight: var(--weight-light);">→</span><span>Structure</span><span style="color: var(--ink-200); font-weight: var(--weight-light);">→</span><span>Professionalize</span><span style="color: var(--ink-200); font-weight: var(--weight-light);">→</span><span>Automate</span>
+              </div>
+              <p style="margin-top: var(--space-5); font-size: var(--text-lead); line-height: 1.4; font-weight: var(--weight-light); letter-spacing: var(--tracking-qualifier); color: var(--text-body); max-width: 60ch;">Make it exist. Make it sound. Make it professional. Make it run on its own.</p>
+              <div style="margin-top: var(--space-7); display: grid;">
+                <div style="display: grid; grid-template-columns: minmax(120px, 180px) minmax(0, 1fr); gap: var(--space-6); padding: var(--space-5) 0; border-top: var(--hairline);">
+                  <div style="display: grid; gap: 6px; align-content: start;"><span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">01</span><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h3); line-height: var(--leading-heading); color: var(--text-primary);">Create</span><span style="font-size: var(--text-small); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);">2016–2019</span></div>
+                  <div style="display: grid; gap: 10px; align-content: start;"><p style="max-width: var(--measure); line-height: var(--leading-body);">My professional path started on the creative side: graphic design, video production, music production and DJing. Creating brands, media and digital experiences gradually evolved into building products and businesses of my own.</p><span style="font-size: var(--text-caption); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);">design · film · music · brands</span></div>
+                </div>
+                <div style="display: grid; grid-template-columns: minmax(120px, 180px) minmax(0, 1fr); gap: var(--space-6); padding: var(--space-5) 0; border-top: var(--hairline);">
+                  <div style="display: grid; gap: 6px; align-content: start;"><span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">02</span><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h3); line-height: var(--leading-heading); color: var(--text-primary);">Structure</span><span style="font-size: var(--text-small); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);">2017–2023</span></div>
+                  <div style="display: grid; gap: 10px; align-content: start;"><p style="max-width: var(--measure); line-height: var(--leading-body);">Creating became building. I began building companies, digital products and technology infrastructure — moving from creating individual outputs to creating systems around them.</p><span style="font-size: var(--text-caption); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);">10 years of entrepreneurial activity · 350+ managed it customers</span></div>
+                </div>
+                <div style="display: grid; grid-template-columns: minmax(120px, 180px) minmax(0, 1fr); gap: var(--space-6); padding: var(--space-5) 0; border-top: var(--hairline);">
+                  <div style="display: grid; gap: 6px; align-content: start;"><span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">03</span><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h3); line-height: var(--leading-heading); color: var(--text-primary);">Professionalize</span><span style="font-size: var(--text-small); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);">2020–today</span></div>
+                  <div style="display: grid; gap: 10px; align-content: start;"><p style="max-width: var(--measure); line-height: var(--leading-body);">Building became professionalizing. Working within banks, professional-services firms and global corporations added another perspective: how established institutions manage complexity, risk, transformation and scale.</p><span style="font-size: var(--text-caption); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);">alixpartners · roche · kpmg · pwc · m.m. warburg</span></div>
+                </div>
+                <div style="display: grid; grid-template-columns: minmax(120px, 180px) minmax(0, 1fr); gap: var(--space-6); padding: var(--space-5) 0; border-top: var(--hairline); border-bottom: var(--hairline);">
+                  <div style="display: grid; gap: 6px; align-content: start;"><span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">04</span><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h3); line-height: var(--leading-heading); color: var(--text-primary);">Automate</span><span style="font-size: var(--text-small); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);">2022–today</span></div>
+                  <div style="display: grid; gap: 10px; align-content: start;"><p style="max-width: var(--measure); line-height: var(--leading-body);">From projects to systems. My interest shifted from individual projects toward how technology, governance and data can make organizations less dependent on individual people and more capable of enduring.</p><span style="font-size: var(--text-caption); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);">digital governance · family manager · data analytics and ai</span></div>
+                </div>
+              </div>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ schemeRail }}" hint-placeholder-val="{{ false }}">
+            <div data-screen-label="Scheme · rail" style="margin-top: var(--space-7); display: grid; grid-template-columns: minmax(64px, 96px) minmax(0, 1fr); column-gap: var(--space-6);">
+              <div style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h2); line-height: 1; color: var(--text-primary); padding-top: var(--space-5);">2016</div>
+              <div style="position: relative; border-left: var(--hairline); padding: var(--space-5) 0 var(--space-6) var(--space-6); display: grid; gap: var(--space-3); align-content: start;">
+                <span style="position: absolute; left: -3px; top: calc(var(--space-5) + 14px); width: 6px; height: 6px; background: var(--accent);"></span>
+                <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h1); line-height: 1; letter-spacing: var(--tracking-display); color: var(--text-primary);">Create</span><span style="font-size: var(--text-lead); font-weight: var(--weight-light); letter-spacing: var(--tracking-qualifier); color: var(--text-body);">Make it exist.</span></div>
+                <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">01 · 2016–2019</span>
+                <p style="max-width: var(--measure); line-height: var(--leading-body);">My professional path started on the creative side: graphic design, video production, music production and DJing. Creating brands, media and digital experiences gradually evolved into building products and businesses of my own.</p>
+                <span style="font-size: var(--text-caption); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);">design · film · music · brands</span>
+              </div>
+              <div style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h2); line-height: 1; color: var(--text-primary); padding-top: var(--space-5);">2017</div>
+              <div style="position: relative; border-left: var(--hairline); padding: var(--space-5) 0 var(--space-6) var(--space-6); display: grid; gap: var(--space-3); align-content: start;">
+                <span style="position: absolute; left: -3px; top: calc(var(--space-5) + 14px); width: 6px; height: 6px; background: var(--accent);"></span>
+                <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h1); line-height: 1; letter-spacing: var(--tracking-display); color: var(--text-primary);">Structure</span><span style="font-size: var(--text-lead); font-weight: var(--weight-light); letter-spacing: var(--tracking-qualifier); color: var(--text-body);">Make it sound.</span></div>
+                <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">02 · 2017–2023</span>
+                <p style="max-width: var(--measure); line-height: var(--leading-body);">Creating became building. I began building companies, digital products and technology infrastructure — moving from creating individual outputs to creating systems around them.</p>
+                <span style="font-size: var(--text-caption); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);">10 years of entrepreneurial activity · 350+ managed it customers</span>
+              </div>
+              <div style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h2); line-height: 1; color: var(--text-primary); padding-top: var(--space-5);">2020</div>
+              <div style="position: relative; border-left: var(--hairline); padding: var(--space-5) 0 var(--space-6) var(--space-6); display: grid; gap: var(--space-3); align-content: start;">
+                <span style="position: absolute; left: -3px; top: calc(var(--space-5) + 14px); width: 6px; height: 6px; background: var(--accent);"></span>
+                <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h1); line-height: 1; letter-spacing: var(--tracking-display); color: var(--text-primary);">Professionalize</span><span style="font-size: var(--text-lead); font-weight: var(--weight-light); letter-spacing: var(--tracking-qualifier); color: var(--text-body);">Make it professional.</span></div>
+                <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">03 · 2020–today</span>
+                <p style="max-width: var(--measure); line-height: var(--leading-body);">Building became professionalizing. Working within banks, professional-services firms and global corporations added another perspective: how established institutions manage complexity, risk, transformation and scale.</p>
+                <span style="font-size: var(--text-caption); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);">alixpartners · roche · kpmg · pwc · m.m. warburg</span>
+              </div>
+              <div style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h2); line-height: 1; color: var(--text-primary); padding-top: var(--space-5);">2022</div>
+              <div style="position: relative; border-left: var(--hairline); padding: var(--space-5) 0 var(--space-6) var(--space-6); display: grid; gap: var(--space-3); align-content: start;">
+                <span style="position: absolute; left: -3px; top: calc(var(--space-5) + 14px); width: 6px; height: 6px; background: var(--accent);"></span>
+                <div style="display: flex; align-items: baseline; gap: var(--space-4); flex-wrap: wrap;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h1); line-height: 1; letter-spacing: var(--tracking-display); color: var(--text-primary);">Automate</span><span style="font-size: var(--text-lead); font-weight: var(--weight-light); letter-spacing: var(--tracking-qualifier); color: var(--text-body);">Make it run on its own.</span></div>
+                <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">04 · 2022–today</span>
+                <p style="max-width: var(--measure); line-height: var(--leading-body);">From projects to systems. My interest shifted from individual projects toward how technology, governance and data can make organizations less dependent on individual people and more capable of enduring.</p>
+                <span style="font-size: var(--text-caption); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);">digital governance · family manager · data analytics and ai</span>
+              </div>
+              <div style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h2); line-height: 1; color: var(--text-primary); padding-top: var(--space-5);">2026</div>
+              <div style="border-left: var(--hairline); padding: var(--space-5) 0 0 var(--space-6);"><span style="font-size: var(--text-small); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);">→ doctoral research · advisory · family governance</span></div>
+            </div>
+          </sc-if>
+        </section>
+
+        <section id="sec-experience" style="margin-top: clamp(64px, 10vw, 128px);">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-5); flex-wrap: wrap;">
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.SectionTitle" number="0.3" level="2" hint-size="320px,40px">Selected experience</x-import>
+            <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">selected, not complete</span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); margin-top: var(--space-7);">
+            <div style="grid-column: span 2; display: grid;">
+              <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Card" variant="surface" number="01" meta="entrepreneurship" hint-size="100%,220px">
+                <div style="min-height: 120px; display: flex; flex-direction: column; justify-content: flex-end; gap: 10px;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: clamp(40px, 5vw, 64px); line-height: 1; letter-spacing: var(--tracking-display); color: var(--text-primary);">10 years</span><span style="font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-body);">of entrepreneurial activity</span></div>
+              </x-import>
+            </div>
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Card" variant="surface" number="02" meta="managed it" hint-size="100%,220px">
+              <div style="min-height: 120px; display: flex; flex-direction: column; justify-content: flex-end; gap: 10px;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: clamp(40px, 5vw, 64px); line-height: 1; letter-spacing: var(--tracking-display); color: var(--text-primary);">350+</span><span style="font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-body);">managed it customers</span></div>
+            </x-import>
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Card" variant="surface" number="03" meta="places" hint-size="100%,220px">
+              <div style="min-height: 120px; display: flex; flex-direction: column; justify-content: flex-end; gap: 10px;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: clamp(40px, 5vw, 64px); line-height: 1; letter-spacing: var(--tracking-display); color: var(--text-primary);">10 cities</span><span style="font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-body);">lived and worked across different environments</span></div>
+            </x-import>
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Card" variant="inverse" number="04" meta="transformation" hint-size="100%,220px">
+              <div style="min-height: 120px; display: flex; flex-direction: column; justify-content: flex-end; gap: 10px;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: clamp(40px, 5vw, 64px); line-height: 1; letter-spacing: var(--tracking-display); color: var(--text-on-inverse-strong);">10,000+</span><span style="font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-on-inverse);">sap end users · 180+ sites · three global s/4hana rollouts</span></div>
+            </x-import>
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Card" variant="strong" number="05" meta="advisory" hint-size="100%,220px">
+              <div style="min-height: 120px; display: flex; flex-direction: column; justify-content: flex-end; gap: 10px;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h1); line-height: 1.05; letter-spacing: var(--tracking-display); color: var(--ink-900);">Corporate</span><span style="font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--ink-800);">consulting, banking and global transformation</span></div>
+            </x-import>
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Card" variant="strong" number="06" meta="entrepreneurship" hint-size="100%,220px">
+              <div style="min-height: 120px; display: flex; flex-direction: column; justify-content: flex-end; gap: 10px;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h1); line-height: 1.05; letter-spacing: var(--tracking-display); color: var(--ink-900);">Builder</span><span style="font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--ink-800);">digital platforms, brands and organizational structures</span></div>
+            </x-import>
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Card" variant="strong" number="07" meta="family enterprise" hint-size="100%,220px">
+              <div style="min-height: 120px; display: flex; flex-direction: column; justify-content: flex-end; gap: 10px;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h1); line-height: 1.05; letter-spacing: var(--tracking-display); color: var(--ink-900);">Family governance</span><span style="font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--ink-800);">digital governance and administration infrastructure</span></div>
+            </x-import>
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Card" variant="strong" number="08" meta="technology" hint-size="100%,220px">
+              <div style="min-height: 120px; display: flex; flex-direction: column; justify-content: flex-end; gap: 10px;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h1); line-height: 1.05; letter-spacing: var(--tracking-display); color: var(--ink-900);">Creative</span><span style="font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--ink-800);">trained in graphic design and video production</span></div>
+            </x-import>
+          </div>
+        </section>
+
+        <section style="margin-top: clamp(64px, 10vw, 128px); border-top: var(--hairline-strong); padding-top: var(--space-6); display: flex; justify-content: space-between; align-items: center; gap: var(--space-5); flex-wrap: wrap;">
+          <div style="display: grid; gap: 6px;">
+            <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h3); line-height: var(--leading-heading); color: var(--text-primary);">Full CV</span>
+            <span style="font-size: var(--text-small); color: var(--text-secondary);">Complete record of positions, ventures, education and memberships.</span>
+          </div>
+          <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Button" variant="secondary" href="#/cv" hint-size="130px,44px">Full CV →</x-import>
+        </section>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isWork }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="1.0 Work">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: var(--space-8); align-items: start;">
+          <div style="display: grid; gap: var(--space-6); justify-items: start;">
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.SectionTitle" number="1.0" level="1" hint-size="200px,44px">Work</x-import>
+            <p style="font-size: var(--text-lead); line-height: 1.4; color: var(--text-primary); max-width: var(--measure-narrow);">The four roles developed in parallel rather than in sequence, and they inform each other: advising is sharper for having built, investing is more disciplined for having advised, and research is grounded in all three.</p>
+          </div>
+          <nav aria-label="Sections" style="display: grid; align-content: start; font-size: var(--text-small); border-top: var(--hairline-strong);">
+            <button type="button" onClick="{{ jumpAdvisory }}" style="display: flex; gap: 14px; align-items: baseline; width: 100%; text-align: left; background: none; border: 0; border-bottom: var(--hairline); padding: 12px 0; cursor: pointer; color: var(--text-body); font: inherit;" style-hover="color: var(--text-secondary);"><span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">1.1</span><span>Advisory</span><span style="margin-left: auto;">↓</span></button>
+            <button type="button" onClick="{{ jumpEntrepreneurship }}" style="display: flex; gap: 14px; align-items: baseline; width: 100%; text-align: left; background: none; border: 0; border-bottom: var(--hairline); padding: 12px 0; cursor: pointer; color: var(--text-body); font: inherit;" style-hover="color: var(--text-secondary);"><span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">1.2</span><span>Entrepreneurship</span><span style="margin-left: auto;">↓</span></button>
+            <button type="button" onClick="{{ jumpInvesting }}" style="display: flex; gap: 14px; align-items: baseline; width: 100%; text-align: left; background: none; border: 0; border-bottom: var(--hairline); padding: 12px 0; cursor: pointer; color: var(--text-body); font: inherit;" style-hover="color: var(--text-secondary);"><span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">1.3</span><span>Investing</span><span style="margin-left: auto;">↓</span></button>
+            <button type="button" onClick="{{ jumpTechnology }}" style="display: flex; gap: 14px; align-items: baseline; width: 100%; text-align: left; background: none; border: 0; border-bottom: var(--hairline); padding: 12px 0; cursor: pointer; color: var(--text-body); font: inherit;" style-hover="color: var(--text-secondary);"><span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">1.4</span><span>Technology and creative</span><span style="margin-left: auto;">↓</span></button>
+          </nav>
+        </div>
+
+        <section id="sec-advisory" style="margin-top: clamp(64px, 10vw, 128px);">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-5); flex-wrap: wrap;">
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.SectionTitle" number="1.1" level="2" hint-size="200px,40px">Advisory</x-import>
+            <span style="font-size: var(--text-small); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);">risk advisory · investigations · data analytics · transformation · transactions · legal and corporate structuring</span>
+          </div>
+          <p style="margin-top: var(--space-6); max-width: var(--measure); line-height: var(--leading-body);">I have worked in professional advisory environments across consulting firms, banks and family offices, on transformation programs, investigations, due diligence, transactions and corporate structuring. This is the conventional part of my profile, and it anchors the rest.</p>
+          <div style="margin-top: var(--space-7); border-top: var(--hairline-strong);">
+            <div style="display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 2fr) minmax(0, 0.9fr); gap: var(--space-5); padding: var(--space-5) 0; border-bottom: var(--hairline); align-items: baseline;">
+              <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h3); line-height: var(--leading-heading); color: var(--text-primary);">AlixPartners</span>
+              <div style="display: grid; gap: 4px;"><span>Analyst, Risk Advisory</span><span style="font-size: var(--text-small); color: var(--text-secondary); line-height: 1.5;">Investigation at a Tier 1 bank; Claude multi-agent orchestration to automate public-source review, awarded as Claude Power User by Anthropic.</span></div>
+              <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary); text-align: right;">zurich · since 04/2026</span>
+            </div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 2fr) minmax(0, 0.9fr); gap: var(--space-5); padding: var(--space-5) 0; border-bottom: var(--hairline); align-items: baseline;">
+              <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h3); line-height: var(--leading-heading); color: var(--text-primary);">Roche / ASPIRE</span>
+              <div style="display: grid; gap: 4px;"><span>Change and training management, three global SAP S/4HANA rollouts (mandate)</span><span style="font-size: var(--text-small); color: var(--text-secondary); line-height: 1.5;">10,000+ end users, 180+ sites; GxP-regulated, FMCG and research environments. GenAI-driven training automation; hyper-care coordination across 100+ institutional units.</span></div>
+              <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary); text-align: right;">dach · 2020–2022 · 2024–2025</span>
+            </div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 2fr) minmax(0, 0.9fr); gap: var(--space-5); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline; font-size: var(--text-small);">
+              <span style="display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; color: var(--text-primary);">Scipio Family Office <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Badge" hint-size="70px,18px">internship</x-import></span>
+              <div style="display: grid; gap: 2px;"><span>Legal and tax structuring</span><span style="color: var(--text-secondary); line-height: 1.5;">Multi-jurisdictional holding structure (CH/LI/LU); CHF 80M cross-border property acquisition; family office establishment.</span></div>
+              <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary); text-align: right;">zug · 01–03/2026</span>
+            </div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 2fr) minmax(0, 0.9fr); gap: var(--space-5); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline; font-size: var(--text-small);">
+              <span style="display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; color: var(--text-primary);">TIE Advisory <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Badge" hint-size="70px,18px">internship</x-import></span>
+              <div style="display: grid; gap: 2px;"><span>Venture capital</span><span style="color: var(--text-secondary); line-height: 1.5;">Legal inception of Swiss Champions Fund; international roundtables with family-office professionals and funds.</span></div>
+              <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary); text-align: right;">st. gallen · 10–12/2025</span>
+            </div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 2fr) minmax(0, 0.9fr); gap: var(--space-5); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline; font-size: var(--text-small);">
+              <span style="display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; color: var(--text-primary);">PwC <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Badge" hint-size="70px,18px">internship</x-import></span>
+              <div style="display: grid; gap: 2px;"><span>Audit, insurance assurance</span><span style="color: var(--text-secondary); line-height: 1.5;">Audits of German insurance companies, including CSRD reporting.</span></div>
+              <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary); text-align: right;">hamburg · 12/2023–02/2024</span>
+            </div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 2fr) minmax(0, 0.9fr); gap: var(--space-5); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline; font-size: var(--text-small);">
+              <span style="display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; color: var(--text-primary);">M.M. Warburg <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Badge" hint-size="70px,18px">internship</x-import></span>
+              <div style="display: grid; gap: 2px;"><span>Transaction services</span><span style="color: var(--text-secondary); line-height: 1.5;">Core-banking migration (OBS to Atruvia); KYC/CDD review for UHNWI clients; withholding-tax refund claims.</span></div>
+              <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary); text-align: right;">hamburg · 07–11/2023</span>
+            </div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 2fr) minmax(0, 0.9fr); gap: var(--space-5); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline; font-size: var(--text-small);">
+              <span style="display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; color: var(--text-primary);">KPMG <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Badge" hint-size="70px,18px">internship</x-import></span>
+              <div style="display: grid; gap: 2px;"><span>Global deal advisory</span><span style="color: var(--text-secondary); line-height: 1.5;">AI-infused Power App to optimise the M&amp;A advisory process.</span></div>
+              <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary); text-align: right;">munich · 02–07/2023</span>
+            </div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 2fr) minmax(0, 0.9fr); gap: var(--space-5); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline; font-size: var(--text-small);">
+              <span style="display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; color: var(--text-primary);">LIQID <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Badge" hint-size="70px,18px">internship</x-import></span>
+              <div style="display: grid; gap: 2px;"><span>Technology management</span><span style="color: var(--text-secondary); line-height: 1.5;">Optimisation of the KYC input process.</span></div>
+              <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary); text-align: right;">berlin · 12/2022–02/2023</span>
+            </div>
+          </div>
+          <p style="margin-top: var(--space-5); font-size: var(--text-small); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);">sap-led transformation · investigations · due diligence · company formations · asset transfers and mergers · corporate governance</p>
+        </section>
+
+        <section id="sec-entrepreneurship" style="margin-top: clamp(64px, 10vw, 128px);">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-5); flex-wrap: wrap;">
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.SectionTitle" number="1.2" level="2" hint-size="280px,40px">Entrepreneurship</x-import>
+            <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">since 2016</span>
+          </div>
+          <p style="margin-top: var(--space-6); max-width: var(--measure); line-height: var(--leading-body);">Entrepreneurship has been a continuous part of my work since 2016. The ventures differ; the pattern behind them does not: create, structure, professionalize, automate.</p>
+          <div style="margin-top: var(--space-7); border-top: var(--hairline-strong); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); column-gap: var(--space-8);">
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: var(--space-4); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline;"><span style="font-weight: var(--weight-medium); color: var(--text-primary);">Managed IT services</span><span style="font-size: var(--text-small); color: var(--text-secondary);"><span title="to be verified" style="border-bottom: 1px dotted var(--ink-500);">~350 business customers</span></span></div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: var(--space-4); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline;"><span style="font-weight: var(--weight-medium); color: var(--text-primary);">Web hosting and reselling</span><span style="font-size: var(--text-small); color: var(--text-secondary);">Hosting and domain infrastructure</span></div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: var(--space-4); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline;"><span style="font-weight: var(--weight-medium); color: var(--text-primary);">Feelbelt</span><span style="font-size: var(--text-small); color: var(--text-secondary);"><span title="to be verified" style="border-bottom: 1px dotted var(--ink-500);">field, role and period to be confirmed</span></span></div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: var(--space-4); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline;"><span style="font-weight: var(--weight-medium); color: var(--text-primary);">Brand and marketing</span><span style="font-size: var(--text-small); color: var(--text-secondary);">Advisory for early-stage companies</span></div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: var(--space-4); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline;"><span style="font-weight: var(--weight-medium); color: var(--text-primary);">finivia</span><span style="font-size: var(--text-small); color: var(--text-secondary);"><span title="to be verified" style="border-bottom: 1px dotted var(--ink-500);">field, role and period to be confirmed</span></span></div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: var(--space-4); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline;"><span style="font-weight: var(--weight-medium); color: var(--text-primary);">Season Records</span><span style="font-size: var(--text-small); color: var(--text-secondary);">Recording label</span></div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: var(--space-4); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline;"><span style="font-weight: var(--weight-medium); color: var(--text-primary);">Virtual App Container</span><span style="font-size: var(--text-small); color: var(--text-secondary);"><span title="to be verified" style="border-bottom: 1px dotted var(--ink-500);">field, role and period to be confirmed</span></span></div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: var(--space-4); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline;"><span style="font-weight: var(--weight-medium); color: var(--text-primary);">Earlier formations</span><span style="font-size: var(--text-small); color: var(--text-secondary);">Company formations 2016–2020</span></div>
+          </div>
+        </section>
+
+        <section id="sec-investing" style="margin-top: clamp(64px, 10vw, 128px);">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-5); flex-wrap: wrap;">
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.SectionTitle" number="1.3" level="2" hint-size="200px,40px">Investing</x-import>
+            <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">private and public markets</span>
+          </div>
+          <p style="margin-top: var(--space-6); max-width: var(--measure); line-height: var(--leading-body);">I invest across private and public markets, including early-stage companies and listed securities.</p>
+          <div style="margin-top: var(--space-7); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: var(--space-6);">
+            <div style="display: grid; gap: var(--space-3); align-content: start; border-top: var(--hairline-strong); padding-top: var(--space-4);">
+              <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h3); line-height: var(--leading-heading); color: var(--text-primary);">Personal investing</span>
+              <p style="font-size: var(--text-small); line-height: 1.6; color: var(--text-body);">Early-stage investments in <span title="to be verified" style="border-bottom: 1px dotted var(--ink-500);">15+ companies</span> since <span title="to be verified" style="border-bottom: 1px dotted var(--ink-500);">2012</span>, alongside a public-markets strategy run via Wikifolio with a multi-asset allocation.</p>
+            </div>
+            <div style="display: grid; gap: var(--space-3); align-content: start; border-top: var(--hairline-strong); padding-top: var(--space-4);">
+              <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h3); line-height: var(--leading-heading); color: var(--text-primary);">Family capital</span>
+              <p style="font-size: var(--text-small); line-height: 1.6; color: var(--text-body);">Alongside my personal investment activities, I serve on the board of the Hartmann Family Office and chair the Investment Committee of the Vereinigung der Familie Hartmann, contributing to the governance and strategic allocation of a long-term multi-asset portfolio.</p>
+            </div>
+            <div style="display: grid; gap: var(--space-3); align-content: start; border-top: var(--hairline-strong); padding-top: var(--space-4);">
+              <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h3); line-height: var(--leading-heading); color: var(--text-primary);">Family enterprise infrastructure</span>
+              <p style="font-size: var(--text-small); line-height: 1.6; color: var(--text-body);">Founding and development of the family office, a digital family governance platform, e-voting, and the administration and reporting systems behind the family association.</p>
+            </div>
+          </div>
+          <div style="margin-top: var(--space-7);">
+            <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">board and advisory</span>
+            <div style="margin-top: var(--space-3); border-top: var(--hairline-strong);">
+              <div style="display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.6fr) minmax(0, 0.8fr); gap: var(--space-5); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline;"><span style="font-weight: var(--weight-medium); color: var(--text-primary);">Vereinigung der Familie Hartmann</span><span style="font-size: var(--text-small); color: var(--text-body);">Chairman of the Board</span><span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary); text-align: right;">since 01/2026</span></div>
+              <div style="display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.6fr) minmax(0, 0.8fr); gap: var(--space-5); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline;"><span style="font-weight: var(--weight-medium); color: var(--text-primary);">Swiss Champions Fund</span><span style="font-size: var(--text-small); color: var(--text-body);">Advisory board · CHF 100m growth venture capital fund</span><span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary); text-align: right;">since 06/2026</span></div>
+              <div style="display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.6fr) minmax(0, 0.8fr); gap: var(--space-5); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline;"><span style="font-weight: var(--weight-medium); color: var(--text-primary);">HWH Capital</span><span style="font-size: var(--text-small); color: var(--text-body);">Advisory board · systematic commodities hedge fund</span><span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary); text-align: right;">since 11/2025</span></div>
+              <div style="display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.6fr) minmax(0, 0.8fr); gap: var(--space-5); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline;"><span style="font-weight: var(--weight-medium); color: var(--text-primary);">SECA</span><span style="font-size: var(--text-small); color: var(--text-body);">Researcher · Swiss Private Equity &amp; Corporate Finance Association</span><span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary); text-align: right;">05–12/2025</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="sec-technology" style="margin-top: clamp(64px, 10vw, 128px);">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-5); flex-wrap: wrap;">
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.SectionTitle" number="1.4" level="2" hint-size="360px,40px">Technology and creative</x-import>
+            <a href="https://soma-suru.de" target="_blank" rel="noopener" style="font-size: var(--text-small); color: var(--text-body);">Music and DJ references →</a>
+          </div>
+          <p style="margin-top: var(--space-6); max-width: var(--measure); line-height: var(--leading-body);">I was trained in graphic design and video production, and produced music and worked as a DJ, before I worked in finance. That background, combined with years of running IT and hosting infrastructure, is why I build things myself rather than specify them for others.</p>
+          <div style="margin-top: var(--space-6); display: flex; gap: var(--space-2); flex-wrap: wrap;">
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Tag" hint-size="90px,30px">branding</x-import>
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Tag" hint-size="130px,30px">web development</x-import>
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Tag" hint-size="200px,30px">automated customer platforms</x-import>
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Tag" hint-size="130px,30px">it infrastructure</x-import>
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Tag" hint-size="80px,30px">hosting</x-import>
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Tag" hint-size="190px,30px">app and container projects</x-import>
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Tag" hint-size="140px,30px">ai and automation</x-import>
+          </div>
+          <div style="margin-top: var(--space-7); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: var(--space-4);">
+            <figure style="margin: 0; aspect-ratio: 16 / 10; background: var(--bg-image-placeholder); display: flex; align-items: flex-end; justify-content: center; padding: 12px; box-sizing: border-box;"><figcaption style="color: var(--ink-200); font-size: var(--text-caption); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier);">project screenshot · to be supplied</figcaption></figure>
+            <figure style="margin: 0; aspect-ratio: 16 / 10; background: var(--bg-image-placeholder); display: flex; align-items: flex-end; justify-content: center; padding: 12px; box-sizing: border-box;"><figcaption style="color: var(--ink-200); font-size: var(--text-caption); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier);">project screenshot · to be supplied</figcaption></figure>
+            <figure style="margin: 0; aspect-ratio: 16 / 10; background: var(--bg-image-placeholder); display: flex; align-items: flex-end; justify-content: center; padding: 12px; box-sizing: border-box;"><figcaption style="color: var(--ink-200); font-size: var(--text-caption); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier);">project screenshot · to be supplied</figcaption></figure>
+          </div>
+        </section>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isResearch }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="2.0 Research">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: var(--space-8); align-items: start;">
+          <div style="display: grid; gap: var(--space-6); justify-items: start;">
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.SectionTitle" number="2.0" level="1" hint-size="240px,44px">Research</x-import>
+            <p style="font-size: var(--text-lead); line-height: 1.4; color: var(--text-primary); max-width: var(--measure-narrow);">My academic work sits at the intersection of finance, law and family enterprise.</p>
+          </div>
+          <nav aria-label="Sections" style="display: grid; align-content: start; font-size: var(--text-small); border-top: var(--hairline-strong);">
+            <button type="button" onClick="{{ jumpGovernance }}" style="display: flex; gap: 14px; align-items: baseline; width: 100%; text-align: left; background: none; border: 0; border-bottom: var(--hairline); padding: 12px 0; cursor: pointer; color: var(--text-body); font: inherit;" style-hover="color: var(--text-secondary);"><span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">2.1</span><span>Family governance</span><span style="margin-left: auto;">↓</span></button>
+            <button type="button" onClick="{{ jumpOffices }}" style="display: flex; gap: 14px; align-items: baseline; width: 100%; text-align: left; background: none; border: 0; border-bottom: var(--hairline); padding: 12px 0; cursor: pointer; color: var(--text-body); font: inherit;" style-hover="color: var(--text-secondary);"><span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">2.2</span><span>Family offices</span><span style="margin-left: auto;">↓</span></button>
+            <button type="button" onClick="{{ jumpPublications }}" style="display: flex; gap: 14px; align-items: baseline; width: 100%; text-align: left; background: none; border: 0; border-bottom: var(--hairline); padding: 12px 0; cursor: pointer; color: var(--text-body); font: inherit;" style-hover="color: var(--text-secondary);"><span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">2.3</span><span>Publications</span><span style="margin-left: auto;">↓</span></button>
+          </nav>
+        </div>
+
+        <div style="margin-top: clamp(48px, 7vw, 96px);">
+          <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">education</span>
+          <div style="margin-top: var(--space-3); border-top: var(--hairline-strong);">
+            <div style="display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr) minmax(0, 0.7fr); gap: var(--space-5); padding: var(--space-5) 0; border-bottom: var(--hairline); align-items: baseline;">
+              <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h3); line-height: var(--leading-heading); color: var(--text-primary);">Doctoral research</span>
+              <span style="font-size: var(--text-small); color: var(--text-body); line-height: 1.6;"><span title="to be verified" style="border-bottom: 1px dotted var(--ink-500);">Family office governance · Witten/Herdecke</span></span>
+              <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary); text-align: right;">2026 →</span>
+            </div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr) minmax(0, 0.7fr); gap: var(--space-5); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline;">
+              <span style="font-weight: var(--weight-medium); color: var(--text-primary);">M.Sc. Finance, Family Office Management</span>
+              <div style="display: grid; gap: 2px; font-size: var(--text-small); line-height: 1.6;"><span>Allensbach Hochschule</span><span style="color: var(--text-secondary);">Thesis: Determinants of the Optimal Asset Threshold for Single Family Offices (meta-analysis)</span></div>
+              <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary); text-align: right;">2025–2026</span>
+            </div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr) minmax(0, 0.7fr); gap: var(--space-5); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline;">
+              <span style="font-weight: var(--weight-medium); color: var(--text-primary);">International track</span>
+              <div style="display: grid; gap: 2px; font-size: var(--text-small); line-height: 1.6;"><span>Asia Pacific University, Malaysia · Digital Transformation</span><span>Pace University, New York · Behavioural Economics and Finance</span></div>
+              <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary); text-align: right;">2024–2025</span>
+            </div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr) minmax(0, 0.7fr); gap: var(--space-5); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline;">
+              <span style="font-weight: var(--weight-medium); color: var(--text-primary);">B.A. Economics &amp; Banking</span>
+              <div style="display: grid; gap: 2px; font-size: var(--text-small); line-height: 1.6;"><span>Allensbach Hochschule</span><span style="color: var(--text-secondary);">Thesis: The Role of Basel III and National Golden Power Regimes in Cross-Border Bank Mergers in Europe</span></div>
+              <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary); text-align: right;">2023–2025</span>
+            </div>
+            <div style="display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 2fr) minmax(0, 0.7fr); gap: var(--space-5); padding: var(--space-4) 0; border-bottom: var(--hairline); align-items: baseline;">
+              <span style="font-weight: var(--weight-medium); color: var(--text-primary);">Law studies</span>
+              <span style="font-size: var(--text-small); color: var(--text-secondary); line-height: 1.6;"><span title="to be verified" style="border-bottom: 1px dotted var(--ink-500);">institution and period to be confirmed</span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+
+        <section id="sec-governance" style="margin-top: clamp(64px, 10vw, 128px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--space-8); align-items: start;">
+          <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.SectionTitle" number="2.1" level="2" hint-size="300px,40px">Family governance</x-import>
+          <p style="max-width: var(--measure); line-height: var(--leading-body);">I did not come to family governance from the literature. I built governance and administration structures for a family association and a family office first, then began to study why such structures hold or fail. The research asks how ownership, capital and decision rights in families can be organized to endure across generations.</p>
+        </section>
+        <section id="sec-offices" style="margin-top: clamp(48px, 7vw, 96px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--space-8); align-items: start; border-top: var(--hairline); padding-top: var(--space-7);">
+          <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.SectionTitle" number="2.2" level="2" hint-size="260px,40px">Family offices</x-import>
+          <p style="max-width: var(--measure); line-height: var(--leading-body);"><span title="to be verified against the exposé" style="border-bottom: 1px dotted var(--ink-500);">Doctoral research on the governance of single family offices: board composition, decision rights, and the wealth thresholds at which a dedicated structure becomes rational.</span></p>
+        </section>
+        <section id="sec-publications" style="margin-top: clamp(48px, 7vw, 96px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--space-8); align-items: start; border-top: var(--hairline); padding-top: var(--space-7);">
+          <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.SectionTitle" number="2.3" level="2" hint-size="240px,40px">Publications</x-import>
+          <div style="display: grid; gap: var(--space-5); justify-items: start;">
+            <p style="max-width: var(--measure); line-height: var(--leading-body);">Title, outlet, year, status and link. Published and submitted work only — loaded live from my ORCID record.</p>
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Button" variant="secondary" href="https://orcid.org/0009-0004-2447-8989" target="_blank" rel="noopener" hint-size="260px,44px">ORCID 0009-0004-2447-8989 →</x-import>
+          </div>
+        </section>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isLearning }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="3.0 Learning">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: var(--space-8); align-items: start;">
+          <div style="display: grid; gap: var(--space-6); justify-items: start;">
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.SectionTitle" number="3.0" level="1" hint-size="240px,44px">Learning</x-import>
+            <p style="font-size: var(--text-lead); line-height: 1.4; color: var(--text-primary); max-width: var(--measure-narrow);">I am a continuous and, admittedly, obsessive learner. Beyond degrees and work, I take a course wherever a question needs a better answer than the one I have.</p>
+            <p style="color: var(--text-body); max-width: var(--measure-narrow); line-height: var(--leading-body);">Listed here is what came with a certificate. Most of what I learn does not.</p>
+          </div>
+          <div style="display: grid; gap: var(--space-3); align-content: start; border-top: var(--hairline-strong); padding-top: var(--space-4);">
+            <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">fields</span>
+            <span style="font-size: var(--text-small); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); line-height: 1.7; color: var(--text-body);">compliance · private markets · law · portfolio and risk · trading · strategy · wealth planning · ai and automation</span>
+          </div>
+        </div>
+
+        <div style="margin-top: clamp(48px, 7vw, 96px);">
+          <div style="display: grid; grid-template-columns: minmax(80px, 128px) minmax(0, 1fr); gap: var(--space-6); padding: var(--space-6) 0; border-top: var(--hairline-strong);">
+            <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: 52px; line-height: 0.9; letter-spacing: var(--tracking-display); color: var(--text-primary);">2026</span>
+            <div style="display: grid; gap: var(--space-5);">
+              <div style="display: grid; gap: 6px;"><div style="display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); flex-wrap: wrap;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h3); line-height: var(--leading-heading); color: var(--text-primary);">Claude Power User</span><x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Badge" hint-size="60px,18px">award</x-import></div><div style="display: flex; justify-content: space-between; gap: var(--space-4); flex-wrap: wrap;"><span style="font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-body);">Anthropic</span><span style="font-size: var(--text-small); color: var(--text-secondary);">Multi-agent orchestration automating public-source review</span></div></div>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: minmax(80px, 128px) minmax(0, 1fr); gap: var(--space-6); padding: var(--space-6) 0; border-top: var(--hairline);">
+            <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: 52px; line-height: 0.9; letter-spacing: var(--tracking-display); color: var(--text-primary);">2025</span>
+            <div style="display: grid; gap: var(--space-5);">
+              <div style="display: grid; gap: 6px;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h3); line-height: var(--leading-heading); color: var(--text-primary);">AML and Counter-Terrorist Financing</span><span style="font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-body);">International Compliance Association (ICA)</span></div>
+              <div style="display: grid; gap: 6px;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h3); line-height: var(--leading-heading); color: var(--text-primary);">Private Equity and Venture Capital</span><span style="font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-body);">Università Bocconi</span></div>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: minmax(80px, 128px) minmax(0, 1fr); gap: var(--space-6); padding: var(--space-6) 0; border-top: var(--hairline);">
+            <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: 52px; line-height: 0.9; letter-spacing: var(--tracking-display); color: var(--text-primary);">2024</span>
+            <div style="display: grid; gap: var(--space-5);">
+              <div style="display: grid; gap: 6px;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h3); line-height: var(--leading-heading); color: var(--text-primary);">Financial Planning &amp; Wealth Management</span><span style="font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-body);">CFI</span></div>
+              <div style="display: grid; gap: 6px;"><div style="display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); flex-wrap: wrap;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h3); line-height: var(--leading-heading); color: var(--text-primary);">Equity Trading Simulation, Asset Management Side</span><x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Badge" hint-size="60px,18px">top 10</x-import></div><span style="font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-body);">AmplifyME × Morgan Stanley</span></div>
+              <div style="display: grid; gap: 6px;"><div style="display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); flex-wrap: wrap;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h3); line-height: var(--leading-heading); color: var(--text-primary);">European Business Law</span><x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Badge" hint-size="90px,18px">with honors</x-import></div><span style="font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-body);">University of Lund</span></div>
+            </div>
+          </div>
+          <div style="display: grid; grid-template-columns: minmax(80px, 128px) minmax(0, 1fr); gap: var(--space-6); padding: var(--space-6) 0; border-top: var(--hairline); border-bottom: var(--hairline);">
+            <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: 52px; line-height: 0.9; letter-spacing: var(--tracking-display); color: var(--text-primary);">2023</span>
+            <div style="display: grid; gap: var(--space-5);">
+              <div style="display: grid; gap: 6px;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h3); line-height: var(--leading-heading); color: var(--text-primary);">KYC, FATCA &amp; CRS Regulation</span><span style="font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-body);">M.M. Warburg Bank</span></div>
+              <div style="display: grid; gap: 6px;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h3); line-height: var(--leading-heading); color: var(--text-primary);">Portfolio &amp; Risk Management</span><span style="font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-body);">Université de Genève</span></div>
+              <div style="display: grid; gap: 6px;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h3); line-height: var(--leading-heading); color: var(--text-primary);">Strategic Management</span><span style="font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-body);">Copenhagen Business School</span></div>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: var(--space-7); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--space-6);">
+          <div style="display: grid; gap: var(--space-2);"><span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">tools in daily use</span><span style="font-size: var(--text-small); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); line-height: 1.7; color: var(--text-body);">claude (cowork, code) · hermes · bloomberg · factset · traderfox · sap s/4hana · power bi · relativity · osint · beck-online · salesforce · hubspot · airtable · atlassian · servicenow</span></div>
+          <div style="display: grid; gap: var(--space-2);"><span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">languages</span><span style="font-size: var(--text-small); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); line-height: 1.7; color: var(--text-body);">german (native) · english (business fluent)</span></div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="4.0 About">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: var(--space-8); align-items: start;">
+          <div style="display: grid; gap: var(--space-6); justify-items: start;">
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.SectionTitle" number="4.0" level="1" hint-size="200px,44px">About</x-import>
+            <p style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-display); line-height: var(--leading-display); letter-spacing: var(--tracking-display); color: var(--text-primary); max-width: 18ch; text-wrap: balance;">I started building things early.</p>
+            <div style="display: grid; gap: var(--space-4); max-width: var(--measure); line-height: var(--leading-body); color: var(--text-body);">
+              <p>My first work was creative: music, design, film. From 2016, that turned into companies, then technology infrastructure, then financial services and corporate consulting, and eventually into family governance and academic research.</p>
+              <p>The pattern has been the same each time. I create something. Then I work on how it is perceived. Then on its legal and corporate structure. Then on its systems and automation. Then on its finances and governance. The research is the last step of that sequence: asking how such structures become institutions.</p>
+              <p>Ten years later, at 26, these experiences have developed into one central interest: understanding how organizations, ownership and capital can be structured to endure.</p>
+              <p>I live in Zug, Switzerland.</p>
+            </div>
+            <div style="border-top: var(--hairline); padding-top: var(--space-4); display: grid; gap: 6px;">
+              <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">in four words</span>
+              <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h3); color: var(--text-primary);">Create → Structure → Professionalize → Automate</span>
+              <span style="font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-body);">Make it exist. Make it sound. Make it professional. Make it run on its own.</span>
+            </div>
+          </div>
+          <figure style="margin: 0; justify-self: end; width: 100%; max-width: 400px; display: grid; gap: 10px;">
+            <img src="assets/portrait-bw.jpg" alt="Jonas Hartmann" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block; background: var(--bg-image-placeholder);">
+            <figcaption style="display: flex; justify-content: space-between; font-size: var(--text-caption); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);"><span>jonas hartmann</span><span>zug, 2026</span></figcaption>
+          </figure>
+        </div>
+
+        <section style="margin-top: clamp(64px, 10vw, 128px);">
+          <div style="display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-5); flex-wrap: wrap;">
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.SectionTitle" number="4.1" level="2" hint-size="220px,40px">2016–2026</x-import>
+            <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">selected milestones, not every position</span>
+          </div>
+          <div style="margin-top: var(--space-7); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: var(--space-6);">
+            <div style="display: grid; gap: var(--space-3); align-content: start; border-top: var(--hairline-strong); padding-top: var(--space-4);">
+              <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">01 · 2016–2019</span>
+              <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h2); line-height: 1.05; color: var(--text-primary);">Create</span>
+              <div style="display: grid; font-size: var(--text-small); line-height: 1.5; color: var(--text-body);"><span style="padding: 8px 0; border-top: var(--hairline);">Graphic design and video production</span><span style="padding: 8px 0; border-top: var(--hairline);">Music production, DJing and the Season Records label</span><span style="padding: 8px 0; border-top: var(--hairline);">Brands, media and digital experiences</span></div>
+            </div>
+            <div style="display: grid; gap: var(--space-3); align-content: start; border-top: var(--hairline-strong); padding-top: var(--space-4);">
+              <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">02 · 2017–2023</span>
+              <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h2); line-height: 1.05; color: var(--text-primary);">Structure</span>
+              <div style="display: grid; font-size: var(--text-small); line-height: 1.5; color: var(--text-body);"><span style="padding: 8px 0; border-top: var(--hairline);">Ventures and company formations</span><span style="padding: 8px 0; border-top: var(--hairline);">Managed IT services and web infrastructure</span><span style="padding: 8px 0; border-top: var(--hairline);">Digital products</span></div>
+            </div>
+            <div style="display: grid; gap: var(--space-3); align-content: start; border-top: var(--hairline-strong); padding-top: var(--space-4);">
+              <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">03 · 2020–today</span>
+              <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h2); line-height: 1.05; color: var(--text-primary);">Professionalize</span>
+              <div style="display: grid; font-size: var(--text-small); line-height: 1.5; color: var(--text-body);"><span style="padding: 8px 0; border-top: var(--hairline);">Banks, professional-services firms and a global corporation</span><span style="padding: 8px 0; border-top: var(--hairline);">Transformation, investigations, due diligence and transactions</span><span style="padding: 8px 0; border-top: var(--hairline);">Risk advisory with a focus on investigations and data analytics</span></div>
+            </div>
+            <div style="display: grid; gap: var(--space-3); align-content: start; border-top: var(--hairline-strong); padding-top: var(--space-4);">
+              <span style="font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">04 · 2022–today</span>
+              <span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h2); line-height: 1.05; color: var(--text-primary);">Automate</span>
+              <div style="display: grid; font-size: var(--text-small); line-height: 1.5; color: var(--text-body);"><span style="padding: 8px 0; border-top: var(--hairline);">Digital governance and the Family Manager platform</span><span style="padding: 8px 0; border-top: var(--hairline);">Data analytics and AI</span><span style="padding: 8px 0; border-top: var(--hairline);">Family governance and doctoral research</span></div>
+            </div>
+          </div>
+        </section>
+
+        <div style="margin-top: clamp(64px, 10vw, 128px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: var(--space-4);">
+          <figure style="margin: 0; display: grid; gap: 10px;"><img src="assets/lego-workshop.jpg" alt="Jonas Hartmann building a model during a workshop" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; filter: grayscale(1) contrast(1.06); background: var(--bg-image-placeholder);"><figcaption style="font-size: var(--text-caption); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);"><span title="to be verified" style="border-bottom: 1px dotted var(--ink-500);">workshop, 2026</span></figcaption></figure>
+          <figure style="margin: 0; display: grid; gap: 10px;"><img src="assets/hanseatic-help.jpg" alt="Loading donated goods for Hanseatic Help" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; filter: grayscale(1) contrast(1.06); background: var(--bg-image-placeholder);"><figcaption style="font-size: var(--text-caption); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); color: var(--text-secondary);"><span title="to be verified" style="border-bottom: 1px dotted var(--ink-500);">hanseatic help, hamburg</span></figcaption></figure>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isCv }}" hint-placeholder-val="{{ false }}">
+      <div data-screen-label="5.0 CV" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: var(--space-8); align-items: start;">
+        <div style="display: grid; gap: var(--space-6); justify-items: start;">
+          <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.SectionTitle" number="5.0" level="1" hint-size="320px,44px">Curriculum vitae</x-import>
+          <p style="font-size: var(--text-lead); line-height: 1.4; color: var(--text-primary); max-width: var(--measure-narrow);">Complete record of positions, ventures, education and memberships.</p>
+          <p style="color: var(--text-body); max-width: var(--measure-narrow); line-height: var(--leading-body);">The website maximizes clarity; the CV maximizes completeness. Everything that is not on these pages is in the document.</p>
+          <div style="display: flex; gap: var(--space-3); flex-wrap: wrap;">
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Button" variant="primary" href="assets/jonas-hartmann-cv-2026-09.pdf" target="_blank" rel="noopener" hint-size="200px,44px">Download as PDF ↓</x-import>
+            <x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Button" variant="ghost" href="https://www.linkedin.com/in/hartmann-jonas/" target="_blank" rel="noopener" hint-size="120px,44px">LinkedIn →</x-import>
+          </div>
+        </div>
+        <div style="background: var(--bg-surface-strong); color: var(--ink-900); padding: var(--pad-card); aspect-ratio: 85 / 55; max-width: 420px; width: 100%; justify-self: end; box-sizing: border-box; display: grid; grid-template-rows: auto 1fr auto; gap: var(--space-4);">
+          <div style="display: flex; justify-content: space-between; font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--ink-500);"><span>curriculum vitae</span><span>pdf · 2 pages</span></div>
+          <div style="display: grid; align-content: center; gap: 4px;"><span style="font-family: var(--font-display); font-weight: var(--weight-semibold); font-size: var(--text-h2); line-height: 1; color: var(--ink-900);">Jonas Hartmann</span><span style="font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); font-size: var(--text-small); color: var(--ink-800);">entrepreneur · advisor · investor · researcher</span></div>
+          <div style="display: flex; justify-content: space-between; font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--ink-500);"><span>september 2026</span><span>jonashartmann.org</span></div>
+        </div>
+      </div>
+    </sc-if>
+  </main>
+  <footer style="display: flex; justify-content: space-between; align-items: flex-end; gap: var(--space-5); flex-wrap: wrap; padding-top: var(--space-6); border-top: var(--hairline); font-size: var(--text-meta); letter-spacing: var(--tracking-meta); color: var(--text-secondary);">
+    <span>© 2026 Jonas Hartmann · Zug, Switzerland</span>
+    <span style="display: flex; gap: var(--space-5);"><a href="https://www.linkedin.com/in/hartmann-jonas/" target="_blank" rel="noopener" style="color: inherit;">LinkedIn →</a><a href="https://orcid.org/0009-0004-2447-8989" target="_blank" rel="noopener" style="color: inherit;">ORCID →</a></span>
+    <span style="display: inline-flex; align-items: center; gap: 14px;"><span>{{ counter }}</span><x-import component-from-global-scope="JonasHartmannDesignSystem_a175b0.Mark" size="{{ markSize }}" color="var(--ink-500)" hint-size="12px,11px"></x-import></span>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;hero&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;portrait&quot;,&quot;options&quot;:[&quot;sequence&quot;,&quot;type&quot;,&quot;portrait&quot;],&quot;tsType&quot;:&quot;'sequence' | 'type' | 'portrait'&quot;,&quot;section&quot;:&quot;Home&quot;},&quot;scheme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;columns&quot;,&quot;options&quot;:[&quot;columns&quot;,&quot;band&quot;,&quot;rail&quot;],&quot;tsType&quot;:&quot;'columns' | 'band' | 'rail'&quot;,&quot;section&quot;:&quot;Home&quot;},&quot;world&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;mono&quot;,&quot;options&quot;:[&quot;mono&quot;,&quot;blue&quot;,&quot;red&quot;],&quot;tsType&quot;:&quot;'mono' | 'blue' | 'red'&quot;,&quot;section&quot;:&quot;Accent&quot;}}">
+class Component extends DCLogic {
+  state = { route: 'home' };
+  static ROUTES = ['work', 'research', 'learning', 'about', 'cv'];
+  static NAV = [
+    { id: 'work', number: '1.0', label: 'Work' },
+    { id: 'research', number: '2.0', label: 'Research' },
+    { id: 'learning', number: '3.0', label: 'Learning' },
+    { id: 'about', number: '4.0', label: 'About' },
+    { id: 'cv', number: '5.0', label: 'CV' },
+  ];
+  readRoute() {
+    const h = (window.location.hash || '').replace(/^#\/?/, '').split('?')[0];
+    return Component.ROUTES.includes(h) ? h : 'home';
+  }
+  componentDidMount() {
+    this._onHash = () => { this.setState({ route: this.readRoute() }); window.scrollTo(0, 0); };
+    window.addEventListener('hashchange', this._onHash);
+    this.setState({ route: this.readRoute() });
+  }
+  componentWillUnmount() { window.removeEventListener('hashchange', this._onHash); }
+  jump(id) {
+    return (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      const el = document.getElementById(id);
+      if (!el) return;
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 24 });
+    };
+  }
+  renderVals() {
+    const r = this.state.route;
+    const hero = this.props.hero ?? 'sequence';
+    const scheme = this.props.scheme ?? 'columns';
+    const nav = Component.NAV.find((n) => n.id === r);
+    return {
+      world: this.props.world ?? 'mono',
+      navItems: Component.NAV,
+      navValue: r === 'home' ? '' : r,
+      goRoute: (id) => { window.location.hash = '/' + id; },
+      counter: nav ? `${nav.number} · ${nav.label.toLowerCase()}` : 'start',
+      markSize: 12,
+      isHome: r === 'home', isWork: r === 'work', isResearch: r === 'research', isLearning: r === 'learning', isAbout: r === 'about', isCv: r === 'cv',
+      heroType: hero === 'type', heroPortrait: hero === 'portrait', heroSequence: hero === 'sequence',
+      schemeBand: scheme === 'band', schemeColumns: scheme === 'columns', schemeRail: scheme === 'rail',
+      jumpRoles: this.jump('sec-roles'),
+      jumpAdvisory: this.jump('sec-advisory'), jumpEntrepreneurship: this.jump('sec-entrepreneurship'), jumpInvesting: this.jump('sec-investing'), jumpTechnology: this.jump('sec-technology'),
+      jumpGovernance: this.jump('sec-governance'), jumpOffices: this.jump('sec-offices'), jumpPublications: this.jump('sec-publications'),
+    };
+  }
+}
+</script>
+</body>
+</html>

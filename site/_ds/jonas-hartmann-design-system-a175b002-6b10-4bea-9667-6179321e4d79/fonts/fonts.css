@@ -1,0 +1,8 @@
+/* Outfit — Schrift der persönlichen Marke (geometrische Grotesk, Rodrigo Fuenzalida, OFL) via Fontsource/jsDelivr. Keine Kursive: Auszeichnung läuft über Gewicht (300) und Laufweite.
+   Cormorant bleibt nur für den Kontext der Hartmann-Wortmarke (Erweiterung kursiv) und als optionale Brücke (--font-serif). Self-gehostet: woff2 liegen neben dieser Datei, keine CDN-Abhaengigkeit. */
+@font-face { font-family: "Outfit"; font-style: normal; font-weight: 300; font-display: swap; src: url("./outfit-latin-300-normal.woff2") format("woff2"); }
+@font-face { font-family: "Outfit"; font-style: normal; font-weight: 400; font-display: swap; src: url("./outfit-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Outfit"; font-style: normal; font-weight: 500; font-display: swap; src: url("./outfit-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Outfit"; font-style: normal; font-weight: 600; font-display: swap; src: url("./outfit-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Cormorant"; font-style: italic; font-weight: 400; font-display: swap; src: url("./cormorant-latin-400-italic.woff2") format("woff2"); }
+@font-face { font-family: "Cormorant"; font-style: normal; font-weight: 600; font-display: swap; src: url("./cormorant-latin-600-normal.woff2") format("woff2"); }

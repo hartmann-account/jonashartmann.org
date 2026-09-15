@@ -1,0 +1,13 @@
+/* Bewegung — nur Blenden und Farbwechsel. Nichts springt, nichts skaliert. */
+:root {
+  --dur-fast: 120ms; /* @kind other */
+  --dur-base: 220ms; /* @kind other */
+  --dur-slow: 420ms; /* @kind other */
+  --ease-out: cubic-bezier(0.2, 0.6, 0.2, 1); /* @kind other */
+  --ease-in-out: cubic-bezier(0.45, 0, 0.2, 1); /* @kind other */
+  --transition-color: color var(--dur-base) var(--ease-out), background-color var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out), opacity var(--dur-base) var(--ease-out); /* @kind other */
+  --reveal-offset: 6px; /* @kind spacing */ /* Einblendung: opacity 0→1 plus 6px nach oben, nie mehr */
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-fast: 0ms; /* @kind other */ --dur-base: 0ms; /* @kind other */ --dur-slow: 0ms; /* @kind other */ }
+}

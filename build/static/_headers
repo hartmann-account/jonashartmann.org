@@ -1,0 +1,5 @@
+# Fonts und Bilder aendern sich nur mit neuem Dateinamen.
+/_ds/*
+  Cache-Control: public, max-age=604800
+/assets/*
+  Cache-Control: public, max-age=604800
