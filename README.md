@@ -1,7 +1,7 @@
 # jonashartmann.org
 
 Persönliche Website von Jonas Hartmann. Live unter
-[mein-hartmann.de](https://mein-hartmann.de), ausgeliefert vom Cloudflare-Worker
+[jonashartmann.org](https://jonashartmann.org), ausgeliefert vom Cloudflare-Worker
 `jonashartmann-org`.
 
 ## Aufbau
@@ -10,6 +10,7 @@ Persönliche Website von Jonas Hartmann. Live unter
 canvas/    Quelle: der Export aus Claude Design (Design-Canvas + Design-System)
 build/     Bauschritt: rendert aus canvas/ die statischen Seiten
 site/      Ergebnis: das, was ausgeliefert wird (im Repository, siehe unten)
+Kleidung/  eigenständige Seite, wird unter /kleidung ausgeliefert
 v2/ v1/    frühere Fassungen der Website
 old/       die ursprüngliche statische Seite
 ```
@@ -55,6 +56,13 @@ Beim ersten Lauf lädt der Bauschritt React und Babel einmal nach `build/vendor/
 
 `/` · `/work` · `/research` · `/learning` · `/about` · `/cv`, dazu `404.html`,
 `robots.txt` und `sitemap.xml`.
+
+Unter **`/kleidung`** liegt zusätzlich die eigenständige Seite aus `Kleidung/`.
+Sie gehört nicht zur Navigation und steht nicht in der Sitemap. Der Bauschritt
+kopiert sie nach `site/kleidung/` und setzt dabei ihre Bildpfade absolut — im
+Quelltext stehen sie relativ (`img/xy.jpg`), was nur trägt, solange die URL auf
+einen Schrägstrich endet. So lädt die Seite unter `/kleidung` und `/kleidung/`
+gleichermaßen vollständig.
 
 ## Nachbesserungen am Export
 

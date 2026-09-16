@@ -27,7 +27,7 @@ import { fileURLToPath } from "node:url";
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 const CANVAS = join(root, "canvas");
 const OUT = join(root, "site");
-const SITE_URL = "https://mein-hartmann.de";
+const SITE_URL = "https://jonashartmann.org";
 
 const ROUTES = [
   { slug: "", hash: "#/", file: "index.html",
@@ -252,6 +252,27 @@ for (const dir of await readdir(join(OUT, "_ds"))) {
 }
 await cp(join(CANVAS, "assets"), join(OUT, "assets"), { recursive: true });
 await cp(join(root, "build", "static"), OUT, { recursive: true });
+
+/*
+ * Die eigenstaendige Seite unter Kleidung/ wird unter /kleidung ausgeliefert.
+ * Ihre Bilder stehen als relative Pfade ("img/xy.jpg") im Quelltext; das
+ * traegt nur, solange die URL auf einen Schraegstrich endet. Damit die Seite
+ * auch unter /kleidung ohne Schraegstrich vollstaendig ist, werden die Pfade
+ * beim Kopieren absolut gesetzt. Die Quelle in Kleidung/ bleibt unveraendert.
+ */
+{
+  const src = join(root, "Kleidung");
+  const dst = join(OUT, "kleidung");
+  if (existsSync(src)) {
+    await cp(src, dst, { recursive: true });
+    const file = join(dst, "index.html");
+    const html = await readFile(file, "utf8");
+    const fixed = html.replace(/(src|href)="(img\/[^"]+)"/g, '$1="/kleidung/$2"');
+    await writeFile(file, fixed, "utf8");
+    const n = (fixed.match(/"\/kleidung\/img\//g) ?? []).length;
+    console.log(`  kleidung/         ${n} Bildpfade absolut gesetzt`);
+  }
+}
 
 /* 404: Kopf und Fuss der Startseite uebernehmen, den Inhalt ersetzen. So
    traegt die Fehlerseite dieselbe Anatomie wie der Rest der Website. */
