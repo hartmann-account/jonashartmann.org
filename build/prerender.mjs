@@ -227,7 +227,7 @@ for (const route of ROUTES) {
       title: route.title,
       description: route.description,
       canonical: SITE_URL + (route.slug ? "/" + route.slug : "/"),
-      ogImage: SITE_URL + "/assets/portrait-bw.jpg",
+      ogImage: SITE_URL + "/og.png",
     },
   });
 

@@ -82,6 +82,26 @@ Design-System unter `canvas/_ds/`:
 Geprüft mit deaktiviertem JavaScript bei 320, 390, 768, 1024 und 1440 px: kein
 horizontaler Überlauf, alle Seiten vollständig, Navigation funktioniert.
 
+## Porträt
+
+Das Porträtfoto ist durch einen Platzhalter ersetzt
+(`canvas/assets/portrait-placeholder.svg`). Er hat bewusst keinen eigenen
+Hintergrund — das `<img>` trägt `background: var(--bg-image-placeholder)`, so
+stimmt die Fläche in hellem wie dunklem Erscheinungsbild. Das Foto ist aus
+`canvas/assets/` entfernt und wird nicht mehr ausgeliefert; das Original liegt
+noch unter `canvas/uploads/` (nicht Teil des Deployments) und in den Archiven
+`v1/` und `v2/`. Auch das Vorschaubild fürs Teilen (`og.png`) ist jetzt
+typografisch statt ein Foto.
+
+## Beteiligungen
+
+Der Investing-Abschnitt auf `/work` listet die Early-Stage-Positionen mit Namen
+und Anlageform — ohne Beträge, Stückzahlen oder Bewertungen. Datenbasis ist die
+Notion-Datenbank *ME / Beteiligungen*, abgezogen am 07.08.2026 und abgelegt in
+`v2/src/content/investments.json`. Insolvente Positionen erscheinen nicht.
+Bei Änderungen in Notion: JSON aktualisieren, Block in `canvas/site.dc.html`
+nachziehen, neu bauen.
+
 ## Schriften
 
 Outfit und Cormorant liegen self-gehostet unter `canvas/_ds/*/fonts/`. Der Export
