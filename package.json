@@ -1,10 +1,13 @@
 {
   "name": "jonashartmann-org",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "private": true,
   "type": "module",
+  "engines": { "node": ">=20" },
   "scripts": {
-    "build": "node build/prerender.mjs",
+    "build": "node build/build.mjs",
+    "check": "node build/check.mjs",
+    "check:layout": "node build/check-layout.mjs",
     "preview": "node build/preview.mjs"
   },
   "devDependencies": {

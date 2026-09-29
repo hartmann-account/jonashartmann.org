@@ -1,8 +1,9 @@
 /* Vorschau des gebauten site/-Verzeichnisses unter http://127.0.0.1:4500,
-   mit derselben URL-Aufloesung wie der Worker: /work liefert work.html. */
+   mit derselben URL-Aufloesung wie der Worker: /work liefert work.html,
+   site/_redirects gilt, Unbekanntes bekommt die 404-Seite. */
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { extname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -15,8 +16,23 @@ const MIME = {
   ".svg": "image/svg+xml", ".pdf": "application/pdf",
 };
 
-createServer(async (req, res) => {
+const redirects = new Map();
+const rules = join(OUT, "_redirects");
+if (existsSync(rules)) {
+  for (const line of readFileSync(rules, "utf8").split("\n")) {
+    const [from, to, status] = line.trim().split(/\s+/);
+    if (from && to && !from.startsWith("#")) redirects.set(from, { to, status: Number(status) || 302 });
+  }
+}
+
+export function serve(port = 4500) {
+  return createServer(async (req, res) => {
   const path = decodeURIComponent(req.url.split("?")[0]);
+  const redirect = redirects.get(path);
+  if (redirect) {
+    res.writeHead(redirect.status, { Location: redirect.to });
+    return void res.end();
+  }
   for (const candidate of [path === "/" ? "/index.html" : path, path + ".html", join(path, "index.html")]) {
     const file = join(OUT, candidate);
     if (file.startsWith(OUT) && existsSync(file) && extname(file)) {
@@ -27,4 +43,9 @@ createServer(async (req, res) => {
   const notFound = join(OUT, "404.html");
   res.writeHead(404, { "Content-Type": "text/html; charset=utf-8" });
   res.end(existsSync(notFound) ? await readFile(notFound) : "not found");
-}).listen(4500, "127.0.0.1", () => console.log("preview: http://127.0.0.1:4500"));
+  }).listen(port, "127.0.0.1");
+}
+
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  serve(4500).on("listening", () => console.log("preview: http://127.0.0.1:4500"));
+}

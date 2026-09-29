@@ -1,0 +1,348 @@
+{
+  "positions": [
+    {
+      "id": "alixpartners",
+      "org": "AlixPartners",
+      "role": "Analyst, Risk Advisory",
+      "place": "Zurich",
+      "period": "since 04/2026",
+      "detail": "Investigation at a Tier 1 bank; Claude multi-agent orchestration to automate public-source review, awarded as Claude Power User by Anthropic.",
+      "pages": [
+        "work",
+        "cv"
+      ]
+    },
+    {
+      "id": "seca",
+      "org": "Swiss Private Equity & Corporate Finance Association (SECA)",
+      "role": "Researcher",
+      "place": null,
+      "period": "05/2025–12/2025",
+      "detail": null,
+      "pages": [
+        "research",
+        "cv"
+      ]
+    },
+    {
+      "id": "roche",
+      "org": "Roche / ASPIRE",
+      "role": "Change and training management, three global SAP S/4HANA rollouts (mandate)",
+      "place": "DACH",
+      "period": "2020–2022, 2024–2025",
+      "detail": "10,000+ end users, 180+ sites; GxP-regulated, FMCG and research environments. GenAI-driven training automation; hyper-care coordination across 100+ institutional units.",
+      "pages": [
+        "work",
+        "cv"
+      ]
+    }
+  ],
+  "internships": [
+    {
+      "org": "Scipio Family Office",
+      "role": "Legal and tax structuring",
+      "place": "Zug",
+      "period": "01/2026–03/2026",
+      "detail": "Multi-jurisdictional holding structure (CH/LI/LU); CHF 80m cross-border property acquisition; family office establishment."
+    },
+    {
+      "org": "TIE Advisory",
+      "role": "Venture capital",
+      "place": "St. Gallen",
+      "period": "10/2025–12/2025",
+      "detail": "Legal inception of Swiss Champions Fund; international roundtables with family-office professionals and funds."
+    },
+    {
+      "org": "PwC",
+      "role": "Audit, insurance assurance",
+      "place": "Hamburg",
+      "period": "12/2023–02/2024",
+      "detail": "Audits of German insurance companies, including CSRD reporting."
+    },
+    {
+      "org": "M.M. Warburg",
+      "role": "Transaction services",
+      "place": "Hamburg",
+      "period": "07/2023–11/2023",
+      "detail": "Core-banking migration (OBS to Atruvia); KYC/CDD review for UHNWI clients; withholding-tax refund claims."
+    },
+    {
+      "org": "KPMG",
+      "role": "Global deal advisory",
+      "place": "Munich",
+      "period": "02/2023–07/2023",
+      "detail": "AI-infused Power App to optimize the M&A advisory process."
+    },
+    {
+      "org": "LIQID",
+      "role": "Technology management",
+      "place": "Berlin",
+      "period": "12/2022–02/2023",
+      "detail": "Optimization of the KYC input process."
+    }
+  ],
+  "boards": [
+    {
+      "org": "Swiss Champions Fund",
+      "role": "Advisory board",
+      "period": "since 06/2026",
+      "detail": "CHF 100m growth venture capital fund."
+    },
+    {
+      "org": "Vereinigung der Familie Hartmann",
+      "lang": "de",
+      "role": "Chairman of the Board",
+      "period": "since 01/2026",
+      "detail": null
+    },
+    {
+      "org": "HWH Capital",
+      "role": "Advisory board",
+      "period": "since 11/2025",
+      "detail": "Systematic commodities hedge fund."
+    },
+    {
+      "org": "Hartmann Family Office",
+      "role": "Member of the Board",
+      "period": null,
+      "detail": null
+    }
+  ],
+  "ventures": [
+    {
+      "name": "Managed IT services",
+      "description": null
+    },
+    {
+      "name": "Web hosting and reselling",
+      "description": "Hosting and domain infrastructure"
+    },
+    {
+      "name": "Brand and marketing",
+      "description": "Advisory for early-stage companies"
+    },
+    {
+      "name": "Season Records",
+      "description": "Recording label"
+    },
+    {
+      "name": "Earlier formations",
+      "description": "Company formations 2016–2020"
+    }
+  ],
+  "portfolio": [
+    {
+      "instrument": "Equity via SPV",
+      "companies": [
+        {
+          "name": "Attensys",
+          "url": "https://www.attensys.io"
+        },
+        {
+          "name": "BigRep",
+          "url": "https://bigrep.com"
+        },
+        {
+          "name": "Companisto",
+          "url": "https://www.companisto.com"
+        },
+        {
+          "name": "Custom Surgical",
+          "url": "https://customsurgical.co"
+        },
+        {
+          "name": "DirectCharge",
+          "url": "https://directcharge.de/"
+        },
+        {
+          "name": "fabel",
+          "url": "https://fabel.care"
+        },
+        {
+          "name": "IDloop",
+          "url": "https://www.idloop.com"
+        },
+        {
+          "name": "Innok Robotics",
+          "url": "https://www.innok-robotics.de"
+        },
+        {
+          "name": "nucao",
+          "url": "https://www.the-nu-company.com/"
+        },
+        {
+          "name": "Scannery",
+          "url": "https://scannery.de"
+        }
+      ]
+    },
+    {
+      "instrument": "Shares",
+      "companies": [
+        {
+          "name": "Idana",
+          "url": "https://idana.com/"
+        },
+        {
+          "name": "Next2Sun",
+          "url": "https://next2sun.com/"
+        },
+        {
+          "name": "WeGrow",
+          "url": "https://wegrow.de/"
+        }
+      ]
+    },
+    {
+      "instrument": "Subordinated loans",
+      "companies": [
+        {
+          "name": "Feelbelt",
+          "url": "https://feelbelt.com/"
+        },
+        {
+          "name": "koawach",
+          "url": "https://www.koawach.de/"
+        }
+      ]
+    },
+    {
+      "instrument": "Bonds",
+      "companies": [
+        {
+          "name": "JES.GREEN",
+          "url": "https://jes-group.com/"
+        },
+        {
+          "name": "LEEF",
+          "url": "https://leef.bio/"
+        },
+        {
+          "name": "MOWEA",
+          "url": "https://moveair.energy/"
+        },
+        {
+          "name": "reconcept Windpark Hilpensberg",
+          "url": "https://www.reconcept.de/"
+        }
+      ]
+    }
+  ],
+  "education": [
+    {
+      "id": "doctoral",
+      "title": "Doctoral research",
+      "lines": [],
+      "period": "since 2026",
+      "detail": null
+    },
+    {
+      "title": "M.Sc. Finance, Family Office Management",
+      "lines": [
+        "Allensbach Hochschule"
+      ],
+      "period": "2025–2026",
+      "detail": "Thesis: Determinants of the Optimal Asset Threshold for Single Family Offices (meta-analysis)"
+    },
+    {
+      "title": "International track",
+      "lines": [
+        "Asia Pacific University, Malaysia · Digital Transformation",
+        "Pace University, New York · Behavioural Economics and Finance"
+      ],
+      "period": "2024–2025",
+      "detail": null
+    },
+    {
+      "title": "B.A. Economics & Banking",
+      "lines": [
+        "Allensbach Hochschule"
+      ],
+      "period": "2023–2025",
+      "detail": "Thesis: The Role of Basel III and National Golden Power Regimes in Cross-Border Bank Mergers in Europe"
+    }
+  ],
+  "certificates": [
+    {
+      "title": "Claude Power User",
+      "issuer": "Anthropic",
+      "distinction": "Award",
+      "year": "2026",
+      "detail": "Multi-agent orchestration automating public-source review."
+    },
+    {
+      "title": "AML and Counter-Terrorist Financing",
+      "issuer": "International Compliance Association (ICA)",
+      "year": "2025"
+    },
+    {
+      "title": "Private Equity and Venture Capital",
+      "issuer": "Università Bocconi",
+      "year": "2025"
+    },
+    {
+      "title": "Financial Planning & Wealth Management",
+      "issuer": "CFI",
+      "year": "2024"
+    },
+    {
+      "title": "Equity Trading Simulation, Asset Management Side",
+      "issuer": "AmplifyME × Morgan Stanley",
+      "distinction": "Top 10",
+      "year": "2024"
+    },
+    {
+      "title": "European Business Law",
+      "issuer": "University of Lund",
+      "distinction": "With honors",
+      "year": "2024"
+    },
+    {
+      "title": "KYC, FATCA & CRS Regulation",
+      "issuer": "M.M. Warburg Bank",
+      "year": "2023"
+    },
+    {
+      "title": "Portfolio & Risk Management",
+      "issuer": "Université de Genève",
+      "year": "2023"
+    },
+    {
+      "title": "Strategic Management",
+      "issuer": "Copenhagen Business School",
+      "year": "2023"
+    }
+  ],
+  "languages": "German (native), English (business fluent)",
+  "tools": "Claude (Cowork, Code), Hermes, Bloomberg, FactSet, TraderFox, SAP S/4HANA, Power BI, Relativity, OSINT, beck-online, Salesforce, HubSpot, Airtable, Atlassian, ServiceNow",
+  "phases": [
+    {
+      "title": "Create",
+      "motto": "Make it exist.",
+      "period": "2016–2019",
+      "text": "My professional path started on the creative side: graphic design, video production, music production and DJing. Creating brands, media and digital experiences gradually evolved into building products and businesses of my own.",
+      "milestones": "Graphic design and video production; music production, DJing and the Season Records label; brands, media and digital experiences."
+    },
+    {
+      "title": "Structure",
+      "motto": "Make it sound.",
+      "period": "2017–2023",
+      "text": "Creating became building. I began building companies, digital products and technology infrastructure — moving from creating individual outputs to creating systems around them.",
+      "milestones": "Ventures and company formations; managed IT services and web infrastructure; digital products."
+    },
+    {
+      "title": "Professionalize",
+      "motto": "Make it professional.",
+      "period": "2020–today",
+      "text": "Building became professionalizing. Working within banks, professional-services firms and global corporations added another perspective: how established institutions manage complexity, risk, transformation and scale.",
+      "milestones": "Banks, professional-services firms and a global corporation; transformation, investigations, due diligence and transactions; risk advisory with a focus on investigations and data analytics."
+    },
+    {
+      "title": "Automate",
+      "motto": "Make it run on its own.",
+      "period": "2022–today",
+      "text": "From projects to systems. My interest shifted from individual projects toward how technology, governance and data can make organizations less dependent on individual people and more capable of enduring.",
+      "milestones": "Digital governance and the Family Manager platform; data analytics and AI; family governance and doctoral research."
+    }
+  ]
+}

@@ -7,107 +7,91 @@ Persönliche Website von Jonas Hartmann. Live unter
 ## Aufbau
 
 ```
-canvas/    Quelle: der Export aus Claude Design (Design-Canvas + Design-System)
-build/     Bauschritt: rendert aus canvas/ die statischen Seiten
+src/       Quelle: Inhalte, Stylesheet, Schriften, Bilder, Skripte
+build/     Bauschritt, Vorschau und Prüfungen
 site/      Ergebnis: das, was ausgeliefert wird (im Repository, siehe unten)
 Kleidung/  eigenständige Seite, wird unter /kleidung ausgeliefert
+backup1/   die Website vom 29.09.2026 vor der Überarbeitung (Claude-Design-Export)
 v2/ v1/    frühere Fassungen der Website
 old/       die ursprüngliche statische Seite
 ```
 
-## Warum ein Bauschritt
+## Gestaltung
 
-Der Export aus Claude Design ist ein **Canvas-Dokument**: ein einziges HTML mit
-eigenem Runtime (`support.js`), das im Browser React und `@babel/standalone`
-nachlädt, die Vorlagen zur Laufzeit kompiliert und per Hash-Routing (`#/work`)
-zwischen den Screens umschaltet.
+Ein Briefkopf, keine Broschüre: Name oben links, Navigation oben rechts, im Fuss
+die Kanäle. Dazwischen eine ruhige Lesespalte mit kurzen Zwischentiteln links
+daneben. Die Regeln:
 
-Für eine Vorschau ist das genau richtig. Für eine öffentliche Website nicht:
+- **Eine Schrift, zwei Schnitte, fünf Grössen.** Outfit 400 und 500;
+  14 / 17 / 18–20 / 24 / 36–56 px. Keine Kursive, keine Versalien, keine Monospace.
+- **Farben nur aus dem Design-System.** Papier, drei Tinten, Nebel für Haarlinien,
+  Blau nur für Hover und Fokus.
+- **Unterstrichen heisst Link.** Nichts anderes ist unterstrichen. Keine Pfeile:
+  Outfit hat das Zeichen nicht, es käme aus einer Ersatzschrift.
+- **Drei Listenformen tragen alles:** Eintragszeile (alles mit Rolle oder Datum),
+  Paarliste (Name und eine Zeile), Publikationszeile.
+- **Jede Angabe hat einen Ort.** Die Stationen stehen einmal auf Work und
+  gekürzt im CV, beide aus derselben Datei. Das Muster Create → Structure →
+  Professionalize → Automate steht nur auf About.
+- **Nur Bestätigtes.** Was im Briefing als unbestätigt markiert war, erscheint
+  nicht, oder nur mit dem bestätigten Teil (Liste unten).
 
-| | Canvas direkt | statisch vorgerendert |
-|---|---|---|
-| Laufzeit vor dem ersten Pixel | ~3,3 MB (Babel 3,1 MB + React) | keine |
-| URLs | `#/work` | `/work` |
-| Ohne JavaScript | leere Seite | vollständig |
-| Suchmaschinen | sehen erst nach Kompilierung etwas | sehen fertiges HTML |
+## Inhalte
 
-`build/prerender.mjs` öffnet deshalb jede Route einmal im Browser, lässt sie
-fertig rendern und schreibt das Ergebnis als eigenständige HTML-Datei. Dabei
-werden die Tab-Buttons (die ohne Runtime tot wären) zu echten Links, Hash-Routen
-zu Pfaden, und sämtliche `<script>` fliegen raus. **Die ausgelieferte Seite
-enthält keine einzige Zeile JavaScript.**
+| Datei | Inhalt |
+|---|---|
+| `src/data/record.json` | Stationen, Praktika, Gremien, Unternehmungen, Beteiligungen, Ausbildung, Zertifikate, Sprachen, die vier Phasen. Eine Quelle für Work, CV, Research und About |
+| `src/data/orcid.json` | letzter guter Stand der ORCID-Werke (wird beim Bauen aktualisiert) |
+| `build/pages/*.mjs` | die Seiten mit ihren Texten |
+
+**Beteiligungen:** Namen und Anlageform, keine Beträge, keine Bewertungen.
+Datenbasis ist die Notion-Datenbank *ME / Beteiligungen*, Stand 07.08.2026;
+insolvente Positionen erscheinen nicht.
+
+**Publikationen:** Beim Bauen wird das ORCID-Profil abgefragt und die Liste fest
+ins HTML geschrieben — sie steht also auch ohne JavaScript da. Auf `/research`
+gleicht ein kleines Skript die Liste im Browser live mit ORCID ab und ersetzt
+sie nur, wenn sich etwas geändert hat. Build und Browser nutzen dasselbe Modul
+(`src/js/orcid-normalize.js`).
+
+**Nicht angezeigt, bis bestätigt:** ~350 Kunden (Managed IT services); die
+Unternehmungen finivia, Virtual App Container und Feelbelt (Feelbelt steht im
+Portfolio); „15+ Unternehmen“ und „seit 2012“; Thema und Hochschule der
+Promotion; Law studies; der Absatz „Family offices“; Jahr und Ort der
+Fotounterschriften. Projekt-Screenshots gibt es noch keine. Das Porträt ist
+auf About eine ruhige Fläche (erst ab 1024 px), auf der Startseite gibt es
+keines.
 
 ## Bauen
 
 ```bash
-npm install
-npm run build     # canvas/ → site/
-npm run preview   # http://127.0.0.1:4500, mit denselben URLs wie live
+npm run build          # src/ → site/, danach die statischen Prüfungen
+npm run preview        # http://127.0.0.1:4500, mit denselben URLs wie live
+npm install            # einmalig, nur für die Browser-Prüfung
+npm run check:layout   # Überlauf, Navigation, Überschriften, Kontrast, Weiterleitungen
 ```
 
-Der Bauschritt braucht einen Browser (Playwright) und läuft deshalb lokal, nicht
-auf dem Build-Runner. Darum liegt `site/` im Repository und Cloudflare liefert es
-unverändert aus — in `wrangler.toml` steht bewusst kein Build-Befehl.
+Der Bauschritt braucht nur Node 20+ und keine Abhängigkeiten. `site/` liegt im
+Repository und Cloudflare liefert es unverändert aus — in `wrangler.toml` steht
+kein Build-Befehl. Nach Änderungen also: bauen, prüfen, `site/` committen.
 
-Beim ersten Lauf lädt der Bauschritt React und Babel einmal nach `build/vendor/`
-(nicht im Repository); danach läuft er ohne Netz.
+`build/check.mjs` läuft nach jedem Build und hält fest, was die Seite ausmacht:
+keine Platzhalter, keine unbestätigten Angaben, keine Beträge im Portfolio,
+nur die Farben und die fünf Schriftgrössen des Systems, keine neuen
+Kontaktkanäle, keine toten internen Links.
 
 ## Seiten
 
-`/` · `/work` · `/research` · `/learning` · `/about` · `/cv`, dazu `404.html`,
-`robots.txt` und `sitemap.xml`.
+`/` · `/work` · `/research` · `/about` · `/cv`, dazu `404.html`, `robots.txt`
+und `sitemap.xml`. `/learning` gibt es nicht mehr: Zertifikate, Sprachen und
+Werkzeuge stehen jetzt im CV, die alte Adresse leitet per `site/_redirects`
+dauerhaft (301) auf `/cv#certificates` weiter.
 
-Unter **`/kleidung`** liegt zusätzlich die eigenständige Seite aus `Kleidung/`.
-Sie gehört nicht zur Navigation und steht nicht in der Sitemap. Der Bauschritt
-kopiert sie nach `site/kleidung/` und setzt dabei ihre Bildpfade absolut — im
-Quelltext stehen sie relativ (`img/xy.jpg`), was nur trägt, solange die URL auf
-einen Schrägstrich endet. So lädt die Seite unter `/kleidung` und `/kleidung/`
-gleichermaßen vollständig.
-
-## Nachbesserungen am Export
-
-`build/static/site.css` enthält die wenigen Korrekturen, die der Export für den
-Live-Betrieb braucht — bewusst klein gehalten, alles Gestalterische bleibt im
-Design-System unter `canvas/_ds/`:
-
-- Die **Tab-Leiste** steht im Export in einer festen Zeile und lief auf schmalen
-  Schirmen über den Rand. Sie darf jetzt umbrechen.
-- Die **Kachelraster** stehen fest auf drei bzw. vier Spalten ohne Media Query;
-  bei 320 px blieben davon 80 px je Spalte und der Inhalt lief aus den Kacheln.
-  Der Bauschritt markiert solche Raster (`cols-3`, `cols-4`), darunter brechen
-  sie auf zwei bzw. eine Spalte um.
-- Einzelne Zeilen im Inhalt standen auf `white-space: nowrap` und zogen die
-  Seite auf; im Inhaltsbereich dürfen sie umbrechen, die Navigation nicht.
-
-Geprüft mit deaktiviertem JavaScript bei 320, 390, 768, 1024 und 1440 px: kein
-horizontaler Überlauf, alle Seiten vollständig, Navigation funktioniert.
-
-## Porträt
-
-Das Porträtfoto ist durch einen Platzhalter ersetzt
-(`canvas/assets/portrait-placeholder.svg`). Er hat bewusst keinen eigenen
-Hintergrund — das `<img>` trägt `background: var(--bg-image-placeholder)`, so
-stimmt die Fläche in hellem wie dunklem Erscheinungsbild. Das Foto ist aus
-`canvas/assets/` entfernt und wird nicht mehr ausgeliefert; das Original liegt
-noch unter `canvas/uploads/` (nicht Teil des Deployments) und in den Archiven
-`v1/` und `v2/`. Auch das Vorschaubild fürs Teilen (`og.png`) ist jetzt
-typografisch statt ein Foto.
-
-## Beteiligungen
-
-Der Investing-Abschnitt auf `/work` listet die Early-Stage-Positionen mit Namen
-und Anlageform — ohne Beträge, Stückzahlen oder Bewertungen. Datenbasis ist die
-Notion-Datenbank *ME / Beteiligungen*, abgezogen am 07.08.2026 und abgelegt in
-`v2/src/content/investments.json`. Insolvente Positionen erscheinen nicht.
-Bei Änderungen in Notion: JSON aktualisieren, Block in `canvas/site.dc.html`
-nachziehen, neu bauen.
-
-## Schriften
-
-Outfit und Cormorant liegen self-gehostet unter `canvas/_ds/*/fonts/`. Der Export
-lud sie von jsDelivr; für die Live-Seite ist die CDN-Abhängigkeit entfernt.
+Unter **`/kleidung`** liegt die eigenständige Seite aus `Kleidung/`. Sie gehört
+nicht zur Navigation und steht nicht in der Sitemap. Der Bauschritt kopiert sie
+nach `site/kleidung/` und setzt dabei ihre Bildpfade absolut, damit sie unter
+`/kleidung` und `/kleidung/` gleichermassen vollständig lädt.
 
 ## Deploy
 
-Cloudflare baut von `main` und liefert `site/` als statische Assets aus. Nach
-Änderungen am Canvas also: `npm run build`, Ergebnis prüfen, `site/` committen.
+Cloudflare baut von `main` und liefert `site/` als statische Assets aus.
