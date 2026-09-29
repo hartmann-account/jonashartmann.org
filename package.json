@@ -8,6 +8,7 @@
     "build": "node build/build.mjs",
     "check": "node build/check.mjs",
     "check:layout": "node build/check-layout.mjs",
+    "og": "node build/og.mjs",
     "preview": "node build/preview.mjs"
   },
   "devDependencies": {
