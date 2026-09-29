@@ -38,10 +38,15 @@ export const phaseRow = (x) => ({
   title: x.title,
   meta: x.period,
   roles: [x.motto],
-  details: [x.text, x.milestones],
+  texts: [x.text],
+  details: [x.milestones],
 });
 
-export const venturePairs = (record) => record.ventures.map((v) => ({ term: v.name, desc: v.description }));
+/* Zeilen ohne Beschreibung ans Ende, damit die Tabelle mit vollen Zeilen beginnt. */
+export const venturePairs = (record) =>
+  [...record.ventures]
+    .sort((a, b) => !a.description - !b.description)
+    .map((v) => ({ term: v.name, desc: v.description }));
 
 export const portfolioPairs = (record) => record.portfolio.map((g) => ({ term: g.instrument, names: g.companies }));
 

@@ -8,6 +8,9 @@ import { html, raw } from "./html.mjs";
 export const SITE_URL = "https://jonashartmann.org";
 export const LINKEDIN = "https://www.linkedin.com/in/hartmann-jonas/";
 export const CV_PDF = "/assets/jonas-hartmann-cv-2026-09.pdf";
+export const HOME_TITLE = "Jonas Hartmann — Advisor, entrepreneur, investor, researcher";
+export const HOME_DESCRIPTION = "Building structures for businesses, families and capital. A decade across entrepreneurship, corporate advisory, technology and family governance.";
+const OG_ALT = "Jonas Hartmann — Advisor, entrepreneur, investor, researcher. Building structures for businesses, families and capital.";
 
 const NAV = [
   { href: "/work", label: "Work" },
@@ -20,7 +23,7 @@ export function page({ path, title, description, body, head = "", noindex = fals
   // Auf der 404-Seite gibt es weder Canonical noch eine aktuelle Seite; ihre
   // Open-Graph-Angaben zeigen auf die Startseite.
   const url = SITE_URL + (noindex ? "/" : path);
-  const ogTitle = noindex ? "Jonas Hartmann — Advisor, entrepreneur, investor, researcher" : title;
+  const ogTitle = noindex ? HOME_TITLE : title;
   const current = (href) => (!noindex && href === path ? raw(' aria-current="page"') : "");
   return `<!doctype html>\n` + html`<html lang="en">
 <head>
@@ -34,11 +37,17 @@ ${noindex ? raw('<meta name="robots" content="noindex">') : html`<link rel="cano
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Jonas Hartmann">
 <meta property="og:title" content="${ogTitle}">
-<meta property="og:description" content="${noindex ? "Building structures for businesses, families and capital." : description}">
+<meta property="og:description" content="${noindex ? HOME_DESCRIPTION : description}">
 <meta property="og:url" content="${url}">
 <meta property="og:image" content="${SITE_URL}/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:alt" content="${OG_ALT}">
+<meta name="twitter:image:alt" content="${OG_ALT}">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/fonts/outfit-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/outfit-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/site.css">

@@ -3,3 +3,6 @@
   Cache-Control: public, max-age=604800
 /assets/*
   Cache-Control: public, max-age=604800
+# Der Lebenslauf enthaelt Kontaktdaten: herunterladbar, aber nicht im Suchindex.
+/assets/jonas-hartmann-cv-2026-09.pdf
+  X-Robots-Tag: noindex

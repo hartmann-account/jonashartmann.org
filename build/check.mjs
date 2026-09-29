@@ -97,13 +97,27 @@ const files = new Set((await readdir(OUT, { recursive: true })).map((f) => "/" +
 const ids = Object.fromEntries(Object.entries(html).map(([f, s]) => [f, new Set([...s.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]))]));
 const fileFor = (path) => (path === "/" ? "index.html" : path.slice(1) + ".html");
 for (const [f, s] of Object.entries(html)) {
-  for (const [, href] of s.matchAll(/href="([^"]+)"/g)) {
+  for (const [, href] of s.matchAll(/(?:href|src)="([^"]+)"/g)) {
     if (/^(https?:)?\/\//.test(href)) continue;
     const [path, hash] = href.split("#");
     const target = path === "" ? f : fileFor(path);
     const exists = path === "" || files.has(path) || (html[target] !== undefined);
     check(exists, `${f}: Link ins Leere ${href}`);
     if (hash && html[target]) check(ids[target].has(hash), `${f}: Anker fehlt ${href}`);
+  }
+}
+
+// 14. Externe Links nur zu bekannten Zielen: Identitaet, Portfolio, ORCID-Werke, Musik.
+{
+  const record = JSON.parse(await readFile(join(OUT, "..", "src", "data", "record.json"), "utf8"));
+  const host = (u) => new URL(u).host;
+  const allowed = new Set(["www.linkedin.com", "orcid.org", "jonashartmann.org", "soma-suru.de",
+    ...record.portfolio.flatMap((g) => g.companies.map((c) => host(c.url))),
+    ...orcid.works.filter((w) => w.href).map((w) => host(w.href))]);
+  for (const [f, s] of Object.entries(html)) {
+    for (const [, u] of s.matchAll(/(?:href|src|content)="(https?:\/\/[^"]+)"/g)) {
+      check(allowed.has(host(u)), `${f}: externer Link zu ${host(u)}`);
+    }
   }
 }
 

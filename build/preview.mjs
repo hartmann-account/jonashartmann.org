@@ -1,10 +1,11 @@
 /* Vorschau des gebauten site/-Verzeichnisses unter http://127.0.0.1:4500,
-   mit derselben URL-Aufloesung wie der Worker: /work liefert work.html,
-   site/_redirects gilt, Unbekanntes bekommt die 404-Seite. */
+   aehnlich wie der Worker: /work liefert work.html, site/_redirects gilt,
+   Unbekanntes bekommt die 404-Seite. Die Schraegstrich-Weiterleitungen des
+   Workers (/work/ und /work.html -> /work) bildet sie nicht nach. */
 import { createServer } from "node:http";
 import { readFile } from "node:fs/promises";
 import { existsSync, readFileSync } from "node:fs";
-import { extname, join, resolve } from "node:path";
+import { extname, join, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const OUT = resolve(fileURLToPath(new URL("../site", import.meta.url)));
@@ -27,7 +28,9 @@ if (existsSync(rules)) {
 
 export function serve(port = 4500) {
   return createServer(async (req, res) => {
-  const path = decodeURIComponent(req.url.split("?")[0]);
+  let path;
+  try { path = decodeURIComponent(req.url.split("?")[0]); }
+  catch { res.writeHead(400); return void res.end("bad request"); }
   const redirect = redirects.get(path);
   if (redirect) {
     res.writeHead(redirect.status, { Location: redirect.to });
@@ -35,7 +38,7 @@ export function serve(port = 4500) {
   }
   for (const candidate of [path === "/" ? "/index.html" : path, path + ".html", join(path, "index.html")]) {
     const file = join(OUT, candidate);
-    if (file.startsWith(OUT) && existsSync(file) && extname(file)) {
+    if ((file === OUT || file.startsWith(OUT + sep)) && existsSync(file) && extname(file)) {
       res.writeHead(200, { "Content-Type": MIME[extname(file)] ?? "application/octet-stream" });
       return void res.end(await readFile(file));
     }

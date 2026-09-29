@@ -24,7 +24,7 @@ export default function cv({ record }) {
         title: "Curriculum vitae",
         lead: "Complete record of positions, ventures, education and memberships.",
         paragraphs: ["The website maximizes clarity; the CV maximizes completeness. Everything that is not on these pages is in the document."],
-        actions: html`<a class="button" href="${CV_PDF}" download>Download CV</a><span class="actions__meta">PDF · 2 pages · September 2026</span><a href="${LINKEDIN}">LinkedIn profile</a>`,
+        actions: html`<span class="actions__primary"><a class="button" href="${CV_PDF}" download>Download CV</a><span class="actions__meta">PDF · 2 pages · September 2026</span></span><a href="${LINKEDIN}">LinkedIn profile</a>`,
         toc: SECTIONS,
       }),
       section({

@@ -69,11 +69,15 @@ const esc = (s) =>
 export const pubMeta = (w) =>
   [w.type, w.outlet, w.year, w.lang === "de" ? "In German" : ""].filter(Boolean).join(" · ");
 
+/* Schluessel fuer den Live-Abgleich: aendert sich Link, Titel, Typ, Ort oder
+   Jahr, ersetzt das Skript die Liste. */
+export const pubKey = (w) => [w.href ?? "", w.title, pubMeta(w)].join("\u241f");
+
 export function pubItemHTML(w) {
   const lang = w.lang === "de" ? ' lang="de"' : "";
   const title = w.href ? `<a href="${esc(w.href)}">${esc(w.title)}</a>` : `<span>${esc(w.title)}</span>`;
   return (
-    `<li class="pub" data-key="${esc(w.href ?? w.title)}"><p class="pub__title"${lang}>${title}</p>` +
+    `<li class="pub" data-key="${esc(pubKey(w))}"><p class="pub__title"${lang}>${title}</p>` +
     `<p class="pub__meta">${esc(pubMeta(w))}</p></li>`
   );
 }

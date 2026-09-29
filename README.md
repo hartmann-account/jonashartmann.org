@@ -66,10 +66,14 @@ keines.
 
 ```bash
 npm run build          # src/ → site/, danach die statischen Prüfungen
-npm run preview        # http://127.0.0.1:4500, mit denselben URLs wie live
-npm install            # einmalig, nur für die Browser-Prüfung
+npm run preview        # http://127.0.0.1:4500 (URLs wie live, ohne dessen /x/ → /x)
+npm install && npx playwright install chromium   # einmalig, nur für die Browser-Schritte
 npm run check:layout   # Überlauf, Navigation, Überschriften, Kontrast, Weiterleitungen
+npm run og             # Vorschaubild und Apple-Icon neu rendern (src/static/)
 ```
+
+Die Browser-Schritte nehmen Playwrights Chromium; `CHROMIUM_PATH` kann auf
+ein anderes zeigen.
 
 Der Bauschritt braucht nur Node 20+ und keine Abhängigkeiten. `site/` liegt im
 Repository und Cloudflare liefert es unverändert aus — in `wrangler.toml` steht
@@ -85,7 +89,13 @@ Kontaktkanäle, keine toten internen Links.
 `/` · `/work` · `/research` · `/about` · `/cv`, dazu `404.html`, `robots.txt`
 und `sitemap.xml`. `/learning` gibt es nicht mehr: Zertifikate, Sprachen und
 Werkzeuge stehen jetzt im CV, die alte Adresse leitet per `site/_redirects`
-dauerhaft (301) auf `/cv#certificates` weiter.
+dauerhaft (301) auf `/cv#certificates` weiter. Ebenso leiten die Adressen der
+früheren Fassungen, die noch in Suchmaschinen stehen (`/ueber-mich`,
+`/kontakt`, `/beitraege`, `/work/advisory` usw.), auf ihre heutige Entsprechung.
+
+Der Lebenslauf als PDF enthält Kontaktdaten und trägt deshalb
+`X-Robots-Tag: noindex` (`site/_headers`): herunterladbar, aber nicht im
+Suchindex.
 
 Unter **`/kleidung`** liegt die eigenständige Seite aus `Kleidung/`. Sie gehört
 nicht zur Navigation und steht nicht in der Sitemap. Der Bauschritt kopiert sie

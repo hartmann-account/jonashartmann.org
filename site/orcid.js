@@ -4,7 +4,7 @@
  * nur, wenn sich etwas geaendert hat. Kein Ladezustand, kein Flackern; faellt
  * ORCID aus, bleibt die gebaute Liste einfach stehen.
  */
-import { WORKS_URL, normalizeWorks, pubItemHTML } from "./orcid-normalize.js";
+import { WORKS_URL, normalizeWorks, pubItemHTML, pubKey } from "./orcid-normalize.js";
 
 const list = document.querySelector("ol.pubs[data-orcid]");
 if (list) {
@@ -16,7 +16,7 @@ if (list) {
       const works = normalizeWorks(json);
       if (!works.length) return; // eine leere Antwort loescht nie die Liste
       const now = [...list.children].map((li) => li.dataset.key).join("\n");
-      const next = works.map((w) => w.href ?? w.title).join("\n");
+      const next = works.map(pubKey).join("\n");
       if (now !== next) list.innerHTML = works.map(pubItemHTML).join("");
     })
     .catch(() => {})

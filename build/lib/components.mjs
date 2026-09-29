@@ -55,7 +55,7 @@ export function entries(rows, { level = "h3", compact = false } = {}) {
 ${rows.map(
   (r) => html`      <li class="entry">
         <${tag} class="entry__title">${r.href ? html`<a href="${r.href}">${r.title}</a>` : text(r.title, r.lang)}</${tag}>
-${r.meta ? html`        <p class="entry__meta">${r.meta}</p>\n` : ""}${(r.roles ?? []).map((x) => html`        <p class="entry__role">${x}</p>\n`)}${(r.details ?? []).map((x) => html`        <p class="entry__detail">${x}</p>\n`)}      </li>
+${r.meta ? html`        <p class="entry__meta">${r.meta}</p>\n` : ""}${(r.roles ?? []).map((x) => html`        <p class="entry__role">${x}</p>\n`)}${(r.texts ?? []).map((x) => html`        <p class="entry__text">${x}</p>\n`)}${(r.details ?? []).map((x) => html`        <p class="entry__detail">${x}</p>\n`)}      </li>
 `
 )}    </ol>
 `;
@@ -68,7 +68,7 @@ ${rows.map(
   (r) => html`      <li class="pairs__row">
         <p class="pairs__term">${r.term}</p>
 ${r.names
-  ? html`        <div class="pairs__desc"><ul class="names">${r.names.map((n) => html`<li><a href="${n.url}" rel="noopener">${n.name}</a></li>`)}</ul></div>\n`
+  ? html`        <div class="pairs__desc"><ul class="names">${r.names.map((n) => html`<li><a href="${n.url}" rel="noopener">${n.name.replace(/ /g, "\u00a0")}</a></li>`)}</ul></div>\n`
   : r.desc
     ? html`        <p class="pairs__desc">${r.desc}</p>\n`
     : ""}      </li>

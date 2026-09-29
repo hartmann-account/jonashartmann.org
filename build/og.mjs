@@ -6,6 +6,7 @@
  */
 import { chromium } from "playwright";
 import { readFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -30,10 +31,20 @@ h1 { margin-top: auto; font-size: 68px; line-height: 1.08; letter-spacing: -0.01
 <div class="foot"><span>Zug, Switzerland</span><span>jonashartmann.org</span></div>
 </body></html>`;
 
-const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH ?? "/opt/pw-browsers/chromium" });
+const exe = process.env.CHROMIUM_PATH || (existsSync("/opt/pw-browsers/chromium") ? "/opt/pw-browsers/chromium" : undefined);
+const browser = await chromium.launch(exe ? { executablePath: exe } : {});
 const page = await browser.newPage({ viewport: { width: 1200, height: 630 } });
 await page.setContent(html);
 await page.evaluate(() => document.fonts.ready);
 await page.screenshot({ path: join(root, "src", "static", "og.png") });
+/* Icon fuer Startbildschirme (iOS), im selben Stil: Initialen in Outfit. */
+await page.setViewportSize({ width: 180, height: 180 });
+await page.setContent(`<!doctype html><html><head><style>
+@font-face { font-family: Outfit; font-weight: 500; src: url(data:font/woff2;base64,${await font(500)}) format("woff2"); }
+body { margin: 0; width: 180px; height: 180px; background: #171a1c; color: #f5f6f7; font: 500 84px/180px Outfit;
+  text-align: center; letter-spacing: -0.02em; }
+</style></head><body>JH</body></html>`);
+await page.evaluate(() => document.fonts.ready);
+await page.screenshot({ path: join(root, "src", "static", "apple-touch-icon.png") });
 await browser.close();
-console.log("src/static/og.png geschrieben");
+console.log("src/static/og.png und apple-touch-icon.png geschrieben");

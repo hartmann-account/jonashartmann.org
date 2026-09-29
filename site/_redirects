@@ -1,3 +1,17 @@
 /learning       /cv#certificates  301
 /learning/      /cv#certificates  301
 /learning.html  /cv#certificates  301
+/ueber-mich                     /about                    301
+/ueber-mich/                    /about                    301
+/author/jonashartmann/          /about                    301
+/kontakt                        /cv                       301
+/kontakt/                       /cv                       301
+/beitraege                      /research#publications    301
+/beitraege/                     /research#publications    301
+/work/advisory                  /work#advisory            301
+/work/entrepreneurship          /work#entrepreneurship    301
+/work/investing                 /work#investing           301
+/work/technology-creative       /work#technology          301
+/research/publications          /research#publications    301
+/research/family-governance     /research                 301
+/research/family-offices        /research                 301

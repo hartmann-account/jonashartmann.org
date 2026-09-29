@@ -1,6 +1,6 @@
 import { html, raw } from "../lib/html.mjs";
 import { intro, section, entries, pubs, p, more } from "../lib/components.mjs";
-import { SITE_URL, LINKEDIN } from "../lib/layout.mjs";
+import { SITE_URL, LINKEDIN, HOME_TITLE, HOME_DESCRIPTION } from "../lib/layout.mjs";
 import { ORCID_URL } from "../../src/js/orcid-normalize.js";
 
 export default function home({ record, works }) {
@@ -44,8 +44,8 @@ export default function home({ record, works }) {
   return {
     path: "/",
     file: "index.html",
-    title: "Jonas Hartmann — Advisor, entrepreneur, investor, researcher",
-    description: "Building structures for businesses, families and capital. A decade across entrepreneurship, corporate advisory, technology and family governance.",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
     head: raw(`<script type="application/ld+json">${JSON.stringify(person).replace(/</g, "\\u003c")}</script>`),
     body: [
       intro({

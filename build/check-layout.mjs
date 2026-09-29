@@ -6,21 +6,27 @@
  *   - genau eine h1, keine uebersprungenen Ueberschriftsebenen
  *   - Kontrast jedes sichtbaren Textes mindestens 4.5:1 (WCAG AA)
  *   - Portraet-Flaeche nur auf About und erst ab 1024 px
- *   - /learning leitet auf den CV weiter, Unbekanntes liefert 404
+ *   - Weiterleitungen aus site/_redirects (wie sie die Vorschau umsetzt;
+ *     Cloudflare liest dieselbe Datei), Unbekanntes liefert 404
+ *   - Hoehenbudget auf dem Telefon
  *
  * Aufruf: npm run check:layout  (nach npm run build)
  */
 import { chromium } from "playwright";
+import { existsSync } from "node:fs";
 import { serve } from "./preview.mjs";
 
 const PORT = 4517;
 const BASE = `http://127.0.0.1:${PORT}`;
 const PAGES = ["/", "/work", "/research", "/about", "/cv", "/does-not-exist"];
 const WIDTHS = [320, 390, 768, 1024, 1440, 1920];
+/* Hoehenbudget bei 390 px: die Seiten sollen auf dem Telefon kurz bleiben. */
+const BUDGET = { "/": 3200, "/work": 6000 };
 
 const server = serve(PORT);
 await new Promise((r) => server.on("listening", r));
-const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH ?? "/opt/pw-browsers/chromium" });
+const exe = process.env.CHROMIUM_PATH || (existsSync("/opt/pw-browsers/chromium") ? "/opt/pw-browsers/chromium" : undefined);
+const browser = await chromium.launch(exe ? { executablePath: exe } : {});
 const failures = [];
 
 for (const width of WIDTHS) {
@@ -50,6 +56,8 @@ for (const width of WIDTHS) {
     if (r.portrait !== null && (path !== "/about" || r.portrait !== width >= 1024)) {
       failures.push(`${path} @${width}: Portraet-Flaeche ${r.portrait ? "sichtbar" : "unsichtbar"}`);
     }
+    if (width === 390 && BUDGET[path] && r.height > BUDGET[path]) failures.push(`${path} @390: ${r.height}px > ${BUDGET[path]}px`);
+    if (path === "/about" && width >= 1024 && r.portrait !== true) failures.push(`/about @${width}: Portraet-Flaeche fehlt`);
     if (width === 390) console.log(`  ${path.padEnd(16)} ${String(r.height).padStart(5)} px hoch bei 390`);
   }
   await ctx.close();
@@ -92,7 +100,7 @@ for (const width of WIDTHS) {
 }
 
 /* Weiterleitungen und Statuscodes, wie im Worker. */
-for (const [path, status, location] of [["/learning", 301, "/cv#certificates"], ["/learning.html", 301, "/cv#certificates"], ["/does-not-exist", 404]]) {
+for (const [path, status, location] of [["/learning", 301, "/cv#certificates"], ["/learning/", 301, "/cv#certificates"], ["/learning.html", 301, "/cv#certificates"], ["/kontakt/", 301, "/cv"], ["/does-not-exist", 404]]) {
   const res = await fetch(BASE + path, { redirect: "manual" });
   if (res.status !== status) failures.push(`${path}: Status ${res.status} statt ${status}`);
   if (location && res.headers.get("location") !== location) failures.push(`${path}: Ziel ${res.headers.get("location")}`);
