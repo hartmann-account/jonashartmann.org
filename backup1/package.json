@@ -1,0 +1,13 @@
+{
+  "name": "jonashartmann-org",
+  "version": "4.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build/prerender.mjs",
+    "preview": "node build/preview.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.1"
+  }
+}

@@ -1,0 +1,12 @@
+# Deployment ueber den bestehenden Worker "jonashartmann-org" (Account Hartmann).
+# Die Seite ist statisch vorgerendert: kein Worker-Skript, nur Assets aus site/.
+#
+# site/ ist ein Build-Ergebnis und liegt bewusst im Repository - der Bauschritt
+# braucht einen Browser (Playwright) und laeuft deshalb lokal, nicht auf dem
+# Build-Runner. Neu bauen mit: npm install && npm run build
+name = "jonashartmann-org"
+account_id = "edc3932f1c8628cc44b7a0941c973a71"
+compatibility_date = "2025-02-23"
+workers_dev = true
+
+assets = { directory = "./site", not_found_handling = "404-page" }

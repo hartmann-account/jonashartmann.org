@@ -1,0 +1,1613 @@
+<title>Weiche Schulter</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..800&family=IBM+Plex+Mono:wght@400;500&family=Newsreader:opsz,wght@6..72,300..600&display=swap">
+<style>
+:root {
+  --ground:#EDEDE8; --surface:#F8F8F5; --sunk:#E3E3DD;
+  --ink:#15181C; --ink-2:#3C434C; --muted:#6A727E; --rule:#D3D4CD;
+  --accent:#27456F; --accent-soft:#5E7CA8;
+  --open:#2E6A4E; --knit:#3B6A80; --half:#8A6420; --canvas:#6A6F7A; --none:#8A8F98;
+  --yes:#2E6A4E; --no:#9A3A32; --maybe:#8A6420;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ground:#131519; --surface:#1B1E23; --sunk:#22262C;
+    --ink:#E7E8E5; --ink-2:#BFC4CB; --muted:#949AA4; --rule:#2C3139;
+    --accent:#93B2DE; --accent-soft:#7E9BC7;
+    --open:#6FB68F; --knit:#7BAEC6; --half:#CFA059; --canvas:#9AA1AC; --none:#868D97;
+    --yes:#6FB68F; --no:#E08C84; --maybe:#CFA059;
+  }
+}
+:root[data-theme="dark"] {
+  --ground:#131519; --surface:#1B1E23; --sunk:#22262C;
+  --ink:#E7E8E5; --ink-2:#BFC4CB; --muted:#949AA4; --rule:#2C3139;
+  --accent:#93B2DE; --accent-soft:#7E9BC7;
+  --open:#6FB68F; --knit:#7BAEC6; --half:#CFA059; --canvas:#9AA1AC; --none:#868D97;
+  --yes:#6FB68F; --no:#E08C84; --maybe:#CFA059;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Newsreader",Georgia,"Times New Roman",serif;
+  font-size:16.5px; line-height:1.62; -webkit-font-smoothing:antialiased;
+}
+.wrap { max-width:1120px; margin:0 auto; padding-inline:22px; padding-block:0; }
+h1,h2,h3,.eyebrow,.label,.fact-brand,.cat,.chip,.ix-land,.pick-brand,.vc-lang,.rejected b {
+  font-family:"Archivo",-apple-system,"Segoe UI",sans-serif;
+}
+.price,.con,.ship,.meta,.eyebrow,.fact-claim,.pick-price,.vc-terms,.count { font-family:"IBM Plex Mono",ui-monospace,Menlo,monospace; }
+a { color:inherit; }
+a:focus-visible, button:focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:2px; }
+img { max-width:100%; display:block; }
+[hidden] { display:none !important; }
+
+.masthead { border-bottom:1px solid var(--rule); padding-block:44px 30px; }
+.eyebrow { margin:0 0 18px; font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); }
+h1 {
+  margin:0; font-size:clamp(42px,9vw,96px); line-height:.95;
+  font-variation-settings:"wdth" 112,"wght" 700; letter-spacing:-.025em; text-wrap:balance;
+}
+.deck { max-width:62ch; margin:26px 0 0; font-size:19px; color:var(--ink-2); text-wrap:pretty; }
+
+.lede { padding-block:34px; border-bottom:1px solid var(--rule); }
+.lede p { max-width:66ch; margin:0 0 14px; }
+.lede p:last-child { margin-bottom:0; }
+.lede strong { font-weight:600; }
+
+.label { font-size:11.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--muted);
+  font-variation-settings:"wdth" 100,"wght" 600; margin:0 0 18px; }
+
+/* shortlist */
+.shortlist { padding-block:36px; border-bottom:1px solid var(--rule); }
+.picks { list-style:none; margin:0; padding:0; display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(270px,1fr)); gap:0; background:var(--surface);
+  border:1px solid var(--rule); overflow:hidden; }
+.picks li { background:var(--surface); padding:17px 18px 19px; display:flex; flex-direction:column; gap:3px; }
+.pick-brand { font-size:17px; font-variation-settings:"wdth" 100,"wght" 680; text-decoration:none;
+  color:var(--ink); align-self:flex-start; border-bottom:1px solid var(--accent-soft); }
+.pick-model { font-size:14.5px; color:var(--ink-2); }
+.pick-price { font-size:13px; color:var(--muted); font-variant-numeric:tabular-nums; }
+.pick-why { margin:9px 0 0; font-size:14.5px; line-height:1.5; color:var(--ink-2); }
+
+/* vocabulary */
+.vocab { padding-block:32px; border-bottom:1px solid var(--rule); }
+.vocab-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:0;
+  background:var(--surface); border:1px solid var(--rule); overflow:hidden; }
+.vc { background:var(--surface); padding:13px 15px 15px; display:flex; flex-direction:column; gap:5px; }
+.vc-lang { font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted);
+  font-variation-settings:"wdth" 100,"wght" 600; }
+.vc-terms { font-size:13.5px; color:var(--ink); line-height:1.45; }
+
+/* construction scale */
+.scale { padding-block:32px; border-bottom:1px solid var(--rule); }
+.scale-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(196px,1fr)); gap:0;
+  background:var(--surface); border:1px solid var(--rule); overflow:hidden; }
+.step { background:var(--surface); padding:16px 16px 18px; }
+.step .con { margin-bottom:9px; }
+.step p { margin:0; font-size:14.5px; line-height:1.5; color:var(--ink-2); }
+.caveat { margin:18px 0 0; font-size:14.5px; color:var(--muted); max-width:70ch; }
+
+/* factcheck */
+.factcheck { padding-block:34px; border-bottom:1px solid var(--rule); }
+.facts { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:1px; background:var(--rule);
+  border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); }
+.fact { background:var(--surface); padding:15px 16px 16px 20px; position:relative;
+  display:grid; grid-template-columns:minmax(120px,1.1fr) minmax(150px,1.5fr) minmax(220px,3fr); gap:6px 22px; align-items:baseline; }
+.fact::before { content:""; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--muted); }
+.fact-ok::before { background:var(--yes); }
+.fact-part::before { background:var(--maybe); }
+.fact-fail::before { background:var(--no); }
+.fact-brand { font-size:15.5px; font-variation-settings:"wdth" 100,"wght" 650; }
+.fact-claim { font-size:12.5px; color:var(--muted); }
+.fact-verdict { margin:0; font-size:15px; color:var(--ink-2); }
+@media (max-width:720px) { .fact { grid-template-columns:1fr; } }
+
+/* index */
+.index { padding-block:32px 34px; border-bottom:1px solid var(--rule); }
+.ix { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:11px; }
+.ix li { display:flex; flex-wrap:wrap; gap:6px 14px; align-items:baseline; }
+.ix-land { flex:0 0 165px; font-size:12px; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--muted); font-variation-settings:"wdth" 100,"wght" 600; }
+.ix a { font-size:15px; color:var(--ink-2); text-decoration:none; border-bottom:1px solid var(--rule); }
+.ix a:hover { color:var(--ink); border-bottom-color:var(--accent-soft); }
+
+/* filter */
+.filterbar { position:sticky; top:env(safe-area-inset-top,0px); z-index:5;
+  background:color-mix(in srgb, var(--ground) 93%, transparent); backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--rule); }
+.filterbar .inner { display:flex; flex-wrap:wrap; gap:7px; align-items:center; padding-block:11px; }
+.filterbar .label { margin:0 4px 0 0; }
+.chip { font-size:12.5px; font-variation-settings:"wdth" 100,"wght" 550; padding:5px 12px;
+  border:1px solid var(--rule); background:var(--surface); color:var(--ink-2); cursor:pointer;
+  border-radius:999px; transition:background .15s,color .15s,border-color .15s; }
+.chip:hover { border-color:var(--accent-soft); }
+.chip[aria-pressed="true"] { background:var(--accent); border-color:var(--accent); color:var(--ground); }
+.sep { width:1px; height:20px; background:var(--rule); margin-inline:5px; }
+.count { font-size:12.5px; color:var(--muted); margin-left:auto; }
+
+/* regions + brands */
+.region { padding-block:8px; scroll-margin-top:78px; }
+.region-head { padding-block:52px 0; }
+h2 { margin:0; font-size:clamp(30px,5.4vw,50px); line-height:1;
+  font-variation-settings:"wdth" 116,"wght" 720; letter-spacing:-.022em; }
+.region-note { max-width:66ch; margin:16px 0 0; color:var(--ink-2); }
+.brand { padding-block:38px 10px; border-bottom:1px solid var(--rule); scroll-margin-top:78px; }
+.brand-head { display:flex; flex-wrap:wrap; gap:12px 24px; align-items:flex-end; justify-content:space-between; }
+.brand-name { margin:0; font-size:clamp(23px,3.4vw,31px); line-height:1.04;
+  font-variation-settings:"wdth" 104,"wght" 660; letter-spacing:-.012em; }
+.meta { margin:6px 0 0; font-size:12.5px; color:var(--muted); }
+.brand-links { display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+.cat { font-size:13px; font-variation-settings:"wdth" 100,"wght" 550; color:var(--accent);
+  text-decoration:none; border-bottom:1px solid var(--accent-soft); padding-bottom:1px; }
+.cat:hover { border-bottom-width:2px; }
+.brand-note { max-width:68ch; margin:18px 0 0; color:var(--ink-2); }
+.ship-note { max-width:68ch; margin:10px 0 0; font-size:14.5px; color:var(--muted); }
+
+.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(212px,1fr)); gap:26px 22px; margin-top:28px; }
+.card { display:flex; flex-direction:column; }
+.shot { display:block; background:var(--sunk); overflow:hidden; }
+.shot img { width:100%; height:auto; transition:transform .5s cubic-bezier(.2,.6,.2,1); }
+.shot:hover img { transform:scale(1.035); }
+.card-body { display:flex; flex-direction:column; gap:5px; padding-top:13px; flex:1; }
+.card h3 { margin:0; font-size:15.5px; line-height:1.28; font-variation-settings:"wdth" 100,"wght" 620; }
+.card h3 a { text-decoration:none; }
+.card h3 a:hover { text-decoration:underline; text-underline-offset:3px; }
+.price { margin:0; font-size:14px; font-weight:500; font-variant-numeric:tabular-nums; }
+.fabric { margin:0; font-size:13.5px; color:var(--muted); line-height:1.42; }
+.ev { margin:4px 0 0; font-size:13.5px; color:var(--ink-2); line-height:1.5; flex:1 0 auto; }
+.con { align-self:flex-start; font-size:11px; letter-spacing:.07em; text-transform:uppercase;
+  padding:3px 8px; border:1px solid currentColor; }
+.card .con { margin-top:12px; }
+.con-open { color:var(--open); } .con-knit { color:var(--knit); }
+.con-half { color:var(--half); } .con-canvas { color:var(--canvas); }
+.con-none { color:var(--none); border-style:dashed; }
+.ship { font-size:11px; letter-spacing:.07em; text-transform:uppercase; padding:3px 9px; border:1px solid currentColor; }
+.ship-yes { color:var(--yes); } .ship-no { color:var(--no); } .ship-maybe { color:var(--maybe); }
+
+.empty { padding-block:60px; text-align:center; color:var(--muted); font-size:15px; }
+
+.closing { padding-block:46px 10px; }
+.closing h2 { font-size:clamp(24px,3.2vw,32px); }
+.closing p { max-width:70ch; color:var(--ink-2); }
+.rejected { margin:20px 0 0; padding:0; list-style:none; display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(256px,1fr)); gap:0; background:var(--surface);
+  border:1px solid var(--rule); overflow:hidden; }
+.picks > li, .vocab-row > .vc, .scale-row > .step, .rejected > li {
+  box-shadow:-1px 0 0 var(--rule), 0 -1px 0 var(--rule); }
+.rejected li { background:var(--surface); padding:13px 15px; font-size:14px; color:var(--ink-2); line-height:1.5; }
+.rejected b { font-variation-settings:"wdth" 100,"wght" 620; font-weight:normal; color:var(--ink);
+  display:block; margin-bottom:3px; font-size:14.5px; }
+footer { border-top:1px solid var(--rule); margin-top:44px; padding-block:26px 46px; font-size:13.5px; color:var(--muted); }
+footer p { max-width:74ch; margin:0 0 9px; }
+@media (prefers-reduced-motion:reduce) { * { transition:none !important; animation:none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="masthead">
+    <p class="eyebrow">Marktübersicht · Stand 15. September 2026</p>
+    <h1>Weiche Schulter</h1>
+    <p class="deck">Sakkos ohne Einlage, ohne Schulterpolster, ohne Steifheit: 29 europäische Marken, 56 lieferbare Modelle, jedes gegen die Produktbeschreibung des Herstellers geprüft — und gegen die Frage, was davon zollfrei nach Zug kommt.</p>
+  </header>
+
+  <section class="lede">
+    <p>Von den fünf ursprünglich genannten niederländischen Marken halten <strong>zwei</strong> der Prüfung stand, zwei nur teilweise, eine gar nicht. Der häufigste Grund fürs Nichtfinden war kein Suchfehler: BONNE Suits firmiert inzwischen als BONNE auf bonnelife.com, und die beschriebene Baumwoll-Elasthan-Linie von Cavallaro Napoli ist seit dem Saisonwechsel ausgelistet.</p>
+    <p>Die Ausweitung auf Europa verschiebt das Bild deutlich. Die Niederlande sind für diese Bauweise nicht der beste Ort — <strong>Italien</strong> hat sie erfunden und nennt sie seit Jahrzehnten beim Namen, <strong>Grossbritannien</strong> dokumentiert sie am genauesten, und die beiden präzisesten Belege des ganzen Felds stehen auf einer Pariser und einer spanischen Produktseite. Preislich reicht die Spanne von EUR 92 bis CHF 1'180 für im Kern dieselbe Konstruktion.</p>
+    <p>Zwei Dinge entscheiden in der Praxis: ob ein Shop die Konstruktion überhaupt deklariert — viele tun es nicht — und ob er in die Schweiz liefert, ohne dass beim Zoll nachgezahlt werden muss. Beides steht bei jeder Marke.</p>
+  </section>
+
+  <section class="shortlist">
+    <p class="label">Kurzliste — sechs Ausgangspunkte statt 56</p>
+    <ul class="picks">
+        <li>
+          <a class="pick-brand" href="#silbon">Silbon</a>
+          <span class="pick-model">Americana comfort</span>
+          <span class="pick-price">EUR 130</span>
+          <p class="pick-why">Der günstigste echte Treffer — und eine von nur zwei Beschreibungen im ganzen Feld, die Schulterpolster ausdrücklich ausschliesst. Zoll kommt dazu.</p>
+        </li>
+        <li>
+          <a class="pick-brand" href="#officine">Officine Générale</a>
+          <span class="pick-model">Veste New Lightest</span>
+          <span class="pick-price">EUR 295</span>
+          <p class="pick-why">„Pas d'épaulettes, pas de doublure au corps.“ Präziser dokumentiert es niemand. Italienischer Bio-Baumwolltwill, genäht in Portugal.</p>
+        </li>
+        <li>
+          <a class="pick-brand" href="#kestin">Kestin</a>
+          <span class="pick-model">Stac Blazer</span>
+          <span class="pick-price">CHF 285</span>
+          <p class="pick-why">Blazer und Chore Coat in einem, ungefüttert, mit passender Hose — und die klarste Zollzusage: keine Nachforderung bei der Zustellung.</p>
+        </li>
+        <li>
+          <a class="pick-brand" href="#bonne">BONNE</a>
+          <span class="pick-model">Bonne Suit</span>
+          <span class="pick-price">EUR 300</span>
+          <p class="pick-why">Der komplette Anzug zum Preis eines Sakkos, 380 g/m² Twill, maschinenwaschbar, Grössen für Sakko und Hose getrennt wählbar.</p>
+        </li>
+        <li>
+          <a class="pick-brand" href="#boglioli">Boglioli</a>
+          <span class="pick-model">K-Jacket</span>
+          <span class="pick-price">CHF 588</span>
+          <p class="pick-why">Der Archetyp der Bauweise, mit Schweizer Storefront und Zoll im Preis. Wer einmal wissen will, wie sich das Original anfühlt, fängt hier an.</p>
+        </li>
+        <li>
+          <a class="pick-brand" href="#suitsupply">Suitsupply</a>
+          <span class="pick-model">Havana Blazer</span>
+          <span class="pick-price">CHF 319</span>
+          <p class="pick-why">Nicht ganz offen, aber natural shoulder — und die einzige Möglichkeit, die weiche Schulter in Zürich anzuprobieren, bevor Geld fliesst.</p>
+        </li>
+    </ul>
+  </section>
+
+  <section class="vocab">
+    <p class="label">Das Vokabular — damit lässt sich in jedem Landesshop direkt suchen</p>
+    <div class="vocab-row">
+      <div class="vc"><span class="vc-lang">Niederländisch</span><span class="vc-terms">ongevoerd · ongeconstrueerd</span></div>
+      <div class="vc"><span class="vc-lang">Italienisch</span><span class="vc-terms">sfoderato · destrutturato</span></div>
+      <div class="vc"><span class="vc-lang">Französisch</span><span class="vc-terms">non doublé · sans épaulettes</span></div>
+      <div class="vc"><span class="vc-lang">Spanisch</span><span class="vc-terms">sin forro · sin armar · sin hombreras</span></div>
+      <div class="vc"><span class="vc-lang">Englisch</span><span class="vc-terms">unlined · unstructured · natural shoulder</span></div>
+      <div class="vc"><span class="vc-lang">Deutsch</span><span class="vc-terms">ungefüttert · unkonstruiert</span></div>
+    </div>
+  </section>
+
+  <section class="scale">
+    <p class="label">Konstruktion — die Stufen, nach denen hier eingeordnet ist</p>
+    <div class="scale-row">
+      <div class="step"><span class="con con-open">ungefüttert</span><p>Kein Futter im Korpus, oft nur im Ärmel, meist aufgesetzte Taschen. Fällt aus der Schulter wie ein Hemd. Das gesuchte Ende der Skala.</p></div>
+      <div class="step"><span class="con con-knit">Strick / Jersey</span><p>Gestricktes oder Jerseygewebe statt Webstoff. Eine Einlage ist bauartbedingt ausgeschlossen — weich, aber optisch näher am Cardigan.</p></div>
+      <div class="step"><span class="con con-half">halb gefüttert</span><p>Rücken offen, Vorderteile gefüttert. Leichter als Vollfutter, die Brustpartie bleibt aber geformt.</p></div>
+      <div class="step"><span class="con con-canvas">half canvas</span><p>Eingearbeitete Rosshaareinlage in Brust und Revers. Klassische Schneiderkonstruktion — hier nur zur Abgrenzung.</p></div>
+      <div class="step"><span class="con con-none">nicht deklariert</span><p>Der Shop sagt zur Konstruktion nichts. Stoff und Schnitt sprechen für eine weiche Bauweise, zugesichert ist sie nicht.</p></div>
+    </div>
+    <p class="caveat">Einschränkung, die fast überall gilt: <strong>Schulterpolster werden so gut wie nie deklariert.</strong> Genau drei Marken im ganzen Feld schliessen sie ausdrücklich aus — Officine Générale („pas d'épaulettes“), Silbon („no contiene hombreras“) und, in der Sache, Drake's und Berg &amp; Berg über das Datenfeld „soft, natural shoulder line“. Überall sonst ist die ungepolsterte Schulter bei „unconstructed“ branchenüblich impliziert, aber nicht zugesichert.</p>
+  </section>
+
+  <section class="factcheck">
+    <p class="label">Die ursprüngliche Liste, Behauptung für Behauptung</p>
+    <ul class="facts">
+        <li class="fact fact-fail">
+          <span class="fact-brand">MR MARVIS</span>
+          <span class="fact-claim">Sakkos im Sortiment</span>
+          <p class="fact-verdict">Kein Sakko. Ein Strickblazer, sieben Farben, dazu Shackets und Overshirts — und keine Hose im gleichen Stoff.</p>
+        </li>
+        <li class="fact fact-part">
+          <span class="fact-brand">Profuomo</span>
+          <span class="fact-claim">Produktlinie „Smart Comfort“</span>
+          <p class="fact-verdict">Den Begriff gibt es nicht; die Linie heisst Aero&nbsp;Ease. Von sieben Sakkos ist eines ungefüttert, drei sind ausdrücklich half canvas.</p>
+        </li>
+        <li class="fact fact-ok">
+          <span class="fact-brand">BONNE Suits</span>
+          <span class="fact-claim">Robuster Alltagsanzug aus Baumwoll-Twill</span>
+          <p class="fact-verdict">Trifft zu. Zu finden war nichts, weil die Marke heute BONNE heisst und auf bonnelife.com liegt.</p>
+        </li>
+        <li class="fact fact-ok">
+          <span class="fact-brand">Scotch &amp; Soda</span>
+          <span class="fact-claim">Entspannte Casual-Sakkos</span>
+          <p class="fact-verdict">Trifft wörtlich zu — „Unconstructed“ steht im Produktnamen. Der Shop liefert allerdings nicht in die Schweiz.</p>
+        </li>
+        <li class="fact fact-fail">
+          <span class="fact-brand">Cavallaro Napoli</span>
+          <span class="fact-claim">Baumwollanzüge mit Elasthan</span>
+          <p class="fact-verdict">Derzeit ausgelistet. Lieferbar sind fünf halb gefütterte Woll- und Viskosemodelle der Winterkollektion.</p>
+        </li>
+    </ul>
+  </section>
+
+  <section class="index">
+    <p class="label">Alle Marken</p>
+    <ul class="ix">
+        <li><span class="ix-land">Niederlande</span><a href="#bonne">BONNE</a> <a href="#profuomo">Profuomo</a> <a href="#suitsupply">Suitsupply</a> <a href="#scotch">Scotch &amp; Soda</a> <a href="#marvis">MR MARVIS</a> <a href="#blueindustry">Blue Industry</a> <a href="#cavallaro">Cavallaro Napoli</a> <a href="#einzel">Dstrezzed &amp; State of Art</a></li>
+        <li><span class="ix-land">Italien</span><a href="#boglioli">Boglioli</a> <a href="#aspesi">Aspesi</a> <a href="#lbm">L.B.M. 1911</a> <a href="#barena">Barena Venezia</a> <a href="#circolo">Circolo 1901</a></li>
+        <li><span class="ix-land">Grossbritannien</span><a href="#kestin">Kestin</a> <a href="#oliverspencer">Oliver Spencer</a> <a href="#universalworks">Universal Works</a> <a href="#drakes">Drake's</a> <a href="#sehkelly">S.E.H Kelly</a></li>
+        <li><span class="ix-land">Skandinavien</span><a href="#bergberg">Berg &amp; Berg</a> <a href="#norse">Norse Projects</a> <a href="#nn07">NN.07</a> <a href="#adaysmarch">A Day's March</a> <a href="#oscarjacobson">Oscar Jacobson</a></li>
+        <li><span class="ix-land">Frankreich, Spanien, DACH</span><a href="#officine">Officine Générale</a> <a href="#apc">A.P.C.</a> <a href="#silbon">Silbon</a> <a href="#scalpers">Scalpers</a> <a href="#drykorn">Drykorn</a> <a href="#windsor">windsor.</a></li>
+    </ul>
+  </section>
+</div>
+
+<div class="filterbar">
+  <div class="wrap inner">
+    <button class="chip" id="f-all" aria-pressed="true" type="button">Alles</button>
+    <span class="sep" aria-hidden="true"></span>
+    <button class="chip chip-region" data-region="nl" aria-pressed="false" type="button">Niederlande</button>
+    <button class="chip chip-region" data-region="it" aria-pressed="false" type="button">Italien</button>
+    <button class="chip chip-region" data-region="uk" aria-pressed="false" type="button">Grossbritannien</button>
+    <button class="chip chip-region" data-region="nord" aria-pressed="false" type="button">Skandinavien</button>
+    <button class="chip chip-region" data-region="west" aria-pressed="false" type="button">Frankreich, Spanien, DACH</button>
+    <span class="sep" aria-hidden="true"></span>
+    <button class="chip" id="f-ch" aria-pressed="false" type="button">Ohne Zollrisiko</button>
+    <button class="chip" id="f-soft" aria-pressed="false" type="button">Ohne Einlage</button>
+    <span class="count" id="count">56 Modelle</span>
+  </div>
+</div>
+
+<main class="wrap">
+  <section class="region" id="r-nl" data-region="nl">
+    <div class="region-head">
+      <h2>Niederlande</h2>
+      <p class="region-note">Der Ausgangspunkt. Zwei der fünf ursprünglich genannten Marken halten stand, zwei nur teilweise, eine gar nicht — und drei niederländische Anbieter fehlten in der Liste ganz.</p>
+    </div>
+    <section class="brand" id="bonne" data-ships="dap">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">BONNE</h3>
+          <p class="meta">Amsterdam · EUR 240–350 · Sakko + Hose</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-maybe">Zoll kommt dazu</span>
+          <a class="cat" href="https://bonnelife.com/collections/bonne-suits" target="_blank" rel="noopener">bonnelife.com &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Der Grund, warum nichts zu finden war: Die Marke heisst heute schlicht <em>BONNE</em> und liegt auf bonnelife.com — bonnesuits.com führt ins Leere. Inhaltlich hält die Beschreibung stand. 380 g/m² Baumwoll-Twill, doppelt abgesteppte Taschen, maschinenwaschbar, handgefertigt in der Türkei, in limitierten Auflagen. Der Preis gilt für Sakko <em>und</em> Hose, die Grössen werden getrennt gewählt (XXS bis XXL je Teil), der Schnitt ist genderneutral.</p>
+      <p class="ship-note">Versand weltweit, ausserhalb der EU EUR 19. Die Schweiz wird nicht namentlich genannt; Einfuhrsteuer und Zoll trägt der Besteller.</p>
+      <div class="grid">
+        <article class="card" data-con="offen" data-safe="nein">
+          <a class="shot" href="https://bonnelife.com/products/tool-blue-bonne-suit" target="_blank" rel="noopener">
+            <img src="img/bn2.jpg" alt="Bonne Suit, Tool Blue" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://bonnelife.com/products/tool-blue-bonne-suit" target="_blank" rel="noopener">Bonne Suit, Tool Blue</a></h3>
+            <p class="price">EUR 300</p>
+            <p class="fabric">100 % Baumwoll-Twill, 380 g/m²</p>
+            <p class="ev">„Heavy cotton twill, a comfortable cut, practical pockets, and a genderless fit.“ Maschinenwaschbar — eine Einlage wäre damit unvereinbar.</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+        <article class="card" data-con="offen" data-safe="nein">
+          <a class="shot" href="https://bonnelife.com/products/old-blue-bonne-suit" target="_blank" rel="noopener">
+            <img src="img/bn1.jpg" alt="Bonne Suit, Old Blue" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://bonnelife.com/products/old-blue-bonne-suit" target="_blank" rel="noopener">Bonne Suit, Old Blue</a></h3>
+            <p class="price">EUR 300</p>
+            <p class="fabric">100 % Baumwoll-Twill</p>
+            <p class="ev">Gleiche Konstruktion wie Tool Blue, hellere Waschung.</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+        <article class="card" data-con="offen" data-safe="nein">
+          <a class="shot" href="https://bonnelife.com/products/dark-green-bonne-suit" target="_blank" rel="noopener">
+            <img src="img/bn4.jpg" alt="Bonne Suit, Dark Green" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://bonnelife.com/products/dark-green-bonne-suit" target="_blank" rel="noopener">Bonne Suit, Dark Green</a></h3>
+            <p class="price">EUR 300</p>
+            <p class="fabric">100 % Baumwoll-Twill</p>
+            <p class="ev">Gleiche Konstruktion, gedecktes Grün.</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+        <article class="card" data-con="offen" data-safe="nein">
+          <a class="shot" href="https://bonnelife.com/products/brown-sally-suit" target="_blank" rel="noopener">
+            <img src="img/bn3.jpg" alt="Sally Suit, Brown" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://bonnelife.com/products/brown-sally-suit" target="_blank" rel="noopener">Sally Suit, Brown</a></h3>
+            <p class="price">EUR 320</p>
+            <p class="fabric">100 % Baumwoll-Twill, 270 g/m²</p>
+            <p class="ev">Leichtere Qualität, Feuerwehrverschluss und verstellbarer Rückengurt statt Gürtelschlaufen.</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="profuomo" data-ships="chshop">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">Profuomo</h3>
+          <p class="meta">Amsterdam · CHF 319–479</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-yes">Schweizer Shop</span>
+          <a class="cat" href="https://profuomo.com/de-ch/collections/colberts" target="_blank" rel="noopener">profuomo.com/de-ch &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Zwei Korrekturen: Die Linie heisst nicht <em>Smart Comfort</em>, sondern <strong>Aero&nbsp;Ease</strong> — den Begriff Smart Comfort führt Profuomo nirgends. Und von den sieben lieferbaren Sakkos ist genau <em>eines</em> ausdrücklich ohne Futter; drei Wollmodelle tragen ausdrücklich <em>half canvas</em>, sind also bewusst konstruiert.</p>
+      <p class="ship-note">Eigener Schweizer Store in CHF. Versand CHF 9.95, ab EUR 350 kostenlos, Lieferung 2–3 Werktage. Zollhinweise fehlen.</p>
+      <div class="grid">
+        <article class="card" data-con="offen" data-safe="ja">
+          <a class="shot" href="https://profuomo.com/de-ch/products/ppxp10002a-light-brown-cotton-jacket" target="_blank" rel="noopener">
+            <img src="img/pf1.jpg" alt="Hellbraunes Baumwoll-Sakko" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://profuomo.com/de-ch/products/ppxp10002a-light-brown-cotton-jacket" target="_blank" rel="noopener">Hellbraunes Baumwoll-Sakko</a></h3>
+            <p class="price">CHF 449</p>
+            <p class="fabric">40 % Baumwolle, 35 % Viskose, 15 % Wolle, 10 % Leinen</p>
+            <p class="ev">„Unconstructed Design ohne Futter für ein entspanntes, leichtes Tragegefühl“ — nur die Ärmel sind gefüttert. Aufgesetzte Taschen, Notch-Revers.</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+        <article class="card" data-con="strick" data-safe="ja">
+          <a class="shot" href="https://profuomo.com/de-ch/products/ppxp10011a-navy-aero-ease-knitted-jacket" target="_blank" rel="noopener">
+            <img src="img/pf2.jpg" alt="Aero Ease Knitted Sakko, Navy" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://profuomo.com/de-ch/products/ppxp10011a-navy-aero-ease-knitted-jacket" target="_blank" rel="noopener">Aero Ease Knitted Sakko, Navy</a></h3>
+            <p class="price">CHF 319</p>
+            <p class="fabric">100 % Baumwolle, strukturiertes Strickgewebe</p>
+            <p class="ev">Strickkonstruktion mit echten Hornknöpfen. Futter wird nicht erwähnt — eine Einlage ist bei diesem Aufbau ausgeschlossen.</p>
+            <span class="con con-knit">Strick / Jersey</span>
+          </div>
+        </article>
+        <article class="card" data-con="strick" data-safe="ja">
+          <a class="shot" href="https://profuomo.com/de-ch/products/ppxp10011c-offwhite-aero-ease-knitted-jacket" target="_blank" rel="noopener">
+            <img src="img/pf3.jpg" alt="Aero Ease Knitted Sakko, Offwhite" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://profuomo.com/de-ch/products/ppxp10011c-offwhite-aero-ease-knitted-jacket" target="_blank" rel="noopener">Aero Ease Knitted Sakko, Offwhite</a></h3>
+            <p class="price">CHF 319</p>
+            <p class="fabric">100 % Baumwolle, Strickgewebe</p>
+            <p class="ev">Helle Variante desselben Modells.</p>
+            <span class="con con-knit">Strick / Jersey</span>
+          </div>
+        </article>
+        <article class="card" data-con="canvas" data-safe="ja">
+          <a class="shot" href="https://profuomo.com/de-ch/products/ppxp30016a-dark-blue-wool-jacket" target="_blank" rel="noopener">
+            <img src="img/pf4.jpg" alt="Wolle-Sakko, dunkelblau" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://profuomo.com/de-ch/products/ppxp30016a-dark-blue-wool-jacket" target="_blank" rel="noopener">Wolle-Sakko, dunkelblau</a></h3>
+            <p class="price">CHF 479</p>
+            <p class="fabric">100 % Wolle, italienischer Stoff</p>
+            <p class="ev">Gegenprobe: „Half canvas Konstruktion für eine natürliche Passform“ — das genaue Gegenteil dessen, was gesucht ist.</p>
+            <span class="con con-canvas">half canvas</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="suitsupply" data-ships="chshop">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">Suitsupply</h3>
+          <p class="meta">Amsterdam · CHF 279–699</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-yes">Schweizer Shop</span>
+          <a class="cat" href="https://suitsupply.com/en-ch/men/jackets" target="_blank" rel="noopener">suitsupply.com/en-ch &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">In der ursprünglichen Liste fehlt der naheliegendste Anbieter. Die beiden relevanten Passformen heissen <strong>Havana</strong> und <strong>Roma</strong>, beide führt Suitsupply selbst unter <em>natural shoulder</em>: weiche, ungepolsterte Schulter. Der Kompromiss: half canvas statt vollständig offen — konstruiert ist hier die Brust, nicht die Schulter.</p>
+      <p class="ship-note">Schweizer Storefront in CHF, Filiale in Zürich — die einzige Anprobemöglichkeit im ganzen Feld.</p>
+      <div class="grid">
+        <article class="card" data-con="halb" data-safe="ja">
+          <a class="shot" href="https://suitsupply.com/en-ch/men/jackets/mid-brown-relaxed-fit-roma-blazer/BBL10026MB1.html" target="_blank" rel="noopener">
+            <img src="img/su2.jpg" alt="Roma Blazer, braun (Relaxed Fit)" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://suitsupply.com/en-ch/men/jackets/mid-brown-relaxed-fit-roma-blazer/BBL10026MB1.html" target="_blank" rel="noopener">Roma Blazer, braun (Relaxed Fit)</a></h3>
+            <p class="price">CHF 579</p>
+            <p class="fabric">Wolle-Alpaka-Leinen, Fischgrat</p>
+            <p class="ev">„a soft, unstructured shoulder for an easy, natural silhouette … patch pockets, and a partially lined interior.“</p>
+            <span class="con con-half">halb gefüttert</span>
+          </div>
+        </article>
+        <article class="card" data-con="canvas" data-safe="ja">
+          <a class="shot" href="https://suitsupply.com/en-ch/men/jackets/navy-relaxed-fit-roma-suit-jacket/C7252.html" target="_blank" rel="noopener">
+            <img src="img/su1.jpg" alt="Roma Sakko, Leinen navy" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://suitsupply.com/en-ch/men/jackets/navy-relaxed-fit-roma-suit-jacket/C7252.html" target="_blank" rel="noopener">Roma Sakko, Leinen navy</a></h3>
+            <p class="price">CHF 469</p>
+            <p class="fabric">100 % Leinen</p>
+            <p class="ev">„natural shoulder, wide notch lapel, jetted pockets, and half-canvas construction.“ Derzeit die einzige reine Sommerqualität am Lager.</p>
+            <span class="con con-canvas">half canvas</span>
+          </div>
+        </article>
+        <article class="card" data-con="canvas" data-safe="ja">
+          <a class="shot" href="https://suitsupply.com/en-ch/men/jackets/navy-tailored-fit-havana-blazer/C25216.html" target="_blank" rel="noopener">
+            <img src="img/su3.jpg" alt="Havana Blazer, navy (Tailored Fit)" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://suitsupply.com/en-ch/men/jackets/navy-tailored-fit-havana-blazer/C25216.html" target="_blank" rel="noopener">Havana Blazer, navy (Tailored Fit)</a></h3>
+            <p class="price">CHF 319</p>
+            <p class="fabric">100 % Wolle</p>
+            <p class="ev">„natural shoulders, a wide notch lapel, jetted pockets, and a half-canvas construction.“</p>
+            <span class="con con-canvas">half canvas</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="scotch" data-ships="nein">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">Scotch &amp; Soda</h3>
+          <p class="meta">Amsterdam · EUR 130–240</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-no">kein CH-Versand</span>
+          <a class="cat" href="https://www.scotchandsoda.com/en-eu/collections/men-clothing-blazers" target="_blank" rel="noopener">scotchandsoda.com/en-eu &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Der einzige Anbieter, bei dem die Behauptung wörtlich im Produktnamen steht — <em>Unconstructed</em> ist hier eine geführte Produktlinie, keine Interpretation. Die Marke war 2023 insolvent; das Sortiment ist aber aktuell. Für einen Schweizer Besteller nützt das wenig.</p>
+      <p class="ship-note">Der EU-Shop listet 19 EU-Länder und die USA. Die Schweiz fehlt, /de-ch und /en-ch geben 404. Nur über eine EU-Lieferadresse oder den Schweizer Fachhandel.</p>
+      <div class="grid">
+        <article class="card" data-con="offen" data-safe="nein">
+          <a class="shot" href="https://www.scotchandsoda.com/en-eu/products/tate-unconstructed-cotton-blend-regular-fit-blazer-183535_260-eggnog-melange" target="_blank" rel="noopener">
+            <img src="img/ss1.jpg" alt="Tate Unconstructed Cotton Blend Blazer" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.scotchandsoda.com/en-eu/products/tate-unconstructed-cotton-blend-regular-fit-blazer-183535_260-eggnog-melange" target="_blank" rel="noopener">Tate Unconstructed Cotton Blend Blazer</a></h3>
+            <p class="price">EUR 199.95</p>
+            <p class="fabric">53 % Baumwolle, 29 % Polyester, 16 % Viskose, 2 % Elasthan</p>
+            <p class="ev">„a clean, unstructured silhouette with a modern regular fit.“ Grösse S derzeit nicht lieferbar.</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+        <article class="card" data-con="offen" data-safe="nein">
+          <a class="shot" href="https://www.scotchandsoda.com/en-eu/products/unconstructed-cottonblend-seersucker-blazer-182152_401-pageant-blue-pinstripe" target="_blank" rel="noopener">
+            <img src="img/ss2.jpg" alt="Unconstructed Seersucker Blazer" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.scotchandsoda.com/en-eu/products/unconstructed-cottonblend-seersucker-blazer-182152_401-pageant-blue-pinstripe" target="_blank" rel="noopener">Unconstructed Seersucker Blazer</a></h3>
+            <p class="price">EUR 199.95</p>
+            <p class="fabric">67 % Baumwolle, 31 % Polyester, 2 % Elasthan</p>
+            <p class="ev">„An unconstructed cotton-blend seersucker blazer with a lightweight feel.“ Handwäsche 40 °C — ein weiterer Beleg gegen eine feste Einlage.</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+        <article class="card" data-con="offen" data-safe="nein">
+          <a class="shot" href="https://www.scotchandsoda.com/en-eu/products/core-unconstructed-peak-lapel-cool-wool-blazer-178358-401-night" target="_blank" rel="noopener">
+            <img src="img/ss3.jpg" alt="Core Unconstructed Peak Lapel, Cool Wool" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.scotchandsoda.com/en-eu/products/core-unconstructed-peak-lapel-cool-wool-blazer-178358-401-night" target="_blank" rel="noopener">Core Unconstructed Peak Lapel, Cool Wool</a></h3>
+            <p class="price">EUR 239.95</p>
+            <p class="fabric">Cool-Wool-Mischung (nicht deklariert)</p>
+            <p class="ev">„An unconstructed blazer in a wool blend, offering a relaxed tailored look.“ Spitzrevers, Neuheit der aktuellen Saison.</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+        <article class="card" data-con="strick" data-safe="nein">
+          <a class="shot" href="https://www.scotchandsoda.com/en-eu/products/miles-tailored-jersey-regular-fit-blazer-183669_410-sky-captain-stripe" target="_blank" rel="noopener">
+            <img src="img/ss4.jpg" alt="Miles Tailored Jersey Blazer" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.scotchandsoda.com/en-eu/products/miles-tailored-jersey-regular-fit-blazer-183669_410-sky-captain-stripe" target="_blank" rel="noopener">Miles Tailored Jersey Blazer</a></h3>
+            <p class="price">EUR 199.95</p>
+            <p class="fabric">60 % Baumwolle, 40 % Polyester, Jersey</p>
+            <p class="ev">„in jersey with slight stretch“, Nadelstreifen. Das Wort unconstructed fehlt hier, der Jerseyaufbau schliesst eine Einlage aber aus.</p>
+            <span class="con con-knit">Strick / Jersey</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="marvis" data-ships="chshop">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">MR MARVIS</h3>
+          <p class="meta">Amsterdam, Fertigung Portugal · CHF 229</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-yes">Schweizer Shop</span>
+          <a class="cat" href="https://www.mrmarvis.com/ch/collections/cardigans-blazers" target="_blank" rel="noopener">mrmarvis.com/ch &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Hier stimmt die Beschreibung nicht. MR MARVIS führt <strong>kein Sakko</strong>. Die Kategorien enthalten Cardigans, Shackets, Overshirts, Blousons — und genau ein Kleidungsstück mit Revers: den Strickblazer, den die Marke selbst „hybriden Look aus Blazer und Cardigan“ nennt. Passende Anzughosen gibt es ebenfalls nicht: Die Hosen tragen dieselben Farbnamen, bestehen aber aus Cord, Flanell oder Chinotwill.</p>
+      <p class="ship-note">Eigener Schweizer Store in CHF, Gratisversand, 1–3 Werktage, kostenlose Rücksendung. Einfuhrabgaben nennt der Shop nur für Ziele ausserhalb von EU und Schweiz.</p>
+      <div class="grid">
+        <article class="card" data-con="strick" data-safe="ja">
+          <a class="shot" href="https://www.mrmarvis.com/ch/products/storms-the-knitted-blazer" target="_blank" rel="noopener">
+            <img src="img/mm1.jpg" alt="Der Strickblazer, Storms" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.mrmarvis.com/ch/products/storms-the-knitted-blazer" target="_blank" rel="noopener">Der Strickblazer, Storms</a></h3>
+            <p class="price">CHF 229</p>
+            <p class="fabric">100 % Bio-Baumwolle, Strick</p>
+            <p class="ev">Reverskragen, geknöpfte Front, zwei aufgesetzte Taschen plus Brusttasche. XS bis 3XL, sieben Farben.</p>
+            <span class="con con-knit">Strick / Jersey</span>
+          </div>
+        </article>
+        <article class="card" data-con="strick" data-safe="ja">
+          <a class="shot" href="https://www.mrmarvis.com/ch/products/baristas-the-knitted-blazer" target="_blank" rel="noopener">
+            <img src="img/mm2.jpg" alt="Der Strickblazer, Baristas" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.mrmarvis.com/ch/products/baristas-the-knitted-blazer" target="_blank" rel="noopener">Der Strickblazer, Baristas</a></h3>
+            <p class="price">CHF 229</p>
+            <p class="fabric">100 % Bio-Baumwolle, Strick</p>
+            <p class="ev">Dunkles Sandbeige, identische Konstruktion.</p>
+            <span class="con con-knit">Strick / Jersey</span>
+          </div>
+        </article>
+        <article class="card" data-con="strick" data-safe="ja">
+          <a class="shot" href="https://www.mrmarvis.com/ch/products/fairways-the-knitted-blazer" target="_blank" rel="noopener">
+            <img src="img/mm3.jpg" alt="Der Strickblazer, Fairways" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.mrmarvis.com/ch/products/fairways-the-knitted-blazer" target="_blank" rel="noopener">Der Strickblazer, Fairways</a></h3>
+            <p class="price">CHF 229</p>
+            <p class="fabric">100 % Bio-Baumwolle, Strick</p>
+            <p class="ev">Grüne Variante desselben Modells.</p>
+            <span class="con con-knit">Strick / Jersey</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="blueindustry" data-ships="unklar">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">Blue Industry</h3>
+          <p class="meta">Niederlande · EUR 90–200</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-maybe">CH-Versand ungeklärt</span>
+          <a class="cat" href="https://www.blue-industry.com/en/collections/colberts" target="_blank" rel="noopener">blue-industry.com &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Das breiteste Colbert-Sortiment der Niederlande und mit Abstand das günstigste: rund 25 Modelle, fast durchgängig Jersey oder Strick, also ohne jede Konfektionseinlage. Qualitativ eine andere Liga als BONNE oder Boglioli, dafür der einfachste Einstieg, um herauszufinden, ob die weiche Schulter überhaupt das Richtige ist.</p>
+      <p class="ship-note">Versand per DHL, gratis ab EUR 75. Die Versandseite nennt „other countries within Europe, 5–12 Werktage“, die Schweiz aber nicht ausdrücklich.</p>
+      <div class="grid">
+        <article class="card" data-con="strick" data-safe="nein">
+          <a class="shot" href="https://www.blue-industry.com/en/products/blue-industry-colbert-sand" target="_blank" rel="noopener">
+            <img src="img/bi1.jpg" alt="Jersey Travel Jacket, Sand" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.blue-industry.com/en/products/blue-industry-colbert-sand" target="_blank" rel="noopener">Jersey Travel Jacket, Sand</a></h3>
+            <p class="price">EUR 199.95</p>
+            <p class="fabric">Jersey mit Stretch, 3D-Strickverfahren</p>
+            <p class="ev">„With a relaxed fit … this blazer guarantees ultimate comfort and freedom of movement.“</p>
+            <span class="con con-knit">Strick / Jersey</span>
+          </div>
+        </article>
+        <article class="card" data-con="strick" data-safe="nein">
+          <a class="shot" href="https://www.blue-industry.com/en/products/het-gemeleerde-jersey-colbert-sand" target="_blank" rel="noopener">
+            <img src="img/bi2.jpg" alt="Gemeleerd Jersey Colbert, Sand" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.blue-industry.com/en/products/het-gemeleerde-jersey-colbert-sand" target="_blank" rel="noopener">Gemeleerd Jersey Colbert, Sand</a></h3>
+            <p class="price">EUR 99.98</p>
+            <p class="fabric">78 % Polyester, 16 % Viskose, 6 % Elasthan</p>
+            <p class="ev">„made from a lounge jersey fabric … retains its shape.“ Aufgesetzte Taschen, passende Chino im Sortiment.</p>
+            <span class="con con-knit">Strick / Jersey</span>
+          </div>
+        </article>
+        <article class="card" data-con="strick" data-safe="nein">
+          <a class="shot" href="https://www.blue-industry.com/en/products/blue-industry-colbert-blue-1" target="_blank" rel="noopener">
+            <img src="img/bi3.jpg" alt="Strick-Colbert, Blue" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.blue-industry.com/en/products/blue-industry-colbert-blue-1" target="_blank" rel="noopener">Strick-Colbert, Blue</a></h3>
+            <p class="price">EUR 91.98</p>
+            <p class="fabric">Baumwoll-Polyester-Strick</p>
+            <p class="ev">„luxurious knitted fabric in a comfortable cotton-polyester blend … patch pockets“, Slim Fit.</p>
+            <span class="con con-knit">Strick / Jersey</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="cavallaro" data-ships="dap">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">Cavallaro Napoli</h3>
+          <p class="meta">Niederlande · EUR 300–530</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-maybe">Zoll kommt dazu</span>
+          <a class="cat" href="https://www.cavallaronapoli.com/de/herren/sakkos" target="_blank" rel="noopener">cavallaronapoli.com &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Die schwächste Übereinstimmung der ursprünglichen Liste. Die beschriebenen Baumwoll-Elasthan-Anzüge sind derzeit <em>ausgelistet</em> — Torano, Perizzo, Tellaro und Arezzo leiten sämtlich auf die Kategorieseite um. Lieferbar sind fünf Sakkomodelle der Winterkollektion, durchweg Woll- oder Viskosemischungen.</p>
+      <p class="ship-note">Versand in die Schweiz EUR 29.95 per UPS, nur an Privatadressen. Kein CHF-Storefront; ob Einfuhrsteuer im Checkout vorab berechnet wird, ist offen.</p>
+      <div class="grid">
+        <article class="card" data-con="halb" data-safe="nein">
+          <a class="shot" href="https://www.cavallaronapoli.com/de/ilanio-sakko-113999015-699000" target="_blank" rel="noopener">
+            <img src="img/cv1.jpg" alt="Ilanio Sakko" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.cavallaronapoli.com/de/ilanio-sakko-113999015-699000" target="_blank" rel="noopener">Ilanio Sakko</a></h3>
+            <p class="price">EUR 339.95</p>
+            <p class="fabric">Viskosemischung mit Stretch, Futter Polyester-Elasthan</p>
+            <p class="ev">Halb gefüttert, einreihig, Pattentaschen, Regular Fit. Passende Hose separat, EUR 159.95.</p>
+            <span class="con con-half">halb gefüttert</span>
+          </div>
+        </article>
+        <article class="card" data-con="halb" data-safe="nein">
+          <a class="shot" href="https://www.cavallaronapoli.com/de/ozzero-sakko-113265007-699006" target="_blank" rel="noopener">
+            <img src="img/cv2.jpg" alt="Ozzero Sakko" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.cavallaronapoli.com/de/ozzero-sakko-113265007-699006" target="_blank" rel="noopener">Ozzero Sakko</a></h3>
+            <p class="price">EUR 299.95</p>
+            <p class="fabric">Merinowollmischung</p>
+            <p class="ev">„Gefütterte Ärmel“ und aufgesetzte Taschen — der Korpus bleibt offen, das Aussentaschendetail ist typisch für weiche Konstruktion.</p>
+            <span class="con con-half">halb gefüttert</span>
+          </div>
+        </article>
+        <article class="card" data-con="halb" data-safe="nein">
+          <a class="shot" href="https://www.cavallaronapoli.com/de/felisio-sakko-113265005-699009" target="_blank" rel="noopener">
+            <img src="img/cv3.jpg" alt="Felisio Sakko" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.cavallaronapoli.com/de/felisio-sakko-113265005-699009" target="_blank" rel="noopener">Felisio Sakko</a></h3>
+            <p class="price">EUR 369.95</p>
+            <p class="fabric">Wollmischung, Futter Viskose</p>
+            <p class="ev">„Gefütterte Ärmel“, einreihig, Pattentaschen, zwei Innentaschen.</p>
+            <span class="con con-half">halb gefüttert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="einzel" data-ships="unklar">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">Dstrezzed &amp; State of Art</h3>
+          <p class="meta">Niederlande · EUR 220–230</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-maybe">CH-Versand ungeklärt</span>
+          <a class="cat" href="https://www.dstrezzed.com/collections/blazers" target="_blank" rel="noopener">dstrezzed.com &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Zwei Marken, bei denen jeweils genau ein Modell passt. Bei Dstrezzed ist es das einzige Sakko im ganzen Shop, bei State of Art das einzige aus Naturfaser.</p>
+      <p class="ship-note">Beide Shops rechnen in EUR ohne Schweizer Markt; die Versandseiten nennen die Schweiz nicht.</p>
+      <div class="grid">
+        <article class="card" data-con="strick" data-safe="nein">
+          <a class="shot" href="https://www.dstrezzed.com/products/roman-blazer" target="_blank" rel="noopener">
+            <img src="img/ds1.jpg" alt="Dstrezzed — Roman Blazer" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.dstrezzed.com/products/roman-blazer" target="_blank" rel="noopener">Dstrezzed — Roman Blazer</a></h3>
+            <p class="price">EUR 219.95</p>
+            <p class="fabric">Fischgrat aussen, Sweatstrick innen</p>
+            <p class="ev">„On the outside, it looks like a sophisticated melange herringbone, while the inside reveals the comfort of a knitted sweat fabric.“ Passende Hose als Set.</p>
+            <span class="con con-knit">Strick / Jersey</span>
+          </div>
+        </article>
+        <article class="card" data-con="halb" data-safe="nein">
+          <a class="shot" href="https://www.stateofart.com/products/corduroy-blazer-van-katoenmix-26803-4200" target="_blank" rel="noopener">
+            <img src="img/so1.jpg" alt="State of Art — Corduroy Blazer" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.stateofart.com/products/corduroy-blazer-van-katoenmix-26803-4200" target="_blank" rel="noopener">State of Art — Corduroy Blazer</a></h3>
+            <p class="price">EUR 229.95</p>
+            <p class="fabric">Cord aus Baumwolle-Elasthan</p>
+            <p class="ev">„De halfvoering en twee loopsplitten achter verhogen het draagcomfort.“ Halb gefüttert, Regular Fit.</p>
+            <span class="con con-half">halb gefüttert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+  </section>
+
+  <section class="region" id="r-it" data-region="it">
+    <div class="region-head">
+      <h2>Italien</h2>
+      <p class="region-note">Die Herkunft der Bauweise. Was hier „sfoderato e destrutturato“ heisst, ist keine Saisonlaune, sondern eine eigene Schneidertradition — entsprechend belastbar sind die Angaben.</p>
+    </div>
+    <section class="brand" id="boglioli" data-ships="ddp">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">Boglioli</h3>
+          <p class="meta">Mailand · CHF 500–1'200</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-yes">Zoll im Preis</span>
+          <a class="cat" href="https://www.bogliolimilano.com/de-ch/collections/k-jackets" target="_blank" rel="noopener">bogliolimilano.com/de-ch &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Das K-Jacket ist der Referenzpunkt der ganzen Kategorie: 65 Varianten, und praktisch jede Beschreibung nennt wortgleich „destrutturata e sfoderata“. Zu haben in Leinen, Stretch-Baumwolle, Baumwoll-Tencel und Strickjersey. Ein Hinweis zur Suche: <em>boglioli.it</em> ist tot, der offizielle Shop läuft unter bogliolimilano.com.</p>
+      <p class="ship-note">Eigene CHF-Storefront, Gratisversand und Gratisretouren. Die Schweiz steht ausdrücklich auf der DDP-Liste — Einfuhrabgaben sind im Preis enthalten.</p>
+      <div class="grid">
+        <article class="card" data-con="offen" data-safe="ja">
+          <a class="shot" href="https://www.bogliolimilano.com/de-ch/products/k-jacket-in-cotone-stretch-tinto-in-capo-verde-26p_150_n2902q_sb6754_00_0511_r" target="_blank" rel="noopener">
+            <img src="img/bo1.jpg" alt="K-Jacket, Stretch-Baumwolle grün" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.bogliolimilano.com/de-ch/products/k-jacket-in-cotone-stretch-tinto-in-capo-verde-26p_150_n2902q_sb6754_00_0511_r" target="_blank" rel="noopener">K-Jacket, Stretch-Baumwolle grün</a></h3>
+            <p class="price">CHF 588</p>
+            <p class="fabric">Stretch-Baumwolle, stückgefärbt</p>
+            <p class="ev">„La struttura sfoderata e destrutturata e i doppi spacchi posteriori garantiscono facilità di movimento.“</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+        <article class="card" data-con="strick" data-safe="ja">
+          <a class="shot" href="https://www.bogliolimilano.com/de-ch/products/k-jacket-in-jersey-lavorato-blu-26a_150_n1302e_fa0015_00_0790_r" target="_blank" rel="noopener">
+            <img src="img/bo3.jpg" alt="K-Jacket, Strickjersey blau" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.bogliolimilano.com/de-ch/products/k-jacket-in-jersey-lavorato-blu-26a_150_n1302e_fa0015_00_0790_r" target="_blank" rel="noopener">K-Jacket, Strickjersey blau</a></h3>
+            <p class="price">CHF 1'180</p>
+            <p class="fabric">gestrickter Jersey</p>
+            <p class="ev">„…grazie alle doppie spacchi posteriori e alla struttura destrutturata e sfoderata.“</p>
+            <span class="con con-knit">Strick / Jersey</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="aspesi" data-ships="ddp">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">Aspesi</h3>
+          <p class="meta">Mailand · EUR 260–460</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-yes">Zoll im Preis</span>
+          <a class="cat" href="https://www.aspesi.com/collections/uomo-giacche-e-blazer" target="_blank" rel="noopener">aspesi.com &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Bekannt für Outerwear, führt aber in der aktuellen Linie echte ungefütterte Sakkos: Das Modell heisst im Shop wörtlich „Blazer sfoderato in lino“. Mit rund EUR 294 der günstigste italienische Einstieg. Eine Einschränkung: Die blaue Farbvariante hat derzeit eine defekte Produktseite (Serverfehler 500), lieferbar ist die grüne.</p>
+      <p class="ship-note">Versandbedingungen ausdrücklich: „Aspesi si fa carico di sostenere i dazi nei seguenti Paesi: Svizzera …“ — der Zoll geht zulasten der Marke.</p>
+      <div class="grid">
+        <article class="card" data-con="offen" data-safe="ja">
+          <a class="shot" href="https://www.aspesi.com/products/blazer-samuraki-in-lino-leggero-verde" target="_blank" rel="noopener">
+            <img src="img/as1.jpg" alt="Blazer sfoderato in lino, grün" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.aspesi.com/products/blazer-samuraki-in-lino-leggero-verde" target="_blank" rel="noopener">Blazer sfoderato in lino, grün</a></h3>
+            <p class="price">EUR 294</p>
+            <p class="fabric">Leinen, Airo-Finish, stückgefärbt</p>
+            <p class="ev">„Blazer sfoderato realizzato in tela di lino … tre bottoni, rever classico, tre tasche a toppa.“ Drei aufgesetzte Taschen, drei Knöpfe.</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="lbm" data-ships="unklar">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">L.B.M. 1911</h3>
+          <p class="meta">Mantua · EUR 450–750</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-maybe">CH-Versand ungeklärt</span>
+          <a class="cat" href="https://www.lbm1911.com/collections/giacche-uomo" target="_blank" rel="noopener">lbm1911.com &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Der ergiebigste Fund Italiens: In der Kategorie Giacche Uomo tragen rund zwanzig Sakkos ausdrücklich „costruzione sfoderata“, in Baumwolle, Woll-Jersey und Woll-Seide-Leinen. Besonders vertrauenswürdig, weil das Haus sauber unterscheidet — die Giacca JOHN sagt ausdrücklich „La costruzione <em>foderata</em>“, ist also gefüttert. Die Etiketten sind hier keine Marketingfloskel.</p>
+      <p class="ship-note">Der Store-Selector kennt nur Italien und EU, beide in EUR; Zollangaben fehlen ganz. Zusätzlich verlangt der Shop, dass Lieferland und Bestellland übereinstimmen. Alternative: PKZ führt die Marke unter „Lubiam“ mit CHF-Preisen und Inlandversand — dort aber teils gefütterte Stücke.</p>
+      <div class="grid">
+        <article class="card" data-con="offen" data-safe="nein">
+          <a class="shot" href="https://www.lbm1911.com/products/22h6_73_2693_s_62507_3-giacca-tom-in-cotone-avorio" target="_blank" rel="noopener">
+            <img src="img/lb1.jpg" alt="Giacca TOM, Baumwolle ivory" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.lbm1911.com/products/22h6_73_2693_s_62507_3-giacca-tom-in-cotone-avorio" target="_blank" rel="noopener">Giacca TOM, Baumwolle ivory</a></h3>
+            <p class="price">EUR 590</p>
+            <p class="fabric">Baumwolle, unbehandelt</p>
+            <p class="ev">„…mentre la costruzione sfoderata ne esalta leggerezza e comfort. Sfoderata, tessuto non trattato.“</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+        <article class="card" data-con="strick" data-safe="nein">
+          <a class="shot" href="https://www.lbm1911.com/products/22h6_73_2813_s_65738_3-giacca-tom-in-jersey-principe-di-galles" target="_blank" rel="noopener">
+            <img src="img/lb2.jpg" alt="Giacca TOM, Jersey Glencheck" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.lbm1911.com/products/22h6_73_2813_s_65738_3-giacca-tom-in-jersey-principe-di-galles" target="_blank" rel="noopener">Giacca TOM, Jersey Glencheck</a></h3>
+            <p class="price">EUR 570</p>
+            <p class="fabric">Jersey mélange, Glencheck</p>
+            <p class="ev">„…la costruzione sfoderata ne esalta la naturale elasticità e il comfort.“ Alle Grössen lieferbar.</p>
+            <span class="con con-knit">Strick / Jersey</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="barena" data-ships="unklar">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">Barena Venezia</h3>
+          <p class="meta">Venedig · EUR 590–860</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-maybe">CH-Versand ungeklärt</span>
+          <a class="cat" href="https://barenavenezia.com/collections/jackets-man" target="_blank" rel="noopener">barenavenezia.com &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Der venezianische Gegenentwurf zur neapolitanischen Schule: kürzere, kastigere Silhouetten, viel Hemdjacken-Vokabular. Wichtig bei der Modellwahl — Barena benennt Konstruktionsgrade sehr genau: Nur die Borgo Tropical ist „unstructured <em>and unlined</em>“, die Schwestermodelle Borgo Flan und Novento sind „unstructured <em>and partially lined</em>“.</p>
+      <p class="ship-note">Die Schweiz steht im Länderwähler und in „Area 1 – Europe“, Carrier ist DHL. Versandkosten und Zollmodus werden nicht angegeben.</p>
+      <div class="grid">
+        <article class="card" data-con="offen" data-safe="nein">
+          <a class="shot" href="https://barenavenezia.com/products/giacca-borgo-tropical-navy" target="_blank" rel="noopener">
+            <img src="img/ba1.jpg" alt="Giacca Borgo Tropical, navy" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://barenavenezia.com/products/giacca-borgo-tropical-navy" target="_blank" rel="noopener">Giacca Borgo Tropical, navy</a></h3>
+            <p class="price">EUR 690</p>
+            <p class="fabric">100 % Schurwolle, Tropical, 230 g/lfm</p>
+            <p class="ev">„This classic two-button blazer is unstructured and unlined, featuring a regular silhouette and a modern fit.“</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="circolo" data-ships="dap">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">Circolo 1901</h3>
+          <p class="meta">Neapel · EUR 250–550</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-maybe">Zoll kommt dazu</span>
+          <a class="cat" href="https://www.circolo1901.it/collections/giacche-uomo" target="_blank" rel="noopener">circolo1901.it &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Trifft die Stoffvorgabe am direktesten — zwanzig Herrensakkos in Piqué, Jersey, Sweat und Cord. <strong>Aber:</strong> Der Shop beschreibt Produkte ausschliesslich als Spec-Liste und sagt zur Konstruktion nichts; die Volltextsuche nach „sfoderato“ liefert kein einziges Sakko. Der Händler THE BS führt ein Circolo-Modell wörtlich als „unstructured“ — beim Hersteller selbst ist das nicht belegt. Deshalb hier ohne Konstruktionsangabe geführt.</p>
+      <p class="ship-note">Gratisversand ab EUR 100, Lieferung ausdrücklich DAP: „Restano a carico del Cliente eventuali costi di sdoganamento compresi i dazi di importazione.“</p>
+      <div class="grid">
+        <article class="card" data-con="unbelegt" data-safe="nein">
+          <a class="shot" href="https://www.circolo1901.it/products/giacca-doppiopetto-piquet" target="_blank" rel="noopener">
+            <img src="img/ci1.jpg" alt="Giacca doppiopetto piquet" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.circolo1901.it/products/giacca-doppiopetto-piquet" target="_blank" rel="noopener">Giacca doppiopetto piquet</a></h3>
+            <p class="price">EUR 252</p>
+            <p class="fabric">Piqué filo di Scozia, 97 % Baumwolle, 3 % Elasthan</p>
+            <p class="ev">Die Beschreibung nennt nur Revers, Knöpfe, Taschen und Doppelschlitz — kein Wort zu Fütterung oder Konstruktion. Piqué-Gewebe schliesst eine Rosshaareinlage praktisch aus, zugesichert ist es aber nicht.</p>
+            <span class="con con-none">nicht deklariert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+  </section>
+
+  <section class="region" id="r-uk" data-region="uk">
+    <div class="region-head">
+      <h2>Grossbritannien</h2>
+      <p class="region-note">Hier sitzen die ausführlichsten Konstruktionsangaben des ganzen Felds — mehrere Shops führen „Unlined“ und „Soft, natural shoulder line“ als eigene Datenfelder. Dafür ist seit dem Brexit die Zollfrage entscheidend.</p>
+    </div>
+    <section class="brand" id="kestin" data-ships="ddp">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">Kestin</h3>
+          <p class="meta">Edinburgh · GBP 229–275 · CHF 285</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-yes">Zoll im Preis</span>
+          <a class="cat" href="https://www.kestin.co/collections/jackets" target="_blank" rel="noopener">kestin.co &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Trifft das Gesuchte fast wörtlich: Der Stac ist ausdrücklich als Hybrid „between a blazer and a chore coat“ konzipiert — drei runde aufgesetzte Taschen, kurzes Kerbrevers, Hornimitat-Knöpfe. Dazu gibt es die passende Doune-Hose mit Gummibund für einen kompletten weichen Anzug. Das günstigste Angebot mit vollständig belegter Konstruktion.</p>
+      <p class="ship-note">Unmissverständlich DDP: „there will be no surprise charges from your customs authority … including all duties and taxes.“ Achtung: Der günstige Economy-Versand ist laut Shop „not available in Switzerland“, für Zug bleibt Express.</p>
+      <div class="grid">
+        <article class="card" data-con="offen" data-safe="ja">
+          <a class="shot" href="https://www.kestin.co/products/stac-blazer-in-olive-check-organic-cotton" target="_blank" rel="noopener">
+            <img src="img/ke1.jpg" alt="Stac Blazer, Olive Check" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.kestin.co/products/stac-blazer-in-olive-check-organic-cotton" target="_blank" rel="noopener">Stac Blazer, Olive Check</a></h3>
+            <p class="price">CHF 285</p>
+            <p class="fabric">100 % Bio-Baumwolle, Mikrokaro, Portugal</p>
+            <p class="ev">„our smartest but comfortably unstructured jacket … the jacket is unlined to provide breathability and comfort.“ Spec-Liste führt „Unlined“ als eigenes Feld.</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="oliverspencer" data-ships="ddp">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">Oliver Spencer</h3>
+          <p class="meta">London · GBP 259–479 · CHF 345–449</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-yes">Zoll im Preis</span>
+          <a class="cat" href="https://oliverspencer.co.uk/collections/jackets" target="_blank" rel="noopener">oliverspencer.co.uk &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Macht seit zwanzig Jahren genau das Gesuchte; die Produkttexte nennen „unstructured suiting“ selbst „the cornerstone of Oliver Spencer collections“. Der Theobald ist das klassische ungefütterte Baumwoll-Sakko, der Camberwell die workwear-nähere Cord-Variante. Das in der Literatur oft genannte Modell <em>Fairway</em> existiert im aktuellen Katalog nicht.</p>
+      <p class="ship-note">CHF-Storefront, Versandpauschale CHF 20, Verkauf über Global-e. DDP ist optional: „International taxes & duties can be prepaid at checkout“ — im Checkout aktiv wählen, sonst kommt der Zoll bei der Zustellung.</p>
+      <div class="grid">
+        <article class="card" data-con="offen" data-safe="ja">
+          <a class="shot" href="https://oliverspencer.co.uk/products/theobald-ashdown-navy-cotton-summer-blazer" target="_blank" rel="noopener">
+            <img src="img/os1.jpg" alt="Theobald Jacket, Ashdown Navy" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://oliverspencer.co.uk/products/theobald-ashdown-navy-cotton-summer-blazer" target="_blank" rel="noopener">Theobald Jacket, Ashdown Navy</a></h3>
+            <p class="price">CHF 449</p>
+            <p class="fabric">100 % Baumwolle, weicher Twill mit Naturstretch, Portugal</p>
+            <p class="ev">Spec wörtlich: „Unstructured with soft shoulder roll construction / Unlined with contrast taped seams and cotton sleeve lining.“</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+        <article class="card" data-con="offen" data-safe="ja">
+          <a class="shot" href="https://oliverspencer.co.uk/products/camberwell-jacket-ivers-cord-navy" target="_blank" rel="noopener">
+            <img src="img/os2.jpg" alt="Camberwell Jacket, Cord navy" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://oliverspencer.co.uk/products/camberwell-jacket-ivers-cord-navy" target="_blank" rel="noopener">Camberwell Jacket, Cord navy</a></h3>
+            <p class="price">CHF 345</p>
+            <p class="fabric">98 % Baumwolle, 2 % Elasthan, Cord</p>
+            <p class="ev">„It comes fully unstructured and features a slim notch lapel … With three patch pockets, it riffs on traditional workwear jackets.“</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="universalworks" data-ships="unklar">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">Universal Works</h3>
+          <p class="meta">Nottingham · GBP 85–345 · CHF 160–277</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-maybe">CH-Versand ungeklärt</span>
+          <a class="cat" href="https://universalworks.com/collections/jackets" target="_blank" rel="noopener">universalworks.com &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Der eigentliche Arbeitsanzug-Ansatz: Cord-, Leinen- und Canvas-Sakkos mit aufgesetzten Taschen, kombinierbar mit passender Hose — das britische Gegenstück zu BONNE. <strong>Fehlkauf-Falle:</strong> Die oft empfohlene <em>London Jacket</em> ist laut eigener Spec „Lined“ mit Baumwollfutter im Korpus. Das richtige Modell ist das Three Button Jacket.</p>
+      <p class="ship-note">Die Versandseite widerspricht sich: oben „All orders shipped DDP (no extra fees on delivery)“, weiter unten für Rest of World das Gegenteil. Dazu passt, dass der CHF-Preis unter der reinen Umrechnung liegt, also netto ohne britische Mehrwertsteuer. Vor dem Kauf nachfragen.</p>
+      <div class="grid">
+        <article class="card" data-con="offen" data-safe="nein">
+          <a class="shot" href="https://universalworks.com/products/dark-navy-cord-three-button-jacket" target="_blank" rel="noopener">
+            <img src="img/uw1.jpg" alt="Three Button Jacket, Cord navy" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://universalworks.com/products/dark-navy-cord-three-button-jacket" target="_blank" rel="noopener">Three Button Jacket, Cord navy</a></h3>
+            <p class="price">CHF 277</p>
+            <p class="fabric">100 % Baumwolle, 8-wale Cord</p>
+            <p class="ev">„a loose-fitting, unstructured jacket with three buttons and three patch pockets … a relaxed take on formal.“ S bis 3XL.</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+        <article class="card" data-con="unbelegt" data-safe="nein">
+          <a class="shot" href="https://universalworks.com/products/universal-works-bakers-jacket-in-light-olive-twill" target="_blank" rel="noopener">
+            <img src="img/uw2.jpg" alt="Bakers Chore Jacket, Twill oliv" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://universalworks.com/products/universal-works-bakers-jacket-in-light-olive-twill" target="_blank" rel="noopener">Bakers Chore Jacket, Twill oliv</a></h3>
+            <p class="price">CHF 160</p>
+            <p class="fabric">100 % Baumwolle, hauseigener 3/1-Twill</p>
+            <p class="ev">Die Wörter unlined und unstructured fallen hier nicht. Die Materialangabe listet nur „Outer: 100 % Cotton. Sleeve Lining: 100 % Polyester“ — kein Korpusfutter. Fünf Knöpfe, kein Revers: ein Chore Jacket, kein Sakko.</p>
+            <span class="con con-none">nicht deklariert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="drakes" data-ships="ddp">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">Drake's</h3>
+          <p class="meta">London · GBP 795–895 · CHF 945</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-yes">Zoll im Preis</span>
+          <a class="cat" href="https://www.drakes.com/collections/games-blazers" target="_blank" rel="noopener">drakes.com &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Die Referenz für Schneiderei ohne Steifheit. Der Games Blazer ist ein 3-Roll-2-Sakko mit aufgesetzten Taschen, in Italien genäht, in rund vierzig Stoffvarianten von Cord über Moleskin bis Seersucker. Das obere Ende dieser Liste — dafür die belastbarste Beleglage und keine Zollüberraschung.</p>
+      <p class="ship-note">Die sauberste Schweiz-Regel im ganzen Feld, namentlich: „Switzerland: Free express shipping on all orders over 260 CHF. Duties and Taxes included.“ Darunter CHF 20 Versand, DHL Express.</p>
+      <div class="grid">
+        <article class="card" data-con="offen" data-safe="ja">
+          <a class="shot" href="https://www.drakes.com/products/navy-cotton-corduroy-games-blazer-mk-i" target="_blank" rel="noopener">
+            <img src="img/dr1.jpg" alt="Games Blazer Mk. I, Cord navy" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.drakes.com/products/navy-cotton-corduroy-games-blazer-mk-i" target="_blank" rel="noopener">Games Blazer Mk. I, Cord navy</a></h3>
+            <p class="price">CHF 945</p>
+            <p class="fabric">100 % Baumwolle, 8-wale Cord aus Yorkshire</p>
+            <p class="ev">Spec-Liste: „Unlined Body / Unstructured Composition / 3-Roll-2 Button Placement / Soft, Natural Shoulder Line / Ventless Back.“</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+        <article class="card" data-con="offen" data-safe="ja">
+          <a class="shot" href="https://www.drakes.com/products/sand-cotton-linen-games-blazer-mk-iv" target="_blank" rel="noopener">
+            <img src="img/dr2.jpg" alt="Games Blazer Mk. IV, Baumwoll-Leinen sand" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.drakes.com/products/sand-cotton-linen-games-blazer-mk-iv" target="_blank" rel="noopener">Games Blazer Mk. IV, Baumwoll-Leinen sand</a></h3>
+            <p class="price">CHF 945</p>
+            <p class="fabric">57 % Baumwolle, 43 % Leinen, italienischer Twill</p>
+            <p class="ev">„it features an unstructured shape, a generous cut“; Spec: „Soft, Natural Shoulder Line / Unlined and Unstructured.“</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="sehkelly" data-ships="unklar">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">S.E.H Kelly</h3>
+          <p class="meta">London · GBP 490–520 · CHF 609</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-maybe">CH-Versand ungeklärt</span>
+          <a class="cat" href="https://sehkelly.com/collections/jackets" target="_blank" rel="noopener">sehkelly.com &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Ein Kleinstbetrieb, der alles in Grossbritannien fertigt und jeden Zulieferer einzeln porträtiert — Leinenweber auf den Äusseren Hebriden, Hornknopfmacher in den West Midlands, Nähstube in Nordost-London. Das Sortiment ist winzig, aktuell vier lieferbare Jacken.</p>
+      <p class="ship-note">Eigener CH-Markt mit CHF-Preisen, der Policy-Text widerspricht sich aber: einerseits „added at point of checkout“, andererseits „may include additional customs and duties fees not shown at the checkout“. Schriftlich rückfragen.</p>
+      <div class="grid">
+        <article class="card" data-con="offen" data-safe="nein">
+          <a class="shot" href="https://sehkelly.com/products/sb-jacket-in-linen-hopsack-in-natural" target="_blank" rel="noopener">
+            <img src="img/sk1.jpg" alt="SB Jacket, Leinen natural" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://sehkelly.com/products/sb-jacket-in-linen-hopsack-in-natural" target="_blank" rel="noopener">SB Jacket, Leinen natural</a></h3>
+            <p class="price">CHF 609</p>
+            <p class="fabric">10 oz Leinen aus Nordirland, Hornknöpfe</p>
+            <p class="ev">Die vollständige Produktbeschreibung lautet: „Unstructured tailored jacket, made in London, with a mid-weight (10oz) linen from Northern Ireland, and horn buttons from the Cotswolds.“</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+  </section>
+
+  <section class="region" id="r-nord" data-region="nord">
+    <div class="region-head">
+      <h2>Skandinavien</h2>
+      <p class="region-note">Zwei Lager: Häuser, die die Konstruktion vorbildlich dokumentieren, aber den Zoll dem Kunden überlassen — und solche mit bequemem Schweizer Shop, die zur Konstruktion schweigen.</p>
+    </div>
+    <section class="brand" id="bergberg" data-ships="dap">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">Berg &amp; Berg</h3>
+          <p class="meta">Stockholm · EUR 200–450</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-maybe">Zoll kommt dazu</span>
+          <a class="cat" href="https://bergbergstore.com/collections/jackets" target="_blank" rel="noopener">bergbergstore.com &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Stockholmer Direktvertrieb mit neapolitanisch geprägter Schnittführung. Als einziges Haus im ganzen Feld führt Berg &amp; Berg <em>beide</em> entscheidenden Angaben als eigene Datenfelder: „Unlined“ und „Soft natural shoulder line“. Die ganze Dante-Linie ist so deklariert, daneben steht die klassische Half-Canvas-Konfektion.</p>
+      <p class="ship-note">Die Schweiz ist eigener Markt (in EUR), Versand mit FedEx, gratis ab EUR 300. Zoll ausdrücklich nicht enthalten: „For other countries, VAT and customs duties are not included and may be charged upon delivery.“</p>
+      <div class="grid">
+        <article class="card" data-con="offen" data-safe="nein">
+          <a class="shot" href="https://bergbergstore.com/products/darwin-casual-blazer-navy-copy" target="_blank" rel="noopener">
+            <img src="img/bb1.jpg" alt="Dante Unlined Corduroy Jacket, navy" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://bergbergstore.com/products/darwin-casual-blazer-navy-copy" target="_blank" rel="noopener">Dante Unlined Corduroy Jacket, navy</a></h3>
+            <p class="price">EUR 397.50</p>
+            <p class="fabric">100 % Baumwolle, 8-wale Cord, 325 g/m²</p>
+            <p class="ev">„The Dante is a casual, unconstructed jacket – an unlined model … The absence of lining lends a relaxed look and feel.“ Spec: „Unlined“, „Soft natural shoulder line“.</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+        <article class="card" data-con="offen" data-safe="nein">
+          <a class="shot" href="https://bergbergstore.com/products/dante-unlined-cavalry-twill-club-blazer-sand" target="_blank" rel="noopener">
+            <img src="img/bb2.jpg" alt="Dante Unlined Cavalry Twill, sand" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://bergbergstore.com/products/dante-unlined-cavalry-twill-club-blazer-sand" target="_blank" rel="noopener">Dante Unlined Cavalry Twill, sand</a></h3>
+            <p class="price">EUR 447.50</p>
+            <p class="fabric">100 % Wolle, English Cavalry Twill, 325 g/m²</p>
+            <p class="ev">Identisches Spec-Sheet: „Unlined“, „Soft natural shoulder line“, „Made in Europe“.</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="norse" data-ships="dap">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">Norse Projects</h3>
+          <p class="meta">Kopenhagen · EUR 180–350</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-maybe">Zoll kommt dazu</span>
+          <a class="cat" href="https://norseprojects.com/collections/jackets" target="_blank" rel="noopener">norseprojects.com &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Zwischen Workwear und skandinavischem Minimalismus. Das Dyvig ist ein schweres, weiches Baumwoll-Woll-Sakko mit aufgesetzten Taschen im Schnitt einer Arbeitsjacke — die Kategorie, die alltagstauglich statt konfektionssteif ist. Alle Grössen XS bis XXL lagernd.</p>
+      <p class="ship-note">Die Schweiz ist eigener Markt, abgerechnet in EUR, Gratisversand ab EUR 350. Vorab bezahlter Zoll ist ausdrücklich nur für die USA und Grossbritannien geregelt.</p>
+      <div class="grid">
+        <article class="card" data-con="offen" data-safe="nein">
+          <a class="shot" href="https://norseprojects.com/products/dyvig-cotton-wool-twill-sports-blazer-dark-navy" target="_blank" rel="noopener">
+            <img src="img/np1.jpg" alt="Dyvig Sports Blazer, dark navy" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://norseprojects.com/products/dyvig-cotton-wool-twill-sports-blazer-dark-navy" target="_blank" rel="noopener">Dyvig Sports Blazer, dark navy</a></h3>
+            <p class="price">EUR 348</p>
+            <p class="fabric">72 % Baumwolle, 15 % Wolle, 13 % Polyester, 470 g/m²</p>
+            <p class="ev">„A sports blazer with a unstructured and relaxed fit“, Corozo-Knöpfe, „work jacket inspired front patch pockets“. Ein Korpusfutter wird nicht geführt, das Wort unlined fällt aber nicht.</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="nn07" data-ships="ddp">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">NN.07</h3>
+          <p class="meta">Kopenhagen · CHF 550–640</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-yes">Zoll im Preis</span>
+          <a class="cat" href="https://www.nn07.com/de/ch/men/overshirts-blazers" target="_blank" rel="noopener">nn07.com/de/ch &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Dänisches Label mit betont weicher, relaxter Passform; die Kategorie heisst dort wörtlich „Overshirts &amp; Blazers“ — die Sakkos sitzen bewusst zwischen Overshirt und Konfektion. <strong>Der Haken:</strong> Weder „unlined“ noch „unstructured“ kommt auf den Produktseiten vor. Bequem zu bestellen, aber ohne jeden Konstruktionsbeleg.</p>
+      <p class="ship-note">Der bequemste Kauf Skandinaviens: eigener CHF-Storefront, DHL Standard CHF 27 oder Express CHF 20, gratis ab CHF 300, und ausdrücklich „Taxes & Duties included in price“.</p>
+      <div class="grid">
+        <article class="card" data-con="unbelegt" data-safe="ja">
+          <a class="shot" href="https://www.nn07.com/en/ch/jordin-10002-eden-green" target="_blank" rel="noopener">
+            <img src="img/nn1.jpg" alt="Jordin 10002 Blazer, Eden Green" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.nn07.com/en/ch/jordin-10002-eden-green" target="_blank" rel="noopener">Jordin 10002 Blazer, Eden Green</a></h3>
+            <p class="price">CHF 640</p>
+            <p class="fabric">98 % zertifizierte Wolle, 2 % Elasthan, 550 g/m² Twill</p>
+            <p class="ev">„Relaxed fit blazer crafted from a luxurious certified wool twill blend with a touch of stretch.“ Futter und Schulterpolster werden nicht erwähnt.</p>
+            <span class="con con-none">nicht deklariert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="adaysmarch" data-ships="dap">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">A Day's March</h3>
+          <p class="meta">Stockholm · EUR 200–380</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-maybe">Zoll kommt dazu</span>
+          <a class="cat" href="https://www.adaysmarch.com/eu/men/blazers" target="_blank" rel="noopener">adaysmarch.com/eu &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Schwedischer Direktvertrieb mit bewusst niedrigen Preisen. Bei der Modellwahl aufpassen — die Produktdaten sind eindeutig: Bedford ist „Fully lined“, Welland hat „Body lining“, der Avenue wird sogar mit „a structured finish“ beworben. Nur das Mace kommt in Frage, und auch dort steht das Wort unlined nicht.</p>
+      <p class="ship-note">Kein Schweizer Markt, Kauf über /eu in EUR. Zollfreiheit gilt laut Shop nur für EU, Grossbritannien und Norwegen; für die Schweiz: „you are responsible for any customs duties, taxes, or fees.“</p>
+      <div class="grid">
+        <article class="card" data-con="unbelegt" data-safe="nein">
+          <a class="shot" href="https://www.adaysmarch.com/eu/mace-cotton-blazer-navy" target="_blank" rel="noopener">
+            <img src="img/ad1.jpg" alt="Mace Cotton Blazer, navy" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.adaysmarch.com/eu/mace-cotton-blazer-navy" target="_blank" rel="noopener">Mace Cotton Blazer, navy</a></h3>
+            <p class="price">EUR 200</p>
+            <p class="fabric">100 % Baumwolle</p>
+            <p class="ev">Die vollständige Spec-Liste führt Schnitt, Knöpfe, aufgesetzte Taschen und Nähte — ein Futter ist, anders als bei den Schwestermodellen, nicht gelistet. Das Wort unlined fällt nicht.</p>
+            <span class="con con-none">nicht deklariert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="oscarjacobson" data-ships="unklar">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">Oscar Jacobson</h3>
+          <p class="meta">Borås · EUR 370–700</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-maybe">CH-Versand ungeklärt</span>
+          <a class="cat" href="https://www.oscarjacobson.com/en-eu/blazers/" target="_blank" rel="noopener">oscarjacobson.com &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Traditionshaus von 1903 und das einzige, das die Konstruktion in einem strukturierten Datenfeld ausweist — man kann gezielt nach „Shoulder: Unconstructed“ filtern. Wichtig: Das Modell <strong>Ferry</strong> ist unkonstruiert, das ähnlich weiche <em>Fogerty</em> dagegen „Super soft constructed“ und gefüttert.</p>
+      <p class="ship-note">Kein CH-Storefront und kein CHF-Preis. Auf Liefer-, FAQ-, AGB- und Retourenseite kommt „Switzerland“ kein einziges Mal vor. Vor einer Bestellung beim Kundendienst klären.</p>
+      <div class="grid">
+        <article class="card" data-con="halb" data-safe="nein">
+          <a class="shot" href="https://www.oscarjacobson.com/en-eu/regular-fit-checked-blazer-31921843-black-310/" target="_blank" rel="noopener">
+            <img src="img/oj1.jpg" alt="Ferry Patch Soft Blazer, schwarz" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.oscarjacobson.com/en-eu/regular-fit-checked-blazer-31921843-black-310/" target="_blank" rel="noopener">Ferry Patch Soft Blazer, schwarz</a></h3>
+            <p class="price">EUR 419.30</p>
+            <p class="fabric">59 % Baumwolle, 40 % Leinen, 1 % Elasthan</p>
+            <p class="ev">Spec-Tabelle wörtlich: „Shoulder: Unconstructed“ · „Lining: Half lined“ · „Pockets: Patch“. Die Schulter ist also offen, der Korpus halb gefüttert.</p>
+            <span class="con con-half">halb gefüttert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+  </section>
+
+  <section class="region" id="r-west" data-region="west">
+    <div class="region-head">
+      <h2>Frankreich, Spanien, DACH</h2>
+      <p class="region-note">Hier stehen die beiden einzigen Produktbeschreibungen des gesamten Felds, die Schulterpolster ausdrücklich ausschliessen — und die günstigsten echten Unkonstruierten überhaupt.</p>
+    </div>
+    <section class="brand" id="officine" data-ships="chshop">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">Officine Générale</h3>
+          <p class="meta">Paris · EUR 295–575</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-yes">Schweizer Shop</span>
+          <a class="cat" href="https://officinegenerale.com/collections/vestes" target="_blank" rel="noopener">officinegenerale.com &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Das Pariser Label von Pierre Mahéo hat diese Nische praktisch definiert: Konfektion mit der Weichheit eines Hemds. Die Beschreibung der New Lightest ist der präziseste Beleg im ganzen Feld — sie schliesst Schulterpolster ausdrücklich aus. <strong>Zur Abgrenzung:</strong> Die teurere <em>Veste Arthus</em> (EUR 575) ist „Entièrement doublé“ mit „léger rembourrage à l'épaule“, also gefüttert und gepolstert.</p>
+      <p class="ship-note">Der Länderwähler führt die Schweiz mit CHF als eigenen Markt. Der exakte CHF-Preis liess sich ohne Sitzung nicht auslesen, Zollhinweise fehlen — im Checkout prüfen.</p>
+      <div class="grid">
+        <article class="card" data-con="offen" data-safe="ja">
+          <a class="shot" href="https://officinegenerale.com/products/new-lightest-jacket-italian-organic-cotton-navy" target="_blank" rel="noopener">
+            <img src="img/og1.jpg" alt="Veste New Lightest, navy" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://officinegenerale.com/products/new-lightest-jacket-italian-organic-cotton-navy" target="_blank" rel="noopener">Veste New Lightest, navy</a></h3>
+            <p class="price">EUR 295</p>
+            <p class="fabric">100 % Bio-Baumwolltwill aus Italien, pigmentgefärbt</p>
+            <p class="ev">„Veste deux boutons complètement souple, pas d'épaulettes, pas de doublure au corps. Manches doublées…“ Stichpunkte: „Pas d'épaulettes“ / „Non doublée“.</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+        <article class="card" data-con="offen" data-safe="ja">
+          <a class="shot" href="https://officinegenerale.com/products/new-lightest-jacket-italian-organic-cotton-olive" target="_blank" rel="noopener">
+            <img src="img/og2.jpg" alt="Veste New Lightest, olive" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://officinegenerale.com/products/new-lightest-jacket-italian-organic-cotton-olive" target="_blank" rel="noopener">Veste New Lightest, olive</a></h3>
+            <p class="price">EUR 295</p>
+            <p class="fabric">100 % Bio-Baumwolltwill, identischer Stoff</p>
+            <p class="ev">Identischer Beleg: „Pas d'épaulettes“, „Non doublée“. Gefertigt in Portugal, Grössen 44–56.</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="apc" data-ships="dap">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">A.P.C.</h3>
+          <p class="meta">Paris · EUR 270–490</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-maybe">Zoll kommt dazu</span>
+          <a class="cat" href="https://www.apc.fr/collections/homme-vestes-et-blousons" target="_blank" rel="noopener">apc.fr &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Die nüchterne Pariser Basics-Linie. Beim Modell heisst es schlicht „Blazer souple“ — weich. Zur Abgrenzung: Die „Veste de costume en toile“ (EUR 490) hat „Doublure intérieure“, ist also gefüttert.</p>
+      <p class="ship-note">Der Währungswähler führt „Suisse“, fakturiert aber in EUR; ein Zollhinweis fehlt, Einfuhrabgaben also voraussichtlich beim Empfänger.</p>
+      <div class="grid">
+        <article class="card" data-con="offen" data-safe="nein">
+          <a class="shot" href="https://www.apc.fr/products/blazer-phil-lzz-cohtf-h03241" target="_blank" rel="noopener">
+            <img src="img/ap1.jpg" alt="Blazer Phil, souple noir" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://www.apc.fr/products/blazer-phil-lzz-cohtf-h03241" target="_blank" rel="noopener">Blazer Phil, souple noir</a></h3>
+            <p class="price">EUR 290</p>
+            <p class="fabric">100 % Bio-Baumwolle</p>
+            <p class="ev">„Non doublé.“ Schneiderkragen, drei Hornimitat-Knöpfe. Schulterpolster werden nicht erwähnt.</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="silbon" data-ships="dap">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">Silbon</h3>
+          <p class="meta">Córdoba · EUR 64–145</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-maybe">Zoll kommt dazu</span>
+          <a class="cat" href="https://silbonshop.com/collections/americanas" target="_blank" rel="noopener">silbonshop.com &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Spanisches Familienlabel mit entspanntem südeuropäischem Zuschnitt — und der wörtlichste Beleg der ganzen Recherche. Die Americana comfort ist mit EUR 130 bis 145 die mit Abstand günstigste echte Unkonstruierte im Feld.</p>
+      <p class="ship-note">Die Schweiz steht im Länderwähler, versendet wird ab Spanien: „Los impuestos de aduanas y tasas de transporte serán pagados por el destinatario“ — Zoll und Einfuhrsteuer trägt der Empfänger.</p>
+      <div class="grid">
+        <article class="card" data-con="offen" data-safe="nein">
+          <a class="shot" href="https://silbonshop.com/products/americana-comfort-navy" target="_blank" rel="noopener">
+            <img src="img/si1.jpg" alt="Americana comfort, navy" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://silbonshop.com/products/americana-comfort-navy" target="_blank" rel="noopener">Americana comfort, navy</a></h3>
+            <p class="price">EUR 129.90</p>
+            <p class="fabric">100 % Leinen</p>
+            <p class="ev">„Cuenta con cuello con solapas de muesca, no contiene hombreras y no tiene forro.“ — ausdrücklich keine Schulterpolster und kein Futter.</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+        <article class="card" data-con="offen" data-safe="nein">
+          <a class="shot" href="https://silbonshop.com/products/americana-comfort-beige-1" target="_blank" rel="noopener">
+            <img src="img/si2.jpg" alt="Americana comfort, beige" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://silbonshop.com/products/americana-comfort-beige-1" target="_blank" rel="noopener">Americana comfort, beige</a></h3>
+            <p class="price">EUR 144.90</p>
+            <p class="fabric">100 % Leinen</p>
+            <p class="ev">Identischer Wortlaut: „no contiene hombreras y no tiene forro“. Aufgesetzte Taschen, funktionsfähige Ärmelknopflöcher.</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="scalpers" data-ships="unklar">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">Scalpers</h3>
+          <p class="meta">Sevilla · EUR 199–379</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-maybe">CH-Versand ungeklärt</span>
+          <a class="cat" href="https://scalperscompany.com/collections/blazers" target="_blank" rel="noopener">scalperscompany.com &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Spanisches Contemporary-Label mit kräftigerer Handschrift. Das Produkt selbst ist nach Silbon der sauberste Treffer — „sin armar sin forro“ lässt keine Deutungsfrage offen.</p>
+      <p class="ship-note">Ein Versand in die Schweiz liess sich nicht belegen: Weder Homepage noch Versandseite nennen die Schweiz, ein Länderwähler war nicht auffindbar. Vor einer Bestellung klären.</p>
+      <div class="grid">
+        <article class="card" data-con="offen" data-safe="nein">
+          <a class="shot" href="https://scalperscompany.com/products/60844-nos-casual-blazer-nos-darknavy" target="_blank" rel="noopener">
+            <img src="img/sc1.jpg" alt="Americana ligera algodón, darknavy" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://scalperscompany.com/products/60844-nos-casual-blazer-nos-darknavy" target="_blank" rel="noopener">Americana ligera algodón, darknavy</a></h3>
+            <p class="price">EUR 199</p>
+            <p class="fabric">100 % Baumwolle</p>
+            <p class="ev">„Americana ligera … Corte regular fit sin armar sin forro. Bolsillos de parche.“ — unkonstruiert, ungefüttert, aufgesetzte Taschen.</p>
+            <span class="con con-open">ungefüttert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="drykorn" data-ships="chshop">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">Drykorn</h3>
+          <p class="meta">Kitzingen · CHF 319–479, aktuell halbiert</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-yes">Schweizer Shop</span>
+          <a class="cat" href="https://drykorn.com/de-ch/herren/sakkos" target="_blank" rel="noopener">drykorn.com/de-ch &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Das deutsche Label für weiche, leicht lässige Konfektion. Im Schweizer Sakko-Sortiment ist <strong>Horley</strong> das einzige passende Modell — die Alternative P-Irving ist „ganz gefüttert“ aus Polyester-Wolle. Halbfutter statt offener Korpus, dafür derzeit zum halben Preis.</p>
+      <p class="ship-note">Der Shop läuft nativ in CHF und schreibt unter jedem Preis wörtlich: „Preise inkl. MwSt. zzgl. Versandkosten, keine zusätzlichen Zollgebühren.“ Für Zug der bequemste EU-Anbieter.</p>
+      <div class="grid">
+        <article class="card" data-con="halb" data-safe="ja">
+          <a class="shot" href="https://drykorn.com/de-ch/10-42-132018-42298-HORLEY-1000-50" target="_blank" rel="noopener">
+            <img src="img/dk1.jpg" alt="Horley, Baumwolle" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://drykorn.com/de-ch/10-42-132018-42298-HORLEY-1000-50" target="_blank" rel="noopener">Horley, Baumwolle</a></h3>
+            <p class="price">CHF 159</p>
+            <p class="fabric">99 % Baumwolle, 1 % Elasthan</p>
+            <p class="ev">Merkmalsliste: „Halbfutter“, „konfektionierter Blazer“, „Slim Fit“, „Paspeltaschen“. Statt CHF 319.</p>
+            <span class="con con-half">halb gefüttert</span>
+          </div>
+        </article>
+        <article class="card" data-con="halb" data-safe="ja">
+          <a class="shot" href="https://drykorn.com/de-ch/10-42-126014-42298-HORLEY-2100-50" target="_blank" rel="noopener">
+            <img src="img/dk2.jpg" alt="Horley, Leinenmix" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://drykorn.com/de-ch/10-42-126014-42298-HORLEY-2100-50" target="_blank" rel="noopener">Horley, Leinenmix</a></h3>
+            <p class="price">CHF 174</p>
+            <p class="fabric">58 % Leinen, 26 % Polyester, 14 % Viskose, 2 % Elasthan</p>
+            <p class="ev">Merkmalsliste: „Halbfutter“, „Einreiher“, „fallendes Revers“. Statt CHF 349.</p>
+            <span class="con con-half">halb gefüttert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="brand" id="windsor" data-ships="chshop">
+      <div class="brand-head">
+        <div class="brand-id">
+          <h3 class="brand-name">windsor.</h3>
+          <p class="meta">Kreuzlingen · CHF 679–859, im Sale ab CHF 380</p>
+        </div>
+        <div class="brand-links">
+          <span class="ship ship-yes">Schweizer Shop</span>
+          <a class="cat" href="https://windsor.de/ch/de/herren/sakkos/c/10102" target="_blank" rel="noopener">windsor.de/ch &#8599;</a>
+        </div>
+      </div>
+      <p class="brand-note">Die gehobene Linie der Holy Fashion Group mit Sitz in Kreuzlingen — der schweizerischste Anbieter mit echtem Sortiment. Zur Klarstellung, weil oft verwechselt: Die Konzernschwester <strong>Strellson</strong> führt zwar 68 „Baukasten-Sakkos“, damit ist aber die Mix-und-Match-Konfektion gemeint, nicht eine weiche Bauweise — jedes geprüfte Modell hat Vollfutter und eine „formgebende Schulterpartie“.</p>
+      <p class="ship-note">Schweizer Shop in CHF mit Schweizer Servicenummer, ausgewiesen als „Kostenloser Versand inklusive Verzollung“, versandkostenfrei ab CHF 300.</p>
+      <div class="grid">
+        <article class="card" data-con="halb" data-safe="ja">
+          <a class="shot" href="https://windsor.de/ch/de/leinenmix-sakko-giro-mit-baumwolle-in-ecru/p/30046378-10009038-110" target="_blank" rel="noopener">
+            <img src="img/wi1.jpg" alt="Sakko Giro, Leinen-Baumwolle ecru" loading="lazy" width="520">
+          </a>
+          <div class="card-body">
+            <h3><a href="https://windsor.de/ch/de/leinenmix-sakko-giro-mit-baumwolle-in-ecru/p/30046378-10009038-110" target="_blank" rel="noopener">Sakko Giro, Leinen-Baumwolle ecru</a></h3>
+            <p class="price">CHF 399</p>
+            <p class="fabric">59 % Leinen, 41 % Baumwolle, Futter Viskose</p>
+            <p class="ev">„fließendes Teilfutter“, dazu „ein fließendes Ärmelfutter“. Shaped Fit, AMF-Steppung, aufgesetzte Taschen. Statt CHF 859.</p>
+            <span class="con con-half">halb gefüttert</span>
+          </div>
+        </article>
+      </div>
+    </section>
+  </section>
+  <p class="empty" id="empty" hidden>Keine Modelle in dieser Kombination. Filter zurücksetzen mit „Alles“.</p>
+</main>
+
+<div class="wrap">
+  <section class="closing">
+    <h2>Geprüft und verworfen</h2>
+    <p>Rund dreissig weitere europäische Namen wurden geprüft und stehen nicht in der Liste — ohne passendes Sortiment, ohne belegbare Konstruktionsangabe oder ohne Lieferweg in die Schweiz. Die lehrreichsten Fälle:</p>
+    <ul class="rejected">
+      <li><b>Atelier Munro</b>Amsterdam, beschreibt das ungefütterte Sakko als „aesthetically our favorite choice for linen“ — aber Made-to-Measure ohne Webshop, ohne Preise, ohne Schweizer Standort.</li>
+      <li><b>Percival</b>Hat CHF-Shop und Zollzusage, aber die Sakkos haben laut eigener Beschreibung „thin shoulder pads“. „Deconstructed“ heisst dort ausdrücklich: leicht, aber formhaltend.</li>
+      <li><b>Community Clothing</b>Der James Blazer (GBP 168, ungefüttert, in Lancashire genäht) wäre preislich und konstruktiv der beste Fund überhaupt — der Shop liefert aber ausschliesslich innerhalb Grossbritanniens.</li>
+      <li><b>Strellson</b>Schweizer Konzern, 68 „Baukasten-Sakkos“ — gemeint ist Mix und Match, nicht weiche Bauweise. Jedes geprüfte Modell hat Vollfutter und „formgebende Schulterpartie“.</li>
+      <li><b>Massimo Dutti</b>Die Kategorietexte beschreiben Leinenblazer als „unstructured and unlined“, und es gibt Filialen in Zürich. Der Shop ist aber durch Bot-Schutz gesperrt, kein einziges Produkt war abrufbar — inhaltlich wahrscheinlich passend, hier nicht belegbar.</li>
+      <li><b>Private White V.C.</b>Ungefütterte Modelle vorhanden, aber ausnahmslos in Wollmischungen — kein einziges aus Baumwolle, Leinen oder Cord.</li>
+      <li><b>Lardini, Tagliatore, Altea</b>Katalog abgerufen beziehungsweise nicht zugänglich; keine einzige Konstruktionsangabe dokumentiert.</li>
+      <li><b>Circle of Gentlemen, Oger</b>Ersterer komplett hinter Bot-Schutz, Letzterer im Kern Multibrand-Händler; das Hauslabel führt Woll- und Seidencolberts ohne Konstruktionsbeleg.</li>
+      <li><b>Filippa K, Samsøe Samsøe, Asket</b>Filippa K hat die Herrenlinie eingestellt, Samsøe führt Blazer nur für Damen, Asket gar keine Sakkos.</li>
+      <li><b>De Fursac, Schneiders, Eduard Dressler</b>Fursac führt klassisch gefütterte Anzugjacken, Schneiders gar keine Sakko-Kollektion, Eduard Dressler hat ein abgelaufenes TLS-Zertifikat.</li>
+      <li><b>Dutch Dandies</b>Deklariert als einzige Marke ausdrücklich „schoudervulling: nee“ — führt aber Hochzeits- und Festkonfektion im Wollmix, nicht den Alltagsanzug.</li>
+      <li><b>Van Gils, Pure White, Ferlucci</b>Van Gils ist heute nur noch eine Duftlinie, Pure White heisst Pure Path und macht Streetwear, Ferlucci hat keinen erreichbaren Shop.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>Alle Preise, Verfügbarkeiten und Verlinkungen am 15. September 2026 direkt aus den Shops abgerufen und einzeln auf Erreichbarkeit geprüft. Preise in CHF stammen aus dem jeweils eigenen Schweizer Storefront, Preise in EUR und GBP aus dem Heimatshop — dort kommen Einfuhrsteuer und Verzollung hinzu, sofern bei der Marke nicht anders vermerkt.</p>
+    <p>Zitate in Anführungszeichen sind wörtliche Produktbeschreibungen der Hersteller; die Konstruktionseinstufung leitet sich ausschliesslich daraus ab. Wo eine Angabe fehlt, steht das ausdrücklich da, statt ergänzt zu werden. Sortimente wechseln saisonal — vor einer Bestellung Verfügbarkeit und Grössen erneut prüfen. Produktfotos: jeweilige Hersteller.</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var regions = Array.prototype.slice.call(document.querySelectorAll('.region'));
+  var sections = Array.prototype.slice.call(document.querySelectorAll('.brand'));
+  var regionChips = Array.prototype.slice.call(document.querySelectorAll('.chip-region'));
+  var all = document.getElementById('f-all');
+  var chCh = document.getElementById('f-ch');
+  var chSoft = document.getElementById('f-soft');
+  var countEl = document.getElementById('count');
+  var emptyEl = document.getElementById('empty');
+  var state = { region: null, ch: false, soft: false };
+
+  function apply() {
+    var visible = 0;
+    regions.forEach(function (reg) {
+      var regionOk = !state.region || reg.dataset.region === state.region;
+      var regShown = 0;
+      Array.prototype.slice.call(reg.querySelectorAll('.brand')).forEach(function (sec) {
+        var shown = 0;
+        Array.prototype.slice.call(sec.querySelectorAll('.card')).forEach(function (c) {
+          var con = c.dataset.con;
+          var softOk = !state.soft || con === 'offen' || con === 'strick';
+          var chOk = !state.ch || c.dataset.safe === 'ja';
+          var on = regionOk && softOk && chOk;
+          c.hidden = !on;
+          if (on) { shown++; }
+        });
+        sec.hidden = shown === 0;
+        regShown += shown;
+      });
+      reg.hidden = regShown === 0;
+      visible += regShown;
+    });
+    countEl.textContent = visible + (visible === 1 ? ' Modell' : ' Modelle');
+    emptyEl.hidden = visible !== 0;
+    all.setAttribute('aria-pressed', String(!state.region && !state.ch && !state.soft));
+    chCh.setAttribute('aria-pressed', String(state.ch));
+    chSoft.setAttribute('aria-pressed', String(state.soft));
+    regionChips.forEach(function (b) {
+      b.setAttribute('aria-pressed', String(state.region === b.dataset.region));
+    });
+  }
+
+  all.addEventListener('click', function () { state.region = null; state.ch = false; state.soft = false; apply(); });
+  chCh.addEventListener('click', function () { state.ch = !state.ch; apply(); });
+  chSoft.addEventListener('click', function () { state.soft = !state.soft; apply(); });
+  regionChips.forEach(function (b) {
+    b.addEventListener('click', function () {
+      state.region = state.region === b.dataset.region ? null : b.dataset.region;
+      apply();
+    });
+  });
+
+  // a link into a filtered-out brand clears the filters first
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest ? e.target.closest('a[href^="#"]') : null;
+    if (!a) { return; }
+    var target = document.querySelector(a.getAttribute('href'));
+    if (target && target.closest('.region') && (state.region || state.ch || state.soft)) {
+      state.region = null; state.ch = false; state.soft = false; apply();
+    }
+  });
+
+  apply();
+})();
+</script>

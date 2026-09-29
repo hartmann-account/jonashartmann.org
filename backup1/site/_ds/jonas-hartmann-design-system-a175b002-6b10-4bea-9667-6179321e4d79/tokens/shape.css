@@ -1,0 +1,21 @@
+/* Form — geradlinig, zeitlos. Keine Rundungen, keine Schatten. Haarlinien statt Kanten. */
+:root {
+  --radius-none: 0;
+  --radius-circle: 50%;  /* einzige Ausnahme: Avatar im Kreis (Brand Book 1.1) */
+
+  --hairline-w: 1px;
+  --hairline: var(--hairline-w) solid var(--rule);
+  --hairline-strong: var(--hairline-w) solid var(--rule-strong);
+  --hairline-inverse: var(--hairline-w) solid var(--rule-on-inverse);
+
+  --shadow-none: none;
+  /* Kein Schattensystem. Tiefe entsteht ton-in-ton durch Flächen (paper-50 → paper-100 → ink-200). */
+
+  --focus-outline: 1px solid var(--focus-ring);
+  --focus-offset: 3px;
+
+  --backdrop-blur: 0; /* @kind other */ /* keine Weichzeichnung; Scrim ist deckendes Papier mit 82% */
+  --z-sticky: 10; /* @kind other */
+  --z-overlay: 100; /* @kind other */
+  --z-toast: 200; /* @kind other */
+}

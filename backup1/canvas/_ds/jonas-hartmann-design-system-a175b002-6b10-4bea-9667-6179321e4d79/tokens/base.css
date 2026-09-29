@@ -1,0 +1,14 @@
+/* Grundzustand — Papier, Tinte, Links. Klassenlose Basis; Komponenten setzen inline auf Tokens. */
+html { background: var(--bg-page); color: var(--text-body); font-family: var(--font-body); font-size: var(--text-body); line-height: var(--leading-body); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; font-feature-settings: "kern", "liga"; }
+body { margin: 0; text-wrap: pretty; }
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: var(--weight-semibold); line-height: var(--leading-heading); letter-spacing: var(--tracking-display); color: var(--text-primary); margin: 0; text-wrap: balance; }
+p { margin: 0; }
+a { color: var(--text-link); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.14em; text-decoration-color: var(--rule); transition: var(--transition-color); }
+a:hover { color: var(--text-link-hover); text-decoration-color: currentColor; }
+em, i { font-style: var(--style-qualifier); font-weight: var(--weight-qualifier); letter-spacing: var(--tracking-qualifier); }
+strong, b { font-weight: var(--weight-semibold); }
+hr { border: 0; border-top: var(--hairline); margin: 0; }
+::selection { background: var(--selection-bg); color: var(--text-primary); }
+:focus-visible { outline: var(--focus-outline); outline-offset: var(--focus-offset); }
+button, input, select, textarea { font: inherit; color: inherit; }
+img { display: block; max-width: 100%; }

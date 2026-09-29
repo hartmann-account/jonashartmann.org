@@ -1,0 +1,31 @@
+/* Abstände — 4px-Raster. Viel Weißraum steht für Klarheit (Brand Book 3.0). */
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+  --space-11: 192px;
+
+  /* Seite — Brand Book: 42pt Rand auf A4 quer (5% der Breite) */
+  --page-margin: clamp(24px, 5vw, 56px);
+  --page-max: 1280px;
+  --content-max: 880px;
+  --gutter: var(--space-6);
+
+  /* Komponenten-Innenabstände */
+  --pad-control-y: 10px;
+  --pad-control-x: 18px;
+  --pad-card: var(--space-5);
+  --pad-dialog: var(--space-6);
+
+  /* Kontrollhöhen */
+  --control-h-sm: 36px;
+  --control-h-md: 44px;
+  --control-h-lg: 52px;
+}

@@ -1,0 +1,59 @@
+/*
+ * Nachbesserungen am Canvas-Export fuer die ausgelieferte Website.
+ *
+ * Der Export setzt seine Stile inline, deshalb brauchen Korrekturen hier
+ * !important. Bewusst so klein wie moeglich: alles Gestalterische bleibt im
+ * Design-System unter _ds/. Die Klassen cols-3 und cols-4 vergibt der
+ * Bauschritt (build/prerender.mjs) an Raster mit fester Spaltenzahl.
+ */
+
+@media (max-width: 720px) {
+  /* Die Tab-Leiste steht im Export in einer festen Zeile und laeuft auf
+     schmalen Schirmen ueber den Rand hinaus. Sie darf umbrechen. */
+  [role="tablist"] {
+    flex-wrap: wrap !important;
+    column-gap: var(--space-4) !important;
+    row-gap: 0 !important;
+  }
+
+  /* Im Inhalt stehen einzelne Zeilen auf nowrap - die Wortmarke im Hero,
+     ihr Qualifier, die ORCID-Zeile. Sie sind breiter als die Spalte und
+     zoegen sonst die ganze Seite auf. Die Tab-Leiste im Kopf bleibt
+     unberuehrt. */
+  main [style*="nowrap"] {
+    white-space: normal !important;
+  }
+
+  /* Feste Raster auf zwei Spalten. */
+  .cols-3,
+  .cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  /* Rasterkinder duerfen unter ihre Inhaltsbreite schrumpfen. */
+  main section > *,
+  .cols-3 > *,
+  .cols-4 > * {
+    min-width: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Ganz schmal: eine Spalte, und Kacheln, die sonst zwei Spalten
+     einnehmen, ordnen sich ein. */
+  .cols-3,
+  .cols-4 {
+    grid-template-columns: 1fr !important;
+  }
+  .cols-3 > *,
+  .cols-4 > * {
+    grid-column: auto !important;
+  }
+}
+
+/* Bilder bleiben im Fluss. */
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+}
