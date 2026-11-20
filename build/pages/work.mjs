@@ -4,7 +4,7 @@ import { competencyClusters, positionRow, boardRow, venturePairs, portfolioPairs
 
 const SECTIONS = [
   { id: "advisory", label: "Advisory" },
-  { id: "entrepreneurship", label: "Entrepreneurship" },
+  { id: "creating", label: "Creating and ventures" },
   { id: "investing", label: "Investing" },
   { id: "boards", label: "Board and advisory roles" },
   { id: "technology", label: "Technology and creative" },
@@ -15,7 +15,7 @@ export default function work({ record }) {
     path: "/work",
     file: "work.html",
     title: "Work — Jonas Hartmann",
-    description: "Advisory, entrepreneurship, investing, board roles, and technology and creative work.",
+    description: "Advisory, ventures and creating, investing, board roles, and technology and creative work.",
     body: [
       intro({
         title: "Work",
@@ -35,11 +35,11 @@ export default function work({ record }) {
         ],
       }),
       section({
-        id: "entrepreneurship",
-        title: "Entrepreneurship",
+        id: "creating",
+        title: "Creating and ventures",
         num: "02",
         body: [
-          p(html`Entrepreneurship has been a continuous part of my work since 2016. The ventures differ; <a href="/about#pattern">the pattern behind them</a> does not.`),
+          p(html`Creating things has been a continuous part of my work since 2016. The ventures differ; <a href="/about#pattern">the pattern behind them</a> does not.`),
           pairs(venturePairs(record)),
         ],
       }),

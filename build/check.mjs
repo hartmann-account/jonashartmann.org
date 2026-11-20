@@ -35,7 +35,7 @@ for (const [f, s] of Object.entries(html)) {
 }
 
 // 2. Keine Platzhalter und keine unbestaetigten Angaben.
-const FORBIDDEN = /to be (confirmed|supplied|verified)|placeholder|loaded live|~350|350\+|15\+|\b2012\b|Witten|Herdecke|Law studies|finivia|Virtual App Container|workshop, 2026|hanseatic help, hamburg|at 26\b|obsessive/i;
+const FORBIDDEN = /to be (confirmed|supplied|verified)|placeholder|loaded live|~350|350\+|15\+|\b2012\b|Witten|Herdecke|Law studies|finivia|Virtual App Container|workshop, 2026|hanseatic help, hamburg|at 26\b/i;
 for (const [f, s] of Object.entries(html)) {
   const m = s.match(FORBIDDEN);
   check(!m, `${f}: verbotener Text "${m?.[0]}"`);

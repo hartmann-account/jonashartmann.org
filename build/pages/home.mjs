@@ -1,32 +1,27 @@
 import { html, raw } from "../lib/html.mjs";
-import { intro, section, entries, pubs, p, more } from "../lib/components.mjs";
+import { intro, section, entries, pairs, pubs, p, more } from "../lib/components.mjs";
 import { SITE_URL, LINKEDIN, HOME_TITLE, HOME_DESCRIPTION } from "../lib/layout.mjs";
 import { ORCID_URL } from "../../src/js/orcid-normalize.js";
 
 export default function home({ record, works }) {
   const current = record.positions[0];
-  const boards = Object.fromEntries(record.boards.map((b) => [b.org, b]));
 
   const areas = [
     {
       title: "Advisory", href: "/work#advisory",
       roles: ["Advising organizations on transformation, transactions, risk and strategic challenges."],
-      details: [`${current.role} at ${current.org}, ${current.place}, ${current.period}.`],
     },
     {
-      title: "Entrepreneurship", href: "/work#entrepreneurship",
+      title: "Creating and ventures", href: "/work#creating",
       roles: ["Building companies, products, brands and digital infrastructure."],
-      details: ["Ventures since 2016, from managed IT services and web hosting to a recording label."],
     },
     {
       title: "Investing", href: "/work#investing",
       roles: ["Investing across private and public markets, and in the governance of family capital."],
-      details: [html`${boards["Vereinigung der Familie Hartmann"].role}, <span lang="de">Vereinigung der Familie Hartmann</span>; advisory board roles at HWH Capital and Amfion.`],
     },
     {
       title: "Research", href: "/research",
       roles: ["Researching family enterprise, governance, finance and institutional structures."],
-      details: ["Doctoral research since 2026."],
     },
   ];
 
@@ -50,10 +45,10 @@ export default function home({ record, works }) {
     body: [
       intro({
         title: html`Building structures for <em>businesses, families and capital</em>.`,
-        lead: "Advisor, entrepreneur, investor and researcher in Zug, Switzerland.",
+        lead: "Advisor, creator, investor and researcher in Zug, Switzerland.",
         media: { src: "/assets/lego-workshop.jpg", alt: "Jonas Hartmann building a model during a workshop", width: 1050, height: 1400 },
         paragraphs: [
-          "Over the past decade, my work has spanned entrepreneurship, corporate advisory, technology and family governance — building companies and digital systems, advising institutions on transformation and risk, and developing a research focus on finance, law and family enterprise.",
+          "Over the past decade, my work has spanned creating, corporate advisory, technology and family governance — building companies and digital systems, advising institutions on transformation and risk, and developing a research focus on finance, law and family enterprise.",
         ],
         actions: html`<a href="/cv">Full CV</a>`,
       }),
@@ -67,9 +62,21 @@ export default function home({ record, works }) {
         ],
       }),
       section({
+        id: "principles",
+        title: "What drives me",
+        num: "02",
+        body: [
+          pairs([
+            { term: "Framework", desc: "Create, structure, professionalize, automate — the same pattern each time." },
+            { term: "Personal trait", desc: "Continuous and obsessive learner." },
+          ]),
+          more("/about#pattern", "The pattern in detail on About"),
+        ],
+      }),
+      section({
         id: "publications",
         title: "Recent publications",
-        num: "02",
+        num: "03",
         body: [pubs(works.slice(0, 3)), more("/research#publications", "All publications")],
       }),
     ],

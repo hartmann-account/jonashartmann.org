@@ -31,7 +31,7 @@ h1 { margin-top: auto; font-family: Cormorant, Georgia, serif; font-size: 84px; 
   font-size: 22px; color: #6b655b; }
 </style></head><body>
 <p class="name">Jonas Hartmann</p>
-<p class="who">Advisor, entrepreneur, investor, researcher</p>
+<p class="who">Advisor, creator, investor, researcher</p>
 <h1>Building structures for <em>businesses, families and capital</em>.</h1>
 <div class="foot"><span>Zug, Switzerland</span><span>jonashartmann.org</span></div>
 </body></html>`;

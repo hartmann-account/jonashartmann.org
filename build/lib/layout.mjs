@@ -7,9 +7,9 @@ import { html, raw } from "./html.mjs";
 
 export const SITE_URL = "https://jonashartmann.org";
 export const LINKEDIN = "https://www.linkedin.com/in/hartmann-jonas/";
-export const HOME_TITLE = "Jonas Hartmann — Advisor, entrepreneur, investor, researcher";
-export const HOME_DESCRIPTION = "Building structures for businesses, families and capital. A decade across entrepreneurship, corporate advisory, technology and family governance.";
-const OG_ALT = "Jonas Hartmann — Advisor, entrepreneur, investor, researcher. Building structures for businesses, families and capital.";
+export const HOME_TITLE = "Jonas Hartmann — Advisor, creator, investor, researcher";
+export const HOME_DESCRIPTION = "Building structures for businesses, families and capital. A decade across creating, corporate advisory, technology and family governance.";
+const OG_ALT = "Jonas Hartmann — Advisor, creator, investor, researcher. Building structures for businesses, families and capital.";
 
 const NAV = [
   { href: "/work", label: "Work" },
