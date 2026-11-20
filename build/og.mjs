@@ -17,13 +17,14 @@ const html = `<!doctype html><html><head><style>
 @font-face { font-family: Outfit; font-weight: 400; src: url(data:font/woff2;base64,${await font(400)}) format("woff2"); }
 @font-face { font-family: Outfit; font-weight: 500; src: url(data:font/woff2;base64,${await font(500)}) format("woff2"); }
 * { margin: 0; box-sizing: border-box; }
-body { width: 1200px; height: 630px; background: #f5f6f7; color: #171a1c; font-family: Outfit;
+body { width: 1200px; height: 630px; background: #f7f6f3; color: #23272b; font-family: Outfit;
   padding: 72px 88px 64px; display: flex; flex-direction: column; }
-.name { font-size: 30px; font-weight: 500; color: #060707; }
-.who { margin-top: 6px; font-size: 24px; color: #5a5e60; }
-h1 { margin-top: auto; font-size: 68px; line-height: 1.08; letter-spacing: -0.015em; font-weight: 500; color: #060707; max-width: 17ch; text-wrap: balance; }
-.foot { margin-top: 56px; padding-top: 22px; border-top: 1px solid #cdd2d7; display: flex; justify-content: space-between;
-  font-size: 22px; color: #5a5e60; }
+.name { font-size: 24px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #121417; }
+.who { margin-top: 10px; font-size: 24px; color: #565c62; }
+h1 { margin-top: auto; font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 72px; line-height: 1.08; letter-spacing: -0.01em; font-weight: 400; color: #121417; max-width: 17ch; text-wrap: balance; }
+.foot { margin-top: 56px; padding-top: 22px; border-top: 1px solid #d8d4cb; display: flex; justify-content: space-between;
+  font-size: 22px; color: #565c62; }
 </style></head><body>
 <p class="name">Jonas Hartmann</p>
 <p class="who">Advisor, entrepreneur, investor, researcher</p>
@@ -41,7 +42,7 @@ await page.screenshot({ path: join(root, "src", "static", "og.png") });
 await page.setViewportSize({ width: 180, height: 180 });
 await page.setContent(`<!doctype html><html><head><style>
 @font-face { font-family: Outfit; font-weight: 500; src: url(data:font/woff2;base64,${await font(500)}) format("woff2"); }
-body { margin: 0; width: 180px; height: 180px; background: #171a1c; color: #f5f6f7; font: 500 84px/180px Outfit;
+body { margin: 0; width: 180px; height: 180px; background: #121417; color: #f7f6f3; font: 500 84px/180px Outfit;
   text-align: center; letter-spacing: -0.02em; }
 </style></head><body>JH</body></html>`);
 await page.evaluate(() => document.fonts.ready);

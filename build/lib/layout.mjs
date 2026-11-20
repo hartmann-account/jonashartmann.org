@@ -30,7 +30,7 @@ export function page({ path, title, description, body, head = "", noindex = fals
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
-<meta name="theme-color" content="#f5f6f7">
+<meta name="theme-color" content="#f7f6f3">
 <title>${title}</title>
 <meta name="description" content="${description}">
 ${noindex ? raw('<meta name="robots" content="noindex">') : html`<link rel="canonical" href="${url}">`}

@@ -11,21 +11,25 @@ src/       Quelle: Inhalte, Stylesheet, Schriften, Bilder, Skripte
 build/     Bauschritt, Vorschau und Prüfungen
 site/      Ergebnis: das, was ausgeliefert wird (im Repository, siehe unten)
 Kleidung/  eigenständige Seite, wird unter /kleidung ausgeliefert
+v1/        vollständige Kopie der Live-Seite (site/) vom 20.11.2026, vor dem Redesign
 backup1/   die Website vom 29.09.2026 vor der Überarbeitung (Claude-Design-Export)
-v2/ v1/    frühere Fassungen der Website
-old/       die ursprüngliche statische Seite
+v2/ old/   frühere Fassungen der Website
 ```
 
 ## Gestaltung
 
-Ein Briefkopf, keine Broschüre: Name oben links, Navigation oben rechts, im Fuss
-die Kanäle. Dazwischen eine ruhige Lesespalte mit kurzen Zwischentiteln links
-daneben. Die Regeln:
+Ein Briefkopf, keine Broschüre: oben eine starke Kante, Name und Navigation in
+Grossbuchstaben über einer Haarlinie, im Fuss die Kanäle. Dazwischen eine ruhige
+Lesespalte mit Serif-Zwischentiteln links daneben. Die Regeln:
 
-- **Eine Schrift, zwei Schnitte, fünf Grössen.** Outfit 400 und 500;
-  14 / 17 / 18–20 / 24 / 36–56 px. Keine Kursive, keine Versalien, keine Monospace.
-- **Farben nur aus dem Design-System.** Papier, drei Tinten, Nebel für Haarlinien,
-  Blau nur für Hover und Fokus.
+- **Zwei Schriften, zwei Schnitte, fünf Grössen.** Serif (Systemstapel
+  Iowan/Palatino/Georgia) für H1 und Abschnittstitel in 400; Outfit 400 und 500
+  für Text und Bedienelemente; 13 / 17 / 18–21 / 28 / 38–64 px. Keine Kursive,
+  keine Monospace.
+- **Grossbuchstaben nur als Label.** Name, Navigation, Meta-Zeilen, Fuss und
+  Bildlegenden: klein, weit gesperrt, gedeckt.
+- **Farben nur aus dem Design-System.** Warmes Papier, drei Tinten, eine
+  Haarlinienfarbe, zwei Blautöne — Blau nur für Hover, Fokus und Button-Hover.
 - **Unterstrichen heisst Link.** Nichts anderes ist unterstrichen. Keine Pfeile:
   Outfit hat das Zeichen nicht, es käme aus einer Ersatzschrift.
 - **Drei Listenformen tragen alles:** Eintragszeile (alles mit Rolle oder Datum),

@@ -1,8 +1,9 @@
 /*
  * Pruefungen nach jedem Build. Schlaegt eine fehl, endet der Build mit Fehler.
  * Sie halten fest, was die Seite ausmacht: keine Platzhalter, keine
- * unbestaetigten Angaben, keine Betraege, ein kleines Typo-System, die
- * Ursprungsfarben des Design-Systems und keine neuen Kontaktkanaele.
+ * unbestaetigten Angaben, keine Betraege, ein kleines Typo-System (Serif-Titel,
+ * fuenf Groessen, zwei Schnitte), die Farben des Design-Systems und keine neuen
+ * Kontaktkanaele.
  */
 import { readFile, readdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
@@ -49,13 +50,14 @@ for (const [f, s] of [...Object.entries(html), ["site.css", css]]) {
   check(!/[←-⇿]/.test(s), `${f}: Pfeilzeichen`);
 }
 
-// 5. Nur die Farben des Design-Systems.
-const HEX = new Set(["#f5f6f7", "#eceef0", "#060707", "#171a1c", "#5a5e60", "#cdd2d7", "#395b75", "#082742"]);
+// 5. Nur die Farben des Design-Systems (warmes Papier, drei Tinten, Haarlinie, zwei Blautoene).
+const HEX = new Set(["#f7f6f3", "#eceae4", "#121417", "#23272b", "#565c62", "#d8d4cb", "#082742", "#2f5a75"]);
 for (const h of css.match(/#[0-9a-f]{3,8}\b/gi) ?? []) check(HEX.has(h.toLowerCase()), `site.css: Farbe ${h} nicht erlaubt`);
 
-// 6. Keine Schatten, Verlaeufe, Unschaerfe, Versalien, Kursive, Rundungen.
-check(!/box-shadow|gradient|blur|backdrop-filter|text-transform|font-style:\s*italic/.test(css), "site.css: verbotene Eigenschaft");
+// 6. Keine Schatten, Verlaeufe, Unschaerfe, Kursive, Rundungen; Grossbuchstaben nur als Label.
+check(!/box-shadow|gradient|blur|backdrop-filter|font-style:\s*italic/.test(css), "site.css: verbotene Eigenschaft");
 for (const r of css.match(/border-radius:\s*[^;]+/g) ?? []) check(/:\s*0\s*$/.test(r), `site.css: ${r}`);
+for (const t of css.match(/text-transform:\s*[^;}]+/g) ?? []) check(/:\s*uppercase\s*$/.test(t), `site.css: ${t.trim()}`);
 
 // 7. Fuenf Schriftgroessen, zwei Schnitte.
 for (const fs of css.match(/font-size:\s*[^;}]+/g) ?? []) {
