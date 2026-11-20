@@ -48,8 +48,13 @@ await cp(join(SRC, "styles", "site.css"), join(OUT, "site.css"));
 await cp(join(SRC, "js", "orcid.js"), join(OUT, "orcid.js"));
 await cp(join(SRC, "js", "orcid-normalize.js"), join(OUT, "orcid-normalize.js"));
 await mkdir(join(OUT, "fonts"));
-for (const w of [400, 500]) {
-  await cp(join(SRC, "fonts", `outfit-latin-${w}-normal.woff2`), join(OUT, "fonts", `outfit-latin-${w}-normal.woff2`));
+for (const f of [
+  "outfit-latin-400-normal.woff2",
+  "outfit-latin-500-normal.woff2",
+  "cormorant-latin-500-normal.woff2",
+  "cormorant-latin-600-italic.woff2",
+]) {
+  await cp(join(SRC, "fonts", f), join(OUT, "fonts", f));
 }
 await cp(join(SRC, "assets"), join(OUT, "assets"), { recursive: true });
 await cp(join(SRC, "static"), OUT, { recursive: true });

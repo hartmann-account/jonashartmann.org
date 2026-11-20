@@ -29,6 +29,7 @@ export default function cv({ record }) {
       section({
         id: "experience",
         title: "Experience",
+        num: "01",
         body: [
           ...competencyClusters(record, "cv").flatMap((c) => [
             h3(c.title),
@@ -40,19 +41,21 @@ export default function cv({ record }) {
       section({
         id: "boards",
         title: "Board and advisory roles",
+        num: "02",
         body: [entries(record.boards.map((x) => boardRow(x, { detail: false })), compact)],
       }),
-      section({ id: "ventures", title: "Ventures", body: [pairs(venturePairs(record))] }),
-      section({ id: "education", title: "Education", body: [entries(record.education.map(educationRow), compact)] }),
+      section({ id: "ventures", title: "Ventures", num: "03", body: [pairs(venturePairs(record))] }),
+      section({ id: "education", title: "Education", num: "04", body: [entries(record.education.map(educationRow), compact)] }),
       section({
         id: "certificates",
         title: "Certificates",
+        num: "05",
         body: [
           p("Beyond degrees and work, I take a course wherever a question needs a better answer than the one I have. Listed here is what came with a certificate."),
           entries(record.certificates.map(certificateRow), compact),
         ],
       }),
-      section({ id: "languages", title: "Languages and tools", body: [pairs(languagePairs(record))] }),
+      section({ id: "languages", title: "Languages and tools", num: "06", body: [pairs(languagePairs(record))] }),
     ],
   };
 }

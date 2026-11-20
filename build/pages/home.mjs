@@ -49,7 +49,7 @@ export default function home({ record, works }) {
     head: raw(`<script type="application/ld+json">${JSON.stringify(person).replace(/</g, "\\u003c")}</script>`),
     body: [
       intro({
-        title: "Building structures for businesses, families and capital.",
+        title: html`Building structures for <em>businesses, families and capital</em>.`,
         lead: "Advisor, entrepreneur, investor and researcher in Zug, Switzerland.",
         paragraphs: [
           "Over the past decade, my work has spanned entrepreneurship, corporate advisory, technology and family governance — building companies and digital systems, advising institutions on transformation and risk, and developing a research focus on finance, law and family enterprise.",
@@ -59,6 +59,7 @@ export default function home({ record, works }) {
       section({
         id: "areas",
         title: "Four areas",
+        num: "01",
         body: [
           p("The four areas developed in parallel, and each informs the others: advising is sharper for having built, investing is more disciplined for having advised, and the research is grounded in both."),
           entries(areas, { level: "h3" }),
@@ -67,6 +68,7 @@ export default function home({ record, works }) {
       section({
         id: "publications",
         title: "Recent publications",
+        num: "02",
         body: [pubs(works.slice(0, 3)), more("/research#publications", "All publications")],
       }),
     ],

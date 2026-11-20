@@ -23,6 +23,7 @@ export default function research({ record, works }) {
       section({
         id: "publications",
         title: "Publications",
+        num: "01",
         body: [
           p("Works as recorded on ORCID, newest first."),
           pubs(works, { live: true }),
@@ -32,6 +33,7 @@ export default function research({ record, works }) {
       section({
         id: "roles",
         title: "Research roles",
+        num: "02",
         body: [
           entries([educationRow(doctoral), positionRow(seca)], { level: "p", compact: true }),
           more("/cv#education", "Education in the CV"),

@@ -18,17 +18,19 @@ v2/ old/   frühere Fassungen der Website
 
 ## Gestaltung
 
-Ein Briefkopf, keine Broschüre: oben eine starke Kante, Name und Navigation in
-Grossbuchstaben über einer Haarlinie, im Fuss die Kanäle. Dazwischen eine ruhige
-Lesespalte mit Serif-Zwischentiteln links daneben. Die Regeln:
+Ein Briefkopf mit eigener Handschrift: oben eine starke Kante, Name in Serif
+links, Navigation rechts, Haarlinie darunter. Grosse Cormorant-Headlines mit
+kursivem Akzent, Abschnitte mit Nummer in der Randspalte. Die Regeln:
 
-- **Zwei Schriften, zwei Schnitte, fünf Grössen.** Serif (Systemstapel
-  Iowan/Palatino/Georgia) für H1 und Abschnittstitel in 400; Outfit 400 und 500
-  für Text und Bedienelemente; 13 / 17 / 18–21 / 28 / 38–64 px. Keine Kursive,
-  keine Monospace.
-- **Grossbuchstaben nur als Label.** Name, Navigation, Meta-Zeilen, Fuss und
-  Bildlegenden: klein, weit gesperrt, gedeckt.
-- **Farben nur aus dem Design-System.** Warmes Papier, drei Tinten, eine
+- **Zwei Schriften, drei Schnitte, sechs Grössen.** Cormorant 500/600 (und 600
+  kursiv, selbst gehostet in `src/fonts/`) für Name, H1, Lead und Abschnittstitel;
+  Outfit 400/500 für Text und Bedienelemente; 14 / 17 / 22 / 26 / 32 / 48–84 px.
+  Kursive nur als echtes `<em>` in der Headline; keine Monospace.
+- **Nummer-Motiv:** Jeder Abschnitt trägt seine Nummer (01, 02 …) als kleine
+  Randnotiz über dem Titel.
+- **Keine Textumwandlungen.** Kein Uppercase/Small Caps; Meta-Zeilen sind klein,
+  gedeckt und mit Ziffernlauf.
+- **Farben nur aus dem Design-System.** Warmes Papier, drei warme Tinten, eine
   Haarlinienfarbe, zwei Blautöne — Blau nur für Hover, Fokus und Button-Hover.
 - **Unterstrichen heisst Link.** Nichts anderes ist unterstrichen. Keine Pfeile:
   Outfit hat das Zeichen nicht, es käme aus einer Ersatzschrift.

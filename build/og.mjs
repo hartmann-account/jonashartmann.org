@@ -11,24 +11,28 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
-const font = async (w) => (await readFile(join(root, "src", "fonts", `outfit-latin-${w}-normal.woff2`))).toString("base64");
+const font = async (f) => (await readFile(join(root, "src", "fonts", f))).toString("base64");
 
-const html = `<!doctype html><html><head><style>
-@font-face { font-family: Outfit; font-weight: 400; src: url(data:font/woff2;base64,${await font(400)}) format("woff2"); }
-@font-face { font-family: Outfit; font-weight: 500; src: url(data:font/woff2;base64,${await font(500)}) format("woff2"); }
+const faces = `
+@font-face { font-family: Outfit; font-weight: 400; src: url(data:font/woff2;base64,${await font("outfit-latin-400-normal.woff2")}) format("woff2"); }
+@font-face { font-family: Outfit; font-weight: 500; src: url(data:font/woff2;base64,${await font("outfit-latin-500-normal.woff2")}) format("woff2"); }
+@font-face { font-family: Cormorant; font-weight: 600; src: url(data:font/woff2;base64,${await font("cormorant-latin-500-normal.woff2")}) format("woff2"); }
+@font-face { font-family: Cormorant; font-style: italic; font-weight: 600; src: url(data:font/woff2;base64,${await font("cormorant-latin-600-italic.woff2")}) format("woff2"); }`;
+
+const html = `<!doctype html><html><head><style>${faces}
 * { margin: 0; box-sizing: border-box; }
-body { width: 1200px; height: 630px; background: #f7f6f3; color: #23272b; font-family: Outfit;
+body { width: 1200px; height: 630px; background: #f7f5f0; color: #2e2a24; font-family: Outfit;
   padding: 72px 88px 64px; display: flex; flex-direction: column; }
-.name { font-size: 24px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: #121417; }
-.who { margin-top: 10px; font-size: 24px; color: #565c62; }
-h1 { margin-top: auto; font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-  font-size: 72px; line-height: 1.08; letter-spacing: -0.01em; font-weight: 400; color: #121417; max-width: 17ch; text-wrap: balance; }
-.foot { margin-top: 56px; padding-top: 22px; border-top: 1px solid #d8d4cb; display: flex; justify-content: space-between;
-  font-size: 22px; color: #565c62; }
+.name { font-family: Cormorant, Georgia, serif; font-size: 36px; font-weight: 600; color: #1a1713; }
+.who { margin-top: 6px; font-size: 24px; color: #6b655b; }
+h1 { margin-top: auto; font-family: Cormorant, Georgia, serif; font-size: 84px; line-height: 1.04;
+  letter-spacing: -0.015em; font-weight: 600; color: #1a1713; max-width: 16ch; text-wrap: balance; }
+.foot { margin-top: 56px; padding-top: 22px; border-top: 1px solid #ddd7ca; display: flex; justify-content: space-between;
+  font-size: 22px; color: #6b655b; }
 </style></head><body>
 <p class="name">Jonas Hartmann</p>
 <p class="who">Advisor, entrepreneur, investor, researcher</p>
-<h1>Building structures for businesses, families and capital.</h1>
+<h1>Building structures for <em>businesses, families and capital</em>.</h1>
 <div class="foot"><span>Zug, Switzerland</span><span>jonashartmann.org</span></div>
 </body></html>`;
 
@@ -41,8 +45,8 @@ await page.screenshot({ path: join(root, "src", "static", "og.png") });
 /* Icon fuer Startbildschirme (iOS), im selben Stil: Initialen in Outfit. */
 await page.setViewportSize({ width: 180, height: 180 });
 await page.setContent(`<!doctype html><html><head><style>
-@font-face { font-family: Outfit; font-weight: 500; src: url(data:font/woff2;base64,${await font(500)}) format("woff2"); }
-body { margin: 0; width: 180px; height: 180px; background: #121417; color: #f7f6f3; font: 500 84px/180px Outfit;
+@font-face { font-family: Outfit; font-weight: 500; src: url(data:font/woff2;base64,${await font("outfit-latin-500-normal.woff2")}) format("woff2"); }
+body { margin: 0; width: 180px; height: 180px; background: #1a1713; color: #f7f5f0; font: 500 84px/180px Outfit;
   text-align: center; letter-spacing: -0.02em; }
 </style></head><body>JH</body></html>`);
 await page.evaluate(() => document.fonts.ready);

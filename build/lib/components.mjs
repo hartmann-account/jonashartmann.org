@@ -32,9 +32,9 @@ function tocNav(items) {
 `;
 }
 
-export function section({ id, title, body }) {
+export function section({ id, title, body, num }) {
   return html`<section class="section grid" id="${id}" aria-labelledby="${id}-h">
-  <h2 class="section__title" id="${id}-h">${title}</h2>
+  <h2 class="section__title" id="${id}-h">${num ? raw(`<span class="section__num" aria-hidden="true">${num}</span>`) : ""}${title}</h2>
   <div class="section__body">
 ${body}  </div>
 </section>

@@ -29,7 +29,7 @@ export function page({ path, title, description, body, head = "", noindex = fals
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
-<meta name="theme-color" content="#f7f6f3">
+<meta name="theme-color" content="#f7f5f0">
 <title>${title}</title>
 <meta name="description" content="${description}">
 ${noindex ? raw('<meta name="robots" content="noindex">') : html`<link rel="canonical" href="${url}">`}
@@ -49,6 +49,8 @@ ${noindex ? raw('<meta name="robots" content="noindex">') : html`<link rel="cano
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/fonts/outfit-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/outfit-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/cormorant-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/cormorant-latin-600-italic.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/site.css">
 ${head}
 </head>

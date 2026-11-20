@@ -1,9 +1,9 @@
 /*
  * Pruefungen nach jedem Build. Schlaegt eine fehl, endet der Build mit Fehler.
  * Sie halten fest, was die Seite ausmacht: keine Platzhalter, keine
- * unbestaetigten Angaben, keine Betraege, ein kleines Typo-System (Serif-Titel,
- * fuenf Groessen, zwei Schnitte), die Farben des Design-Systems und keine neuen
- * Kontaktkanaele.
+ * unbestaetigten Angaben, keine Betraege, ein kleines Typo-System (Cormorant-
+ * Display, sechs Groessen, drei Schnitte), die Farben des Design-Systems und
+ * keine neuen Kontaktkanaele.
  */
 import { readFile, readdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
@@ -50,21 +50,22 @@ for (const [f, s] of [...Object.entries(html), ["site.css", css]]) {
   check(!/[←-⇿]/.test(s), `${f}: Pfeilzeichen`);
 }
 
-// 5. Nur die Farben des Design-Systems (warmes Papier, drei Tinten, Haarlinie, zwei Blautoene).
-const HEX = new Set(["#f7f6f3", "#eceae4", "#121417", "#23272b", "#565c62", "#d8d4cb", "#082742", "#2f5a75"]);
+// 5. Nur die Farben des Design-Systems (warmes Papier, drei warme Tinten, Haarlinie, zwei Blautoene).
+const HEX = new Set(["#f7f5f0", "#edeae2", "#1a1713", "#2e2a24", "#6b655b", "#ddd7ca", "#082742", "#2f5a75"]);
 for (const h of css.match(/#[0-9a-f]{3,8}\b/gi) ?? []) check(HEX.has(h.toLowerCase()), `site.css: Farbe ${h} nicht erlaubt`);
 
-// 6. Keine Schatten, Verlaeufe, Unschaerfe, Kursive, Rundungen; Grossbuchstaben nur als Label.
-check(!/box-shadow|gradient|blur|backdrop-filter|font-style:\s*italic/.test(css), "site.css: verbotene Eigenschaft");
+// 6. Keine Schatten, Verlaeufe, Unschaerfe, Textumwandlungen, Rundungen; Kursive nur
+//    als echtes em (UA-Stylesheet) oder im @font-face-Deskriptor.
+const cssNoFaces = css.replace(/@font-face\s*\{[^}]*\}/g, "");
+check(!/box-shadow|gradient|blur|backdrop-filter|text-transform|font-style:\s*italic/.test(cssNoFaces), "site.css: verbotene Eigenschaft");
 for (const r of css.match(/border-radius:\s*[^;]+/g) ?? []) check(/:\s*0\s*$/.test(r), `site.css: ${r}`);
-for (const t of css.match(/text-transform:\s*[^;}]+/g) ?? []) check(/:\s*uppercase\s*$/.test(t), `site.css: ${t.trim()}`);
 
-// 7. Fuenf Schriftgroessen, zwei Schnitte.
+// 7. Sechs Schriftgroessen, drei Schnitte.
 for (const fs of css.match(/font-size:\s*[^;}]+/g) ?? []) {
-  check(/var\(--fs-(display|heading|lead|body|small)\)/.test(fs), `site.css: ${fs.trim()}`);
+  check(/var\(--fs-(brand|display|heading|lead|body|small)\)/.test(fs), `site.css: ${fs.trim()}`);
 }
 for (const fw of css.match(/font-weight:\s*[^;}]+/g) ?? []) {
-  check(/var\(--fw-(regular|medium)\)|:\s*(400|500)\s*$/.test(fw), `site.css: ${fw.trim()}`);
+  check(/var\(--fw-(regular|medium|semibold)\)|:\s*(400|500|600)\s*$/.test(fw), `site.css: ${fw.trim()}`);
 }
 
 // 8. Kein Portraet-Platzhalter mehr.
