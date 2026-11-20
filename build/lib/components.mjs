@@ -16,9 +16,9 @@ export function metaLine(place, period) {
 /* Ein Wert, der nur in einer anderen Sprache steht, bekommt lang="…". */
 const text = (value, lang) => (lang ? html`<span lang="${lang}">${value}</span>` : value);
 
-export function intro({ title, lead, paragraphs = [], actions, toc, portrait = false }) {
+export function intro({ title, lead, paragraphs = [], actions, toc, portrait = false, media = null }) {
   return html`<div class="intro grid">
-${portrait ? raw('  <div class="portrait" aria-hidden="true"></div>\n') : ""}  <div class="intro__body">
+${portrait ? raw('  <div class="portrait" aria-hidden="true"></div>\n') : ""}${media ? html`  <div class="masthead__media"><img src="${media.src}" alt="${media.alt}" width="${media.width}" height="${media.height}" decoding="async"></div>\n` : ""}  <div class="intro__body">
     <h1>${title}</h1>
 ${lead ? html`    <p class="lead">${lead}</p>\n` : ""}${paragraphs.map((p) => html`    <p>${p}</p>\n`)}${actions ? html`    <div class="actions">${actions}</div>\n` : ""}${toc ? tocNav(toc) : ""}  </div>
 </div>

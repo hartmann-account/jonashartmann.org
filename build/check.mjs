@@ -51,7 +51,7 @@ for (const [f, s] of [...Object.entries(html), ["site.css", css]]) {
 }
 
 // 5. Nur die Farben des Design-Systems (warmes Papier, drei warme Tinten, Haarlinie, zwei Blautoene).
-const HEX = new Set(["#f7f5f0", "#edeae2", "#1a1713", "#2e2a24", "#6b655b", "#ddd7ca", "#082742", "#2f5a75"]);
+const HEX = new Set(["#f7f5f0", "#edeae2", "#1a1713", "#2e2a24", "#6b655b", "#ddd7ca", "#3a352c", "#082742", "#2f5a75"]);
 for (const h of css.match(/#[0-9a-f]{3,8}\b/gi) ?? []) check(HEX.has(h.toLowerCase()), `site.css: Farbe ${h} nicht erlaubt`);
 
 // 6. Keine Schatten, Verlaeufe, Unschaerfe, Textumwandlungen, Rundungen; Kursive nur

@@ -19,6 +19,8 @@ const NAV = [
 ];
 
 export function page({ path, title, description, body, head = "", noindex = false, year, orcidUrl }) {
+  // Der erste Body-Baustein ist immer die Intro; sie liegt im dunklen Masthead.
+  const [intro, ...rest] = body;
   // Auf der 404-Seite gibt es weder Canonical noch eine aktuelle Seite; ihre
   // Open-Graph-Angaben zeigen auf die Startseite.
   const url = SITE_URL + (noindex ? "/" : path);
@@ -29,7 +31,7 @@ export function page({ path, title, description, body, head = "", noindex = fals
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
-<meta name="theme-color" content="#f7f5f0">
+<meta name="theme-color" content="#1a1713">
 <title>${title}</title>
 <meta name="description" content="${description}">
 ${noindex ? raw('<meta name="robots" content="noindex">') : html`<link rel="canonical" href="${url}">`}
@@ -65,8 +67,15 @@ ${NAV.map((n) => html`        <li><a href="${n.href}"${current(n.href)}>${n.labe
     </nav>
   </div>
 </header>
-<main id="content" class="frame" tabindex="-1">
-${body}
+<main id="content" tabindex="-1">
+  <div class="masthead">
+    <div class="frame">
+${intro}
+    </div>
+  </div>
+  <div class="frame">
+${rest}
+  </div>
 </main>
 <footer class="site-footer">
   <div class="frame">

@@ -18,9 +18,10 @@ v2/ old/   frühere Fassungen der Website
 
 ## Gestaltung
 
-Ein Briefkopf mit eigener Handschrift: oben eine starke Kante, Name in Serif
-links, Navigation rechts, Haarlinie darunter. Grosse Cormorant-Headlines mit
-kursivem Akzent, Abschnitte mit Nummer in der Randspalte. Die Regeln:
+Ein dunkler, kinematischer Masthead (sticky Kopf in Ink, Hero in grosser
+Cormorant mit kursivem Akzent, schwebendes Medienfragment, blaue Kante zum
+Uebergang) geht in den hellen, papierfarbenen Inhalt über; Abschnitte mit
+Nummer in der Randspalte. Die Regeln:
 
 - **Zwei Schriften, drei Schnitte, sechs Grössen.** Cormorant 500/600 (und 600
   kursiv, selbst gehostet in `src/fonts/`) für Name, H1, Lead und Abschnittstitel;
@@ -28,6 +29,9 @@ kursivem Akzent, Abschnitte mit Nummer in der Randspalte. Die Regeln:
   Kursive nur als echtes `<em>` in der Headline; keine Monospace.
 - **Nummer-Motiv:** Jeder Abschnitt trägt seine Nummer (01, 02 …) als kleine
   Randnotiz über dem Titel.
+- **Bewegung nur per CSS, nie per JavaScript:** schwebendes Medienfragment im
+  Masthead, Scroll-Reveals der Abschnitte via `animation-timeline: view()`,
+  bei `prefers-reduced-motion` abgeschaltet.
 - **Keine Textumwandlungen.** Kein Uppercase/Small Caps; Meta-Zeilen sind klein,
   gedeckt und mit Ziffernlauf.
 - **Farben nur aus dem Design-System.** Warmes Papier, drei warme Tinten, eine

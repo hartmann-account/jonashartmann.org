@@ -51,6 +51,7 @@ export default function home({ record, works }) {
       intro({
         title: html`Building structures for <em>businesses, families and capital</em>.`,
         lead: "Advisor, entrepreneur, investor and researcher in Zug, Switzerland.",
+        media: { src: "/assets/lego-workshop.jpg", alt: "Jonas Hartmann building a model during a workshop", width: 1050, height: 1400 },
         paragraphs: [
           "Over the past decade, my work has spanned entrepreneurship, corporate advisory, technology and family governance — building companies and digital systems, advising institutions on transformation and risk, and developing a research focus on finance, law and family enterprise.",
         ],
