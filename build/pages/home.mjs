@@ -44,7 +44,7 @@ export default function home({ record, works }) {
     head: raw(`<script type="application/ld+json">${JSON.stringify(person).replace(/</g, "\\u003c")}</script>`),
     body: [
       intro({
-        title: html`Building structures for <em>businesses, families and capital</em>.`,
+        title: html`Create <span class="arrow">→</span> Structure <span class="arrow">→</span> Professionalize <span class="arrow">→</span> Automate`,
         lead: "Advisor, creator, investor and researcher in Zug, Switzerland.",
         media: { src: "/assets/lego-workshop.jpg", alt: "Jonas Hartmann building a model during a workshop", width: 1050, height: 1400 },
         paragraphs: [
@@ -67,7 +67,7 @@ export default function home({ record, works }) {
         num: "02",
         body: [
           pairs([
-            { term: "Framework", desc: "Create, structure, professionalize, automate — the same pattern each time." },
+            { term: "Framework", desc: "The pattern behind everything I build — from first idea to lasting institution." },
             { term: "Personal trait", desc: "Continuous and obsessive learner." },
           ]),
           more("/about#pattern", "The pattern in detail on About"),

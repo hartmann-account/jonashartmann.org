@@ -45,10 +45,11 @@ for (const [f, s] of Object.entries(html)) {
 check(count(html["work.html"], /Feelbelt/g) === 1, "work: Feelbelt genau einmal (Portfolio)");
 for (const f of PAGES.filter((f) => f !== "work.html")) check(!/Feelbelt/.test(html[f]), `${f}: Feelbelt`);
 
-// 4. Keine Pfeile: Outfit hat sie nicht, sie kaemen aus einer Ersatzschrift.
-for (const [f, s] of [...Object.entries(html), ["site.css", css]]) {
-  check(!/[←-⇿]/.test(s), `${f}: Pfeilzeichen`);
-}
+// 4. Keine Pfeile — Ausnahme: der -> im H1 (eigene Fallback-Schrift via .arrow).
+const ARROWS = /[\u2190-\u21ff]/;
+const ARROWS_NO_RIGHT = /[\u2190\u2191\u2193-\u21ff]/;
+for (const [f, s] of Object.entries(html)) check(!ARROWS_NO_RIGHT.test(s), `${f}: Pfeilzeichen`);
+check(!ARROWS.test(css), "site.css: Pfeilzeichen");
 
 // 5. Nur die Farben des Design-Systems (warmes Papier, drei warme Tinten, Haarlinie, zwei Blautoene).
 const HEX = new Set(["#f7f5f0", "#edeae2", "#1a1713", "#2e2a24", "#6b655b", "#ddd7ca", "#3a352c", "#082742", "#2f5a75"]);

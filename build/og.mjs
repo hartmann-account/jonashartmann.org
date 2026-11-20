@@ -27,12 +27,13 @@ body { width: 1200px; height: 630px; background: #f7f5f0; color: #2e2a24; font-f
 .who { margin-top: 6px; font-size: 24px; color: #6b655b; }
 h1 { margin-top: auto; font-family: Cormorant, Georgia, serif; font-size: 84px; line-height: 1.04;
   letter-spacing: -0.015em; font-weight: 600; color: #1a1713; max-width: 16ch; text-wrap: balance; }
+h1 .arrow { font-family: Outfit, sans-serif; font-weight: 400; color: #6b655b; padding-inline: 0.12em; }
 .foot { margin-top: 56px; padding-top: 22px; border-top: 1px solid #ddd7ca; display: flex; justify-content: space-between;
   font-size: 22px; color: #6b655b; }
 </style></head><body>
 <p class="name">Jonas Hartmann</p>
 <p class="who">Advisor, creator, investor, researcher</p>
-<h1>Building structures for <em>businesses, families and capital</em>.</h1>
+<h1>Create <span class="arrow">→</span> Structure <span class="arrow">→</span> Professionalize <span class="arrow">→</span> Automate</h1>
 <div class="foot"><span>Zug, Switzerland</span><span>jonashartmann.org</span></div>
 </body></html>`;
 

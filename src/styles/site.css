@@ -158,6 +158,8 @@ a:hover { color: var(--link-hover); text-decoration-color: var(--link-hover); }
   line-height: var(--lh-display); letter-spacing: var(--tr-display); text-wrap: balance;
   color: var(--masthead-text); }
 .intro h1 em { font-weight: var(--fw-semibold); }
+.intro h1 .arrow { font-family: var(--font-sans); font-weight: var(--fw-regular);
+  color: var(--masthead-text-soft); padding-inline: 0.12em; }
 .lead { text-wrap: balance; margin-top: var(--s-5); font-family: var(--font-serif);
   font-size: var(--fs-lead); font-weight: var(--fw-medium); line-height: var(--lh-lead);
   color: var(--masthead-text-soft); }
