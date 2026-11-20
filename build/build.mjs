@@ -9,7 +9,7 @@
  *
  * Aufruf: npm run build  (danach laufen die Pruefungen aus build/check.mjs)
  */
-import { readFile, writeFile, mkdir, rm, cp } from "node:fs/promises";
+import { readFile, writeFile, mkdir, rm, cp, readdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -75,6 +75,33 @@ await writeFile(
     const html = await readFile(file, "utf8");
     await writeFile(file, html.replace(/(src|href)="(img\/[^"]+)"/g, '$1="/kleidung/$2"'), "utf8");
     console.log("  kleidung/      kopiert");
+  }
+}
+
+/*
+ * Die archivierte Live-Seite aus v1/ wird unter /v1/ mit ausgeliefert. Ihre
+ * root-absoluten URLs (/site.css, /work, /fonts/...) wuerden sonst auf die
+ * aktuelle Seite zeigen; beim Kopieren werden sie auf /v1/ umgeschrieben.
+ */
+{
+  const src = join(root, "v1");
+  const dst = join(OUT, "v1");
+  if (existsSync(src)) {
+    await cp(src, dst, { recursive: true });
+    const rewrite = (s) =>
+      s
+        .replace(/(href|src|srcset)="\/(?!\/)/g, '$1="/v1/')
+        .replace(/url\("\/(?!\/)/g, 'url("/v1/')
+        .replace(/url\(\/(?!\/)/g, "url(/v1/");
+    const walk = async (dir) => {
+      for (const e of await readdir(dir, { withFileTypes: true })) {
+        const p = join(dir, e.name);
+        if (e.isDirectory()) await walk(p);
+        else if (/\.(html|css)$/.test(e.name)) await writeFile(p, rewrite(await readFile(p, "utf8")), "utf8");
+      }
+    };
+    await walk(dst);
+    console.log("  v1/            kopiert (erreichbar unter /v1/)");
   }
 }
 

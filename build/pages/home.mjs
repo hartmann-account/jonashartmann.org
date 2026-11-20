@@ -21,7 +21,7 @@ export default function home({ record, works }) {
     {
       title: "Investing", href: "/work#investing",
       roles: ["Investing across private and public markets, and in the governance of family capital."],
-      details: [html`${boards["Vereinigung der Familie Hartmann"].role}, <span lang="de">Vereinigung der Familie Hartmann</span>; advisory boards of Swiss Champions Fund and HWH Capital.`],
+      details: [html`${boards["Vereinigung der Familie Hartmann"].role}, <span lang="de">Vereinigung der Familie Hartmann</span>; advisory board roles at HWH Capital and Amfion.`],
     },
     {
       title: "Research", href: "/research",
@@ -50,9 +50,9 @@ export default function home({ record, works }) {
     body: [
       intro({
         title: "Building structures for businesses, families and capital.",
-        lead: "I am an advisor, entrepreneur, investor and researcher in Zug.",
+        lead: "Advisor, entrepreneur, investor and researcher in Zug, Switzerland.",
         paragraphs: [
-          "For the past decade, I have worked across entrepreneurship, corporate advisory, technology and family governance — building companies, digital systems and organizational structures while developing an academic focus on finance, law and family enterprise.",
+          "Over the past decade, my work has spanned entrepreneurship, corporate advisory, technology and family governance — building companies and digital systems, advising institutions on transformation and risk, and developing a research focus on finance, law and family enterprise.",
         ],
         actions: html`<a href="/cv">Full CV</a>`,
       }),
@@ -60,7 +60,7 @@ export default function home({ record, works }) {
         id: "areas",
         title: "Four areas",
         body: [
-          p("The four areas developed in parallel rather than in sequence, and they inform each other: advising is sharper for having built, investing is more disciplined for having advised, and research is grounded in all three."),
+          p("The four areas developed in parallel, and each informs the others: advising is sharper for having built, investing is more disciplined for having advised, and the research is grounded in both."),
           entries(areas, { level: "h3" }),
         ],
       }),

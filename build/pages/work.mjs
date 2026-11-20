@@ -1,6 +1,6 @@
 import { html } from "../lib/html.mjs";
 import { intro, section, entries, pairs, p, h3, more } from "../lib/components.mjs";
-import { positionRow, boardRow, venturePairs, portfolioPairs } from "../lib/record.mjs";
+import { competencyClusters, positionRow, boardRow, venturePairs, portfolioPairs } from "../lib/record.mjs";
 
 const SECTIONS = [
   { id: "advisory", label: "Advisory" },
@@ -11,7 +11,6 @@ const SECTIONS = [
 ];
 
 export default function work({ record }) {
-  const positions = record.positions.filter((x) => x.pages.includes("work"));
   return {
     path: "/work",
     file: "work.html",
@@ -20,18 +19,18 @@ export default function work({ record }) {
     body: [
       intro({
         title: "Work",
-        lead: "Advisory work in consulting firms, banks and family offices, ventures since 2016, investments across private and public markets, and board and advisory roles.",
+        lead: "Advisory in consulting firms, banks and family offices; ventures since 2016; investments across private and public markets; board and advisory roles.",
         toc: SECTIONS,
       }),
       section({
         id: "advisory",
         title: "Advisory",
         body: [
-          p("I have worked in professional advisory environments across consulting firms, banks and family offices, on transformation programs, investigations, due diligence, transactions and corporate structuring. This is the conventional part of my profile, and it anchors the rest."),
-          h3("Positions and mandates"),
-          entries(positions.map((x) => positionRow(x)), { level: "h4" }),
-          h3("Internships"),
-          entries(record.internships.map((x) => positionRow(x)), { level: "h4" }),
+          p("Advisory work across consulting firms, banks and family offices — on transformation programs, investigations, due diligence, transactions and corporate structuring. Grouped by competency rather than by employer:"),
+          ...competencyClusters(record, "work").flatMap((c) => [
+            h3(c.title),
+            entries(c.items.map((x) => positionRow(x)), { level: "h4" }),
+          ]),
         ],
       }),
       section({
@@ -65,7 +64,7 @@ export default function work({ record }) {
         id: "technology",
         title: "Technology and creative",
         body: [
-          p("I was trained in graphic design and video production, and produced music and worked as a DJ, before I worked in finance. That background, combined with years of running IT and hosting infrastructure, is why I build things myself rather than specify them for others."),
+          p("Trained in graphic design and video production, active as a music producer and DJ before finance, plus years of running IT and hosting infrastructure: that is why I build things myself rather than specify them for others."),
           p("The work spans branding, web development, automated customer platforms, IT infrastructure, hosting, app and container projects, and AI and automation."),
           more("https://soma-suru.de", "Music and DJ references"),
         ],

@@ -11,7 +11,7 @@ src/       Quelle: Inhalte, Stylesheet, Schriften, Bilder, Skripte
 build/     Bauschritt, Vorschau und Prüfungen
 site/      Ergebnis: das, was ausgeliefert wird (im Repository, siehe unten)
 Kleidung/  eigenständige Seite, wird unter /kleidung ausgeliefert
-v1/        vollständige Kopie der Live-Seite (site/) vom 20.11.2026, vor dem Redesign
+v1/        vollständige Kopie der Live-Seite (site/) vom 20.11.2026, vor dem Redesign; wird unter /v1/ ausgeliefert
 backup1/   die Website vom 29.09.2026 vor der Überarbeitung (Claude-Design-Export)
 v2/ old/   frühere Fassungen der Website
 ```
@@ -44,7 +44,7 @@ Lesespalte mit Serif-Zwischentiteln links daneben. Die Regeln:
 
 | Datei | Inhalt |
 |---|---|
-| `src/data/record.json` | Stationen, Praktika, Gremien, Unternehmungen, Beteiligungen, Ausbildung, Zertifikate, Sprachen, die vier Phasen. Eine Quelle für Work, CV, Research und About |
+| `src/data/record.json` | Stationen, Praktika, Gremien, Unternehmungen, Beteiligungen, Ausbildung, Zertifikate, Sprachen, die vier Phasen — jede Station mit Kompetenzfeld (`category`). Eine Quelle für Work, CV, Research und About |
 | `src/data/orcid.json` | letzter guter Stand der ORCID-Werke (wird beim Bauen aktualisiert) |
 | `build/pages/*.mjs` | die Seiten mit ihren Texten |
 
@@ -97,9 +97,9 @@ dauerhaft (301) auf `/cv#certificates` weiter. Ebenso leiten die Adressen der
 früheren Fassungen, die noch in Suchmaschinen stehen (`/ueber-mich`,
 `/kontakt`, `/beitraege`, `/work/advisory` usw.), auf ihre heutige Entsprechung.
 
-Der Lebenslauf als PDF enthält Kontaktdaten und trägt deshalb
-`X-Robots-Tag: noindex` (`site/_headers`): herunterladbar, aber nicht im
-Suchindex.
+Der Lebenslauf steht nur als Webseite unter `/cv` (kein PDF-Download mehr).
+Die archivierte frühere Fassung der Seite ist unter `/v1/` erreichbar und
+über `robots.txt` (`Disallow: /v1/`) vom Suchindex ausgeschlossen.
 
 Unter **`/kleidung`** liegt die eigenständige Seite aus `Kleidung/`. Sie gehört
 nicht zur Navigation und steht nicht in der Sitemap. Der Bauschritt kopiert sie

@@ -74,7 +74,7 @@ check(!existsSync(join(OUT, "assets", "portrait-placeholder.svg")), "assets: por
 // 9. Keine neuen Tabs.
 for (const [f, s] of Object.entries(html)) check(!/target="_blank"/.test(s), `${f}: target="_blank"`);
 
-// 10. Keine Kontaktkanaele ausser LinkedIn, ORCID und dem CV-PDF.
+// 10. Keine Kontaktkanaele ausser LinkedIn und ORCID.
 for (const [f, s] of Object.entries(html)) check(!/mailto:|tel:|Aabach|\+41/.test(s), `${f}: Kontaktdaten`);
 
 // 11. Portfolio: 19 Namen in 4 Gruppen, keine Betraege.

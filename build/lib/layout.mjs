@@ -7,7 +7,6 @@ import { html, raw } from "./html.mjs";
 
 export const SITE_URL = "https://jonashartmann.org";
 export const LINKEDIN = "https://www.linkedin.com/in/hartmann-jonas/";
-export const CV_PDF = "/assets/jonas-hartmann-cv-2026-09.pdf";
 export const HOME_TITLE = "Jonas Hartmann — Advisor, entrepreneur, investor, researcher";
 export const HOME_DESCRIPTION = "Building structures for businesses, families and capital. A decade across entrepreneurship, corporate advisory, technology and family governance.";
 const OG_ALT = "Jonas Hartmann — Advisor, entrepreneur, investor, researcher. Building structures for businesses, families and capital.";
@@ -74,7 +73,6 @@ ${body}
       <ul class="site-footer__links">
         <li><a href="${LINKEDIN}">LinkedIn</a></li>
         <li><a href="${orcidUrl}">ORCID</a></li>
-        <li><a href="${CV_PDF}">CV (PDF)</a></li>
       </ul>
     </div>
   </div>

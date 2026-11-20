@@ -17,7 +17,7 @@ export default function research({ record, works }) {
         title: "Research",
         lead: "My academic work sits at the intersection of finance, law and family enterprise.",
         paragraphs: [
-          "I did not come to family governance from the literature. I built governance and administration structures for a family association and a family office first, then began to study why such structures hold or fail. The research asks how ownership, capital and decision rights in families can be organized to endure across generations.",
+          "I came to family governance from practice, not the literature: I built governance and administration structures for a family association and a family office first, then began to study why such structures hold or fail. The research asks how ownership, capital and decision rights in families can be organized to endure across generations.",
         ],
       }),
       section({

@@ -11,10 +11,10 @@ export default function about({ record }) {
       intro({
         title: "About",
         portrait: true,
-        lead: "I started building things early.",
+        lead: "From creative beginnings to institutions.",
         paragraphs: [
-          "My first work was creative: music, design, film. From 2016, that turned into companies, then technology infrastructure, then financial services and corporate consulting, and eventually into family governance and academic research.",
-          "Together, these experiences have developed into one central interest: understanding how organizations, ownership and capital can be structured to endure.",
+          "My first work was creative: music, design, film. From 2016 it became companies, then technology infrastructure, then financial services and corporate consulting \u2014 and eventually family governance and academic research.",
+          "Across all of them, one interest has remained central: how organizations, ownership and capital can be structured to endure.",
           "I have lived and worked in ten cities. I live in Zug, Switzerland.",
         ],
       }),
@@ -22,7 +22,7 @@ export default function about({ record }) {
         id: "pattern",
         title: "The pattern",
         body: [
-          p("From creating things to building institutions. The pattern has been the same each time."),
+          p("The same pattern each time: create, structure, professionalize, automate."),
           entries(record.phases.map(phaseRow), { level: "h3" }),
           p("The research is the last step of that sequence: asking how such structures become institutions."),
         ],

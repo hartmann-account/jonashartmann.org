@@ -1,7 +1,7 @@
 import { html } from "../lib/html.mjs";
 import { intro, section, entries, pairs, p, h3, more } from "../lib/components.mjs";
-import { positionRow, boardRow, educationRow, certificateRow, venturePairs, languagePairs } from "../lib/record.mjs";
-import { CV_PDF, LINKEDIN } from "../lib/layout.mjs";
+import { competencyClusters, positionRow, boardRow, educationRow, certificateRow, venturePairs, languagePairs } from "../lib/record.mjs";
+import { LINKEDIN } from "../lib/layout.mjs";
 
 const SECTIONS = [
   { id: "experience", label: "Experience" },
@@ -18,23 +18,22 @@ export default function cv({ record }) {
     path: "/cv",
     file: "cv.html",
     title: "Curriculum vitae — Jonas Hartmann",
-    description: "Curriculum vitae of Jonas Hartmann: experience, board roles, ventures, education, certificates and languages, with the full CV as PDF.",
+    description: "Curriculum vitae of Jonas Hartmann: experience, board and advisory roles, ventures, education, certificates and languages.",
     body: [
       intro({
         title: "Curriculum vitae",
         lead: "Complete record of positions, ventures, education and memberships.",
-        paragraphs: ["The website maximizes clarity; the CV maximizes completeness. Everything that is not on these pages is in the document."],
-        actions: html`<span class="actions__primary"><a class="button" href="${CV_PDF}" download>Download CV</a><span class="actions__meta">PDF · 2 pages · September 2026</span></span><a href="${LINKEDIN}">LinkedIn profile</a>`,
+        actions: html`<a href="${LINKEDIN}">LinkedIn profile</a>`,
         toc: SECTIONS,
       }),
       section({
         id: "experience",
         title: "Experience",
         body: [
-          h3("Positions and mandates"),
-          entries(record.positions.map((x) => positionRow(x, { detail: false })), compact),
-          h3("Internships"),
-          entries(record.internships.map((x) => positionRow(x, { detail: false })), compact),
+          ...competencyClusters(record, "cv").flatMap((c) => [
+            h3(c.title),
+            entries(c.items.map((x) => positionRow(x, { detail: false })), compact),
+          ]),
           more("/work#advisory", "Full descriptions on the Work page"),
         ],
       }),
